@@ -7,7 +7,7 @@ Area                                    Addr        Size        Decimal Bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00000000  .__.ABS.                           cpct_firmware
+     00000000  .__.ABS.                           cpct_video
      00000000  l__CABS                         
      00000000  l__DABS                         
      00000000  l__DATA                         
@@ -18,38 +18,59 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000000  l__INITIALIZER                  
      00000000  s__CABS                         
      00000000  s__DABS                         
-     0000020C  l__CODE                         
+     00000581  l__CODE                         
      00004000  s__CODE                         
-     0000420C  s__DATA                         
-     0000420C  s__GSFINAL                      
-     0000420C  s__GSINIT                       
-     0000420C  s__HOME                         
-     0000420C  s__INITIALIZED                  
-     0000420C  s__INITIALIZER                  
+     00004581  s__DATA                         
+     00004581  s__GSFINAL                      
+     00004581  s__GSINIT                       
+     00004581  s__HOME                         
+     00004581  s__INITIALIZED                  
+     00004581  s__INITIALIZER                  
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    0000020C =         524. bytes (REL,CON)
+_CODE                               00004000    00000581 =        1409. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00004000  _main                              main
-     00004039  _g_tile_tileset                    gladis_quieto
-     0000403D  _gladis_quieto_dcha                gladis_quieto
-     000040BD  _gladis_quieto_izda                gladis_quieto
-     0000413D  _cpct_drawStringM1                 cpct_strings
-     00004145  cpct_drawStringM1_asm              cpct_strings
-     0000415F  dc_mode1_ct                        cpct_strings
-     00004163  _cpct_drawCharM1                   cpct_strings
-     00004170  cpct_drawCharM1_asm                cpct_strings
-     000041EA  _cpct_memset                       cpct_memutils
-     000041F8  _cpct_mode_rom_status              cpct_firmware
-     000041F9  _cpct_firmware_address             cpct_firmware
-     000041FB  _cpct_disableFirmware              cpct_firmware
-     000041FB  cpct_disableFirmware_asm           cpct_firmware
+     00004000  _init                              main
+     00004025  _g_palette                         main
+     00004029  _menu                              main
+     00004095  _game                              main
+     00004194  _loadMap                           main
+     00004195  _main                              main
+     000041A0  _g_tile_tileset                    gladis_quieto
+     000041A4  _gladis_quieto_dcha                gladis_quieto
+     00004224  _gladis_quieto_izda                gladis_quieto
+     000042A4  _cpct_setPalette                   cpct_video
+     000042AD  cpct_setPalette_asm                cpct_video
+     000042C8  _cpct_isKeyPressed                 cpct_keyboard
+     000042C8  cpct_isKeyPressed_asm              cpct_keyboard
+     000042D4  _cpct_scanKeyboard_f               cpct_keyboard
+     000042D4  cpct_scanKeyboard_f_asm            cpct_keyboard
+     0000433E  _cpct_drawStringM0                 cpct_strings
+     00004346  cpct_drawStringM0_asm              cpct_strings
+     00004362  dc_mode0_ct                        cpct_strings
+     00004372  _cpct_drawCharM0                   cpct_strings
+     0000437F  cpct_drawCharM0_asm                cpct_strings
+     000043FF  _cpct_fw2hw                        cpct_video
+     00004419  _cpct_keyboardStatusBuffer         cpct_keyboard
+     00004423  _cpct_drawSpriteMasked             cpct_sprites
+     00004452  cpct_firmware2hw_colour            
+     0000446D  _cpct_waitVSYNC                    cpct_video
+     0000446D  cpct_waitVSYNC_asm                 cpct_video
+     00004475  _cpct_setVideoMode                 cpct_video
+     0000447A  cpct_setVideoMode_asm              cpct_video
+     00004487  _cpct_memset                       cpct_memutils
+     00004495  _cpct_mode_rom_status              cpct_firmware
+     00004496  _cpct_firmware_address             cpct_firmware
+     00004498  _cpct_disableFirmware              cpct_firmware
+     00004498  cpct_disableFirmware_asm           cpct_firmware
+     000044A9  _cpct_drawSolidBox                 cpct_sprites
+     00004561  _cpct_getScreenPtr                 cpct_video
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
 
@@ -61,14 +82,36 @@ obj/gladis-quieto.rel                     [ gladis_quieto ]
 
 Libraries Linked                          [ object file ]
 
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
-                                          [ cpct_drawStringM1.rel ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
-                                          [ cpct_drawCharM1.rel ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_setPalette.rel ]
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_isKeyPressed.rel ]
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_scanKeyboard_f.rel ]
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_drawStringM0.rel ]
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_drawCharM0.rel ]
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_fw2hw.rel ]
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
+                                          [ keyboard.rel ]
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_drawSpriteMasked_cbindings. ]
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_firmware2hw_colour_table.re ]
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_waitVSYNC.rel ]
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_setVideoMode.rel ]
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_memset_cbinding.rel ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_disableFirmware.rel ]
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_drawSolidBox_cbindings.rel ]
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_getScreenPtr_cbindings.rel ]
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
 
