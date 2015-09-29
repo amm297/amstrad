@@ -17,6 +17,7 @@
 //------------------------------------------------------------------------------
 
 #include <cpctelera.h>
+#include "gladis-quieto.h"
 
 void main(void) {
    u8* video_memory_start  = (u8*)0xC000;
