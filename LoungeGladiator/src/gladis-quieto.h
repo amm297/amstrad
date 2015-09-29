@@ -4,7 +4,6 @@
 
 #include <cpctelera.h>
 
-extern u8* const g_tile_tileset[2];
 extern const u8 gladis_quieto_dcha[128];
 extern const u8 gladis_quieto_izda[128];
 
