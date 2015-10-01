@@ -16,12 +16,25 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 
+#include <stdlib.h>
 #include <cpctelera.h>
-#include <stdio.h>
 #include "gladis-quieto.h"
 #include "gladis-atk.h"
 #include "chacho-quieto.h"
 #define VMEM (u8*)0xC000
+#define width 16
+#define height 10
+
+const u8 mapa[height][width] = {{1,1,1,1,0,1,1,1,0,1,1,0,1,1,1,1},
+                                {1,1,1,1,0,1,1,1,0,1,1,0,0,0,1,1},
+                                {1,1,1,1,0,1,1,1,0,1,1,0,1,0,1,1},
+                                {1,1,1,1,0,1,1,1,0,1,1,0,1,0,1,1},
+                                {1,1,1,1,0,0,0,0,0,0,0,0,1,0,1,1},
+                                {1,1,1,1,0,1,1,1,0,1,1,1,1,0,1,1},
+                                {1,1,1,1,0,1,1,1,0,1,1,1,1,0,1,1},
+                                {1,1,1,1,0,1,1,1,0,1,1,1,1,0,1,1},
+                                {1,1,1,1,0,1,1,1,0,0,0,0,0,0,1,1},
+                                {1,1,1,1,0,1,1,1,0,1,1,1,1,1,1,1}};
 
 typedef struct
 {
@@ -50,7 +63,7 @@ void menu(){
    cpct_clearScreen(0);
 
    memptr = cpct_getScreenPtr(VMEM,20,10);
-   cpct_drawStringM0("Super Menu",memptr,2,3);
+   cpct_drawStringM0("MENU",memptr,2,3);
 
     memptr = cpct_getScreenPtr(VMEM,18,180);
    cpct_drawStringM0("Pulsa Intro",memptr,4,5);
@@ -61,6 +74,7 @@ void menu(){
 
 }
 
+<<<<<<< HEAD
 u8 checkIntersect(u8 pX, u8 pY, u8 eX, u8 eY, u8* dir){
 
 }
@@ -83,6 +97,22 @@ u8* checkCollisions(u8 pX, u8 pY, u8 eX, u8 eY, u8* dir, u8* atk){
             return 2;
 
     return 0;
+=======
+
+/*MAPA*/
+void drawMap(){
+   u8 posX=0,posY =0;
+   u8* memptr;
+   
+   for(posY=0; posY<height;posY++){
+      for(posX=0; posX<width;posX++){
+         memptr = cpct_getScreenPtr(VMEM, posX*5, posY*20); 
+         if(mapa[posY][posX] == 1){
+            cpct_drawSolidBox(memptr, 3, 5, 20);
+         }
+      }
+   }
+>>>>>>> e54a3f15918467d29456e86cd5164e20c7e609d8
 }
 
 /*JUEGO*/
@@ -97,9 +127,13 @@ void game(){
    u8* col = 0;
    u8* rebote = 12;
    cpct_clearScreen(0);
-
+   drawMap();
    while (1){
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> e54a3f15918467d29456e86cd5164e20c7e609d8
       //Esperar el retrazado
       cpct_waitVSYNC();
 
@@ -116,6 +150,7 @@ void game(){
 
       atk = 0;
       //Comprobar teclado
+<<<<<<< HEAD
       if(col != 2){
         cpct_scanKeyboard_f();
         if(cpct_isKeyPressed(Key_Space)){
@@ -173,6 +208,25 @@ void game(){
         memptr = cpct_getScreenPtr(VMEM,e.x,e.y);
         cpct_drawSolidBox(memptr, 18, 4, 16);
       }
+=======
+      cpct_scanKeyboard_f();
+      if(cpct_isKeyPressed(Key_CursorRight) && p.x < 76 ){
+         p.x += 1;
+         sprite = gladis_quieto_dcha;
+      }else if(cpct_isKeyPressed(Key_CursorLeft) && p.x > 0 ){
+         p.x -= 1;
+         sprite = gladis_quieto_izda;
+      }else  if(cpct_isKeyPressed(Key_Esc)){
+         return;
+      }
+
+
+      //Dibujar personaje   
+      memptr = cpct_getScreenPtr(VMEM,p.x,p.y);
+      cpct_drawSpriteMasked(sprite,memptr,4,16);
+
+     
+>>>>>>> e54a3f15918467d29456e86cd5164e20c7e609d8
 
    }
 }
@@ -193,8 +247,10 @@ void main(void) {
    init();
    //loadMap();
    // Loop forever
+  
    while(1){
       menu();
+
       game();
    }
 
