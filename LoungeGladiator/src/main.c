@@ -19,15 +19,21 @@
 #include <cpctelera.h>
 #include <stdio.h>
 #include "gladis-quieto.h"
-
-
+#include "gladis-atk.h"
+#include "chacho-quieto.h"
 #define VMEM (u8*)0xC000
 
-typedef struct 
+typedef struct
 {
   u8 x,y; //posicion personaje
 
 }TPlayer;
+
+typedef struct
+{
+  u8 x,y; //posicion enemigo
+  u8 vivo; //control vida enemigo
+}TEnemy;
 
 const u8 g_palette[4] = { 0,26,6,18 };
 /*INICIALIZACION*/
@@ -48,45 +54,126 @@ void menu(){
 
     memptr = cpct_getScreenPtr(VMEM,18,180);
    cpct_drawStringM0("Pulsa Intro",memptr,4,5);
-   
+
    do{
     cpct_scanKeyboard_f();
    }while(!cpct_isKeyPressed(Key_Enter));
 
 }
 
+u8 checkIntersect(u8 pX, u8 pY, u8 eX, u8 eY, u8* dir){
+
+}
+
+//Detectar colision de personajes
+u8* checkCollisions(u8 pX, u8 pY, u8 eX, u8 eY, u8* dir, u8* atk){
+    if(atk == 1)
+        if(dir == 0)
+            if(eX - pX > -1 && eX - pX < 11)
+                return 1;
+            else
+                return 0;
+        else
+            if(pX - eX > -1 && pX - eX < 11)
+                return 1;
+            else
+                return 0;
+    else
+        if(eX - pX > 0 && eX - pX < 4)
+            return 2;
+
+    return 0;
+}
+
 /*JUEGO*/
 
 void game(){
    TPlayer p = { 0,100 };
+   TEnemy  e = { 50,100,0 };
    u8* memptr;
    u8* sprite = gladis_quieto_dcha;
+   u8* dir = 0;
+   u8* atk = 0;
+   u8* col = 0;
+   u8* rebote = 12;
    cpct_clearScreen(0);
 
    while (1){
-     
+
       //Esperar el retrazado
       cpct_waitVSYNC();
 
-      //Desdibujar personaje   
+      //Desdibujar personaje
       memptr = cpct_getScreenPtr(VMEM,p.x,p.y);
-      cpct_drawSolidBox(memptr,0,4,16);
+      if(atk == 0)
+        cpct_drawSolidBox(memptr,0,4,16);
+      else
+        cpct_drawSolidBox(memptr,0,5,16);
 
+      memptr = cpct_getScreenPtr(VMEM,e.x,e.y);
+      if(e.vivo == 0)
+        cpct_drawSolidBox(memptr,0,4,16);
 
+      atk = 0;
       //Comprobar teclado
-      cpct_scanKeyboard_f();
-      if(cpct_isKeyPressed(Key_CursorRight) && p.x < 69 ){
-         p.x += 1;
-         sprite = gladis_quieto_dcha;
-      }else if(cpct_isKeyPressed(Key_CursorLeft) && p.x > 0 ){
-         p.x -= 1;
-         sprite = gladis_quieto_izda;
-      }else  if(cpct_isKeyPressed(Key_Esc)){
-         return;
+      if(col != 2){
+        cpct_scanKeyboard_f();
+        if(cpct_isKeyPressed(Key_Space)){
+            atk = 1;
+        if(cpct_isKeyPressed(Key_CursorRight))
+                dir = 0;
+        else if(cpct_isKeyPressed(Key_CursorLeft))
+                dir = 1;
+        }else if(cpct_isKeyPressed(Key_CursorRight) && p.x < 76 ){
+            if(col != 2)
+                p.x += 1;
+            dir = 0;
+        }else if(cpct_isKeyPressed(Key_CursorLeft) && p.x > 0 ){
+            if(col != 2)
+                p.x -= 1;
+            dir = 1;
+        }else  if(cpct_isKeyPressed(Key_Esc)){
+            return;
+        }
+      }else{
+        p.x -= 2;
+        rebote -= 2;
+        if(rebote == 0){
+            rebote = 12;
+            col = 0;
+        }
       }
-      //Dibujar personaje   
+
+      //Comprobar si esta quieto para que no se dibuje el sprite de atacar
+        if(atk == 0)
+            if(dir == 0)
+                sprite = gladis_quieto_dcha;
+            else
+                sprite = gladis_quieto_izda;
+        else if(dir == 0){
+            sprite = gladis_atk_dcha;
+        }else{
+            sprite = gladis_atk_izda;
+        }
+
+      if(col != 2)
+        col = checkCollisions(p.x,p.y,e.x,e.y,dir,atk);
+      if(col == 1)
+        e.vivo = 1;
+
+      //Dibujar personajes
       memptr = cpct_getScreenPtr(VMEM,p.x,p.y);
-      cpct_drawSpriteMasked(sprite,memptr,4,16);
+
+      if(atk == 1)
+        cpct_drawSpriteMasked(sprite, memptr, 5, 16);
+      else
+        cpct_drawSpriteMasked(sprite, memptr, 4, 16);
+
+      if(e.vivo == 0){
+        memptr = cpct_getScreenPtr(VMEM,e.x,e.y);
+        cpct_drawSolidBox(memptr, 18, 4, 16);
+      }
+
    }
 }
 
@@ -95,7 +182,7 @@ void game(){
 /*MAPA*/
 
 void loadMap(){
-  
+
 }
 
 
@@ -110,5 +197,5 @@ void main(void) {
       menu();
       game();
    }
-      
+
 }

@@ -9,6 +9,8 @@ Symbol Table
     .__.H$L.                                                    =  0000 L
   0 ___str_0                                                       007E R
   0 ___str_1                                                       0089 R
+  0 _checkCollisions                                               0096 GR
+  0 _checkIntersect                                                0095 GR
     _cpct_disableFirmware                                          **** GX
     _cpct_drawSolidBox                                             **** GX
     _cpct_drawSpriteMasked                                         **** GX
@@ -22,21 +24,22 @@ Symbol Table
     _cpct_setVideoMode                                             **** GX
     _cpct_waitVSYNC                                                **** GX
   0 _g_palette                                                     0025 GR
-  0 _game                                                          0095 GR
+  0 _game                                                          012A GR
+    _gladis_atk_dcha                                               **** GX
+    _gladis_atk_izda                                               **** GX
     _gladis_quieto_dcha                                            **** GX
     _gladis_quieto_izda                                            **** GX
   0 _init                                                          0000 GR
-  0 _loadMap                                                       0194 GR
-  0 _main                                                          0195 GR
+  0 _loadMap                                                       0475 GR
+  0 _main                                                          0476 GR
   0 _menu                                                          0029 GR
-
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
 Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size  1A0   flags    0
+   0 _CODE                                      size  481   flags    0
    1 _DATA                                      size    0   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8
