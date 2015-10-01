@@ -7,8 +7,8 @@ Symbol Table
     .__.ABS.                                                    =  0000 G
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
-  0 _gladis_quieto_dcha                                            0000 GR
-  0 _gladis_quieto_izda                                            0080 GR
+  0 _chacho_quieto_dcha                                            0000 GR
+  0 _chacho_quieto_izda                                            0080 GR
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
 Hexadecimal [16-Bits]
