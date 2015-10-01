@@ -2,9 +2,5 @@ hex2bin v2.0, Copyright (C) 2015 Jacques Pelletier & contributors
 
 Binary file start = 00004000
 Records start     = 00004000
-<<<<<<< HEAD
-Highest address   = 00004A9D
-=======
-Highest address   = 000046A3
->>>>>>> e54a3f15918467d29456e86cd5164e20c7e609d8
+Highest address   = 00004C10
 Pad Byte          = 0
