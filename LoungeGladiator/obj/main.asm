@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
-; Version 3.5.0 #9253 (Sep 22 2015) (CYGWIN)
-; This file was generated Thu Oct  1 16:47:51 2015
+; Version 3.5.0 #9253 (Sep 26 2015) (CYGWIN)
+; This file was generated Fri Oct  2 10:07:54 2015
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mz80
@@ -11,6 +11,7 @@
 ;--------------------------------------------------------
 	.globl _main
 	.globl _game
+	.globl _drawMap
 	.globl _checkSprite
 	.globl _checkCollisions
 	.globl _menu
@@ -28,6 +29,7 @@
 	.globl _cpct_memset
 	.globl _cpct_disableFirmware
 	.globl _g_palette
+	.globl _mapa
 ;--------------------------------------------------------
 ; special function registers
 ;--------------------------------------------------------
@@ -59,20 +61,20 @@
 ; code
 ;--------------------------------------------------------
 	.area _CODE
-;src/main.c:40: void init(){
+;src/main.c:58: void init(){
 ;	---------------------------------
 ; Function init
 ; ---------------------------------
 _init::
-;src/main.c:41: cpct_disableFirmware();
+;src/main.c:59: cpct_disableFirmware();
 	call	_cpct_disableFirmware
-;src/main.c:42: cpct_setVideoMode(0);
+;src/main.c:60: cpct_setVideoMode(0);
 	xor	a, a
 	push	af
 	inc	sp
 	call	_cpct_setVideoMode
 	inc	sp
-;src/main.c:43: cpct_fw2hw(g_palette,4);
+;src/main.c:61: cpct_fw2hw(g_palette,4);
 	ld	de,#_g_palette
 	ld	a,#0x04
 	push	af
@@ -81,7 +83,7 @@ _init::
 	call	_cpct_fw2hw
 	pop	af
 	inc	sp
-;src/main.c:44: cpct_setPalette(g_palette,4);
+;src/main.c:62: cpct_setPalette(g_palette,4);
 	ld	de,#_g_palette
 	ld	a,#0x04
 	push	af
@@ -91,17 +93,178 @@ _init::
 	pop	af
 	inc	sp
 	ret
+_mapa:
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
 _g_palette:
 	.db #0x00	; 0
 	.db #0x1A	; 26
 	.db #0x06	; 6
 	.db #0x12	; 18
-;src/main.c:48: void menu(){
+;src/main.c:66: void menu(){
 ;	---------------------------------
 ; Function menu
 ; ---------------------------------
 _menu::
-;src/main.c:50: cpct_clearScreen(0);
+;src/main.c:68: cpct_clearScreen(0);
 	ld	hl,#0x4000
 	push	hl
 	xor	a, a
@@ -110,13 +273,13 @@ _menu::
 	ld	h, #0xC0
 	push	hl
 	call	_cpct_memset
-;src/main.c:52: memptr = cpct_getScreenPtr(VMEM,20,10);
+;src/main.c:70: memptr = cpct_getScreenPtr(VMEM,20,10);
 	ld	hl,#0x0A14
 	push	hl
 	ld	hl,#0xC000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:53: cpct_drawStringM0("Super Menu",memptr,2,3);
+;src/main.c:71: cpct_drawStringM0("Super Menu",memptr,2,3);
 	ex	de,hl
 	ld	bc,#___str_0+0
 	ld	hl,#0x0302
@@ -127,13 +290,13 @@ _menu::
 	ld	hl,#6
 	add	hl,sp
 	ld	sp,hl
-;src/main.c:55: memptr = cpct_getScreenPtr(VMEM,18,180);
+;src/main.c:73: memptr = cpct_getScreenPtr(VMEM,18,180);
 	ld	hl,#0xB412
 	push	hl
 	ld	hl,#0xC000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:56: cpct_drawStringM0("Pulsa Intro",memptr,4,5);
+;src/main.c:74: cpct_drawStringM0("Pulsa Intro",memptr,4,5);
 	ex	de,hl
 	ld	bc,#___str_1+0
 	ld	hl,#0x0504
@@ -144,11 +307,11 @@ _menu::
 	ld	hl,#6
 	add	hl,sp
 	ld	sp,hl
-;src/main.c:58: do{
+;src/main.c:76: do{
 00101$:
-;src/main.c:59: cpct_scanKeyboard_f();
+;src/main.c:77: cpct_scanKeyboard_f();
 	call	_cpct_scanKeyboard_f
-;src/main.c:60: }while(!cpct_isKeyPressed(Key_Enter));
+;src/main.c:78: }while(!cpct_isKeyPressed(Key_Enter));
 	ld	hl,#0x4000
 	call	_cpct_isKeyPressed
 	ld	a,l
@@ -161,7 +324,7 @@ ___str_0:
 ___str_1:
 	.ascii "Pulsa Intro"
 	.db 0x00
-;src/main.c:65: u8* checkCollisions(u8 pX, u8 pY, u8 eX, u8 eY, u8* dir, u8* atk){
+;src/main.c:83: u8* checkCollisions(u8 pX, u8 pY, u8 eX, u8 eY, u8* dir, u8* atk){
 ;	---------------------------------
 ; Function checkCollisions
 ; ---------------------------------
@@ -169,7 +332,7 @@ _checkCollisions::
 	push	ix
 	ld	ix,#0
 	add	ix,sp
-;src/main.c:68: if(eX - pX > -1 && eX - pX < 11)
+;src/main.c:86: if(eX - pX > -1 && eX - pX < 11)
 	ld	c,6 (ix)
 	ld	b,#0x00
 	ld	l,4 (ix)
@@ -180,17 +343,17 @@ _checkCollisions::
 	ld	a,b
 	sbc	a, h
 	ld	d,a
-;src/main.c:66: if(atk >= 21)
+;src/main.c:84: if(atk >= 21)
 	ld	a,10 (ix)
 	sub	a, #0x15
 	ld	a,11 (ix)
 	sbc	a, #0x00
 	jr	C,00116$
-;src/main.c:67: if(dir == 0)
+;src/main.c:85: if(dir == 0)
 	ld	a,9 (ix)
 	or	a,8 (ix)
 	jr	NZ,00110$
-;src/main.c:68: if(eX - pX > -1 && eX - pX < 11)
+;src/main.c:86: if(eX - pX > -1 && eX - pX < 11)
 	ld	a,#0xFF
 	cp	a, e
 	sbc	a, d
@@ -206,15 +369,15 @@ _checkCollisions::
 	rra
 	sbc	a, #0x80
 	jr	NC,00102$
-;src/main.c:69: return 1;
+;src/main.c:87: return 1;
 	ld	hl,#0x0001
 	jr	00118$
 00102$:
-;src/main.c:71: return 0;
+;src/main.c:89: return 0;
 	ld	hl,#0x0000
 	jr	00118$
 00110$:
-;src/main.c:73: if(pX - eX > -1 && pX - eX < 11)
+;src/main.c:91: if(pX - eX > -1 && pX - eX < 11)
 	cp	a, a
 	sbc	hl, bc
 	ld	a,#0xFF
@@ -231,15 +394,15 @@ _checkCollisions::
 	rr	l
 	sbc	hl, de
 	jr	NC,00106$
-;src/main.c:74: return 1;
+;src/main.c:92: return 1;
 	ld	hl,#0x0001
 	jr	00118$
 00106$:
-;src/main.c:76: return 0;
+;src/main.c:94: return 0;
 	ld	hl,#0x0000
 	jr	00118$
 00116$:
-;src/main.c:78: if(eX - pX > 0 && eX - pX < 4)
+;src/main.c:96: if(eX - pX > 0 && eX - pX < 4)
 	xor	a, a
 	cp	a, e
 	sbc	a, d
@@ -255,21 +418,21 @@ _checkCollisions::
 	rra
 	sbc	a, #0x80
 	jr	NC,00117$
-;src/main.c:79: return 2;
+;src/main.c:97: return 2;
 	ld	hl,#0x0002
 	jr	00118$
 00117$:
-;src/main.c:81: return 0;
+;src/main.c:99: return 0;
 	ld	hl,#0x0000
 00118$:
 	pop	ix
 	ret
-;src/main.c:84: u8* checkSprite(u8* atk, u8* dir){
+;src/main.c:102: u8* checkSprite(u8* atk, u8* dir){
 ;	---------------------------------
 ; Function checkSprite
 ; ---------------------------------
 _checkSprite::
-;src/main.c:85: if(atk <= 20)
+;src/main.c:103: if(atk <= 20)
 	ld	a,#0x14
 	ld	iy,#2
 	add	iy,sp
@@ -277,36 +440,131 @@ _checkSprite::
 	ld	a,#0x00
 	sbc	a, 1 (iy)
 	jr	C,00108$
-;src/main.c:86: if(dir == 0)
+;src/main.c:104: if(dir == 0)
 	ld	hl, #4+1
 	add	hl, sp
 	ld	a, (hl)
 	dec	hl
 	or	a,(hl)
 	jr	NZ,00102$
-;src/main.c:87: return gladis_quieto_dcha;
+;src/main.c:105: return gladis_quieto_dcha;
 	ld	hl,#_gladis_quieto_dcha
 	ret
 00102$:
-;src/main.c:89: return gladis_quieto_izda;
+;src/main.c:107: return gladis_quieto_izda;
 	ld	hl,#_gladis_quieto_izda
 	ret
 00108$:
-;src/main.c:90: else if(dir == 0){
+;src/main.c:108: else if(dir == 0){
 	ld	hl, #4+1
 	add	hl, sp
 	ld	a, (hl)
 	dec	hl
 	or	a,(hl)
 	jr	NZ,00105$
-;src/main.c:91: return gladis_atk_dcha;
+;src/main.c:109: return gladis_atk_dcha;
 	ld	hl,#_gladis_atk_dcha
 	ret
 00105$:
-;src/main.c:93: return gladis_atk_izda;
+;src/main.c:111: return gladis_atk_izda;
 	ld	hl,#_gladis_atk_izda
 	ret
-;src/main.c:99: void game(){
+;src/main.c:120: void drawMap(){
+;	---------------------------------
+; Function drawMap
+; ---------------------------------
+_drawMap::
+	push	ix
+	ld	ix,#0
+	add	ix,sp
+	push	af
+	push	af
+;src/main.c:124: for(posY=0; posY<height;posY++){
+	ld	c,#0x00
+	ld	e,#0x00
+;src/main.c:125: for(posX=0; posX<width;posX++){
+00112$:
+	ld	-2 (ix),#0x00
+	ld	-1 (ix),#0x00
+00105$:
+;src/main.c:126: memptr = cpct_getScreenPtr(VMEM, posX*5, posY*20); 
+	push	bc
+	push	de
+	ld	a,e
+	push	af
+	inc	sp
+	ld	a,-1 (ix)
+	push	af
+	inc	sp
+	ld	hl,#0xC000
+	push	hl
+	call	_cpct_getScreenPtr
+	pop	de
+	pop	bc
+	inc	sp
+	inc	sp
+	push	hl
+;src/main.c:127: if(mapa[posY][posX] == 1){
+	ld	l,c
+	ld	h,#0x00
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	ld	a,#<(_mapa)
+	add	a, l
+	ld	l,a
+	ld	a,#>(_mapa)
+	adc	a, h
+	ld	h,a
+	ld	a,l
+	add	a, -2 (ix)
+	ld	l,a
+	ld	a,h
+	adc	a, #0x00
+	ld	h,a
+	ld	a,(hl)
+	dec	a
+	jr	NZ,00106$
+;src/main.c:128: cpct_drawSolidBox(memptr, 3, 5, 20);
+	ld	d,-4 (ix)
+	ld	b,-3 (ix)
+	push	bc
+	push	de
+	ld	hl,#0x1405
+	push	hl
+	ld	a,#0x03
+	push	af
+	inc	sp
+	ld	c,d
+	push	bc
+	call	_cpct_drawSolidBox
+	pop	af
+	pop	af
+	inc	sp
+	pop	de
+	pop	bc
+00106$:
+;src/main.c:125: for(posX=0; posX<width;posX++){
+	ld	a,-1 (ix)
+	add	a, #0x05
+	ld	-1 (ix),a
+	inc	-2 (ix)
+	ld	a,-2 (ix)
+	sub	a, #0x10
+	jr	C,00105$
+;src/main.c:124: for(posY=0; posY<height;posY++){
+	ld	a,e
+	add	a, #0x14
+	ld	e,a
+	inc	c
+	ld	a,c
+	sub	a, #0x0A
+	jr	C,00112$
+	ld	sp, ix
+	pop	ix
+	ret
+;src/main.c:138: void game(){
 ;	---------------------------------
 ; Function game
 ; ---------------------------------
@@ -317,62 +575,62 @@ _game::
 	ld	hl,#-28
 	add	hl,sp
 	ld	sp,hl
-;src/main.c:100: TPlayer p = { 0,100 };
-	ld	hl,#0x0005
+;src/main.c:139: TPlayer p = { 0,100 };
+	ld	hl,#0x0000
 	add	hl,sp
 	ld	(hl),#0x00
-	ld	hl,#0x0005
-	add	hl,sp
-	ld	-13 (ix),l
-	ld	-12 (ix),h
-	ld	a,-13 (ix)
-	add	a, #0x01
-	ld	-11 (ix),a
-	ld	a,-12 (ix)
-	adc	a, #0x00
-	ld	-10 (ix),a
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
-	ld	(hl),#0x64
-;src/main.c:101: TEnemy  e = { 55,100,0 };
-	ld	hl,#0x0002
-	add	hl,sp
-	ld	(hl),#0x37
-	ld	hl,#0x0002
+	ld	hl,#0x0000
 	add	hl,sp
 	ld	-4 (ix),l
 	ld	-3 (ix),h
 	ld	a,-4 (ix)
 	add	a, #0x01
-	ld	-15 (ix),a
+	ld	-7 (ix),a
 	ld	a,-3 (ix)
+	adc	a, #0x00
+	ld	-6 (ix),a
+	ld	l,-7 (ix)
+	ld	h,-6 (ix)
+	ld	(hl),#0x64
+;src/main.c:140: TEnemy  e = { 55,100,0 };
+	ld	hl,#0x0002
+	add	hl,sp
+	ld	(hl),#0x37
+	ld	hl,#0x0002
+	add	hl,sp
+	ld	-2 (ix),l
+	ld	-1 (ix),h
+	ld	a,-2 (ix)
+	add	a, #0x01
+	ld	-10 (ix),a
+	ld	a,-1 (ix)
+	adc	a, #0x00
+	ld	-9 (ix),a
+	ld	l,-10 (ix)
+	ld	h,-9 (ix)
+	ld	(hl),#0x64
+	ld	a,-2 (ix)
+	add	a, #0x02
+	ld	-15 (ix),a
+	ld	a,-1 (ix)
 	adc	a, #0x00
 	ld	-14 (ix),a
 	ld	l,-15 (ix)
 	ld	h,-14 (ix)
-	ld	(hl),#0x64
-	ld	a,-4 (ix)
-	add	a, #0x02
-	ld	-8 (ix),a
-	ld	a,-3 (ix)
-	adc	a, #0x00
-	ld	-7 (ix),a
-	ld	l,-8 (ix)
-	ld	h,-7 (ix)
 	ld	(hl),#0x00
-;src/main.c:104: u8* dir = 0;
+;src/main.c:143: u8* dir = 0;
 	ld	-17 (ix),#0x00
 	ld	-16 (ix),#0x00
-;src/main.c:105: u8* atk = 20;
+;src/main.c:144: u8* atk = 20;
 	ld	-19 (ix),#0x14
 	ld	-18 (ix),#0x00
-;src/main.c:106: u8* col = 0;
+;src/main.c:145: u8* col = 0;
 	ld	-21 (ix),#0x00
 	ld	-20 (ix),#0x00
-;src/main.c:107: u8* rebote = 6;
-	ld	hl,#0x0006
-	ex	(sp), hl
-;src/main.c:109: cpct_clearScreen(0);
+;src/main.c:146: u8* rebote = 6;
+	ld	-23 (ix),#0x06
+	ld	-22 (ix),#0x00
+;src/main.c:148: cpct_clearScreen(0);
 	ld	hl,#0x4000
 	push	hl
 	xor	a, a
@@ -381,31 +639,33 @@ _game::
 	ld	h, #0xC0
 	push	hl
 	call	_cpct_memset
-;src/main.c:111: while (1){
+;src/main.c:149: drawMap();
+	call	_drawMap
+;src/main.c:150: while (1){
 00154$:
-;src/main.c:114: cpct_waitVSYNC();
+;src/main.c:153: cpct_waitVSYNC();
 	call	_cpct_waitVSYNC
-;src/main.c:117: memptr = cpct_getScreenPtr(VMEM,p.x,p.y);
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
+;src/main.c:156: memptr = cpct_getScreenPtr(VMEM,p.x,p.y);
+	ld	l,-7 (ix)
+	ld	h,-6 (ix)
 	ld	b,(hl)
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	c, (hl)
 	push	bc
 	ld	hl,#0xC000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:119: cpct_drawSolidBox(memptr,0,4,16);
+;src/main.c:158: cpct_drawSolidBox(memptr,0,4,16);
 	ld	c, l
 	ld	b, h
-;src/main.c:118: if(atk <= 20)
+;src/main.c:157: if(atk <= 20)
 	ld	a,#0x14
 	cp	a, -19 (ix)
 	ld	a,#0x00
 	sbc	a, -18 (ix)
 	jr	C,00102$
-;src/main.c:119: cpct_drawSolidBox(memptr,0,4,16);
+;src/main.c:158: cpct_drawSolidBox(memptr,0,4,16);
 	ld	hl,#0x1004
 	push	hl
 	xor	a, a
@@ -418,7 +678,7 @@ _game::
 	inc	sp
 	jr	00103$
 00102$:
-;src/main.c:121: cpct_drawSolidBox(memptr,0,5,16);
+;src/main.c:160: cpct_drawSolidBox(memptr,0,5,16);
 	ld	hl,#0x1005
 	push	hl
 	xor	a, a
@@ -430,25 +690,25 @@ _game::
 	pop	af
 	inc	sp
 00103$:
-;src/main.c:123: memptr = cpct_getScreenPtr(VMEM,e.x,e.y);
-	ld	l,-15 (ix)
-	ld	h,-14 (ix)
+;src/main.c:162: memptr = cpct_getScreenPtr(VMEM,e.x,e.y);
+	ld	l,-10 (ix)
+	ld	h,-9 (ix)
 	ld	b,(hl)
-	ld	l,-4 (ix)
-	ld	h,-3 (ix)
+	ld	l,-2 (ix)
+	ld	h,-1 (ix)
 	ld	c, (hl)
 	push	bc
 	ld	hl,#0xC000
 	push	hl
 	call	_cpct_getScreenPtr
 	ex	de,hl
-;src/main.c:124: if(e.vivo == 0)
-	ld	l,-8 (ix)
-	ld	h,-7 (ix)
+;src/main.c:163: if(e.vivo == 0)
+	ld	l,-15 (ix)
+	ld	h,-14 (ix)
 	ld	a,(hl)
 	or	a, a
 	jr	NZ,00105$
-;src/main.c:125: cpct_drawSolidBox(memptr,0,4,16);
+;src/main.c:164: cpct_drawSolidBox(memptr,0,4,16);
 	ld	hl,#0x1004
 	push	hl
 	xor	a, a
@@ -460,7 +720,7 @@ _game::
 	pop	af
 	inc	sp
 00105$:
-;src/main.c:128: if(col != 2){
+;src/main.c:167: if(col != 2){
 	ld	a,-21 (ix)
 	sub	a, #0x02
 	jr	NZ,00265$
@@ -472,181 +732,180 @@ _game::
 00265$:
 	xor	a,a
 00266$:
-	ld	-5 (ix), a
+	ld	-13 (ix), a
 	or	a, a
 	jp	NZ,00138$
-;src/main.c:129: cpct_scanKeyboard_f();
+;src/main.c:168: cpct_scanKeyboard_f();
 	call	_cpct_scanKeyboard_f
-;src/main.c:130: if(cpct_isKeyPressed(Key_Space) && atk >= 20){
+;src/main.c:169: if(cpct_isKeyPressed(Key_Space) && atk >= 20){
 	ld	hl,#0x8005
 	call	_cpct_isKeyPressed
-	ld	-6 (ix),l
+	ld	-8 (ix),l
 	ld	a,-19 (ix)
 	sub	a, #0x14
 	ld	a,-18 (ix)
 	sbc	a, #0x00
 	ld	a,#0x00
 	rla
-	ld	-9 (ix),a
-;src/main.c:134: atk += 1;
+	ld	-5 (ix),a
+;src/main.c:173: atk += 1;
 	ld	a,-19 (ix)
 	add	a, #0x01
-	ld	-2 (ix),a
+	ld	-12 (ix),a
 	ld	a,-18 (ix)
 	adc	a, #0x00
-	ld	-1 (ix),a
-;src/main.c:130: if(cpct_isKeyPressed(Key_Space) && atk >= 20){
-	ld	a,-6 (ix)
+	ld	-11 (ix),a
+;src/main.c:169: if(cpct_isKeyPressed(Key_Space) && atk >= 20){
+	ld	a,-8 (ix)
 	or	a, a
 	jr	Z,00132$
-	ld	a,-9 (ix)
+	ld	a,-5 (ix)
 	or	a, a
 	jr	NZ,00132$
-;src/main.c:131: if(atk >= 50)
+;src/main.c:170: if(atk >= 50)
 	ld	a,-19 (ix)
 	sub	a, #0x32
 	ld	a,-18 (ix)
 	sbc	a, #0x00
 	jr	C,00107$
-;src/main.c:132: atk = 0;
+;src/main.c:171: atk = 0;
 	ld	-19 (ix),#0x00
 	ld	-18 (ix),#0x00
 	jr	00108$
 00107$:
-;src/main.c:134: atk += 1;
-	ld	a,-2 (ix)
+;src/main.c:173: atk += 1;
+	ld	a,-12 (ix)
 	ld	-19 (ix),a
-	ld	a,-1 (ix)
+	ld	a,-11 (ix)
 	ld	-18 (ix),a
 00108$:
-;src/main.c:135: if(cpct_isKeyPressed(Key_CursorRight))
+;src/main.c:174: if(cpct_isKeyPressed(Key_CursorRight))
 	ld	hl,#0x0200
 	call	_cpct_isKeyPressed
 	ld	a,l
 	or	a, a
 	jr	Z,00112$
-;src/main.c:136: dir = 0;
+;src/main.c:175: dir = 0;
 	ld	-17 (ix),#0x00
 	ld	-16 (ix),#0x00
 	jp	00139$
 00112$:
-;src/main.c:137: else if(cpct_isKeyPressed(Key_CursorLeft))
+;src/main.c:176: else if(cpct_isKeyPressed(Key_CursorLeft))
 	ld	hl,#0x0101
 	call	_cpct_isKeyPressed
 	ld	a,l
 	or	a, a
 	jp	Z,00139$
-;src/main.c:138: dir = 1;
+;src/main.c:177: dir = 1;
 	ld	-17 (ix),#0x01
 	ld	-16 (ix),#0x00
 	jp	00139$
 00132$:
-;src/main.c:140: if(atk < 20)
-	ld	a,-9 (ix)
+;src/main.c:179: if(atk < 20)
+	ld	a,-5 (ix)
 	or	a, a
 	jr	Z,00115$
-;src/main.c:141: atk += 1;
-	ld	a,-2 (ix)
+;src/main.c:180: atk += 1;
+	ld	a,-12 (ix)
 	ld	-19 (ix),a
-	ld	a,-1 (ix)
+	ld	a,-11 (ix)
 	ld	-18 (ix),a
 	jr	00116$
 00115$:
-;src/main.c:143: atk = 20;
+;src/main.c:182: atk = 20;
 	ld	-19 (ix),#0x14
 	ld	-18 (ix),#0x00
 00116$:
-;src/main.c:144: if(cpct_isKeyPressed(Key_CursorRight) && p.x < 76 ){
+;src/main.c:183: if(cpct_isKeyPressed(Key_CursorRight) && p.x < 76 ){
 	ld	hl,#0x0200
 	call	_cpct_isKeyPressed
 	ld	a,l
 	or	a, a
 	jr	Z,00128$
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	d,(hl)
 	ld	a,d
 	sub	a, #0x4C
 	jr	NC,00128$
-;src/main.c:145: if(col != 2)
-	ld	a,-5 (ix)
+;src/main.c:184: if(col != 2)
+	ld	a,-13 (ix)
 	or	a, a
 	jr	NZ,00118$
-;src/main.c:146: p.x += 1;
+;src/main.c:185: p.x += 1;
 	inc	d
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	(hl),d
 00118$:
-;src/main.c:147: dir = 0;
+;src/main.c:186: dir = 0;
 	ld	-17 (ix),#0x00
 	ld	-16 (ix),#0x00
 	jr	00139$
 00128$:
-;src/main.c:148: }else if(cpct_isKeyPressed(Key_CursorLeft) && p.x > 0 ){
+;src/main.c:187: }else if(cpct_isKeyPressed(Key_CursorLeft) && p.x > 0 ){
 	ld	hl,#0x0101
 	call	_cpct_isKeyPressed
 	ld	a,l
 	or	a, a
 	jr	Z,00124$
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	d,(hl)
 	ld	a,d
 	or	a, a
 	jr	Z,00124$
-;src/main.c:149: if(col != 2)
-	ld	a,-5 (ix)
+;src/main.c:188: if(col != 2)
+	ld	a,-13 (ix)
 	or	a, a
 	jr	NZ,00120$
-;src/main.c:150: p.x -= 1;
+;src/main.c:189: p.x -= 1;
 	dec	d
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	(hl),d
 00120$:
-;src/main.c:151: dir = 1;
+;src/main.c:190: dir = 1;
 	ld	-17 (ix),#0x01
 	ld	-16 (ix),#0x00
 	jr	00139$
 00124$:
-;src/main.c:152: }else  if(cpct_isKeyPressed(Key_Esc)){
+;src/main.c:191: }else  if(cpct_isKeyPressed(Key_Esc)){
 	ld	hl,#0x0408
 	call	_cpct_isKeyPressed
 	ld	a,l
 	or	a, a
 	jr	Z,00139$
-;src/main.c:153: return;
+;src/main.c:192: return;
 	jp	00159$
 00138$:
-;src/main.c:157: p.x -= 2;
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
+;src/main.c:196: p.x -= 2;
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	a,(hl)
 	add	a,#0xFE
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	(hl),a
-;src/main.c:158: rebote -= 2;
-	ld	e,-28 (ix)
-	ld	d,-27 (ix)
+;src/main.c:197: rebote -= 2;
+	ld	e,-23 (ix)
+	ld	d,-22 (ix)
 	dec	de
 	dec	de
-	inc	sp
-	inc	sp
-	push	de
-;src/main.c:159: if(rebote == 0){
+	ld	-23 (ix),e
+	ld	-22 (ix),d
+;src/main.c:198: if(rebote == 0){
 	ld	a,d
 	or	a,e
 	jr	NZ,00139$
-;src/main.c:160: rebote = 6;
-	ld	hl,#0x0006
-	ex	(sp), hl
-;src/main.c:161: col = 0;
+;src/main.c:199: rebote = 6;
+	ld	-23 (ix),#0x06
+	ld	-22 (ix),#0x00
+;src/main.c:200: col = 0;
 	ld	-21 (ix),#0x00
 	ld	-20 (ix),#0x00
 00139$:
-;src/main.c:166: sprite = checkSprite(atk,dir);
+;src/main.c:205: sprite = checkSprite(atk,dir);
 	ld	l,-17 (ix)
 	ld	h,-16 (ix)
 	push	hl
@@ -658,7 +917,7 @@ _game::
 	pop	af
 	ld	c, l
 	ld	b, h
-;src/main.c:168: if(col != 2 && e.vivo == 0)
+;src/main.c:207: if(col != 2 && e.vivo == 0)
 	ld	a,-21 (ix)
 	sub	a, #0x02
 	jr	NZ,00267$
@@ -666,25 +925,25 @@ _game::
 	or	a, a
 	jr	Z,00141$
 00267$:
-	ld	l,-8 (ix)
-	ld	h,-7 (ix)
+	ld	l,-15 (ix)
+	ld	h,-14 (ix)
 	ld	a,(hl)
 	or	a, a
 	jr	NZ,00141$
-;src/main.c:169: col = checkCollisions(p.x,p.y,e.x,e.y,dir,atk);
-	ld	l,-15 (ix)
-	ld	h,-14 (ix)
+;src/main.c:208: col = checkCollisions(p.x,p.y,e.x,e.y,dir,atk);
+	ld	l,-10 (ix)
+	ld	h,-9 (ix)
 	ld	e,(hl)
+	ld	l,-2 (ix)
+	ld	h,-1 (ix)
+	ld	a,(hl)
+	ld	-12 (ix),a
+	ld	l,-7 (ix)
+	ld	h,-6 (ix)
+	ld	a,(hl)
+	ld	-5 (ix),a
 	ld	l,-4 (ix)
 	ld	h,-3 (ix)
-	ld	a,(hl)
-	ld	-2 (ix),a
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
-	ld	a,(hl)
-	ld	-9 (ix),a
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
 	ld	d,(hl)
 	push	bc
 	ld	l,-19 (ix)
@@ -696,10 +955,10 @@ _game::
 	ld	a,e
 	push	af
 	inc	sp
-	ld	a,-2 (ix)
+	ld	a,-12 (ix)
 	push	af
 	inc	sp
-	ld	a,-9 (ix)
+	ld	a,-5 (ix)
 	push	af
 	inc	sp
 	push	de
@@ -713,24 +972,24 @@ _game::
 	ld	-21 (ix),l
 	ld	-20 (ix),h
 00141$:
-;src/main.c:170: if(col == 1)
+;src/main.c:209: if(col == 1)
 	ld	a,-21 (ix)
 	dec	a
 	jr	NZ,00144$
 	ld	a,-20 (ix)
 	or	a, a
 	jr	NZ,00144$
-;src/main.c:171: e.vivo = 1;
-	ld	l,-8 (ix)
-	ld	h,-7 (ix)
+;src/main.c:210: e.vivo = 1;
+	ld	l,-15 (ix)
+	ld	h,-14 (ix)
 	ld	(hl),#0x01
 00144$:
-;src/main.c:174: memptr = cpct_getScreenPtr(VMEM,p.x,p.y);
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
+;src/main.c:213: memptr = cpct_getScreenPtr(VMEM,p.x,p.y);
+	ld	l,-7 (ix)
+	ld	h,-6 (ix)
 	ld	d,(hl)
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	a,(hl)
 	push	bc
 	push	de
@@ -741,7 +1000,7 @@ _game::
 	push	hl
 	call	_cpct_getScreenPtr
 	pop	bc
-;src/main.c:177: if(atk >= 21)
+;src/main.c:216: if(atk >= 21)
 	ld	a,-19 (ix)
 	sub	a, #0x15
 	ld	a,-18 (ix)
@@ -749,49 +1008,49 @@ _game::
 	ld	a,#0x00
 	rla
 	ld	e,a
-;src/main.c:119: cpct_drawSolidBox(memptr,0,4,16);
-	ld	-2 (ix),l
-	ld	-1 (ix),h
-;src/main.c:178: cpct_drawSpriteMasked(sprite, memptr, 5, 16);
-;src/main.c:177: if(atk >= 21)
+;src/main.c:158: cpct_drawSolidBox(memptr,0,4,16);
+	ld	-12 (ix),l
+	ld	-11 (ix),h
+;src/main.c:217: cpct_drawSpriteMasked(sprite, memptr, 5, 16);
+;src/main.c:216: if(atk >= 21)
 	ld	a,e
 	or	a, a
 	jr	NZ,00146$
-;src/main.c:178: cpct_drawSpriteMasked(sprite, memptr, 5, 16);
+;src/main.c:217: cpct_drawSpriteMasked(sprite, memptr, 5, 16);
 	push	de
 	ld	hl,#0x1005
 	push	hl
-	ld	l,-2 (ix)
-	ld	h,-1 (ix)
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
 	push	hl
 	push	bc
 	call	_cpct_drawSpriteMasked
 	pop	de
 	jr	00147$
 00146$:
-;src/main.c:180: cpct_drawSpriteMasked(sprite, memptr, 4, 16);
+;src/main.c:219: cpct_drawSpriteMasked(sprite, memptr, 4, 16);
 	push	de
 	ld	hl,#0x1004
 	push	hl
-	ld	l,-2 (ix)
-	ld	h,-1 (ix)
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
 	push	hl
 	push	bc
 	call	_cpct_drawSpriteMasked
 	pop	de
 00147$:
-;src/main.c:183: if(e.vivo == 0){
-	ld	l,-8 (ix)
-	ld	h,-7 (ix)
+;src/main.c:222: if(e.vivo == 0){
+	ld	l,-15 (ix)
+	ld	h,-14 (ix)
 	ld	a, (hl)
 	or	a, a
 	jr	NZ,00149$
-;src/main.c:184: memptr = cpct_getScreenPtr(VMEM,e.x,e.y);
-	ld	l,-15 (ix)
-	ld	h,-14 (ix)
+;src/main.c:223: memptr = cpct_getScreenPtr(VMEM,e.x,e.y);
+	ld	l,-10 (ix)
+	ld	h,-9 (ix)
 	ld	b,(hl)
-	ld	l,-4 (ix)
-	ld	h,-3 (ix)
+	ld	l,-2 (ix)
+	ld	h,-1 (ix)
 	ld	d,(hl)
 	push	de
 	ld	c, d
@@ -800,7 +1059,7 @@ _game::
 	push	hl
 	call	_cpct_getScreenPtr
 	pop	de
-;src/main.c:185: cpct_drawSolidBox(memptr, 18, 4, 16);
+;src/main.c:224: cpct_drawSolidBox(memptr, 18, 4, 16);
 	ld	c, l
 	ld	b, h
 	push	de
@@ -816,7 +1075,7 @@ _game::
 	inc	sp
 	pop	de
 00149$:
-;src/main.c:188: memptr = cpct_getScreenPtr(VMEM, 6, 10);
+;src/main.c:227: memptr = cpct_getScreenPtr(VMEM, 6, 10);
 	push	de
 	ld	hl,#0x0A06
 	push	hl
@@ -824,7 +1083,7 @@ _game::
 	push	hl
 	call	_cpct_getScreenPtr
 	pop	de
-;src/main.c:189: cpct_drawStringM0("FATIGA",memptr, 2, 0);
+;src/main.c:228: cpct_drawStringM0("FATIGA",memptr, 2, 0);
 	ld	c, l
 	ld	b, h
 	push	de
@@ -838,9 +1097,9 @@ _game::
 	add	hl,sp
 	ld	sp,hl
 	pop	de
-;src/main.c:191: if(atk >= 21)
+;src/main.c:230: if(atk >= 21)
 	ld	a,e
-;src/main.c:192: for(i=0; i<(*atk - 20)/10; i++){
+;src/main.c:231: for(i=0; i<(*atk - 20)/10; i++){
 	or	a,a
 	jp	NZ,00154$
 	ld	c,a
@@ -872,7 +1131,7 @@ _game::
 	xor	a, #0x80
 00270$:
 	jp	P,00154$
-;src/main.c:193: memptr = cpct_getScreenPtr(VMEM, 18+i*4, 10);
+;src/main.c:232: memptr = cpct_getScreenPtr(VMEM, 18+i*4, 10);
 	ld	a,c
 	add	a, a
 	add	a, a
@@ -888,7 +1147,7 @@ _game::
 	push	hl
 	call	_cpct_getScreenPtr
 	pop	bc
-;src/main.c:194: cpct_drawSolidBox(memptr, 18, 3, 10);
+;src/main.c:233: cpct_drawSolidBox(memptr, 18, 3, 10);
 	ex	de,hl
 	push	bc
 	ld	hl,#0x0A03
@@ -902,7 +1161,7 @@ _game::
 	pop	af
 	inc	sp
 	pop	bc
-;src/main.c:192: for(i=0; i<(*atk - 20)/10; i++){
+;src/main.c:231: for(i=0; i<(*atk - 20)/10; i++){
 	inc	c
 	jr	00157$
 00159$:
@@ -912,18 +1171,18 @@ _game::
 ___str_2:
 	.ascii "FATIGA"
 	.db 0x00
-;src/main.c:201: void main(void) {
+;src/main.c:240: void main(void) {
 ;	---------------------------------
 ; Function main
 ; ---------------------------------
 _main::
-;src/main.c:203: init();
+;src/main.c:242: init();
 	call	_init
-;src/main.c:206: while(1){
+;src/main.c:245: while(1){
 00102$:
-;src/main.c:207: menu();
+;src/main.c:246: menu();
 	call	_menu
-;src/main.c:208: game();
+;src/main.c:247: game();
 	call	_game
 	jr	00102$
 	.area _CODE

@@ -21,6 +21,24 @@
 #include "gladis-quieto.h"
 #include "gladis-atk.h"
 #include "chacho-quieto.h"
+
+
+
+#define width 16
+#define height 10
+
+const u8 mapa[height][width] = {{1,1,1,1,0,1,1,1,0,1,1,0,1,1,1,1},
+                                {1,1,1,1,0,1,1,1,0,1,1,0,0,0,1,1},
+                                {1,1,1,1,0,1,1,1,0,1,1,0,1,0,1,1},
+                                {1,1,1,1,0,1,1,1,0,1,1,0,1,0,1,1},
+                                {1,1,1,1,0,0,0,0,0,0,0,0,1,0,1,1},
+                                {1,1,1,1,0,1,1,1,0,1,1,1,1,0,1,1},
+                                {1,1,1,1,0,1,1,1,0,1,1,1,1,0,1,1},
+                                {1,1,1,1,0,1,1,1,0,1,1,1,1,0,1,1},
+                                {1,1,1,1,0,1,1,1,0,0,0,0,0,0,1,1},
+                                {1,1,1,1,0,1,1,1,0,1,1,1,1,1,1,1}};
+
+
 #define VMEM (u8*)0xC000
 
 typedef struct
@@ -94,6 +112,27 @@ u8* checkSprite(u8* atk, u8* dir){
     }
 }
 
+
+
+
+
+/*MAPA*/
+void drawMap(){
+   u8 posX=0,posY =0;
+   u8* memptr;
+   
+   for(posY=0; posY<height;posY++){
+      for(posX=0; posX<width;posX++){
+         memptr = cpct_getScreenPtr(VMEM, posX*5, posY*20); 
+         if(mapa[posY][posX] == 1){
+            cpct_drawSolidBox(memptr, 3, 5, 20);
+         }
+      }
+   }
+}
+
+
+
 /*JUEGO*/
 
 void game(){
@@ -107,7 +146,7 @@ void game(){
    u8* rebote = 6;
    u8 i = 0;
    cpct_clearScreen(0);
-
+    drawMap();
    while (1){
 
       //Esperar el retrazado
