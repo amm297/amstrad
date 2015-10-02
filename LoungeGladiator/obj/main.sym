@@ -9,10 +9,6 @@ Symbol Table
     .__.H$L.                                                    =  0000 L
   0 ___str_0                                                       02FE R
   0 ___str_1                                                       0303 R
-    __divsint                                                      **** GX
-    __divuchar                                                     **** GX
-  7 __xinit__sprite                                                0000 R
-  0 _checkColisions                                                0420 GR
     _cpct_disableFirmware                                          **** GX
     _cpct_drawSolidBox                                             **** GX
     _cpct_drawSpriteMasked                                         **** GX
@@ -27,31 +23,29 @@ Symbol Table
     _cpct_waitVSYNC                                                **** GX
   0 _drawMap                                                       030F GR
   0 _g_palette                                                     02A5 GR
-  0 _game                                                          0509 GR
+  0 _game                                                          0420 GR
     _gladis_quieto_dcha                                            **** GX
     _gladis_quieto_izda                                            **** GX
   0 _init                                                          0000 GR
-  0 _loadMap                                                       06BA GR
-  0 _main                                                          06BB GR
+  0 _loadMap                                                       05A5 GR
+  0 _main                                                          05A6 GR
   0 _mapa1                                                         0025 GR
   0 _mapa2                                                         0165 GR
   0 _menu                                                          02A9 GR
   1 _scene                                                         0000 GR
-  2 _sprite                                                        0000 GR
-
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
 Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size  6C6   flags    0
+   0 _CODE                                      size  5B1   flags    0
    1 _DATA                                      size    6   flags    0
-   2 _INITIALIZED                               size    2   flags    0
+   2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8
    4 _HOME                                      size    0   flags    0
    5 _GSINIT                                    size    0   flags    0
    6 _GSFINAL                                   size    0   flags    0
-   7 _INITIALIZER                               size    2   flags    0
+   7 _INITIALIZER                               size    0   flags    0
    8 _CABS                                      size    0   flags    8
 
