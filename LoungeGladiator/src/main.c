@@ -177,7 +177,7 @@ void checkKeyboard(u8 *x, u8 *y,int *finish){
 
 void game(){
    TPlayer p = { 0,100 };
-   p.sprite = gladis_quieto_dcha;
+   //p.sprite = gladis_quieto_dcha;
    u8* memptr;
    int i =1;
    int finish = 0;
