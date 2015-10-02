@@ -7,12 +7,8 @@ Symbol Table
     .__.ABS.                                                    =  0000 G
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
-  0 ___str_0                                                       011E R
-  0 ___str_1                                                       0129 R
-  0 ___str_2                                                       068A R
-    __divsint                                                      **** GX
-  0 _checkCollisions                                               0135 GR
-  0 _checkSprite                                                   01C9 GR
+  0 ___str_0                                                       0310 R
+  0 ___str_1                                                       0315 R
     _cpct_disableFirmware                                          **** GX
     _cpct_drawSolidBox                                             **** GX
     _cpct_drawSpriteMasked                                         **** GX
@@ -25,25 +21,28 @@ Symbol Table
     _cpct_setPalette                                               **** GX
     _cpct_setVideoMode                                             **** GX
     _cpct_waitVSYNC                                                **** GX
-  0 _drawMap                                                       01FD GR
-  0 _g_palette                                                     00C5 GR
-  0 _game                                                          0280 GR
-    _gladis_atk_dcha                                               **** GX
-    _gladis_atk_izda                                               **** GX
+  0 _drawMap                                                       0321 GR
+  0 _g_palette                                                     02B7 GR
+  0 _game                                                          0432 GR
     _gladis_quieto_dcha                                            **** GX
     _gladis_quieto_izda                                            **** GX
   0 _init                                                          0000 GR
-  0 _main                                                          0691 GR
-  0 _mapa                                                          0025 GR
-  0 _menu                                                          00C9 GR
+  0 _loadMap                                                       05B7 GR
+  0 _main                                                          05B8 GR
+  0 _mapa1                                                         0037 GR
+  0 _mapa2                                                         0177 GR
+  0 _menu                                                          02BB GR
+  0 _p                                                             0025 GR
+  1 _scene                                                         0000 GR
+
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
 Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size  69C   flags    0
-   1 _DATA                                      size    0   flags    0
+   0 _CODE                                      size  5C3   flags    0
+   1 _DATA                                      size    6   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8
    4 _HOME                                      size    0   flags    0

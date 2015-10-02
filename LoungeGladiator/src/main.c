@@ -26,10 +26,6 @@
 #define height 10
 
 const int *scene[3];
-const int p[3][3] = {     {1,1,1},
-                          {0,1,0},
-                          {1,1,1}
-                        };
 
 
 const int mapa1[height][width] = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
