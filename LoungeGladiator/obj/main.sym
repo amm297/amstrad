@@ -9,6 +9,10 @@ Symbol Table
     .__.H$L.                                                    =  0000 L
   0 ___str_0                                                       02FE R
   0 ___str_1                                                       0303 R
+    __divsint                                                      **** GX
+    __divuchar                                                     **** GX
+  0 _checkColisions                                                0420 GR
+  0 _checkKeyboard                                                 0509 GR
     _cpct_disableFirmware                                          **** GX
     _cpct_drawSolidBox                                             **** GX
     _cpct_drawSpriteMasked                                         **** GX
@@ -22,15 +26,17 @@ Symbol Table
     _cpct_setVideoMode                                             **** GX
     _cpct_waitVSYNC                                                **** GX
   0 _drawMap                                                       030F GR
-  0 _g_palette                                                     02A5 GR
-  0 _game                                                          0420 GR
+  0 _g_palette                                                     0025 GR
+  0 _game                                                          0625 GR
+    _gladis_atk_dcha                                               **** GX
+    _gladis_atk_izda                                               **** GX
     _gladis_quieto_dcha                                            **** GX
     _gladis_quieto_izda                                            **** GX
   0 _init                                                          0000 GR
-  0 _loadMap                                                       05A5 GR
-  0 _main                                                          05A6 GR
-  0 _mapa1                                                         0025 GR
-  0 _mapa2                                                         0165 GR
+  0 _loadMap                                                       082C GR
+  0 _main                                                          082D GR
+  0 _mapa1                                                         0029 GR
+  0 _mapa2                                                         0169 GR
   0 _menu                                                          02A9 GR
   1 _scene                                                         0000 GR
 
@@ -39,8 +45,8 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size  5B1   flags    0
-   1 _DATA                                      size    6   flags    0
+   0 _CODE                                      size  838   flags    0
+   1 _DATA                                      size   14   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8
    4 _HOME                                      size    0   flags    0

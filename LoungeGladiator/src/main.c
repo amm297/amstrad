@@ -19,50 +19,9 @@
 #include <stdlib.h>
 #include <cpctelera.h>
 #include "gladis-quieto.h"
+#include "gladis-atk.h"
+#include "mapa.h"
 
-
-#define VMEM (u8*)0xC000
-#define width 16
-#define height 10
-#define tilewidth 5
-#define tileheight 20
-#define playerwidth 4
-#define playerheight 16
-
-const int *scene[3];
-
-
-
-const int mapa1[height][width] = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-                                  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                                  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                                  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                                  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                                  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                                  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                                  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                                  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                                  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
-
-const int mapa2[height][width] = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-                                  {1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1},
-                                  {1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1},
-                                  {1,0,1,0,0,0,0,1,1,1,0,0,0,1,0,1},
-                                  {1,0,1,0,0,0,0,1,1,1,0,0,0,1,0,1},
-                                  {0,0,1,0,0,0,0,1,0,1,0,0,0,1,0,1},
-                                  {1,0,1,1,1,1,1,0,0,0,1,1,1,1,0,1},
-                                  {1,0,1,1,1,1,1,0,0,0,1,1,1,1,0,1},
-                                  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                                  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
-
-typedef struct 
-{
-  u8 x,y; //posicion personaje
-  u8* sprite;
-
-}TPlayer;
-
-const u8 g_palette[4] = { 0,26,6,18 };
 /*INICIALIZACION*/
 void init(){
    cpct_disableFirmware();
@@ -148,36 +107,47 @@ void checkColisions(u8 *x,u8 *y, u8 lx, u8 ly){
 
 /*Teclado*/
 
-void checkKeyboard(u8 *x, u8 *y,int *finish){
+u8* checkKeyboard(u8 *x, u8 *y,int *finish,u8 *s,u8 *dir,u8 *size){
   
+      u8 *sprite = s;
       if(cpct_isKeyPressed(Key_CursorRight) && x[0] < 76 ){
          x[0] += 1;
-         //sprite[0] = gladis_quieto_dcha;
+         dir[0] = 6;
+         size[0] = 4;
+         sprite = gladis_quieto_dcha;
       }else if(cpct_isKeyPressed(Key_CursorLeft) && x[0] > 0 ){
          x[0] -= 1;
-         //sprite[0] = gladis_quieto_izda;
+         dir[0] = 4;
+         size[0] = 4;
+         sprite = gladis_quieto_izda;
       }else  if(cpct_isKeyPressed(Key_CursorDown) && y[0] < 180){
          y[0] += 2;
-         //sprite[0] = gladis_quieto_dcha;
+         dir[0] = 2;
+         size[0] = 4;
+         sprite = gladis_quieto_dcha;
       }else if(cpct_isKeyPressed(Key_CursorUp) && y[0] > 0 ){
          y[0] -= 2;
-         //sprite[0] = gladis_quieto_dcha;
+         dir[0] = 8;
+         size[0] = 4;
+         sprite = gladis_quieto_dcha;
       }else  if(cpct_isKeyPressed(Key_Esc)){
          finish[0] = 1;
-      }/*else if(cpct_isKeyPressed(Key_Space)){
-          cpct_clearScreen(0);
-          if(i ==1 ) {i++;}
-          else {i--;}
-          drawMap(i);
-      }**/
+      }else if(cpct_isKeyPressed(Key_Space)){
+          size[0] = 5;
+          if(dir[0] == 6) {sprite = gladis_atk_dcha;}
+          else if(dir[0] == 4) {sprite = gladis_atk_izda;}
+          else {sprite = gladis_quieto_dcha;} 
+      }
+      return sprite;
 }
 
 
 /*JUEGO*/
 
 void game(){
-   TPlayer p = { 0,100 };
-   //p.sprite = gladis_quieto_dcha;
+   TPlayer p = {0,100,gladis_quieto_dcha,10,6,4};
+   TPlayer e = {30,100,gladis_quieto_dcha,5,4,4};
+
    u8* memptr;
    int i =1;
    int finish = 0;
@@ -195,7 +165,7 @@ void game(){
 
       //Desdibujar personaje   
       memptr = cpct_getScreenPtr(VMEM,p.x,p.y);
-      cpct_drawSolidBox(memptr,0,4,16);
+      cpct_drawSolidBox(memptr,0,p.size,16);
 
 
       //guardarposicion anterior;
@@ -205,14 +175,14 @@ void game(){
 
       //Comprobar teclado
       cpct_scanKeyboard_f();
-      checkKeyboard(&p.x,&p.y,&finish);
+      p.sprite  = checkKeyboard(&p.x,&p.y,&finish,p.sprite,&p.dir,&p.size);
 
       //Comprobar colisiones
       checkColisions(&p.x,&p.y,lx,ly);
 
       //Dibujar personaje   
       memptr = cpct_getScreenPtr(VMEM,p.x,p.y);
-      cpct_drawSpriteMasked(p.sprite,memptr,4,16);
+      cpct_drawSpriteMasked(p.sprite,memptr,p.size,16);
 
      if(finish == 1) {return;}
 
