@@ -9,10 +9,15 @@ Symbol Table
     .__.H$L.                                                    =  0000 L
   0 ___str_0                                                       02FE R
   0 ___str_1                                                       0303 R
+  0 ___str_2                                                       071B R
+  0 ___str_3                                                       072A R
+    __assert                                                       **** GX
     __divsint                                                      **** GX
     __divuchar                                                     **** GX
-  0 _checkColisions                                                0420 GR
-  0 _checkKeyboard                                                 0509 GR
+    _calloc                                                        **** GX
+    _chacho_quieto_dcha                                            **** GX
+  0 _checkColisions                                                04B3 GR
+  0 _checkKeyboard                                                 059C GR
     _cpct_disableFirmware                                          **** GX
     _cpct_drawSolidBox                                             **** GX
     _cpct_drawSpriteMasked                                         **** GX
@@ -25,27 +30,30 @@ Symbol Table
     _cpct_setPalette                                               **** GX
     _cpct_setVideoMode                                             **** GX
     _cpct_waitVSYNC                                                **** GX
+  0 _create_Player                                                 06B8 GR
   0 _drawMap                                                       030F GR
+  0 _drawPlayers                                                   0420 GR
   0 _g_palette                                                     0025 GR
-  0 _game                                                          0625 GR
+  0 _game                                                          0735 GR
     _gladis_atk_dcha                                               **** GX
     _gladis_atk_izda                                               **** GX
     _gladis_quieto_dcha                                            **** GX
     _gladis_quieto_izda                                            **** GX
   0 _init                                                          0000 GR
-  0 _loadMap                                                       082C GR
-  0 _main                                                          082D GR
+  0 _loadMap                                                       0890 GR
+  0 _main                                                          0891 GR
   0 _mapa1                                                         0029 GR
   0 _mapa2                                                         0169 GR
   0 _menu                                                          02A9 GR
   1 _scene                                                         0000 GR
+
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
 Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size  838   flags    0
+   0 _CODE                                      size  89C   flags    0
    1 _DATA                                      size   14   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8

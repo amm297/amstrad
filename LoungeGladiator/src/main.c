@@ -16,10 +16,14 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 
+#include <stdio.h>
+#include <assert.h>
 #include <stdlib.h>
+#include <string.h>
 #include <cpctelera.h>
 #include "gladis-quieto.h"
 #include "gladis-atk.h"
+#include "chacho-quieto.h"
 #include "mapa.h"
 
 /*INICIALIZACION*/
@@ -75,6 +79,19 @@ void drawMap(int t){
    }
 }
 
+/*Dibujar personajes*/
+
+void drawPlayers(TPlayer *p,TPlayer *e){
+  u8* memptr;
+  if(p->life > 0){
+    memptr = cpct_getScreenPtr(VMEM,p->x,p->y);
+    cpct_drawSpriteMasked(p->sprite,memptr,p->size,16);
+  }
+  if(e->life > 0 ){
+    memptr = cpct_getScreenPtr(VMEM,e->x,e->y);
+    cpct_drawSpriteMasked(e->sprite,memptr,e->size,16);
+  }
+}
 
 /*Colisiones*/
 
@@ -142,11 +159,35 @@ u8* checkKeyboard(u8 *x, u8 *y,int *finish,u8 *s,u8 *dir,u8 *size){
 }
 
 
+/*Crear Personaje*/
+TPlayer *create_Player(u8 x,u8 y,u8 *sprite,u8 life,u8 dir,u8 size){
+   TPlayer *player = calloc(1,sizeof *player);
+  assert(player != NULL);
+
+  player->x = x;
+  player->y = y;
+  player->sprite = sprite;
+  player->life = life;
+  player->dir = dir;
+  player->size = size;
+
+  return player;
+}
+
 /*JUEGO*/
 
 void game(){
-   TPlayer p = {0,100,gladis_quieto_dcha,10,6,4};
-   TPlayer e = {30,100,gladis_quieto_dcha,5,4,4};
+   /*TPlayer p = {0,100,gladis_quieto_dcha,10,6,4};
+   TPlayer e = {30,100,gladis_quieto_dcha,5,4,4};*/
+
+  TPlayer *players;
+  players = calloc(1,sizeof players[0]);
+ 
+
+  TPlayer *p = create_Player(0,100,gladis_quieto_dcha,10,6,4);
+  TPlayer *e = create_Player(10,110,chacho_quieto_dcha,10,6,4);
+  
+ 
 
    u8* memptr;
    int i =1;
@@ -164,25 +205,28 @@ void game(){
       cpct_waitVSYNC();
 
       //Desdibujar personaje   
-      memptr = cpct_getScreenPtr(VMEM,p.x,p.y);
-      cpct_drawSolidBox(memptr,0,p.size,16);
+      memptr = cpct_getScreenPtr(VMEM,p->x,p->y);
+      cpct_drawSolidBox(memptr,0,p->size,16);
 
 
       //guardarposicion anterior;
 
-      lx = p.x;
-      ly = p.y;
+      lx = p->x;
+      ly = p->y;
 
       //Comprobar teclado
       cpct_scanKeyboard_f();
-      p.sprite  = checkKeyboard(&p.x,&p.y,&finish,p.sprite,&p.dir,&p.size);
+      p->sprite  = checkKeyboard(&p->x,&p->y,&finish,p->sprite,&p->dir,&p->size);
 
       //Comprobar colisiones
-      checkColisions(&p.x,&p.y,lx,ly);
+      checkColisions(&p->x,&p->y,lx,ly);
 
-      //Dibujar personaje   
-      memptr = cpct_getScreenPtr(VMEM,p.x,p.y);
-      cpct_drawSpriteMasked(p.sprite,memptr,p.size,16);
+      //Dibujar personaje 
+      drawPlayers(p,e);
+      /*memptr = cpct_getScreenPtr(VMEM,p->x,p->y);
+      cpct_drawSpriteMasked(p->sprite,memptr,p->size,16);
+      memptr = cpct_getScreenPtr(VMEM,e->x,e->y);
+      cpct_drawSpriteMasked(e->sprite,memptr,e->size,16);*/
 
      if(finish == 1) {return;}
 

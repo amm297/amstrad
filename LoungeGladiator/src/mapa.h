@@ -50,9 +50,9 @@ typedef struct
 {
   u8 x,y; //posicion personaje
   u8 *sprite; //sprite persnaje
-  u8  life;
-  u8 dir;
-  u8 size;
+  u8 life; //vida personaje
+  u8 dir; //direccion personaje
+  u8 size; //size ancho personaje
 
 }TPlayer;
 
