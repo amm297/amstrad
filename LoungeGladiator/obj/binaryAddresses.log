@@ -1,3 +1,7 @@
 Generated Binary File obj/LoungeGladiator.bin:
 Load Address = 4000
+<<<<<<< HEAD
 Run  Address = 5303 
+=======
+Run  Address = 4C55 
+>>>>>>> 100f2f53c950a4f5642a7437e7ddf52df6d2a2ee

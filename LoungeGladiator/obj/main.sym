@@ -7,6 +7,7 @@ Symbol Table
     .__.ABS.                                                    =  0000 G
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
+<<<<<<< HEAD
   0 ___str_0                                                       043E R
   0 ___str_1                                                       0443 R
   0 ___str_2                                                       0EFF R
@@ -19,6 +20,14 @@ Symbol Table
   0 _checkEnemiesCollisions                                        0A1D GR
   0 _checkKeyboard                                                 0A1E GR
   0 _cleanScreenPlayers                                            060F GR
+=======
+  0 ___str_0                                                       007E R
+  0 ___str_1                                                       0089 R
+  0 _checkCollisions                                               0095 GR
+  0 _checkSprite                                                   0151 GR
+    _corazon_lleno                                                 **** GX
+    _corazon_roto                                                  **** GX
+>>>>>>> 100f2f53c950a4f5642a7437e7ddf52df6d2a2ee
     _cpct_disableFirmware                                          **** GX
     _cpct_drawSolidBox                                             **** GX
     _cpct_drawSpriteMasked                                         **** GX
@@ -31,6 +40,7 @@ Symbol Table
     _cpct_setPalette                                               **** GX
     _cpct_setVideoMode                                             **** GX
     _cpct_waitVSYNC                                                **** GX
+<<<<<<< HEAD
   0 _create_Player                                                 0EA0 GR
   0 _drawMap                                                       044F GR
   0 _drawPlayers                                                   0686 GR
@@ -38,11 +48,19 @@ Symbol Table
     _free                                                          **** GX
   0 _g_palette                                                     0025 GR
   0 _game                                                          0F1A GR
+=======
+  0 _drawFatiga                                                    01AF GR
+  0 _drawVida                                                      026C GR
+  0 _g_palette                                                     0025 GR
+  0 _game                                                          0313 GR
+    _gladis_arriba_dcha                                            **** GX
+>>>>>>> 100f2f53c950a4f5642a7437e7ddf52df6d2a2ee
     _gladis_atk_dcha                                               **** GX
     _gladis_atk_izda                                               **** GX
     _gladis_quieto_dcha                                            **** GX
     _gladis_quieto_izda                                            **** GX
   0 _init                                                          0000 GR
+<<<<<<< HEAD
   0 _initPlayers                                                   0719 GR
   0 _main                                                          1103 GR
     _malloc                                                        **** GX
@@ -52,6 +70,10 @@ Symbol Table
   0 _move                                                          0B3A GR
     _rand                                                          **** GX
   1 _scene                                                         0000 GR
+=======
+  0 _main                                                          0891 GR
+  0 _menu                                                          0029 GR
+>>>>>>> 100f2f53c950a4f5642a7437e7ddf52df6d2a2ee
 
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
@@ -59,8 +81,13 @@ Hexadecimal [16-Bits]
 
 Area Table
 
+<<<<<<< HEAD
    0 _CODE                                      size 110E   flags    0
    1 _DATA                                      size   18   flags    0
+=======
+   0 _CODE                                      size  89C   flags    0
+   1 _DATA                                      size    0   flags    0
+>>>>>>> 100f2f53c950a4f5642a7437e7ddf52df6d2a2ee
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8
    4 _HOME                                      size    0   flags    0
