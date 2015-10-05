@@ -10,7 +10,9 @@ Symbol Table
   0 ___str_0                                                       007E R
   0 ___str_1                                                       0089 R
   0 _checkCollisions                                               0095 GR
-  0 _checkSprite                                                   0129 GR
+  0 _checkSprite                                                   0151 GR
+    _corazon_lleno                                                 **** GX
+    _corazon_roto                                                  **** GX
     _cpct_disableFirmware                                          **** GX
     _cpct_drawSolidBox                                             **** GX
     _cpct_drawSpriteMasked                                         **** GX
@@ -23,14 +25,17 @@ Symbol Table
     _cpct_setPalette                                               **** GX
     _cpct_setVideoMode                                             **** GX
     _cpct_waitVSYNC                                                **** GX
+  0 _drawFatiga                                                    01AF GR
+  0 _drawVida                                                      026C GR
   0 _g_palette                                                     0025 GR
-  0 _game                                                          015D GR
+  0 _game                                                          0313 GR
+    _gladis_arriba_dcha                                            **** GX
     _gladis_atk_dcha                                               **** GX
     _gladis_atk_izda                                               **** GX
     _gladis_quieto_dcha                                            **** GX
     _gladis_quieto_izda                                            **** GX
   0 _init                                                          0000 GR
-  0 _main                                                          058F GR
+  0 _main                                                          0855 GR
   0 _menu                                                          0029 GR
 
 
@@ -39,7 +44,7 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size  59A   flags    0
+   0 _CODE                                      size  860   flags    0
    1 _DATA                                      size    0   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8

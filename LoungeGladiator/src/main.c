@@ -19,8 +19,10 @@
 #include <cpctelera.h>
 #include <stdio.h>
 #include "gladis-quieto.h"
+#include "gladis-arriba.h"
 #include "gladis-atk.h"
 #include "chacho-quieto.h"
+#include "vida.h"
 #define VMEM (u8*)0xC000
 
 typedef struct
@@ -30,12 +32,14 @@ typedef struct
   u8* dir;
   u8* col;
   u8* rebote;
+  u8* life;
 }TPlayer;
 
 typedef struct
 {
   u8 x,y; //posicion enemigo
-  u8 vivo; //control vida enemigo
+  u8* vivo; //control vida enemigo
+  u8* dir;
 }TEnemy;
 
 const u8 g_palette[4] = { 0,26,6,18 };
@@ -66,7 +70,7 @@ void menu(){
 
 //Detectar p.colision de personajes
 u8* checkCollisions(u8 pX, u8 pY, u8 eX, u8 eY, u8* dir, u8* atk){
-    if(atk >= 21)
+    if((u8)atk >= 21)
         if(dir == 0)
             if(eX - pX > -1 && eX - pX < 11)
                 return 1;
@@ -78,7 +82,7 @@ u8* checkCollisions(u8 pX, u8 pY, u8 eX, u8 eY, u8* dir, u8* atk){
             else
                 return 0;
     else
-        if(eX - pX > 0 && eX - pX < 4)
+        if(eX - pX > 0 && eX - pX < 4 && eY - pY > 0 && eY - pY < 16)
             return 2;
 
     return 0;
@@ -86,10 +90,19 @@ u8* checkCollisions(u8 pX, u8 pY, u8 eX, u8 eY, u8* dir, u8* atk){
 
 u8* checkSprite(u8* atk, u8* dir){
     if(atk <= 20)
-        if(dir == 0)
+        switch((int)dir){
+        case 0:
             return gladis_quieto_dcha;
-        else
+            break;
+        case 1:
             return gladis_quieto_izda;
+            break;
+        case 2:
+            return gladis_quieto_dcha;
+            break;
+        case 3:
+            return gladis_arriba_dcha;
+        }
     else if(dir == 0){
         return gladis_atk_dcha;
     }else{
@@ -97,11 +110,78 @@ u8* checkSprite(u8* atk, u8* dir){
     }
 }
 
+//Dibujar las tres barras de fatiga cuando el jugador ataca
+void drawFatiga(u8* atk, u8* memptr, u8 col){
+    if(atk < 20)
+        col = 2;
+    if(atk > 30 || atk <= 20){
+        memptr = cpct_getScreenPtr(VMEM,4,160);
+        cpct_drawSolidBox(memptr, col, 2, 8);
+    }
+    if(atk > 40 || atk <= 20){
+        memptr = cpct_getScreenPtr(VMEM,7,160);
+        cpct_drawSolidBox(memptr, col, 2, 8);
+    }
+    if(atk <= 20){
+        memptr = cpct_getScreenPtr(VMEM,10,160);
+        cpct_drawSolidBox(memptr, col, 2, 8);
+    }
+}
+
+//dibujar los corazones de vida del personaje
+void drawVida(u8* life, u8* memptr){
+    if(life >= 1){
+        memptr = cpct_getScreenPtr(VMEM,55,160);
+        cpct_drawSpriteMasked(corazon_lleno, memptr, 4, 8);
+    }
+    memptr = cpct_getScreenPtr(VMEM,60,160);
+    if(life >= 2)
+        cpct_drawSpriteMasked(corazon_lleno, memptr, 4, 8);
+    else
+        cpct_drawSpriteMasked(corazon_roto, memptr, 4, 8);
+    memptr = cpct_getScreenPtr(VMEM,65,160);
+    if(life >= 3)
+        cpct_drawSpriteMasked(corazon_lleno, memptr, 4, 8);
+    else
+        cpct_drawSpriteMasked(corazon_roto, memptr, 4, 8);
+
+}
+
+void shoot(u8* x, u8* y, u8* vivo, u8* dir){
+    switch((int dir)){
+        case 0:
+            if(x < 72)
+                x++;
+            else
+                vivo = 1;
+            break
+        case 1:
+            if(x > 0)
+                x++;
+            else
+                vivo = 1;
+            break;
+        case 2:
+            if(y < 184)
+                y++;
+            else
+                vivo = 1;
+            break;
+        case 3:
+            if(y > 0)
+                y--;
+            else
+                vivo = 1;
+            break;
+    }
+}
+
 /*JUEGO*/
 
 void game(){
-   TPlayer p = { 0,100,20,0,0,6 };
-   TEnemy  e = { 55,100,0 };
+   TPlayer p = { 0,100,20,0,0,6,3 };
+   TEnemy  e = { 55,100,0,0 };
+   TEnemy pr = { 0,0,1,0 };
    u8* memptr;
    u8* sprite = gladis_quieto_dcha;
    u8* auxCol;
@@ -119,6 +199,9 @@ void game(){
         cpct_drawSolidBox(memptr,0,4,16);
       else
         cpct_drawSolidBox(memptr,0,5,16);
+
+      memptr = cpct_getScreenPtr(VMEM,55,160);
+      cpct_drawSolidBox(memptr,0,15,16);
 
       memptr = cpct_getScreenPtr(VMEM,e.x,e.y);
       if(e.vivo == 0)
@@ -149,8 +232,19 @@ void game(){
                 if(p.col != 2)
                     p.x -= 1;
                 p.dir = 1;
+            }else if(cpct_isKeyPressed(Key_CursorDown) && p.y < 184 ){
+                p.y += 2;
+                p.dir = 2;
+            }else if(cpct_isKeyPressed(Key_CursorUp) && p.y > 0 ){
+                p.y -= 2;
+                p.dir = 3;
             }else  if(cpct_isKeyPressed(Key_Esc)){
                 return;
+            }
+        }
+        if(cpct_isKeyPressed(Key_X)){
+            shoot(pr.x, pr.y, pr.dir){
+
             }
         }
       }else{
@@ -165,8 +259,13 @@ void game(){
       //Comprobar si esta quieto para que no se dibuje el sprite de atacar//
         sprite = checkSprite(p.atk,p.dir);
 
-      if(p.col != 2 && e.vivo == 0)
+      if(p.col != 2 && e.vivo == 0){
         p.col = checkCollisions(p.x,p.y,e.x,e.y,p.dir,p.atk);
+        if(p.col == 2)
+            p.life--;
+            if(p.life == 0)
+                return;
+      }
       if(p.col == 1)
         e.vivo = 1;
 
@@ -184,7 +283,17 @@ void game(){
         memptr = cpct_getScreenPtr(VMEM,e.x,e.y);
         cpct_drawSolidBox(memptr, 18, 4, 16);
       }
+
+    if(p.atk < 20)
+        drawFatiga(p.atk,memptr,2);
+    else if(p.atk > 20)
+        drawFatiga(p.atk,memptr,16);
+    else
+        drawFatiga(p.atk,memptr,0);
+
+    drawVida(p.life, memptr);
    }
+
 }
 
 /*EMPIEZA EL CODIGO*/
