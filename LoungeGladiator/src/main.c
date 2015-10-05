@@ -147,35 +147,6 @@ void drawVida(u8* life, u8* memptr){
 
 }
 
-void shoot(u8* x, u8* y, u8* vivo, u8* dir){
-    switch((int dir)){
-        case 0:
-            if(x < 72)
-                x++;
-            else
-                vivo = 1;
-            break
-        case 1:
-            if(x > 0)
-                x++;
-            else
-                vivo = 1;
-            break;
-        case 2:
-            if(y < 184)
-                y++;
-            else
-                vivo = 1;
-            break;
-        case 3:
-            if(y > 0)
-                y--;
-            else
-                vivo = 1;
-            break;
-    }
-}
-
 /*JUEGO*/
 
 void game(){
@@ -201,7 +172,7 @@ void game(){
         cpct_drawSolidBox(memptr,0,5,16);
 
       memptr = cpct_getScreenPtr(VMEM,55,160);
-      cpct_drawSolidBox(memptr,0,15,16);
+      cpct_drawSolidBox(memptr,0,10,16);
 
       memptr = cpct_getScreenPtr(VMEM,e.x,e.y);
       if(e.vivo == 0)
@@ -240,11 +211,6 @@ void game(){
                 p.dir = 3;
             }else  if(cpct_isKeyPressed(Key_Esc)){
                 return;
-            }
-        }
-        if(cpct_isKeyPressed(Key_X)){
-            shoot(pr.x, pr.y, pr.dir){
-
             }
         }
       }else{

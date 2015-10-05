@@ -18,80 +18,86 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000000  l__INITIALIZER                  
      00000000  s__CABS                         
      00000000  s__DABS                         
-     00001001  l__CODE                         
+     000010BD  l__CODE                         
      00004000  s__CODE                         
-     00005001  s__DATA                         
-     00005001  s__GSFINAL                      
-     00005001  s__GSINIT                       
-     00005001  s__HOME                         
-     00005001  s__INITIALIZED                  
-     00005001  s__INITIALIZER                  
+     000050BD  s__DATA                         
+     000050BD  s__GSFINAL                      
+     000050BD  s__GSINIT                       
+     000050BD  s__HOME                         
+     000050BD  s__INITIALIZED                  
+     000050BD  s__INITIALIZER                  
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00001001 =        4097. bytes (REL,CON)
+_CODE                               00004000    000010BD =        4285. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00004000  _gladis_arriba_dcha                gladis_arriba
-     00004080  _gladis_arriba_izda                gladis_arriba
-     00004100  _chacho_quieto_dcha                chacho_quieto
-     00004180  _chacho_quieto_izda                chacho_quieto
-     00004200  _gladis_quieto_dcha                gladis_quieto
-     00004280  _gladis_quieto_izda                gladis_quieto
-     00004300  _g_tile_tileset                    vida
-     00004304  _corazon_lleno                     vida
-     00004344  _corazon_roto                      vida
-     00004384  _init                              main
-     000043A9  _g_palette                         main
-     000043AD  _menu                              main
-     00004419  _checkCollisions                   main
-     000044D5  _checkSprite                       main
-     00004533  _drawFatiga                        main
-     000045F0  _drawVida                          main
-     00004697  _game                              main
-     00004BD9  _main                              main
-     00004BE4  _gladis_atk_dcha                   gladis_atk
-     00004C84  _gladis_atk_izda                   gladis_atk
-     00004D24  _cpct_setPalette                   cpct_video
-     00004D2D  cpct_setPalette_asm                cpct_video
-     00004D48  _cpct_isKeyPressed                 cpct_keyboard
-     00004D48  cpct_isKeyPressed_asm              cpct_keyboard
-     00004D54  _cpct_scanKeyboard_f               cpct_keyboard
-     00004D54  cpct_scanKeyboard_f_asm            cpct_keyboard
-     00004DBE  _cpct_drawStringM0                 cpct_strings
-     00004DC6  cpct_drawStringM0_asm              cpct_strings
-     00004DE2  dc_mode0_ct                        cpct_strings
-     00004DF2  _cpct_drawCharM0                   cpct_strings
-     00004DFF  cpct_drawCharM0_asm                cpct_strings
-     00004E7F  _cpct_fw2hw                        cpct_video
-     00004E99  _cpct_keyboardStatusBuffer         cpct_keyboard
-     00004EA3  _cpct_drawSpriteMasked             cpct_sprites
-     00004ED2  cpct_firmware2hw_colour            
-     00004EED  _cpct_waitVSYNC                    cpct_video
-     00004EED  cpct_waitVSYNC_asm                 cpct_video
-     00004EF5  _cpct_setVideoMode                 cpct_video
-     00004EFA  cpct_setVideoMode_asm              cpct_video
-     00004F07  _cpct_memset                       cpct_memutils
-     00004F15  _cpct_mode_rom_status              cpct_firmware
-     00004F16  _cpct_firmware_address             cpct_firmware
-     00004F18  _cpct_disableFirmware              cpct_firmware
-     00004F18  cpct_disableFirmware_asm           cpct_firmware
-     00004F29  _cpct_drawSolidBox                 cpct_sprites
-     00004FE1  _cpct_getScreenPtr                 cpct_video
+     00004000  _flecha_dcha                       flecha_vertical
+     00004020  _flecha_izda                       flecha_vertical
+     00004040  _gladis_arriba_dcha                gladis_arriba
+     000040C0  _gladis_arriba_izda                gladis_arriba
+     00004140  _chacho_quieto_dcha                chacho_quieto
+     000041C0  _chacho_quieto_izda                chacho_quieto
+     00004240  _gladis_quieto_dcha                gladis_quieto
+     000042C0  _gladis_quieto_izda                gladis_quieto
+     00004340  _g_tile_tileset                    vida
+     00004344  _corazon_lleno                     vida
+     00004384  _corazon_roto                      vida
+     000043C4  _init                              main
+     000043E9  _g_palette                         main
+     000043ED  _menu                              main
+     00004459  _checkCollisions                   main
+     00004515  _checkSprite                       main
+     00004573  _drawFatiga                        main
+     00004630  _drawVida                          main
+     000046D7  _game                              main
+     00004C55  _main                              main
+     00004C60  _flecha_arriba                     flecha_horizontal
+     00004C80  _flecha_abajo                      flecha_horizontal
+     00004CA0  _gladis_atk_dcha                   gladis_atk
+     00004D40  _gladis_atk_izda                   gladis_atk
+     00004DE0  _cpct_setPalette                   cpct_video
+     00004DE9  cpct_setPalette_asm                cpct_video
+     00004E04  _cpct_isKeyPressed                 cpct_keyboard
+     00004E04  cpct_isKeyPressed_asm              cpct_keyboard
+     00004E10  _cpct_scanKeyboard_f               cpct_keyboard
+     00004E10  cpct_scanKeyboard_f_asm            cpct_keyboard
+     00004E7A  _cpct_drawStringM0                 cpct_strings
+     00004E82  cpct_drawStringM0_asm              cpct_strings
+     00004E9E  dc_mode0_ct                        cpct_strings
+     00004EAE  _cpct_drawCharM0                   cpct_strings
+     00004EBB  cpct_drawCharM0_asm                cpct_strings
+     00004F3B  _cpct_fw2hw                        cpct_video
+     00004F55  _cpct_keyboardStatusBuffer         cpct_keyboard
+     00004F5F  _cpct_drawSpriteMasked             cpct_sprites
+     00004F8E  cpct_firmware2hw_colour            
+     00004FA9  _cpct_waitVSYNC                    cpct_video
+     00004FA9  cpct_waitVSYNC_asm                 cpct_video
+     00004FB1  _cpct_setVideoMode                 cpct_video
+     00004FB6  cpct_setVideoMode_asm              cpct_video
+     00004FC3  _cpct_memset                       cpct_memutils
+     00004FD1  _cpct_mode_rom_status              cpct_firmware
+     00004FD2  _cpct_firmware_address             cpct_firmware
+     00004FD4  _cpct_disableFirmware              cpct_firmware
+     00004FD4  cpct_disableFirmware_asm           cpct_firmware
+     00004FE5  _cpct_drawSolidBox                 cpct_sprites
+     0000509D  _cpct_getScreenPtr                 cpct_video
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
 
 Files Linked                              [ module(s) ]
 
+obj/flecha-vertical.rel                   [ flecha_vertical ]
 obj/gladis-arriba.rel                     [ gladis_arriba ]
 obj/chacho-quieto.rel                     [ chacho_quieto ]
 obj/gladis-quieto.rel                     [ gladis_quieto ]
 obj/vida.rel                              [ vida ]
 obj/main.rel                              [ main ]
+obj/flecha-horizontal.rel                 [ flecha_horizontal ]
 obj/gladis-atk.rel                        [ gladis_atk ]
 
 

@@ -35,7 +35,7 @@ Symbol Table
     _gladis_quieto_dcha                                            **** GX
     _gladis_quieto_izda                                            **** GX
   0 _init                                                          0000 GR
-  0 _main                                                          0855 GR
+  0 _main                                                          0891 GR
   0 _menu                                                          0029 GR
 
 
@@ -44,7 +44,7 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size  860   flags    0
+   0 _CODE                                      size  89C   flags    0
    1 _DATA                                      size    0   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8
