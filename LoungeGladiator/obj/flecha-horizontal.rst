@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
-                              3 ; Version 3.5.0 #9253 (Sep 22 2015) (CYGWIN)
-                              4 ; This file was generated Mon Oct  5 17:18:40 2015
+                              3 ; Version 3.5.0 #9253 (Sep 26 2015) (CYGWIN)
+                              4 ; This file was generated Mon Oct  5 18:28:44 2015
                               5 ;--------------------------------------------------------
                               6 	.module flecha_horizontal
                               7 	.optsdcc -mz80
@@ -43,71 +43,71 @@
                              43 ;--------------------------------------------------------
                              44 	.area _CODE
                              45 	.area _CODE
-   4C60                      46 _flecha_arriba:
-   4C60 FF                   47 	.db #0xFF	; 255
-   4C61 00                   48 	.db #0x00	; 0
-   4C62 FF                   49 	.db #0xFF	; 255
-   4C63 00                   50 	.db #0x00	; 0
-   4C64 FF                   51 	.db #0xFF	; 255
-   4C65 00                   52 	.db #0x00	; 0
-   4C66 FF                   53 	.db #0xFF	; 255
-   4C67 00                   54 	.db #0x00	; 0
-   4C68 FF                   55 	.db #0xFF	; 255
-   4C69 00                   56 	.db #0x00	; 0
-   4C6A FF                   57 	.db #0xFF	; 255
-   4C6B 00                   58 	.db #0x00	; 0
-   4C6C FF                   59 	.db #0xFF	; 255
-   4C6D 00                   60 	.db #0x00	; 0
-   4C6E 55                   61 	.db #0x55	; 85	'U'
-   4C6F 80                   62 	.db #0x80	; 128
-   4C70 00                   63 	.db #0x00	; 0
-   4C71 C0                   64 	.db #0xC0	; 192
-   4C72 00                   65 	.db #0x00	; 0
-   4C73 C0                   66 	.db #0xC0	; 192
-   4C74 00                   67 	.db #0x00	; 0
-   4C75 C0                   68 	.db #0xC0	; 192
-   4C76 AA                   69 	.db #0xAA	; 170
-   4C77 40                   70 	.db #0x40	; 64
-   4C78 FF                   71 	.db #0xFF	; 255
-   4C79 00                   72 	.db #0x00	; 0
-   4C7A FF                   73 	.db #0xFF	; 255
-   4C7B 00                   74 	.db #0x00	; 0
-   4C7C FF                   75 	.db #0xFF	; 255
-   4C7D 00                   76 	.db #0x00	; 0
-   4C7E 55                   77 	.db #0x55	; 85	'U'
-   4C7F 80                   78 	.db #0x80	; 128
-   4C80                      79 _flecha_abajo:
-   4C80 FF                   80 	.db #0xFF	; 255
-   4C81 00                   81 	.db #0x00	; 0
-   4C82 FF                   82 	.db #0xFF	; 255
-   4C83 00                   83 	.db #0x00	; 0
-   4C84 FF                   84 	.db #0xFF	; 255
-   4C85 00                   85 	.db #0x00	; 0
-   4C86 FF                   86 	.db #0xFF	; 255
-   4C87 00                   87 	.db #0x00	; 0
-   4C88 AA                   88 	.db #0xAA	; 170
-   4C89 40                   89 	.db #0x40	; 64
-   4C8A FF                   90 	.db #0xFF	; 255
-   4C8B 00                   91 	.db #0x00	; 0
-   4C8C FF                   92 	.db #0xFF	; 255
-   4C8D 00                   93 	.db #0x00	; 0
-   4C8E FF                   94 	.db #0xFF	; 255
-   4C8F 00                   95 	.db #0x00	; 0
-   4C90 55                   96 	.db #0x55	; 85	'U'
-   4C91 80                   97 	.db #0x80	; 128
-   4C92 00                   98 	.db #0x00	; 0
-   4C93 C0                   99 	.db #0xC0	; 192
-   4C94 00                  100 	.db #0x00	; 0
-   4C95 C0                  101 	.db #0xC0	; 192
-   4C96 00                  102 	.db #0x00	; 0
-   4C97 C0                  103 	.db #0xC0	; 192
-   4C98 AA                  104 	.db #0xAA	; 170
-   4C99 40                  105 	.db #0x40	; 64
-   4C9A FF                  106 	.db #0xFF	; 255
-   4C9B 00                  107 	.db #0x00	; 0
-   4C9C FF                  108 	.db #0xFF	; 255
-   4C9D 00                  109 	.db #0x00	; 0
-   4C9E FF                  110 	.db #0xFF	; 255
-   4C9F 00                  111 	.db #0x00	; 0
+   54D2                      46 _flecha_arriba:
+   54D2 FF                   47 	.db #0xFF	; 255
+   54D3 00                   48 	.db #0x00	; 0
+   54D4 FF                   49 	.db #0xFF	; 255
+   54D5 00                   50 	.db #0x00	; 0
+   54D6 FF                   51 	.db #0xFF	; 255
+   54D7 00                   52 	.db #0x00	; 0
+   54D8 FF                   53 	.db #0xFF	; 255
+   54D9 00                   54 	.db #0x00	; 0
+   54DA FF                   55 	.db #0xFF	; 255
+   54DB 00                   56 	.db #0x00	; 0
+   54DC FF                   57 	.db #0xFF	; 255
+   54DD 00                   58 	.db #0x00	; 0
+   54DE FF                   59 	.db #0xFF	; 255
+   54DF 00                   60 	.db #0x00	; 0
+   54E0 55                   61 	.db #0x55	; 85	'U'
+   54E1 80                   62 	.db #0x80	; 128
+   54E2 00                   63 	.db #0x00	; 0
+   54E3 C0                   64 	.db #0xC0	; 192
+   54E4 00                   65 	.db #0x00	; 0
+   54E5 C0                   66 	.db #0xC0	; 192
+   54E6 00                   67 	.db #0x00	; 0
+   54E7 C0                   68 	.db #0xC0	; 192
+   54E8 AA                   69 	.db #0xAA	; 170
+   54E9 40                   70 	.db #0x40	; 64
+   54EA FF                   71 	.db #0xFF	; 255
+   54EB 00                   72 	.db #0x00	; 0
+   54EC FF                   73 	.db #0xFF	; 255
+   54ED 00                   74 	.db #0x00	; 0
+   54EE FF                   75 	.db #0xFF	; 255
+   54EF 00                   76 	.db #0x00	; 0
+   54F0 55                   77 	.db #0x55	; 85	'U'
+   54F1 80                   78 	.db #0x80	; 128
+   54F2                      79 _flecha_abajo:
+   54F2 FF                   80 	.db #0xFF	; 255
+   54F3 00                   81 	.db #0x00	; 0
+   54F4 FF                   82 	.db #0xFF	; 255
+   54F5 00                   83 	.db #0x00	; 0
+   54F6 FF                   84 	.db #0xFF	; 255
+   54F7 00                   85 	.db #0x00	; 0
+   54F8 FF                   86 	.db #0xFF	; 255
+   54F9 00                   87 	.db #0x00	; 0
+   54FA AA                   88 	.db #0xAA	; 170
+   54FB 40                   89 	.db #0x40	; 64
+   54FC FF                   90 	.db #0xFF	; 255
+   54FD 00                   91 	.db #0x00	; 0
+   54FE FF                   92 	.db #0xFF	; 255
+   54FF 00                   93 	.db #0x00	; 0
+   5500 FF                   94 	.db #0xFF	; 255
+   5501 00                   95 	.db #0x00	; 0
+   5502 55                   96 	.db #0x55	; 85	'U'
+   5503 80                   97 	.db #0x80	; 128
+   5504 00                   98 	.db #0x00	; 0
+   5505 C0                   99 	.db #0xC0	; 192
+   5506 00                  100 	.db #0x00	; 0
+   5507 C0                  101 	.db #0xC0	; 192
+   5508 00                  102 	.db #0x00	; 0
+   5509 C0                  103 	.db #0xC0	; 192
+   550A AA                  104 	.db #0xAA	; 170
+   550B 40                  105 	.db #0x40	; 64
+   550C FF                  106 	.db #0xFF	; 255
+   550D 00                  107 	.db #0x00	; 0
+   550E FF                  108 	.db #0xFF	; 255
+   550F 00                  109 	.db #0x00	; 0
+   5510 FF                  110 	.db #0xFF	; 255
+   5511 00                  111 	.db #0x00	; 0
                             112 	.area _INITIALIZER
                             113 	.area _CABS (ABS)

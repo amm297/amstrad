@@ -11,11 +11,8 @@ obj/flecha-vertical.rel
 obj/gladis-arriba.rel
 obj/chacho-quieto.rel
 obj/gladis-quieto.rel
-<<<<<<< HEAD
 obj/ia.rel
-=======
 obj/vida.rel
->>>>>>> 100f2f53c950a4f5642a7437e7ddf52df6d2a2ee
 obj/main.rel
 obj/flecha-horizontal.rel
 obj/gladis-atk.rel
