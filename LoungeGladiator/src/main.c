@@ -39,20 +39,72 @@ void init(){
 }
 
 /*MENU*/
-void menu(){
+int menu(){
    u8* memptr;
+   int init = 50;
+   int pushed =0;
+   int cont =0;
    cpct_clearScreen(0);
 
-   memptr = cpct_getScreenPtr(VMEM,20,10);
-   cpct_drawStringM0("MENU",memptr,2,3);
+   memptr = cpct_getScreenPtr(VMEM,10,10);
+   cpct_drawStringM0("Lounge Gladiator",memptr,1,0);
 
-    memptr = cpct_getScreenPtr(VMEM,18,180);
-   cpct_drawStringM0("Pulsa Intro",memptr,4,5);
+   //Opciones 
+   memptr = cpct_getScreenPtr(VMEM,20,50);
+   cpct_drawStringM0("Nueva Partida",memptr,1,0);
+
+   memptr = cpct_getScreenPtr(VMEM,20,70);
+   cpct_drawStringM0("Creditos",memptr,1,0);
+
+   memptr = cpct_getScreenPtr(VMEM,20,90);
+   cpct_drawStringM0("Salir",memptr,1,0);
+
+    /*memptr = cpct_getScreenPtr(VMEM,18,180);
+   cpct_drawStringM0("Pulsa Intro",memptr,4,5);*/
+
+   //Indicador
    
-   do{
-    cpct_scanKeyboard_f();
-   }while(!cpct_isKeyPressed(Key_Enter));
 
+
+   while(1){
+    
+      cpct_scanKeyboard();
+      if(cpct_isKeyPressed(Key_CursorDown) && cont > 150){
+        cpct_drawSolidBox(memptr, 0, 2, 8);
+        pushed ++;
+        cont =0;
+      }
+      if(cpct_isKeyPressed(Key_CursorUp) && cont > 150){
+        cpct_drawSolidBox(memptr, 0, 2, 8);
+        pushed --;
+        cont = 0;
+      }
+
+      switch (pushed){
+        case 0: init = 50;break;
+        case 1: init = 70;break;
+        case 2: init = 90;break;
+      }
+      memptr = cpct_getScreenPtr(VMEM,15,init);
+      cpct_drawSolidBox(memptr, 3, 2, 8);
+      if(cpct_isKeyPressed(Key_Enter)){
+        switch (pushed){
+        case 0: return 1;break;
+        case 1: return 2;break;
+        case 2: return 0;break;
+      }
+      }
+      cont++;
+     
+    
+      
+   }
+
+   /*
+   do{
+    
+   }while(!cpct_isKeyPressed(Key_Enter));
+  */
 }
 
 
@@ -79,6 +131,21 @@ void drawMap(int t){
          if(scene[posY][posX] == 1){
             cpct_drawSolidBox(memptr, 3, tilewidth, tileheight);
          }
+         if(scene[posY][posX] == 9){
+            cpct_drawSolidBox(memptr, 9, tilewidth, tileheight);
+         }
+      }
+   }
+}
+
+/*OBJETOS*/
+
+void drawObjects(){
+  int posX=0,posY =0;
+  u8* memptr;
+   for(posY=0; posY<height;posY++){
+      for(posX=0; posX<width;posX++){
+         memptr = cpct_getScreenPtr(VMEM, posX*tilewidth, posY*tileheight);
          if(scene[posY][posX] == 5){
             cpct_drawSpriteMasked(flecha_abajo,memptr,4,4);
          }
@@ -157,6 +224,19 @@ u8 checkBoundsCollisions(u8 *x,u8 *y, u8 lx, u8 ly){
         drawMap(2);
   }
   return bound;
+}
+
+void checkArrowCollisions(u8 *x,u8 *y, u8 *vivo,u8 w,u8 h){
+
+  u8 *posX = x;
+  u8 *posY = y;
+  if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 1   
+      || scene[(posY[0])/tileheight][(posX[0]+w-1)/tilewidth] == 1
+      || scene[(posY[0]+h-2)/tileheight][(posX[0])/tilewidth] == 1 
+      || scene[(posY[0]+h-2)/tileheight][(posX[0]+w-1)/tilewidth] == 1
+    ){   
+        vivo = 1;
+  }
 }
 
 void checkEnemiesCollisions(){
@@ -317,6 +397,10 @@ void game(){
       //Dibujar personaje 
       drawPlayers(p,e);
 
+      //Dibujar objetos
+
+      //drawObjects();
+
       //guardarposicion anterior;
       p->lx = p->x;
       p->ly = p->y;
@@ -336,26 +420,49 @@ void game(){
       
 
      if(finish == 1) {
-      free(p);
-      free(e);
-      return;}
+        free(p);
+        free(e);
+        return;
+      }
 
    }
 }
 
 
+/* CREDITOS */
+void credits(){
+  u8* memptr;
+  cpct_clearScreen(0);
+  memptr = cpct_getScreenPtr(VMEM,10,10);
+  cpct_drawStringM0("Lounge Gladiator",memptr,1,0);  
+
+  while (1){
+      
+      cpct_scanKeyboard_f();
+     
+      
+
+     if(cpct_isKeyPressed(Key_Esc)) {
+       
+        return;
+      }
+
+   }
+}
 /*EMPIEZA EL CODIGO*/
 
 void main(void) {
-
+  int x =0;
    init();
-   //loadMap();
-   // Loop forever
   
+   // Loop forever
    while(1){
-      menu();
-
-      game();
+      x=menu();
+      switch(x){
+        case 0: return;break;
+        case 1: game(); break;
+        case 2: credits();break;
+      }
    }
       
 }

@@ -12,6 +12,7 @@ obj/chacho-quieto.rel
 obj/ia.rel
 obj/vida.rel
 obj/main.rel
+obj/muro.rel
 obj/flecha.rel
 
 -e
