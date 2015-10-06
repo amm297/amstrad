@@ -1,9 +1,9 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.5.0 #9253 (Sep 26 2015) (CYGWIN)
-; This file was generated Tue Oct  6 09:48:11 2015
+; This file was generated Tue Oct  6 09:52:51 2015
 ;--------------------------------------------------------
-	.module flecha_vertical
+	.module flecha
 	.optsdcc -mz80
 	
 ;--------------------------------------------------------

@@ -23,6 +23,7 @@
 typedef struct 
 {
   u8 x,y; //posicion personaje
+  u8 lx,ly; //posicion personaje
   u8 *sprite; //sprite persnaje
   u8 life; //vida personaje
   u8 dir; //direccion personaje
@@ -30,11 +31,26 @@ typedef struct
 
 }TPlayer;
 
+typedef struct 
+{
+  u8 x,y; //posicion objeto
+  u8 *sprite; //sprite objeto
+  u8 catched; //objeto cogido
+
+}TObject;
+
 //const u8* sprite = gladis_quieto_dcha;
 const u8 g_palette[4] = { 0,26,6,18 };
 const int *scene[height];
 
 
+//Definicion de mapa
+  //0 -> Zona libre
+  //1 -> Bordes del Mapa
+  //2 -> Zona Patrulla
+  //5 -> Flecha
+  //6 -> Corazon
+  //9 -> Puerta
 
 const int mapa1[height][width] = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
                                   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -44,10 +60,10 @@ const int mapa1[height][width] = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
                                   {0,0,1,1,0,1,1,1,2,2,2,1,0,0,0,0,0,0,0,1},
                                   {1,0,1,2,2,2,2,1,0,0,0,1,0,0,0,0,0,0,0,1},
                                   {1,0,1,2,2,2,2,1,2,2,2,1,0,0,0,0,0,0,0,1},
-                                  {1,0,1,2,2,2,2,1,0,0,0,1,0,0,0,0,0,0,0,1},
+                                  {1,0,1,2,2,6,2,1,0,0,0,1,0,0,0,0,0,0,0,1},
                                   {1,0,1,2,2,2,2,1,2,2,2,1,0,0,0,0,0,0,0,1},
                                   {1,5,1,2,2,2,2,1,0,0,0,0,0,0,0,0,0,0,0,1},
-                                  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,1,1,1,1}};
+                                  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,9,1,1,1,1}};
 
 const int mapa2[height][width] = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
                                   {1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,6},

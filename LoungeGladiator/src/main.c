@@ -22,9 +22,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <cpctelera.h>
-#include "gladis-quieto.h"
-#include "gladis-atk.h"
+#include "gladis.h"
 #include "chacho-quieto.h"
+#include "flecha.h"
 #include "mapa.h"
 #include "ia.h"
 
@@ -80,7 +80,7 @@ void drawMap(int t){
             cpct_drawSolidBox(memptr, 3, tilewidth, tileheight);
          }
          if(scene[posY][posX] == 5){
-            cpct_drawSolidBox(memptr, 5, tilewidth, tileheight);
+            cpct_drawSpriteMasked(flecha_abajo,memptr,4,4);
          }
          if(scene[posY][posX] == 6){
             cpct_drawSolidBox(memptr, 6, tilewidth, tileheight);
@@ -93,11 +93,11 @@ void drawMap(int t){
 void cleanScreenPlayers(TPlayer *p,TPlayer *e){
   u8* memptr;
   if(p->life > 0){
-    memptr = cpct_getScreenPtr(VMEM,p->x,p->y);
+    memptr = cpct_getScreenPtr(VMEM,p->lx,p->ly);
     cpct_drawSolidBox(memptr,0,p->size,16);
   }
   if(e->life > 0 ){
-    memptr = cpct_getScreenPtr(VMEM,e->x,e->y);
+    memptr = cpct_getScreenPtr(VMEM,e->lx,e->ly);
     cpct_drawSolidBox(memptr,0,e->size,16);
 
   }      
@@ -132,15 +132,26 @@ u8 checkBoundsCollisions(u8 *x,u8 *y, u8 lx, u8 ly){
       || scene[(posY[0]+playerheight-2)/tileheight][(posX[0])/tilewidth] == 1 
       || scene[(posY[0]+playerheight-2)/tileheight][(posX[0]+playerwidth-1)/tilewidth] == 1
     ){   
-  
         *posX=lx;
         *posY=ly;
         bound = 1;
   }
-  if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 6   
+  else if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 6   
       || scene[(posY[0])/tileheight][(posX[0]+playerwidth-1)/tilewidth] == 6
       || scene[(posY[0]+playerheight-2)/tileheight][(posX[0])/tilewidth] == 6
       || scene[(posY[0]+playerheight-2)/tileheight][(posX[0]+playerwidth-1)/tilewidth] == 6
+    ){   
+       //Sumar corazones
+  }else if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 5   
+      || scene[(posY[0])/tileheight][(posX[0]+playerwidth-1)/tilewidth] == 5
+      || scene[(posY[0]+playerheight-2)/tileheight][(posX[0])/tilewidth] == 5
+      || scene[(posY[0]+playerheight-2)/tileheight][(posX[0]+playerwidth-1)/tilewidth] == 5
+    ){   
+        //Sumar municion
+  }else if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 9   
+      || scene[(posY[0])/tileheight][(posX[0]+playerwidth-1)/tilewidth] == 9
+      || scene[(posY[0]+playerheight-2)/tileheight][(posX[0])/tilewidth] == 9
+      || scene[(posY[0]+playerheight-2)/tileheight][(posX[0]+playerwidth-1)/tilewidth] == 9
     ){   
         cpct_clearScreen(0);
         drawMap(2);
@@ -177,7 +188,7 @@ u8* checkKeyboard(u8 *x, u8 *y,int *finish,u8 *s,u8 *dir,u8 *size){
          y[0] -= 2;
          dir[0] = 8;
          size[0] = 4;
-         sprite = gladis_quieto_dcha;
+         sprite = gladis_arriba_dcha;
       }else  if(cpct_isKeyPressed(Key_Esc)){
          finish[0] = 1;
       }else if(cpct_isKeyPressed(Key_Space)){
@@ -286,11 +297,7 @@ void game(){
 
    //u8* memptr;
    int finish = 0,i=1;
-   
-   
-   u8 lx,ly,lex,ley;
-
-   //u8* memptr;
+    //u8* memptr;
    u8 bound =0;;
    
     
@@ -303,23 +310,29 @@ void game(){
       
       //Esperar el retrazado
       cpct_waitVSYNC();
+
       //Desdibujar personaje   
       cleanScreenPlayers(p,e);
+
+      //Dibujar personaje 
+      drawPlayers(p,e);
+
       //guardarposicion anterior;
-      lx = p->x;
-      ly = p->y;
-      lex = e->x;
-      ley = e->y;
+      p->lx = p->x;
+      p->ly = p->y;
+      e->lx = e->x;
+      e->ly = e->y;
+
       //Comprobar teclado
       cpct_scanKeyboard_f();
       p->sprite  = checkKeyboard(&p->x,&p->y,&finish,p->sprite,&p->dir,&p->size);
       e->sprite = move(&e->x,&e->y,e->sprite,bound,&e->dir,&e->size);
+      
       //Comprobar colisiones
-      checkBoundsCollisions(&p->x,&p->y,lx,ly);
-      bound = checkBoundsCollisions(&e->x,&e->y,lex,ley);
+      checkBoundsCollisions(&p->x,&p->y,p->lx,p->ly);
+      bound = checkBoundsCollisions(&e->x,&e->y,e->lx,e->ly);
       //checkEnemiesCollisions();
-      //Dibujar personaje 
-      drawPlayers(p,e);
+      
       
 
      if(finish == 1) {

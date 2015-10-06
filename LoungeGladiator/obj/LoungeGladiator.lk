@@ -7,14 +7,11 @@
 -k /home/Alberto/cpctelera/cpctelera/tools/sdcc-3.5.0/share/sdcc/lib/z80
 -l /home/Alberto/cpctelera/cpctelera/cpctelera.lib
 -l z80
-obj/flecha-vertical.rel
-obj/gladis-arriba.rel
+obj/gladis.rel
 obj/chacho-quieto.rel
-obj/gladis-quieto.rel
 obj/ia.rel
 obj/vida.rel
 obj/main.rel
-obj/flecha-horizontal.rel
-obj/gladis-atk.rel
+obj/flecha.rel
 
 -e
