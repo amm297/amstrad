@@ -13,6 +13,7 @@ obj/chacho-quieto.rel
 obj/gladis-quieto.rel
 obj/vida.rel
 obj/main.rel
+obj/muro.rel
 obj/flecha-horizontal.rel
 obj/gladis-atk.rel
 

@@ -77,7 +77,7 @@ u8* checkCollisions(u8 pX, u8 pY, u8 eX, u8 eY, u8* dir, u8* atk, u8 mode){
 
     u8 popX = pX + 8;
     u8 popY = pY + 16;
-    u8 eopX = e8 + 8;
+    u8 eopX = eX + 8;
     u8 eopY = eY + 16;
 
 

@@ -43,71 +43,71 @@
                              43 ;--------------------------------------------------------
                              44 	.area _CODE
                              45 	.area _CODE
-   4F9E                      46 _flecha_dcha:
-   4F9E FF                   47 	.db #0xFF	; 255
-   4F9F 00                   48 	.db #0x00	; 0
-   4FA0 FF                   49 	.db #0xFF	; 255
-   4FA1 00                   50 	.db #0x00	; 0
-   4FA2 FF                   51 	.db #0xFF	; 255
-   4FA3 00                   52 	.db #0x00	; 0
-   4FA4 FF                   53 	.db #0xFF	; 255
-   4FA5 00                   54 	.db #0x00	; 0
-   4FA6 FF                   55 	.db #0xFF	; 255
-   4FA7 00                   56 	.db #0x00	; 0
-   4FA8 FF                   57 	.db #0xFF	; 255
-   4FA9 00                   58 	.db #0x00	; 0
-   4FAA FF                   59 	.db #0xFF	; 255
-   4FAB 00                   60 	.db #0x00	; 0
-   4FAC 55                   61 	.db #0x55	; 85	'U'
-   4FAD 80                   62 	.db #0x80	; 128
-   4FAE 00                   63 	.db #0x00	; 0
-   4FAF C0                   64 	.db #0xC0	; 192
-   4FB0 00                   65 	.db #0x00	; 0
-   4FB1 C0                   66 	.db #0xC0	; 192
-   4FB2 00                   67 	.db #0x00	; 0
-   4FB3 C0                   68 	.db #0xC0	; 192
-   4FB4 AA                   69 	.db #0xAA	; 170
-   4FB5 40                   70 	.db #0x40	; 64
-   4FB6 FF                   71 	.db #0xFF	; 255
-   4FB7 00                   72 	.db #0x00	; 0
-   4FB8 FF                   73 	.db #0xFF	; 255
-   4FB9 00                   74 	.db #0x00	; 0
-   4FBA FF                   75 	.db #0xFF	; 255
-   4FBB 00                   76 	.db #0x00	; 0
-   4FBC 55                   77 	.db #0x55	; 85	'U'
-   4FBD 80                   78 	.db #0x80	; 128
-   4FBE                      79 _flecha_izda:
-   4FBE FF                   80 	.db #0xFF	; 255
-   4FBF 00                   81 	.db #0x00	; 0
-   4FC0 FF                   82 	.db #0xFF	; 255
-   4FC1 00                   83 	.db #0x00	; 0
-   4FC2 FF                   84 	.db #0xFF	; 255
-   4FC3 00                   85 	.db #0x00	; 0
-   4FC4 FF                   86 	.db #0xFF	; 255
-   4FC5 00                   87 	.db #0x00	; 0
-   4FC6 AA                   88 	.db #0xAA	; 170
-   4FC7 40                   89 	.db #0x40	; 64
-   4FC8 FF                   90 	.db #0xFF	; 255
-   4FC9 00                   91 	.db #0x00	; 0
-   4FCA FF                   92 	.db #0xFF	; 255
-   4FCB 00                   93 	.db #0x00	; 0
-   4FCC FF                   94 	.db #0xFF	; 255
-   4FCD 00                   95 	.db #0x00	; 0
-   4FCE 55                   96 	.db #0x55	; 85	'U'
-   4FCF 80                   97 	.db #0x80	; 128
-   4FD0 00                   98 	.db #0x00	; 0
-   4FD1 C0                   99 	.db #0xC0	; 192
-   4FD2 00                  100 	.db #0x00	; 0
-   4FD3 C0                  101 	.db #0xC0	; 192
-   4FD4 00                  102 	.db #0x00	; 0
-   4FD5 C0                  103 	.db #0xC0	; 192
-   4FD6 AA                  104 	.db #0xAA	; 170
-   4FD7 40                  105 	.db #0x40	; 64
-   4FD8 FF                  106 	.db #0xFF	; 255
-   4FD9 00                  107 	.db #0x00	; 0
-   4FDA FF                  108 	.db #0xFF	; 255
-   4FDB 00                  109 	.db #0x00	; 0
-   4FDC FF                  110 	.db #0xFF	; 255
-   4FDD 00                  111 	.db #0x00	; 0
+   50EA                      46 _flecha_dcha:
+   50EA FF                   47 	.db #0xFF	; 255
+   50EB 00                   48 	.db #0x00	; 0
+   50EC FF                   49 	.db #0xFF	; 255
+   50ED 00                   50 	.db #0x00	; 0
+   50EE FF                   51 	.db #0xFF	; 255
+   50EF 00                   52 	.db #0x00	; 0
+   50F0 FF                   53 	.db #0xFF	; 255
+   50F1 00                   54 	.db #0x00	; 0
+   50F2 FF                   55 	.db #0xFF	; 255
+   50F3 00                   56 	.db #0x00	; 0
+   50F4 FF                   57 	.db #0xFF	; 255
+   50F5 00                   58 	.db #0x00	; 0
+   50F6 FF                   59 	.db #0xFF	; 255
+   50F7 00                   60 	.db #0x00	; 0
+   50F8 55                   61 	.db #0x55	; 85	'U'
+   50F9 80                   62 	.db #0x80	; 128
+   50FA 00                   63 	.db #0x00	; 0
+   50FB C0                   64 	.db #0xC0	; 192
+   50FC 00                   65 	.db #0x00	; 0
+   50FD C0                   66 	.db #0xC0	; 192
+   50FE 00                   67 	.db #0x00	; 0
+   50FF C0                   68 	.db #0xC0	; 192
+   5100 AA                   69 	.db #0xAA	; 170
+   5101 40                   70 	.db #0x40	; 64
+   5102 FF                   71 	.db #0xFF	; 255
+   5103 00                   72 	.db #0x00	; 0
+   5104 FF                   73 	.db #0xFF	; 255
+   5105 00                   74 	.db #0x00	; 0
+   5106 FF                   75 	.db #0xFF	; 255
+   5107 00                   76 	.db #0x00	; 0
+   5108 55                   77 	.db #0x55	; 85	'U'
+   5109 80                   78 	.db #0x80	; 128
+   510A                      79 _flecha_izda:
+   510A FF                   80 	.db #0xFF	; 255
+   510B 00                   81 	.db #0x00	; 0
+   510C FF                   82 	.db #0xFF	; 255
+   510D 00                   83 	.db #0x00	; 0
+   510E FF                   84 	.db #0xFF	; 255
+   510F 00                   85 	.db #0x00	; 0
+   5110 FF                   86 	.db #0xFF	; 255
+   5111 00                   87 	.db #0x00	; 0
+   5112 AA                   88 	.db #0xAA	; 170
+   5113 40                   89 	.db #0x40	; 64
+   5114 FF                   90 	.db #0xFF	; 255
+   5115 00                   91 	.db #0x00	; 0
+   5116 FF                   92 	.db #0xFF	; 255
+   5117 00                   93 	.db #0x00	; 0
+   5118 FF                   94 	.db #0xFF	; 255
+   5119 00                   95 	.db #0x00	; 0
+   511A 55                   96 	.db #0x55	; 85	'U'
+   511B 80                   97 	.db #0x80	; 128
+   511C 00                   98 	.db #0x00	; 0
+   511D C0                   99 	.db #0xC0	; 192
+   511E 00                  100 	.db #0x00	; 0
+   511F C0                  101 	.db #0xC0	; 192
+   5120 00                  102 	.db #0x00	; 0
+   5121 C0                  103 	.db #0xC0	; 192
+   5122 AA                  104 	.db #0xAA	; 170
+   5123 40                  105 	.db #0x40	; 64
+   5124 FF                  106 	.db #0xFF	; 255
+   5125 00                  107 	.db #0x00	; 0
+   5126 FF                  108 	.db #0xFF	; 255
+   5127 00                  109 	.db #0x00	; 0
+   5128 FF                  110 	.db #0xFF	; 255
+   5129 00                  111 	.db #0x00	; 0
                             112 	.area _INITIALIZER
                             113 	.area _CABS (ABS)

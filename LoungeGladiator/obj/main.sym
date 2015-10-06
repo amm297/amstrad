@@ -10,8 +10,8 @@ Symbol Table
   0 ___str_0                                                       007E R
   0 ___str_1                                                       0089 R
   0 _checkCollisions                                               0095 GR
-  0 _checkSprite                                                   0151 GR
-  0 _checkSpriteFlecha                                             01AF GR
+  0 _checkSprite                                                   0096 GR
+  0 _checkSpriteFlecha                                             00F4 GR
     _corazon_lleno                                                 **** GX
     _corazon_roto                                                  **** GX
     _cpct_disableFirmware                                          **** GX
@@ -26,21 +26,21 @@ Symbol Table
     _cpct_setPalette                                               **** GX
     _cpct_setVideoMode                                             **** GX
     _cpct_waitVSYNC                                                **** GX
-  0 _drawFatiga                                                    01E2 GR
-  0 _drawVida                                                      029F GR
+  0 _drawFatiga                                                    0127 GR
+  0 _drawVida                                                      01E4 GR
     _flecha_abajo                                                  **** GX
     _flecha_arriba                                                 **** GX
     _flecha_dcha                                                   **** GX
     _flecha_izda                                                   **** GX
   0 _g_palette                                                     0025 GR
-  0 _game                                                          0346 GR
+  0 _game                                                          028B GR
     _gladis_arriba_dcha                                            **** GX
     _gladis_atk_dcha                                               **** GX
     _gladis_atk_izda                                               **** GX
     _gladis_quieto_dcha                                            **** GX
     _gladis_quieto_izda                                            **** GX
   0 _init                                                          0000 GR
-  0 _main                                                          0BCF GR
+  0 _main                                                          0B1B GR
   0 _menu                                                          0029 GR
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
@@ -48,7 +48,7 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size  BDA   flags    0
+   0 _CODE                                      size  B26   flags    0
    1 _DATA                                      size    0   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8
