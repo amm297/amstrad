@@ -7,10 +7,9 @@ Area                                    Addr        Size        Decimal Bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00000000  .__.ABS.                           cpct_video
+     00000000  .__.ABS.                           cpct_keyboard
      00000000  l__CABS                         
      00000000  l__DABS                         
-     00000000  l__DATA                         
      00000000  l__GSFINAL                      
      00000000  l__GSINIT                       
      00000000  l__HOME                         
@@ -18,135 +17,155 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000000  l__INITIALIZER                  
      00000000  s__CABS                         
      00000000  s__DABS                         
-     000016F4  l__CODE                         
+     0000003C  l__DATA                         
+     00001A7E  l__CODE                         
      00004000  s__CODE                         
-     000056F4  s__DATA                         
-     000056F4  s__GSFINAL                      
-     000056F4  s__GSINIT                       
-     000056F4  s__HOME                         
-     000056F4  s__INITIALIZED                  
-     000056F4  s__INITIALIZER                  
+     00005A7E  s__DATA                         
+     00005ABA  s__GSFINAL                      
+     00005ABA  s__GSINIT                       
+     00005ABA  s__HOME                         
+     00005ABA  s__INITIALIZED                  
+     00005ABA  s__INITIALIZER                  
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    000016F4 =        5876. bytes (REL,CON)
+_CODE                               00004000    00001A7E =        6782. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00004000  _flecha_arriba                     flecha_vertical
-     00004020  _flecha_abajo                      flecha_vertical
-     00004040  _gladis_arriba_dcha                gladis_arriba
-     000040C0  _gladis_arriba_izda                gladis_arriba
-     00004140  _chacho_quieto_dcha                chacho_quieto
-     000041C0  _chacho_quieto_izda                chacho_quieto
-     00004240  _gladis_quieto_dcha                gladis_quieto
-     000042C0  _gladis_quieto_izda                gladis_quieto
-     00004340  _g_tile_tileset                    vida
-     00004344  _corazon_lleno                     vida
-     00004384  _corazon_roto                      vida
-     000043C4  _init                              main
-     000043E9  _g_palette                         main
-     000043ED  _menu                              main
-     00004459  _checkCollisions                   main
-     00004573  _checkSprite                       main
-     000045D1  _checkSpriteFlecha                 main
-     00004604  _drawFatiga                        main
-     000046C1  _drawVida                          main
-     00004768  _game                              main
-     0000508C  _main                              main
-     00005097  _muro                              muro
-     00005297  _flecha_dcha                       flecha_horizontal
-     000052B7  _flecha_izda                       flecha_horizontal
-     000052D7  _gladis_atk_dcha                   gladis_atk
-     00005377  _gladis_atk_izda                   gladis_atk
-     00005417  _cpct_setPalette                   cpct_video
-     00005420  cpct_setPalette_asm                cpct_video
-     0000543B  _cpct_isKeyPressed                 cpct_keyboard
-     0000543B  cpct_isKeyPressed_asm              cpct_keyboard
-     00005447  _cpct_scanKeyboard_f               cpct_keyboard
-     00005447  cpct_scanKeyboard_f_asm            cpct_keyboard
-     000054B1  _cpct_drawStringM0                 cpct_strings
-     000054B9  cpct_drawStringM0_asm              cpct_strings
-     000054D5  dc_mode0_ct                        cpct_strings
-     000054E5  _cpct_drawCharM0                   cpct_strings
-     000054F2  cpct_drawCharM0_asm                cpct_strings
-     00005572  _cpct_fw2hw                        cpct_video
-     0000558C  _cpct_keyboardStatusBuffer         cpct_keyboard
-     00005596  _cpct_drawSpriteMasked             cpct_sprites
-     000055C5  cpct_firmware2hw_colour            
-     000055E0  _cpct_waitVSYNC                    cpct_video
-     000055E0  cpct_waitVSYNC_asm                 cpct_video
-     000055E8  _cpct_setVideoMode                 cpct_video
-     000055ED  cpct_setVideoMode_asm              cpct_video
-     000055FA  _cpct_memset                       cpct_memutils
-     00005608  _cpct_mode_rom_status              cpct_firmware
-     00005609  _cpct_firmware_address             cpct_firmware
-     0000560B  _cpct_disableFirmware              cpct_firmware
-     0000560B  cpct_disableFirmware_asm           cpct_firmware
+     00004000  _gladis_quieto_dcha                gladis
+     00004080  _gladis_quieto_izda                gladis
+     00004100  _gladis_atk_dcha                   gladis
+     000041A0  _gladis_atk_izda                   gladis
+     00004240  _gladis_arriba_dcha                gladis
+     000042C0  _gladis_arriba_izda                gladis
+     00004340  _chacho_quieto_dcha                chacho_quieto
+     000043C0  _chacho_quieto_izda                chacho_quieto
+     00004440  _g_tile_tileset                    vida
+     00004444  _corazon_lleno                     vida
+     00004484  _corazon_roto                      vida
+     000044C4  _init                              main
+     000044E9  _g_palette                         main
+     000044ED  _mapa1                             main
+     000045DD  _mapa2                             main
+     000046CD  _menu                              main
+     000048DE  _drawMap                           main
+     00004A34  _drawPlayer                        main
+     00004A63  _erasePlayer                       main
+     00004A8F  _drawFatiga                        main
+     00004B23  _drawVida                          main
+     00004BA6  _checkBoundsCollisions             main
+     00004F65  _checkKeyboard                     main
+     00005190  _game                              main
+     00005472  _credits                           main
+     000054BB  _main                              main
+     000054F0  _muro                              muro
+     000056F0  _flecha_dcha                       flecha
+     00005710  _flecha_izda                       flecha
+     00005730  _flecha_arriba                     flecha
+     00005750  _flecha_abajo                      flecha
+     00005770  _cpct_setPalette                   cpct_video
+     00005779  cpct_setPalette_asm                cpct_video
+     00005794  _cpct_isKeyPressed                 cpct_keyboard
+     00005794  cpct_isKeyPressed_asm              cpct_keyboard
+     000057A0  _cpct_scanKeyboard_f               cpct_keyboard
+     000057A0  cpct_scanKeyboard_f_asm            cpct_keyboard
+     0000580A  _cpct_drawStringM0                 cpct_strings
+     00005812  cpct_drawStringM0_asm              cpct_strings
+     0000582E  dc_mode0_ct                        cpct_strings
+     0000583E  _cpct_drawCharM0                   cpct_strings
+     0000584B  cpct_drawCharM0_asm                cpct_strings
+     000058CB  _cpct_fw2hw                        cpct_video
+     000058E5  _cpct_keyboardStatusBuffer         cpct_keyboard
+     000058EF  _cpct_drawSpriteMasked             cpct_sprites
+     0000591E  cpct_firmware2hw_colour            
+     00005939  _cpct_waitVSYNC                    cpct_video
+     00005939  cpct_waitVSYNC_asm                 cpct_video
+     00005941  _cpct_setVideoMode                 cpct_video
+     00005946  cpct_setVideoMode_asm              cpct_video
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    000016F4 =        5876. bytes (REL,CON)
+_CODE                               00004000    00001A7E =        6782. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     0000561C  _cpct_drawSolidBox                 cpct_sprites
-     000056D4  _cpct_getScreenPtr                 cpct_video
+     00005953  _cpct_memset                       cpct_memutils
+     00005961  _cpct_mode_rom_status              cpct_firmware
+     00005962  _cpct_firmware_address             cpct_firmware
+     00005964  _cpct_disableFirmware              cpct_firmware
+     00005964  cpct_disableFirmware_asm           cpct_firmware
+     00005975  _cpct_drawSolidBox                 cpct_sprites
+     00005A2D  _cpct_getScreenPtr                 cpct_video
+     00005A4D  _cpct_scanKeyboard                 cpct_keyboard
+     00005A4D  cpct_scanKeyboard_asm              cpct_keyboard
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_DATA                               00005A7E    0000003C =          60. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00005A7E  _scene                             main
+     00005A96  _object                            main
+     00005AA0  _players                           main
+ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
 
 Files Linked                              [ module(s) ]
 
-obj/flecha-vertical.rel                   [ flecha_vertical ]
-obj/gladis-arriba.rel                     [ gladis_arriba ]
+obj/gladis.rel                            [ gladis ]
 obj/chacho-quieto.rel                     [ chacho_quieto ]
-obj/gladis-quieto.rel                     [ gladis_quieto ]
+obj/ia.rel                                [ ia ]
 obj/vida.rel                              [ vida ]
 obj/main.rel                              [ main ]
 obj/muro.rel                              [ muro ]
-obj/flecha-horizontal.rel                 [ flecha_horizontal ]
-obj/gladis-atk.rel                        [ gladis_atk ]
+obj/flecha.rel                            [ flecha ]
 
 
 Libraries Linked                          [ object file ]
 
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_setPalette.rel ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_isKeyPressed.rel ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_scanKeyboard_f.rel ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawStringM0.rel ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawCharM0.rel ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_fw2hw.rel ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ keyboard.rel ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawSpriteMasked_cbindings. ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_firmware2hw_colour_table.re ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_waitVSYNC.rel ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_setVideoMode.rel ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_memset_cbinding.rel ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_disableFirmware.rel ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawSolidBox_cbindings.rel ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_getScreenPtr_cbindings.rel ]
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_scanKeyboard.rel ]
 
-ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 6.
 
 User Base Address Definitions
 

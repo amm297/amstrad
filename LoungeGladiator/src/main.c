@@ -2,9 +2,9 @@
 //  This file is part of CPCtelera: An Amstrad CPC Game Engine
 //  Copyright (C) 2015 ronaldo / Fremos / Cheesetea / ByteRealms (@FranGallegoBR)
 //
-//  This program is free software: you can redistribute it and/or modify
+//  This program is free softilewidthare: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
-//  the Free Software Foundation, either version 3 of the License, or
+//  the Free Softilewidthare Foundation, either version 3 of the License, or
 //  (at your option) any later version.
 //
 //  This program is distributed in the hope that it will be useful,
@@ -16,35 +16,19 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 
-#include <cpctelera.h>
 #include <stdio.h>
-#include "gladis-quieto.h"
-#include "gladis-arriba.h"
-#include "gladis-atk.h"
+#include <assert.h>
+#include <time.h>
+#include <stdlib.h>
+#include <string.h>
+#include <cpctelera.h>
+#include "gladis.h"
 #include "chacho-quieto.h"
+#include "flecha.h"
+#include "mapa.h"
 #include "vida.h"
-#include "flecha-horizontal.h"
-#include "flecha-vertical.h"
-#define VMEM (u8*)0xC000
+#include "ia.h"
 
-typedef struct
-{
-  u8 x,y,prevX,prevY; //posicion personaje
-  u8* atk; //auxiliares de posicion y sprite
-  u8* prevAtk;
-  u8* dir;
-  u8* col;
-  u8* life;
-}TPlayer;
-
-typedef struct
-{
-  u8 x,y,prevX,prevY; //posicion enemigo
-  u8* vivo; //control vida enemigo
-  u8* dir;
-}TEnemy;
-
-const u8 g_palette[4] = { 0,26,6,18 };
 /*INICIALIZACION*/
 void init(){
    cpct_disableFirmware();
@@ -54,129 +38,154 @@ void init(){
 }
 
 /*MENU*/
-void menu(){
+int menu(){
    u8* memptr;
+   int init = 50;
+   int pushed =0;
+   int cont =0;
    cpct_clearScreen(0);
 
-   memptr = cpct_getScreenPtr(VMEM,20,10);
-   cpct_drawStringM0("Super Menu",memptr,2,3);
+   memptr = cpct_getScreenPtr(VMEM,10,10);
+   cpct_drawStringM0("Lounge Gladiator",memptr,1,0);
 
-    memptr = cpct_getScreenPtr(VMEM,18,180);
-   cpct_drawStringM0("Pulsa Intro",memptr,4,5);
+   //Opciones 
+   memptr = cpct_getScreenPtr(VMEM,20,50);
+   cpct_drawStringM0("Nueva Partida",memptr,1,0);
 
+   memptr = cpct_getScreenPtr(VMEM,20,70);
+   cpct_drawStringM0("Creditos",memptr,1,0);
+
+   memptr = cpct_getScreenPtr(VMEM,20,90);
+   cpct_drawStringM0("Salir",memptr,1,0);
+
+    /*memptr = cpct_getScreenPtr(VMEM,18,180);
+   cpct_drawStringM0("Pulsa Intro",memptr,4,5);*/
+
+   //Indicador
+   while(1){
+    
+      cpct_scanKeyboard();
+      if(cpct_isKeyPressed(Key_CursorDown) && cont > 150){
+        cpct_drawSolidBox(memptr, 0, 2, 8);
+        pushed ++;
+        cont =0;
+      }
+      if(cpct_isKeyPressed(Key_CursorUp) && cont > 150){
+        cpct_drawSolidBox(memptr, 0, 2, 8);
+        pushed --;
+        cont = 0;
+      }
+
+      switch (pushed){
+        case 0: init = 50;break;
+        case 1: init = 70;break;
+        case 2: init = 90;break;
+      }
+      memptr = cpct_getScreenPtr(VMEM,15,init);
+      cpct_drawSolidBox(memptr, 3, 2, 8);
+      if(cpct_isKeyPressed(Key_Enter)){
+        switch (pushed){
+        case 0: return 1;break;
+        case 1: return 2;break;
+        case 2: return 0;break;
+      }
+      }
+      cont++;
+     
+    
+      
+   }
+
+   /*
    do{
-    cpct_scanKeyboard_f();
+    
    }while(!cpct_isKeyPressed(Key_Enter));
-
+  */
 }
 
-//Detectar p.colision de personajes
-u8* checkCollisions(u8 pX, u8 pY, u8 eX, u8 eY, u8* dir, u8* atk, u8 mode){
-    u8 popX = pX + 4;
-    u8 popY = pY + 16;
-    u8 eopX = eX + 4;
-    u8 eopY = eY + 16;
 
-    if(atk >= 21 && mode == 0){
-        popX += 2;
+/*MAPA*/
+void drawMap(u8 t){
+   int posX=0,posY =0,x=0;
+   u8* memptr;
+
+   if(t == 1){ 
+    for(x=0;x<height;x++){
+      scene[x] = mapa1[x];
     }
+  }
 
-    if(eopX >= pX && eopX <= popX && eY >= pY && eY <= popY)
-        if(atk >= 21)
-            return 1;
-        else
-            return 2;
-
-    if(eX >= pX && eX <= popX && eY >= pY && eY <= popY)
-        if(atk >= 21)
-            return 1;
-        else
-            return 2;
-
-    if(eX >= pX && eX <= popX && eopY >= pY && eopY <= popY)
-        if(atk >= 21)
-            return 1;
-        else
-            return 2;
-
-    if(eopX >= pX && eopX <= popX && eopY >= pY && eopY <= popY)
-        if(atk >= 21)
-            return 1;
-        else
-            return 2;
-
-    return 0;
-}
-
-u8* checkSprite(u8* atk, u8* dir){
-    if(atk <= 20)
-        switch((int)dir){
-        case 0:
-            return gladis_quieto_dcha;
-            break;
-        case 1:
-            return gladis_quieto_izda;
-            break;
-        case 2:
-            return gladis_quieto_dcha;
-            break;
-        case 3:
-            return gladis_arriba_dcha;
-        }
-    else if(dir == 0){
-        return gladis_atk_dcha;
-    }else{
-        return gladis_atk_izda;
+  if(t == 2){ 
+    for(x=0;x<height;x++){
+      scene[x] = mapa2[x];
     }
+  }
+   
+   for(posY=0; posY<height;posY++){
+      for(posX=0; posX<width;posX++){
+         memptr = cpct_getScreenPtr(VMEM, posX*tilewidth, posY*tileheight); 
+         if(scene[posY][posX] == 1){
+            cpct_drawSolidBox(memptr, 3, tilewidth, tileheight);
+         }
+         if(scene[posY][posX] == 9){
+            cpct_drawSolidBox(memptr, 9, tilewidth, tileheight);
+         }
+      }
+   }
 }
 
-u8* checkSpriteFlecha(u8* dir){
-    switch((int)dir){
-        case 0:
-            return flecha_dcha;
-            break;
-        case 1:
-            return flecha_izda;
-            break;
-        case 2:
-            return flecha_abajo;
-            break;
-        case 3:
-            return flecha_arriba;
-            break;
-    }
+/*PERSONAJES*/
+
+void drawPlayer(u8 x,u8 y,u8 *sprite,u8 size){
+  u8* memptr;
+  //if(p.life > 0){
+    memptr = cpct_getScreenPtr(VMEM,x,y);
+    cpct_drawSpriteMasked(sprite, memptr, size, 16);
+  //}
 }
 
-//Dibujar las tres barras de fatiga cuando el jugador ataca
-void drawFatiga(u8* atk, u8* memptr, u8 col){
+void erasePlayer(u8 x,u8 y,u8 size){
+  u8* memptr;
+  //if(p.life > 0){
+    memptr = cpct_getScreenPtr(VMEM,x,y);
+    cpct_drawSolidBox(memptr,0,size,16);
+  //}
+}
+
+
+/*FATIGA*/
+
+void drawFatiga(u8 atk, u8 col){
+  u8* memptr;
     if(atk < 20)
         col = 2;
     if(atk > 30 || atk <= 20){
-        memptr = cpct_getScreenPtr(VMEM,4,160);
+        memptr = cpct_getScreenPtr(VMEM,4,192);
         cpct_drawSolidBox(memptr, col, 2, 8);
     }
     if(atk > 40 || atk <= 20){
-        memptr = cpct_getScreenPtr(VMEM,7,160);
+        memptr = cpct_getScreenPtr(VMEM,7,192);
         cpct_drawSolidBox(memptr, col, 2, 8);
     }
     if(atk <= 20){
-        memptr = cpct_getScreenPtr(VMEM,10,160);
+        memptr = cpct_getScreenPtr(VMEM,10,192);
         cpct_drawSolidBox(memptr, col, 2, 8);
     }
 }
 
-//dibujar los corazones de vida del personaje
-void drawVida(u8* life, u8* memptr){
+/*VIDA*/
+void drawVida(u8 life){
+  u8* memptr;
     if(life >= 1){
-        memptr = cpct_getScreenPtr(VMEM,55,160);
+        memptr = cpct_getScreenPtr(VMEM,65,192);
         cpct_drawSpriteMasked(corazon_lleno, memptr, 4, 8);
     }
-    memptr = cpct_getScreenPtr(VMEM,60,160);
+    memptr = cpct_getScreenPtr(VMEM,70,192);
     if(life >= 2)
         cpct_drawSpriteMasked(corazon_lleno, memptr, 4, 8);
     else
         cpct_drawSpriteMasked(corazon_roto, memptr, 4, 8);
-    memptr = cpct_getScreenPtr(VMEM,65,160);
+    memptr = cpct_getScreenPtr(VMEM,75,192);
     if(life >= 3)
         cpct_drawSpriteMasked(corazon_lleno, memptr, 4, 8);
     else
@@ -184,184 +193,201 @@ void drawVida(u8* life, u8* memptr){
 
 }
 
+/*Colisiones*/
+
+
+u8 checkBoundsCollisions(u8 *x,u8 *y, u8 lx, u8 ly,u8 size){
+
+  u8 *posX = x;
+  u8 *posY = y;
+  u8 bound = 0;
+  if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 1   
+      || scene[(posY[0])/tileheight][(posX[0]+size-1)/tilewidth] == 1
+      || scene[(posY[0]+playerheight-2)/tileheight][(posX[0])/tilewidth] == 1 
+      || scene[(posY[0]+playerheight-2)/tileheight][(posX[0]+size-1)/tilewidth] == 1
+    ){   
+        *posX=lx;
+        *posY=ly;
+        bound = 1;
+  }
+  else if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 6   
+      || scene[(posY[0])/tileheight][(posX[0]+size-1)/tilewidth] == 6
+      || scene[(posY[0]+playerheight-2)/tileheight][(posX[0])/tilewidth] == 6
+      || scene[(posY[0]+playerheight-2)/tileheight][(posX[0]+size-1)/tilewidth] == 6
+    ){   
+       //Sumar corazones
+  }else if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 5   
+      || scene[(posY[0])/tileheight][(posX[0]+size-1)/tilewidth] == 5
+      || scene[(posY[0]+playerheight-2)/tileheight][(posX[0])/tilewidth] == 5
+      || scene[(posY[0]+playerheight-2)/tileheight][(posX[0]+size-1)/tilewidth] == 5
+    ){   
+        //Sumar municion
+  }else if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 9   
+      || scene[(posY[0])/tileheight][(posX[0]+size-1)/tilewidth] == 9
+      || scene[(posY[0]+playerheight-2)/tileheight][(posX[0])/tilewidth] == 9
+      || scene[(posY[0]+playerheight-2)/tileheight][(posX[0]+size-1)/tilewidth] == 9
+    ){   
+        cpct_clearScreen(0);
+        drawMap(2);
+  }
+  return bound;
+}
+
+
+/* TECLADO*/
+
+u8* checkKeyboard(u8 *x,u8 *y,u8 *atk,u8 *dir,u8 *s,u8 *size,u8 *finish,u8 *arrow){
+  u8 *sprite = s;
+  if(cpct_isKeyPressed(Key_Space) && atk[0]>=20){
+      size[0] = 5;
+      if(atk[0] >= 50) atk[0] =0;
+      else atk[0] += 1;
+      if(dir[0] == 6) {s = gladis_atk_dcha;}
+      else if(dir[0] == 4) {s = gladis_atk_izda;}     
+  }else{
+    if(atk[0] < 20) atk[0] += 1;
+    else atk[0] = 20;
+    if(cpct_isKeyPressed(Key_CursorRight) && x[0] < 76 ){
+         x[0] += 1;
+         dir[0] = 6;
+         size[0] = 4;
+         sprite = gladis_quieto_dcha;
+      }else if(cpct_isKeyPressed(Key_CursorLeft) && x[0] > 0 ){
+         x[0] -= 1;
+         dir[0] = 4;
+         size[0] = 4;
+         sprite = gladis_quieto_izda;
+      }else  if(cpct_isKeyPressed(Key_CursorDown) && y[0] < 180){
+         y[0] += 2;
+         dir[0] = 2;
+         size[0] = 4;
+         sprite = gladis_quieto_dcha;
+      }else if(cpct_isKeyPressed(Key_CursorUp) && y[0] > 0 ){
+         y[0] -= 2;
+         dir[0] = 8;
+         size[0] = 4;
+         sprite = gladis_arriba_dcha;
+      }else if(cpct_isKeyPressed(Key_X) && arrow == 0){
+
+        u8 *spr,xs,ys;
+        switch(dir[0]){
+          case 6: spr = flecha_dcha; xs=2;ys=8; break;
+          case 4: spr = flecha_izda; xs=2;ys=8; break;
+          case 2: spr = flecha_arriba; xs=4;ys=4; break;
+          case 8: spr = flecha_abajo; xs=4;ys=4; break;
+        }
+        object.x = x[0]+4;
+        object.y = y[0]+8;
+        object.x = object.x;
+        object.y = object.y;
+        object.sprite = spr;
+        object.vivo = 0;
+        object.dir = dir[0];
+        object.xsize = xs;
+        object.ysize = ys;
+        arrow[0]=1;
+      }else {
+        size[0] = 4;
+        s = gladis_quieto_dcha;
+      } 
+  }
+  
+  if(cpct_isKeyPressed(Key_Esc)){
+       finish[0] = 1;
+  }
+
+  return s;
+} 
+
 /*JUEGO*/
 
-void game(){
-   TPlayer p = { 0,100,0,100,20,20,0,0,6,3 };
-   TEnemy  e = { 55,100,55,100,0,1 };
-   TEnemy pr = { 0,0,0,0,1,0 };
-   u8* memptr;
-   u8* sprite = gladis_quieto_dcha;
-   u8* auxCol;
-   u8 i = 0;
+void game(){  
+  TPlayer p = {0,80,0,80,gladis_quieto_dcha,3,6,4,4,0,0,2};
+
+  //players[0] =p;
+   //u8 i = p.x;
+
+   //u8* memptr;
+   u8 finish = 0,i=1,arrow=0;
+    //u8* memptr;
+   u8 bound =0;
+
+
    cpct_clearScreen(0);
+   drawMap(i);
 
    while (1){
 
     //Esperar el retrazado
     cpct_waitVSYNC();
 
-    //Desdibujar el enemigo
-    memptr = cpct_getScreenPtr(VMEM,e.x,e.y);
-    cpct_drawSolidBox(memptr,0,4,16);
-    //Dibujar el enemigo solo si esta vivo
-    if(e.vivo == 0){
-        memptr = cpct_getScreenPtr(VMEM,e.x,e.y);
-        cpct_drawSolidBox(memptr, 18, 4, 16);
-    }
-
-     //Desdibujar flecha
-    memptr = cpct_getScreenPtr(VMEM,pr.prevX,pr.prevY);
-    if((int)pr.dir < 2)
-        cpct_drawSolidBox(memptr, 0, 4, 4);
-    else
-        cpct_drawSolidBox(memptr, 0, 2, 8);
-    //Dibujar flecha
-    if(pr.vivo == 0){
-        memptr = cpct_getScreenPtr(VMEM,pr.x,pr.y);
-        if((int)pr.dir < 2)
-            cpct_drawSpriteMasked(checkSpriteFlecha(pr.dir), memptr, 4, 4);
-        else
-            cpct_drawSpriteMasked(checkSpriteFlecha(pr.dir), memptr, 2, 8);
-    }
-
-    //Desdibujar personaje
-    memptr = cpct_getScreenPtr(VMEM,p.prevX,p.prevY);
-    if(p.prevAtk <= 20)
-        cpct_drawSolidBox(memptr,0,4,16);
-    else
-        cpct_drawSolidBox(memptr,0,5,16);
+    //Desdibujar personajes
+    erasePlayer(p.lx,p.ly,p.lsize);
+    
     //Dibujar personajes
-    memptr = cpct_getScreenPtr(VMEM,p.x,p.y);
-    //Si esta atacando dibujar un sprite, si no, otro
-    if(p.atk >= 21)
-        cpct_drawSpriteMasked(sprite, memptr, 5, 16);
-    else
-        cpct_drawSpriteMasked(sprite, memptr, 4, 16);
+    drawPlayer(p.x,p.y,p.sprite,p.size);
 
-    //Desdibujar la vida
-    memptr = cpct_getScreenPtr(VMEM,60,160);
-    cpct_drawSolidBox(memptr,0,10,16);
-    //Dibujar Vida
-    drawVida(p.life, memptr);
+    //Dibujar vida
+    drawVida(p.life);
 
     //Dibujar fatiga
-    if(p.atk < 20)
-        drawFatiga(p.atk,memptr,2);
-    else if(p.atk > 20)
-        drawFatiga(p.atk,memptr,16);
-    else
-        drawFatiga(p.atk,memptr,0);
+    if(p.atk < 20) drawFatiga(p.atk,2);
+    else if(p.atk > 20) drawFatiga(p.atk,16);
+    else drawFatiga(p.atk,0);
 
-    p.prevX = p.x;
-    p.prevY = p.y;
-    p.prevAtk = p.atk;
-    //Comprobar teclado, no se comprobara si ha chocado con un enemigo
+    //guardar datos anteriores
+    p.lx = p.x;
+    p.ly = p.y;
+    p.latk = p.atk;
+    p.lsize = p.size;
+     
+      //Comprobar teclado
+      cpct_scanKeyboard_f();
+      p.sprite = checkKeyboard(&p.x,&p.y,&p.atk,&p.dir,p.sprite,&p.size,&finish,&arrow);
+      checkBoundsCollisions(&p.x,&p.y,p.lx,p.ly,p.size);
 
-    cpct_scanKeyboard_f();
-    if(cpct_isKeyPressed(Key_Space) && p.atk >= 20){
-        if(p.atk >= 50)
-            p.atk = 0;
-        else
-            p.atk += 1;
-    if(cpct_isKeyPressed(Key_CursorRight))
-            p.dir = 0;
-    else if(cpct_isKeyPressed(Key_CursorLeft))
-            p.dir = 1;
-    }else{
-        if(p.atk < 20)
-            p.atk += 1;
-        else
-            p.atk = 20;
-        if(cpct_isKeyPressed(Key_CursorRight) && p.x < 76 ){
-            if(p.col != 2)
-                p.x += 1;
-            p.dir = 0;
-        }else if(cpct_isKeyPressed(Key_CursorLeft) && p.x > 0 ){
-            if(p.col != 2)
-                p.x -= 1;
-            p.dir = 1;
-        }else if(cpct_isKeyPressed(Key_CursorDown) && p.y < 184 ){
-            p.y += 2;
-            p.dir = 2;
-        }else if(cpct_isKeyPressed(Key_CursorUp) && p.y > 0 ){
-            p.y -= 2;
-            p.dir = 3;
-        }else if(cpct_isKeyPressed(Key_X) && pr.vivo == 1){
-            pr.vivo = 0;
-            pr.dir = p.dir;
-            pr.x = p.x+4;
-            pr.y = p.y+8;
-        }else  if(cpct_isKeyPressed(Key_Esc)){
-            return;
-        }
-    }
 
-    //Comprobar si esta quieto para que no se dibuje el sprite de atacar//
-    sprite = checkSprite(p.atk,p.dir);
-
-    if(pr.vivo == 0){
-        pr.prevX = pr.x;
-        pr.prevY = pr.y;
-        switch((int)pr.dir){
-            case 0:
-                if(pr.x<74)
-                    pr.x++;
-                else
-                    pr.vivo = 1;
-                break;
-            case 1:
-                if(pr.x > 0)
-                    pr.x--;
-                else
-                    pr.vivo = 1;
-                break;
-            case 2:
-                if(pr.y < 192)
-                    pr.y+=2;
-                else
-                    pr.vivo = 1;
-                break;
-            case 3:
-                if(pr.y > 0)
-                    pr.y-=2;
-                else
-                    pr.vivo = 1;
-                break;
-        }
-        if(checkCollisions(pr.x,pr.y,e.x,e.y,pr.dir,21,1) == 1){
-            e.vivo = 1;
-            pr.vivo = 1;
-        }
-    }
-
-    if(p.col != 2 && e.vivo == 0){
-        p.col = checkCollisions(p.x,p.y,e.x,e.y,p.dir,p.atk,0);
-        if(p.col == 2){
-            p.life--;
-            p.x = 1;
-            p.y = 100;
-            p.col = 0;
-            if(p.life == 0)
-                return;
-        }
-      }
-      if(p.col == 1)
-        e.vivo = 1;
+      
    }
-
 }
 
+
+/* CREDITOS */
+void credits(){
+  u8* memptr;
+  cpct_clearScreen(0);
+  memptr = cpct_getScreenPtr(VMEM,10,10);
+  cpct_drawStringM0("Lounge Gladiator",memptr,1,0);  
+
+  while (1){
+      
+      cpct_scanKeyboard_f();
+     
+      
+
+     if(cpct_isKeyPressed(Key_Esc)) {
+       
+        return;
+      }
+
+   }
+}
 /*EMPIEZA EL CODIGO*/
 
 void main(void) {
-
+ 
+  
+  int x =0;
    init();
-   //loadMap();
+  
    // Loop forever
    while(1){
-      menu();
-      game();
+      x=menu();
+      switch(x){
+        case 0: return;break;
+        case 1: game(); break;
+        case 2: credits();break;
+      }
    }
-
+      
 }

@@ -31,19 +31,25 @@ typedef struct
   u8 lsize; //last size ancho anterior personaje
   u8 atk; //Ataque personaje
   u8 latk; //Ataque previo personaje
+  u8 bullets; //Municion restante
 }TPlayer;
 
 typedef struct 
 {
   u8 x,y; //posicion objeto
+  u8 lx,ly; //posicion objeto
   u8 *sprite; //sprite objeto
   u8 vivo; //objeto cogido
-
+  u8 dir;
+  u8 xsize;
+  u8 ysize;
 }TObject;
 
 //const u8* sprite = gladis_quieto_dcha;
 const u8 g_palette[4] = { 0,26,6,18 };
-const int *scene[height];
+const u8 *scene[height];
+TObject object;
+TPlayer players[numplayers];
 
 
 //Definicion de mapa
@@ -54,7 +60,7 @@ const int *scene[height];
   //6 -> Corazon
   //9 -> Puerta
 
-const int mapa1[height][width] = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+const u8 mapa1[height][width] = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
                                   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
                                   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
                                   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1},
@@ -67,7 +73,7 @@ const int mapa1[height][width] = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
                                   {1,5,1,2,2,2,2,1,0,0,0,0,0,0,0,0,0,0,0,1},
                                   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,9,1,1,1,1}};
 
-const int mapa2[height][width] = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+const u8 mapa2[height][width] = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
                                   {1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,6},
                                   {1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
                                   {1,0,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1},
