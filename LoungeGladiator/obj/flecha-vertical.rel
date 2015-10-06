@@ -4,8 +4,8 @@ M flecha_vertical
 O -mz80
 S .__.ABS. Def0000
 A _CODE size 40 flags 0 addr 0
-S _flecha_izda Def0020
-S _flecha_dcha Def0000
+S _flecha_arriba Def0000
+S _flecha_abajo Def0020
 A _DATA size 0 flags 0 addr 0
 A _INITIALIZED size 0 flags 0 addr 0
 A _DABS size 0 flags 8 addr 0

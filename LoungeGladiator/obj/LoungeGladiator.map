@@ -18,26 +18,26 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000000  l__INITIALIZER                  
      00000000  s__CABS                         
      00000000  s__DABS                         
-     0000113C  l__CODE                         
+     000013FB  l__CODE                         
      00004000  s__CODE                         
-     0000513C  s__DATA                         
-     0000513C  s__GSFINAL                      
-     0000513C  s__GSINIT                       
-     0000513C  s__HOME                         
-     0000513C  s__INITIALIZED                  
-     0000513C  s__INITIALIZER                  
+     000053FB  s__DATA                         
+     000053FB  s__GSFINAL                      
+     000053FB  s__GSINIT                       
+     000053FB  s__HOME                         
+     000053FB  s__INITIALIZED                  
+     000053FB  s__INITIALIZER                  
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    0000113C =        4412. bytes (REL,CON)
+_CODE                               00004000    000013FB =        5115. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00004000  _flecha_dcha                       flecha_vertical
-     00004020  _flecha_izda                       flecha_vertical
+     00004000  _flecha_arriba                     flecha_vertical
+     00004020  _flecha_abajo                      flecha_vertical
      00004040  _gladis_arriba_dcha                gladis_arriba
      000040C0  _gladis_arriba_izda                gladis_arriba
      00004140  _chacho_quieto_dcha                chacho_quieto
@@ -52,42 +52,51 @@ _CODE                               00004000    0000113C =        4412. bytes (R
      000043ED  _menu                              main
      00004459  _checkCollisions                   main
      00004515  _checkSprite                       main
-     00004573  _drawFatiga                        main
-     00004630  _drawVida                          main
-     000046D7  _game                              main
-     00004CD4  _main                              main
-     00004CDF  _flecha_arriba                     flecha_horizontal
-     00004CFF  _flecha_abajo                      flecha_horizontal
-     00004D1F  _gladis_atk_dcha                   gladis_atk
-     00004DBF  _gladis_atk_izda                   gladis_atk
-     00004E5F  _cpct_setPalette                   cpct_video
-     00004E68  cpct_setPalette_asm                cpct_video
-     00004E83  _cpct_isKeyPressed                 cpct_keyboard
-     00004E83  cpct_isKeyPressed_asm              cpct_keyboard
-     00004E8F  _cpct_scanKeyboard_f               cpct_keyboard
-     00004E8F  cpct_scanKeyboard_f_asm            cpct_keyboard
-     00004EF9  _cpct_drawStringM0                 cpct_strings
-     00004F01  cpct_drawStringM0_asm              cpct_strings
-     00004F1D  dc_mode0_ct                        cpct_strings
-     00004F2D  _cpct_drawCharM0                   cpct_strings
-     00004F3A  cpct_drawCharM0_asm                cpct_strings
-     00004FBA  _cpct_fw2hw                        cpct_video
-     00004FD4  _cpct_keyboardStatusBuffer         cpct_keyboard
-     00004FDE  _cpct_drawSpriteMasked             cpct_sprites
-     0000500D  cpct_firmware2hw_colour            
-     00005028  _cpct_waitVSYNC                    cpct_video
-     00005028  cpct_waitVSYNC_asm                 cpct_video
-     00005030  _cpct_setVideoMode                 cpct_video
-     00005035  cpct_setVideoMode_asm              cpct_video
-     00005042  _cpct_memset                       cpct_memutils
-     00005050  _cpct_mode_rom_status              cpct_firmware
-     00005051  _cpct_firmware_address             cpct_firmware
-     00005053  _cpct_disableFirmware              cpct_firmware
-     00005053  cpct_disableFirmware_asm           cpct_firmware
-     00005064  _cpct_drawSolidBox                 cpct_sprites
-     0000511C  _cpct_getScreenPtr                 cpct_video
-
+     00004573  _checkSpriteFlecha                 main
+     000045A6  _drawFatiga                        main
+     00004663  _drawVida                          main
+     0000470A  _game                              main
+     00004F93  _main                              main
+     00004F9E  _flecha_dcha                       flecha_horizontal
+     00004FBE  _flecha_izda                       flecha_horizontal
+     00004FDE  _gladis_atk_dcha                   gladis_atk
+     0000507E  _gladis_atk_izda                   gladis_atk
+     0000511E  _cpct_setPalette                   cpct_video
+     00005127  cpct_setPalette_asm                cpct_video
+     00005142  _cpct_isKeyPressed                 cpct_keyboard
+     00005142  cpct_isKeyPressed_asm              cpct_keyboard
+     0000514E  _cpct_scanKeyboard_f               cpct_keyboard
+     0000514E  cpct_scanKeyboard_f_asm            cpct_keyboard
+     000051B8  _cpct_drawStringM0                 cpct_strings
+     000051C0  cpct_drawStringM0_asm              cpct_strings
+     000051DC  dc_mode0_ct                        cpct_strings
+     000051EC  _cpct_drawCharM0                   cpct_strings
+     000051F9  cpct_drawCharM0_asm                cpct_strings
+     00005279  _cpct_fw2hw                        cpct_video
+     00005293  _cpct_keyboardStatusBuffer         cpct_keyboard
+     0000529D  _cpct_drawSpriteMasked             cpct_sprites
+     000052CC  cpct_firmware2hw_colour            
+     000052E7  _cpct_waitVSYNC                    cpct_video
+     000052E7  cpct_waitVSYNC_asm                 cpct_video
+     000052EF  _cpct_setVideoMode                 cpct_video
+     000052F4  cpct_setVideoMode_asm              cpct_video
+     00005301  _cpct_memset                       cpct_memutils
+     0000530F  _cpct_mode_rom_status              cpct_firmware
+     00005310  _cpct_firmware_address             cpct_firmware
+     00005312  _cpct_disableFirmware              cpct_firmware
+     00005312  cpct_disableFirmware_asm           cpct_firmware
+     00005323  _cpct_drawSolidBox                 cpct_sprites
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_CODE                               00004000    000013FB =        5115. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     000053DB  _cpct_getScreenPtr                 cpct_video
+ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
 
 Files Linked                              [ module(s) ]
 
@@ -134,7 +143,7 @@ Libraries Linked                          [ object file ]
 /home/Pepe/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_getScreenPtr_cbindings.rel ]
 
-ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
 
 User Base Address Definitions
 

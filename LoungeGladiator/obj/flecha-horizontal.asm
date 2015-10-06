@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.5.0 #9253 (Sep 22 2015) (CYGWIN)
-; This file was generated Tue Oct  6 10:19:49 2015
+; This file was generated Tue Oct  6 11:16:36 2015
 ;--------------------------------------------------------
 	.module flecha_horizontal
 	.optsdcc -mz80
@@ -9,8 +9,8 @@
 ;--------------------------------------------------------
 ; Public variables in this module
 ;--------------------------------------------------------
-	.globl _flecha_abajo
-	.globl _flecha_arriba
+	.globl _flecha_izda
+	.globl _flecha_dcha
 ;--------------------------------------------------------
 ; special function registers
 ;--------------------------------------------------------
@@ -43,7 +43,7 @@
 ;--------------------------------------------------------
 	.area _CODE
 	.area _CODE
-_flecha_arriba:
+_flecha_dcha:
 	.db #0xFF	; 255
 	.db #0x00	; 0
 	.db #0xFF	; 255
@@ -76,7 +76,7 @@ _flecha_arriba:
 	.db #0x00	; 0
 	.db #0x55	; 85	'U'
 	.db #0x80	; 128
-_flecha_abajo:
+_flecha_izda:
 	.db #0xFF	; 255
 	.db #0x00	; 0
 	.db #0xFF	; 255

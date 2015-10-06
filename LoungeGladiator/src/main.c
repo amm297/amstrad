@@ -23,6 +23,8 @@
 #include "gladis-atk.h"
 #include "chacho-quieto.h"
 #include "vida.h"
+#include "flecha-horizontal.h"
+#include "flecha-vertical.h"
 #define VMEM (u8*)0xC000
 
 typedef struct
@@ -38,7 +40,7 @@ typedef struct
 
 typedef struct
 {
-  u8 x,y; //posicion enemigo
+  u8 x,y,prevX,prevY; //posicion enemigo
   u8* vivo; //control vida enemigo
   u8* dir;
 }TEnemy;
@@ -70,23 +72,15 @@ void menu(){
 }
 
 //Detectar p.colision de personajes
-u8* checkCollisions(u8 pX, u8 pY, u8 eX, u8 eY, u8* dir, u8* atk){
-    if((u8)atk >= 21)
-        if(dir == 0)
-            if(eX - pX > -1 && eX - pX < 11)
-                return 1;
-            else
-                return 0;
-        else
-            if(pX - eX > -1 && pX - eX < 11)
-                return 1;
-            else
-                return 0;
-    else
-        if(eX - pX > 0 && eX - pX < 4 && eY - pY > 0 && eY - pY < 16)
-            return 2;
+u8* checkCollisions(u8 pX, u8 pY, u8 eX, u8 eY, u8* dir, u8* atk, u8 mode){
 
-    return 0;
+
+    u8 popX = pX + 8;
+    u8 popY = pY + 16;
+    u8 eopX = e8 + 8;
+    u8 eopY = eY + 16;
+
+
 }
 
 u8* checkSprite(u8* atk, u8* dir){
@@ -108,6 +102,23 @@ u8* checkSprite(u8* atk, u8* dir){
         return gladis_atk_dcha;
     }else{
         return gladis_atk_izda;
+    }
+}
+
+u8* checkSpriteFlecha(u8* dir){
+    switch((int)dir){
+        case 0:
+            return flecha_dcha;
+            break;
+        case 1:
+            return flecha_izda;
+            break;
+        case 2:
+            return flecha_abajo;
+            break;
+        case 3:
+            return flecha_arriba;
+            break;
     }
 }
 
@@ -152,8 +163,8 @@ void drawVida(u8* life, u8* memptr){
 
 void game(){
    TPlayer p = { 0,100,0,100,20,20,0,0,6,3 };
-   TEnemy  e = { 55,100,0,0 };
-   TEnemy pr = { 0,0,1,0 };
+   TEnemy  e = { 55,100,55,100,0,0 };
+   TEnemy pr = { 0,0,0,0,1,0 };
    u8* memptr;
    u8* sprite = gladis_quieto_dcha;
    u8* auxCol;
@@ -168,40 +179,54 @@ void game(){
     //Desdibujar personaje
     memptr = cpct_getScreenPtr(VMEM,p.prevX,p.prevY);
     if(p.prevAtk <= 20)
-      cpct_drawSolidBox(memptr,0,4,16);
+        cpct_drawSolidBox(memptr,0,4,16);
     else
-      cpct_drawSolidBox(memptr,0,5,16);
+        cpct_drawSolidBox(memptr,0,5,16);
     //Dibujar personajes
     memptr = cpct_getScreenPtr(VMEM,p.x,p.y);
     //Si esta atacando dibujar un sprite, si no, otro
     if(p.atk >= 21)
-      cpct_drawSpriteMasked(sprite, memptr, 5, 16);
+        cpct_drawSpriteMasked(sprite, memptr, 5, 16);
     else
-      cpct_drawSpriteMasked(sprite, memptr, 4, 16);
+        cpct_drawSpriteMasked(sprite, memptr, 4, 16);
 
+    //Desdibujar la vida
     memptr = cpct_getScreenPtr(VMEM,60,160);
     cpct_drawSolidBox(memptr,0,10,16);
+    //Dibujar Vida
+    drawVida(p.life, memptr);
 
+    //Desdibujar el enemigo
     memptr = cpct_getScreenPtr(VMEM,e.x,e.y);
-    if(e.vivo == 0)
-      cpct_drawSolidBox(memptr,0,4,16);
-
-
-
+    cpct_drawSolidBox(memptr,0,4,16);
     //Dibujar el enemigo solo si esta vivo
     if(e.vivo == 0){
-      memptr = cpct_getScreenPtr(VMEM,e.x,e.y);
-      cpct_drawSolidBox(memptr, 18, 4, 16);
+        memptr = cpct_getScreenPtr(VMEM,e.x,e.y);
+        cpct_drawSolidBox(memptr, 18, 4, 16);
     }
 
+    //Desdibujar flecha
+    memptr = cpct_getScreenPtr(VMEM,pr.prevX,pr.prevY);
+    if((int)pr.dir < 2)
+        cpct_drawSolidBox(memptr, 0, 4, 4);
+    else
+        cpct_drawSolidBox(memptr, 0, 2, 8);
+    //Dibujar flecha
+    if(pr.vivo == 0){
+        memptr = cpct_getScreenPtr(VMEM,pr.x,pr.y);
+        if((int)pr.dir < 2)
+            cpct_drawSpriteMasked(checkSpriteFlecha(pr.dir), memptr, 4, 4);
+        else
+            cpct_drawSpriteMasked(checkSpriteFlecha(pr.dir), memptr, 2, 8);
+    }
+
+    //Dibujar fatiga
     if(p.atk < 20)
         drawFatiga(p.atk,memptr,2);
     else if(p.atk > 20)
         drawFatiga(p.atk,memptr,16);
     else
         drawFatiga(p.atk,memptr,0);
-
-    drawVida(p.life, memptr);
 
     p.prevX = p.x;
     p.prevY = p.y;
@@ -237,6 +262,11 @@ void game(){
             }else if(cpct_isKeyPressed(Key_CursorUp) && p.y > 0 ){
                 p.y -= 2;
                 p.dir = 3;
+            }else if(cpct_isKeyPressed(Key_X) && pr.vivo == 1){
+                pr.vivo = 0;
+                pr.dir = p.dir;
+                pr.x = p.x+4;
+                pr.y = p.y+8;
             }else  if(cpct_isKeyPressed(Key_Esc)){
                 return;
             }
@@ -250,11 +280,42 @@ void game(){
         }
       }
 
-      //Comprobar si esta quieto para que no se dibuje el sprite de atacar//
-        sprite = checkSprite(p.atk,p.dir);
+    //Comprobar si esta quieto para que no se dibuje el sprite de atacar//
+    sprite = checkSprite(p.atk,p.dir);
+
+    if(pr.vivo == 0){
+        pr.prevX = pr.x;
+        pr.prevY = pr.y;
+        switch((int)pr.dir){
+            case 0:
+                if(pr.x<74)
+                    pr.x++;
+                else
+                    pr.vivo = 1;
+                break;
+            case 1:
+                if(pr.x > 0)
+                    pr.x--;
+                else
+                    pr.vivo = 1;
+                break;
+            case 2:
+                if(pr.y < 192)
+                    pr.y+=2;
+                else
+                    pr.vivo = 1;
+                break;
+            case 3:
+                if(pr.y > 0)
+                    pr.y-=2;
+                else
+                    pr.vivo = 1;
+                break;
+        }
+    }
 
     if(p.col != 2 && e.vivo == 0){
-        p.col = checkCollisions(p.x,p.y,e.x,e.y,p.dir,p.atk);
+        p.col = checkCollisions(p.x,p.y,e.x,e.y,p.dir,p.atk,0);
         if(p.col == 2)
             p.life--;
             if(p.life == 0)

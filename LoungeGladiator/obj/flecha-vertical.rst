@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 3.5.0 #9253 (Sep 22 2015) (CYGWIN)
-                              4 ; This file was generated Tue Oct  6 10:19:45 2015
+                              4 ; This file was generated Tue Oct  6 11:14:14 2015
                               5 ;--------------------------------------------------------
                               6 	.module flecha_vertical
                               7 	.optsdcc -mz80
@@ -9,8 +9,8 @@
                               9 ;--------------------------------------------------------
                              10 ; Public variables in this module
                              11 ;--------------------------------------------------------
-                             12 	.globl _flecha_izda
-                             13 	.globl _flecha_dcha
+                             12 	.globl _flecha_abajo
+                             13 	.globl _flecha_arriba
                              14 ;--------------------------------------------------------
                              15 ; special function registers
                              16 ;--------------------------------------------------------
@@ -43,7 +43,7 @@
                              43 ;--------------------------------------------------------
                              44 	.area _CODE
                              45 	.area _CODE
-   4000                      46 _flecha_dcha:
+   4000                      46 _flecha_arriba:
    4000 FF                   47 	.db #0xFF	; 255
    4001 00                   48 	.db #0x00	; 0
    4002 55                   49 	.db #0x55	; 85	'U'
@@ -76,7 +76,7 @@
    401D 00                   76 	.db #0x00	; 0
    401E 55                   77 	.db #0x55	; 85	'U'
    401F 80                   78 	.db #0x80	; 128
-   4020                      79 _flecha_izda:
+   4020                      79 _flecha_abajo:
    4020 AA                   80 	.db #0xAA	; 170
    4021 40                   81 	.db #0x40	; 64
    4022 FF                   82 	.db #0xFF	; 255
