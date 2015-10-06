@@ -1,9 +1,9 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.5.0 #9253 (Sep 26 2015) (CYGWIN)
-; This file was generated Tue Oct  6 12:37:55 2015
+; This file was generated Tue Oct  6 09:52:51 2015
 ;--------------------------------------------------------
-	.module flecha_horizontal
+	.module flecha
 	.optsdcc -mz80
 	
 ;--------------------------------------------------------
@@ -11,6 +11,8 @@
 ;--------------------------------------------------------
 	.globl _flecha_abajo
 	.globl _flecha_arriba
+	.globl _flecha_izda
+	.globl _flecha_dcha
 ;--------------------------------------------------------
 ; special function registers
 ;--------------------------------------------------------
@@ -43,6 +45,72 @@
 ;--------------------------------------------------------
 	.area _CODE
 	.area _CODE
+_flecha_dcha:
+	.db #0xFF	; 255
+	.db #0x00	; 0
+	.db #0x55	; 85	'U'
+	.db #0x80	; 128
+	.db #0xAA	; 170
+	.db #0x40	; 64
+	.db #0xAA	; 170
+	.db #0x40	; 64
+	.db #0xFF	; 255
+	.db #0x00	; 0
+	.db #0x55	; 85	'U'
+	.db #0x80	; 128
+	.db #0xFF	; 255
+	.db #0x00	; 0
+	.db #0x55	; 85	'U'
+	.db #0x80	; 128
+	.db #0xFF	; 255
+	.db #0x00	; 0
+	.db #0x55	; 85	'U'
+	.db #0x80	; 128
+	.db #0xFF	; 255
+	.db #0x00	; 0
+	.db #0x55	; 85	'U'
+	.db #0x80	; 128
+	.db #0xFF	; 255
+	.db #0x00	; 0
+	.db #0x55	; 85	'U'
+	.db #0x80	; 128
+	.db #0xFF	; 255
+	.db #0x00	; 0
+	.db #0x55	; 85	'U'
+	.db #0x80	; 128
+_flecha_izda:
+	.db #0xAA	; 170
+	.db #0x40	; 64
+	.db #0xFF	; 255
+	.db #0x00	; 0
+	.db #0xAA	; 170
+	.db #0x40	; 64
+	.db #0xFF	; 255
+	.db #0x00	; 0
+	.db #0xAA	; 170
+	.db #0x40	; 64
+	.db #0xFF	; 255
+	.db #0x00	; 0
+	.db #0xAA	; 170
+	.db #0x40	; 64
+	.db #0xFF	; 255
+	.db #0x00	; 0
+	.db #0xAA	; 170
+	.db #0x40	; 64
+	.db #0xFF	; 255
+	.db #0x00	; 0
+	.db #0xAA	; 170
+	.db #0x40	; 64
+	.db #0xFF	; 255
+	.db #0x00	; 0
+	.db #0x55	; 85	'U'
+	.db #0x80	; 128
+	.db #0x55	; 85	'U'
+	.db #0x80	; 128
+	.db #0xAA	; 170
+	.db #0x40	; 64
+	.db #0xFF	; 255
+	.db #0x00	; 0
 _flecha_arriba:
 	.db #0xFF	; 255
 	.db #0x00	; 0

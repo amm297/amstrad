@@ -1,16 +1,14 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.5.0 #9253 (Sep 26 2015) (CYGWIN)
-; This file was generated Tue Oct  6 12:37:55 2015
+; This file was generated Mon Oct  5 10:14:23 2015
 ;--------------------------------------------------------
-	.module flecha_horizontal
+	.module ia
 	.optsdcc -mz80
 	
 ;--------------------------------------------------------
 ; Public variables in this module
 ;--------------------------------------------------------
-	.globl _flecha_abajo
-	.globl _flecha_arriba
 ;--------------------------------------------------------
 ; special function registers
 ;--------------------------------------------------------
@@ -43,71 +41,5 @@
 ;--------------------------------------------------------
 	.area _CODE
 	.area _CODE
-_flecha_arriba:
-	.db #0xFF	; 255
-	.db #0x00	; 0
-	.db #0xFF	; 255
-	.db #0x00	; 0
-	.db #0xFF	; 255
-	.db #0x00	; 0
-	.db #0xFF	; 255
-	.db #0x00	; 0
-	.db #0xFF	; 255
-	.db #0x00	; 0
-	.db #0xFF	; 255
-	.db #0x00	; 0
-	.db #0xFF	; 255
-	.db #0x00	; 0
-	.db #0x55	; 85	'U'
-	.db #0x80	; 128
-	.db #0x00	; 0
-	.db #0xC0	; 192
-	.db #0x00	; 0
-	.db #0xC0	; 192
-	.db #0x00	; 0
-	.db #0xC0	; 192
-	.db #0xAA	; 170
-	.db #0x40	; 64
-	.db #0xFF	; 255
-	.db #0x00	; 0
-	.db #0xFF	; 255
-	.db #0x00	; 0
-	.db #0xFF	; 255
-	.db #0x00	; 0
-	.db #0x55	; 85	'U'
-	.db #0x80	; 128
-_flecha_abajo:
-	.db #0xFF	; 255
-	.db #0x00	; 0
-	.db #0xFF	; 255
-	.db #0x00	; 0
-	.db #0xFF	; 255
-	.db #0x00	; 0
-	.db #0xFF	; 255
-	.db #0x00	; 0
-	.db #0xAA	; 170
-	.db #0x40	; 64
-	.db #0xFF	; 255
-	.db #0x00	; 0
-	.db #0xFF	; 255
-	.db #0x00	; 0
-	.db #0xFF	; 255
-	.db #0x00	; 0
-	.db #0x55	; 85	'U'
-	.db #0x80	; 128
-	.db #0x00	; 0
-	.db #0xC0	; 192
-	.db #0x00	; 0
-	.db #0xC0	; 192
-	.db #0x00	; 0
-	.db #0xC0	; 192
-	.db #0xAA	; 170
-	.db #0x40	; 64
-	.db #0xFF	; 255
-	.db #0x00	; 0
-	.db #0xFF	; 255
-	.db #0x00	; 0
-	.db #0xFF	; 255
-	.db #0x00	; 0
 	.area _INITIALIZER
 	.area _CABS (ABS)
