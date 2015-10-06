@@ -34,7 +34,6 @@ typedef struct
   u8* prevAtk;
   u8* dir;
   u8* col;
-  u8* rebote;
   u8* life;
 }TPlayer;
 
@@ -73,14 +72,40 @@ void menu(){
 
 //Detectar p.colision de personajes
 u8* checkCollisions(u8 pX, u8 pY, u8 eX, u8 eY, u8* dir, u8* atk, u8 mode){
-
-
-    u8 popX = pX + 8;
+    u8 popX = pX + 4;
     u8 popY = pY + 16;
-    u8 eopX = eX + 8;
+    u8 eopX = eX + 4;
     u8 eopY = eY + 16;
 
+    if(atk >= 21 && mode == 0){
+        popX += 2;
+    }
 
+    if(eopX >= pX && eopX <= popX && eY >= pY && eY <= popY)
+        if(atk >= 21)
+            return 1;
+        else
+            return 2;
+
+    if(eX >= pX && eX <= popX && eY >= pY && eY <= popY)
+        if(atk >= 21)
+            return 1;
+        else
+            return 2;
+
+    if(eX >= pX && eX <= popX && eopY >= pY && eopY <= popY)
+        if(atk >= 21)
+            return 1;
+        else
+            return 2;
+
+    if(eopX >= pX && eopX <= popX && eopY >= pY && eopY <= popY)
+        if(atk >= 21)
+            return 1;
+        else
+            return 2;
+
+    return 0;
 }
 
 u8* checkSprite(u8* atk, u8* dir){
@@ -163,7 +188,7 @@ void drawVida(u8* life, u8* memptr){
 
 void game(){
    TPlayer p = { 0,100,0,100,20,20,0,0,6,3 };
-   TEnemy  e = { 55,100,55,100,0,0 };
+   TEnemy  e = { 55,100,55,100,0,1 };
    TEnemy pr = { 0,0,0,0,1,0 };
    u8* memptr;
    u8* sprite = gladis_quieto_dcha;
@@ -175,6 +200,30 @@ void game(){
 
     //Esperar el retrazado
     cpct_waitVSYNC();
+
+    //Desdibujar el enemigo
+    memptr = cpct_getScreenPtr(VMEM,e.x,e.y);
+    cpct_drawSolidBox(memptr,0,4,16);
+    //Dibujar el enemigo solo si esta vivo
+    if(e.vivo == 0){
+        memptr = cpct_getScreenPtr(VMEM,e.x,e.y);
+        cpct_drawSolidBox(memptr, 18, 4, 16);
+    }
+
+     //Desdibujar flecha
+    memptr = cpct_getScreenPtr(VMEM,pr.prevX,pr.prevY);
+    if((int)pr.dir < 2)
+        cpct_drawSolidBox(memptr, 0, 4, 4);
+    else
+        cpct_drawSolidBox(memptr, 0, 2, 8);
+    //Dibujar flecha
+    if(pr.vivo == 0){
+        memptr = cpct_getScreenPtr(VMEM,pr.x,pr.y);
+        if((int)pr.dir < 2)
+            cpct_drawSpriteMasked(checkSpriteFlecha(pr.dir), memptr, 4, 4);
+        else
+            cpct_drawSpriteMasked(checkSpriteFlecha(pr.dir), memptr, 2, 8);
+    }
 
     //Desdibujar personaje
     memptr = cpct_getScreenPtr(VMEM,p.prevX,p.prevY);
@@ -196,30 +245,6 @@ void game(){
     //Dibujar Vida
     drawVida(p.life, memptr);
 
-    //Desdibujar el enemigo
-    memptr = cpct_getScreenPtr(VMEM,e.x,e.y);
-    cpct_drawSolidBox(memptr,0,4,16);
-    //Dibujar el enemigo solo si esta vivo
-    if(e.vivo == 0){
-        memptr = cpct_getScreenPtr(VMEM,e.x,e.y);
-        cpct_drawSolidBox(memptr, 18, 4, 16);
-    }
-
-    //Desdibujar flecha
-    memptr = cpct_getScreenPtr(VMEM,pr.prevX,pr.prevY);
-    if((int)pr.dir < 2)
-        cpct_drawSolidBox(memptr, 0, 4, 4);
-    else
-        cpct_drawSolidBox(memptr, 0, 2, 8);
-    //Dibujar flecha
-    if(pr.vivo == 0){
-        memptr = cpct_getScreenPtr(VMEM,pr.x,pr.y);
-        if((int)pr.dir < 2)
-            cpct_drawSpriteMasked(checkSpriteFlecha(pr.dir), memptr, 4, 4);
-        else
-            cpct_drawSpriteMasked(checkSpriteFlecha(pr.dir), memptr, 2, 8);
-    }
-
     //Dibujar fatiga
     if(p.atk < 20)
         drawFatiga(p.atk,memptr,2);
@@ -232,53 +257,45 @@ void game(){
     p.prevY = p.y;
     p.prevAtk = p.atk;
     //Comprobar teclado, no se comprobara si ha chocado con un enemigo
-    if(p.col != 2){
-        cpct_scanKeyboard_f();
-        if(cpct_isKeyPressed(Key_Space) && p.atk >= 20){
-            if(p.atk >= 50)
-                p.atk = 0;
-            else
-                p.atk += 1;
-        if(cpct_isKeyPressed(Key_CursorRight))
-                p.dir = 0;
-        else if(cpct_isKeyPressed(Key_CursorLeft))
-                p.dir = 1;
-        }else{
-            if(p.atk < 20)
-                p.atk += 1;
-            else
-                p.atk = 20;
-            if(cpct_isKeyPressed(Key_CursorRight) && p.x < 76 ){
-                if(p.col != 2)
-                    p.x += 1;
-                p.dir = 0;
-            }else if(cpct_isKeyPressed(Key_CursorLeft) && p.x > 0 ){
-                if(p.col != 2)
-                    p.x -= 1;
-                p.dir = 1;
-            }else if(cpct_isKeyPressed(Key_CursorDown) && p.y < 184 ){
-                p.y += 2;
-                p.dir = 2;
-            }else if(cpct_isKeyPressed(Key_CursorUp) && p.y > 0 ){
-                p.y -= 2;
-                p.dir = 3;
-            }else if(cpct_isKeyPressed(Key_X) && pr.vivo == 1){
-                pr.vivo = 0;
-                pr.dir = p.dir;
-                pr.x = p.x+4;
-                pr.y = p.y+8;
-            }else  if(cpct_isKeyPressed(Key_Esc)){
-                return;
-            }
-        }
+
+    cpct_scanKeyboard_f();
+    if(cpct_isKeyPressed(Key_Space) && p.atk >= 20){
+        if(p.atk >= 50)
+            p.atk = 0;
+        else
+            p.atk += 1;
+    if(cpct_isKeyPressed(Key_CursorRight))
+            p.dir = 0;
+    else if(cpct_isKeyPressed(Key_CursorLeft))
+            p.dir = 1;
     }else{
-        p.x -= 2;
-        p.rebote -= 2;
-        if(p.rebote == 0){
-            p.rebote = 6;
-            p.col = 0;
+        if(p.atk < 20)
+            p.atk += 1;
+        else
+            p.atk = 20;
+        if(cpct_isKeyPressed(Key_CursorRight) && p.x < 76 ){
+            if(p.col != 2)
+                p.x += 1;
+            p.dir = 0;
+        }else if(cpct_isKeyPressed(Key_CursorLeft) && p.x > 0 ){
+            if(p.col != 2)
+                p.x -= 1;
+            p.dir = 1;
+        }else if(cpct_isKeyPressed(Key_CursorDown) && p.y < 184 ){
+            p.y += 2;
+            p.dir = 2;
+        }else if(cpct_isKeyPressed(Key_CursorUp) && p.y > 0 ){
+            p.y -= 2;
+            p.dir = 3;
+        }else if(cpct_isKeyPressed(Key_X) && pr.vivo == 1){
+            pr.vivo = 0;
+            pr.dir = p.dir;
+            pr.x = p.x+4;
+            pr.y = p.y+8;
+        }else  if(cpct_isKeyPressed(Key_Esc)){
+            return;
         }
-      }
+    }
 
     //Comprobar si esta quieto para que no se dibuje el sprite de atacar//
     sprite = checkSprite(p.atk,p.dir);
@@ -312,14 +329,22 @@ void game(){
                     pr.vivo = 1;
                 break;
         }
+        if(checkCollisions(pr.x,pr.y,e.x,e.y,pr.dir,21,1) == 1){
+            e.vivo = 1;
+            pr.vivo = 1;
+        }
     }
 
     if(p.col != 2 && e.vivo == 0){
         p.col = checkCollisions(p.x,p.y,e.x,e.y,p.dir,p.atk,0);
-        if(p.col == 2)
+        if(p.col == 2){
             p.life--;
+            p.x = 1;
+            p.y = 100;
+            p.col = 0;
             if(p.life == 0)
                 return;
+        }
       }
       if(p.col == 1)
         e.vivo = 1;
