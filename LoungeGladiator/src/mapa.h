@@ -28,14 +28,16 @@ typedef struct
   u8 life; //vida personaje
   u8 dir; //direccion personaje
   u8 size; //size ancho personaje
-
+  u8 lsize; //last size ancho anterior personaje
+  u8 atk; //Ataque personaje
+  u8 latk; //Ataque previo personaje
 }TPlayer;
 
 typedef struct 
 {
   u8 x,y; //posicion objeto
   u8 *sprite; //sprite objeto
-  u8 catched; //objeto cogido
+  u8 vivo; //objeto cogido
 
 }TObject;
 
@@ -60,7 +62,7 @@ const int mapa1[height][width] = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
                                   {0,0,1,1,0,1,1,1,2,2,2,1,0,0,0,0,0,0,0,1},
                                   {1,0,1,2,2,2,2,1,0,0,0,1,0,0,0,0,0,0,0,1},
                                   {1,0,1,2,2,2,2,1,2,2,2,1,0,0,0,0,0,0,0,1},
-                                  {1,0,1,2,2,6,2,1,0,0,0,1,0,0,0,0,0,0,0,1},
+                                  {1,0,1,2,2,2,2,1,0,0,0,1,0,0,0,0,0,0,0,1},
                                   {1,0,1,2,2,2,2,1,2,2,2,1,0,0,0,0,0,0,0,1},
                                   {1,5,1,2,2,2,2,1,0,0,0,0,0,0,0,0,0,0,0,1},
                                   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,9,1,1,1,1}};

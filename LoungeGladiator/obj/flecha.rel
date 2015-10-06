@@ -1,13 +1,11 @@
 XL2
-H 9 areas 5 global symbols
+H 9 areas 3 global symbols
 M flecha
 O -mz80
 S .__.ABS. Def0000
-A _CODE size 80 flags 0 addr 0
-S _flecha_izda Def0020
-S _flecha_arriba Def0040
-S _flecha_abajo Def0060
-S _flecha_dcha Def0000
+A _CODE size 40 flags 0 addr 0
+S _flecha_arriba Def0000
+S _flecha_abajo Def0020
 A _DATA size 0 flags 0 addr 0
 A _INITIALIZED size 0 flags 0 addr 0
 A _DABS size 0 flags 8 addr 0
@@ -31,20 +29,4 @@ R 00 00 00 00
 T 2E 00 FF 00 AA 40 FF 00 AA 40 FF 00 55 80 55 80
 R 00 00 00 00
 T 3C 00 AA 40 FF 00
-R 00 00 00 00
-T 40 00
-R 00 00 00 00
-T 40 00 FF 00 FF 00 FF 00 FF 00 FF 00 FF 00 FF 00
-R 00 00 00 00
-T 4E 00 55 80 00 C0 00 C0 00 C0 AA 40 FF 00 FF 00
-R 00 00 00 00
-T 5C 00 FF 00 55 80
-R 00 00 00 00
-T 60 00
-R 00 00 00 00
-T 60 00 FF 00 FF 00 FF 00 FF 00 AA 40 FF 00 FF 00
-R 00 00 00 00
-T 6E 00 FF 00 55 80 00 C0 00 C0 00 C0 AA 40 FF 00
-R 00 00 00 00
-T 7C 00 FF 00 FF 00
 R 00 00 00 00
