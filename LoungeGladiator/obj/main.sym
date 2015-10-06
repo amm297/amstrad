@@ -7,22 +7,11 @@ Symbol Table
     .__.ABS.                                                    =  0000 G
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
-  0 ___str_0                                                       05CC R
-  0 ___str_1                                                       05DD R
-  0 ___str_2                                                       05EB R
-  0 ___str_3                                                       05F4 R
-  0 ___str_4                                                       1632 R
-  0 ___str_5                                                       1641 R
-  0 ___str_6                                                       18E2 R
-    __assert                                                       **** GX
-    __modsint                                                      **** GX
-    _chacho_quieto_dcha                                            **** GX
-    _chacho_quieto_izda                                            **** GX
-  0 _checkArrowCollisions                                          0ED3 GR
-  0 _checkBoundsCollisions                                         0A8F GR
-  0 _checkEnemiesCollisions                                        1059 GR
-  0 _checkKeyboard                                                 105A GR
-  0 _cleanScreenPlayers                                            0974 GR
+  0 ___str_0                                                       007E R
+  0 ___str_1                                                       0089 R
+  0 _checkCollisions                                               0095 GR
+  0 _checkSprite                                                   01AF GR
+  0 _checkSpriteFlecha                                             020D GR
     _corazon_lleno                                                 **** GX
     _corazon_roto                                                  **** GX
     _cpct_disableFirmware                                          **** GX
@@ -33,52 +22,34 @@ Symbol Table
     _cpct_getScreenPtr                                             **** GX
     _cpct_isKeyPressed                                             **** GX
     _cpct_memset                                                   **** GX
-    _cpct_scanKeyboard                                             **** GX
     _cpct_scanKeyboard_f                                           **** GX
     _cpct_setPalette                                               **** GX
     _cpct_setVideoMode                                             **** GX
     _cpct_waitVSYNC                                                **** GX
-  0 _create_Player                                                 15AA GR
-  0 _credits                                                       18AA GR
-  0 _drawFatiga                                                    085D GR
-  0 _drawMap                                                       05FA GR
-  0 _drawObjects                                                   0769 GR
-  0 _drawPlayers                                                   09F7 GR
-  0 _drawSomething                                                 164C GR
-  0 _drawVida                                                      08F1 GR
+  0 _drawFatiga                                                    0240 GR
+  0 _drawVida                                                      02FD GR
     _flecha_abajo                                                  **** GX
-    _free                                                          **** GX
+    _flecha_arriba                                                 **** GX
+    _flecha_dcha                                                   **** GX
+    _flecha_izda                                                   **** GX
   0 _g_palette                                                     0025 GR
-  0 _game                                                          164D GR
+  0 _game                                                          03A4 GR
     _gladis_arriba_dcha                                            **** GX
     _gladis_atk_dcha                                               **** GX
     _gladis_atk_izda                                               **** GX
     _gladis_quieto_dcha                                            **** GX
     _gladis_quieto_izda                                            **** GX
   0 _init                                                          0000 GR
-  0 _initPlayers                                                   0A8E GR
-  0 _main                                                          18F3 GR
+  0 _main                                                          0CC8 GR
+  0 _menu                                                          0029 GR
+
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
-Hexadecimal [16-Bits]
-
-Symbol Table
-
-    _malloc                                                        **** GX
-  0 _mapa1                                                         0029 GR
-  0 _mapa2                                                         0209 GR
-  0 _menu                                                          03E9 GR
-  0 _move                                                          1244 GR
-    _rand                                                          **** GX
-  1 _scene                                                         0000 GR
-
-
-ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 3.
 Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size 1928   flags    0
-   1 _DATA                                      size   18   flags    0
+   0 _CODE                                      size  CD3   flags    0
+   1 _DATA                                      size    0   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8
    4 _HOME                                      size    0   flags    0
