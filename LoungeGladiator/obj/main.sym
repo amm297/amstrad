@@ -11,7 +11,7 @@ Symbol Table
   0 ___str_1                                                       03FD R
   0 ___str_2                                                       040B R
   0 ___str_3                                                       0414 R
-  0 ___str_4                                                       0FE6 R
+  0 ___str_4                                                       0FFA R
   0 _checkBoundsCollisions                                         06E2 GR
   0 _checkKeyboard                                                 0AA1 GR
     _corazon_lleno                                                 **** GX
@@ -29,7 +29,7 @@ Symbol Table
     _cpct_setPalette                                               **** GX
     _cpct_setVideoMode                                             **** GX
     _cpct_waitVSYNC                                                **** GX
-  0 _credits                                                       0FAE GR
+  0 _credits                                                       0FC2 GR
   0 _drawFatiga                                                    05CB GR
   0 _drawMap                                                       041A GR
   0 _drawPlayer                                                    0570 GR
@@ -45,13 +45,14 @@ Symbol Table
     _gladis_atk_izda                                               **** GX
     _gladis_quieto_dcha                                            **** GX
   0 _init                                                          0000 GR
-  0 _main                                                          0FF7 GR
+  0 _main                                                          100B GR
   0 _mapa1                                                         0029 GR
   0 _mapa2                                                         0119 GR
   0 _menu                                                          0209 GR
   1 _object                                                        0018 GR
   1 _players                                                       0022 GR
   1 _scene                                                         0000 GR
+    _time                                                          **** GX
 
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
@@ -59,7 +60,7 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size 102C   flags    0
+   0 _CODE                                      size 1040   flags    0
    1 _DATA                                      size   3C   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8

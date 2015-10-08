@@ -48,7 +48,7 @@ int menu(){
    memptr = cpct_getScreenPtr(VMEM,10,10);
    cpct_drawStringM0("Lounge Gladiator",memptr,1,0);
 
-   //Opciones 
+   //Opciones
    memptr = cpct_getScreenPtr(VMEM,20,50);
    cpct_drawStringM0("Nueva Partida",memptr,1,0);
 
@@ -63,7 +63,7 @@ int menu(){
 
    //Indicador
    while(1){
-    
+
       cpct_scanKeyboard();
       if(cpct_isKeyPressed(Key_CursorDown) && cont > 150){
         cpct_drawSolidBox(memptr, 0, 2, 8);
@@ -91,14 +91,14 @@ int menu(){
       }
       }
       cont++;
-     
-    
-      
+
+
+
    }
 
    /*
    do{
-    
+
    }while(!cpct_isKeyPressed(Key_Enter));
   */
 }
@@ -109,21 +109,21 @@ void drawMap(u8 t){
    int posX=0,posY =0,x=0;
    u8* memptr;
 
-   if(t == 1){ 
+   if(t == 1){
     for(x=0;x<height;x++){
       scene[x] = mapa1[x];
     }
   }
 
-  if(t == 2){ 
+  if(t == 2){
     for(x=0;x<height;x++){
       scene[x] = mapa2[x];
     }
   }
-   
+
    for(posY=0; posY<height;posY++){
       for(posX=0; posX<width;posX++){
-         memptr = cpct_getScreenPtr(VMEM, posX*tilewidth, posY*tileheight); 
+         memptr = cpct_getScreenPtr(VMEM, posX*tilewidth, posY*tileheight);
          if(scene[posY][posX] == 1){
             cpct_drawSolidBox(memptr, 3, tilewidth, tileheight);
          }
@@ -201,32 +201,32 @@ u8 checkBoundsCollisions(u8 *x,u8 *y, u8 lx, u8 ly,u8 size){
   u8 *posX = x;
   u8 *posY = y;
   u8 bound = 0;
-  if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 1   
+  if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 1
       || scene[(posY[0])/tileheight][(posX[0]+size-1)/tilewidth] == 1
-      || scene[(posY[0]+playerheight-2)/tileheight][(posX[0])/tilewidth] == 1 
+      || scene[(posY[0]+playerheight-2)/tileheight][(posX[0])/tilewidth] == 1
       || scene[(posY[0]+playerheight-2)/tileheight][(posX[0]+size-1)/tilewidth] == 1
-    ){   
+    ){
         *posX=lx;
         *posY=ly;
         bound = 1;
   }
-  else if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 6   
+  else if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 6
       || scene[(posY[0])/tileheight][(posX[0]+size-1)/tilewidth] == 6
       || scene[(posY[0]+playerheight-2)/tileheight][(posX[0])/tilewidth] == 6
       || scene[(posY[0]+playerheight-2)/tileheight][(posX[0]+size-1)/tilewidth] == 6
-    ){   
+    ){
        //Sumar corazones
-  }else if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 5   
+  }else if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 5
       || scene[(posY[0])/tileheight][(posX[0]+size-1)/tilewidth] == 5
       || scene[(posY[0]+playerheight-2)/tileheight][(posX[0])/tilewidth] == 5
       || scene[(posY[0]+playerheight-2)/tileheight][(posX[0]+size-1)/tilewidth] == 5
-    ){   
+    ){
         //Sumar municion
-  }else if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 9   
+  }else if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 9
       || scene[(posY[0])/tileheight][(posX[0]+size-1)/tilewidth] == 9
       || scene[(posY[0]+playerheight-2)/tileheight][(posX[0])/tilewidth] == 9
       || scene[(posY[0]+playerheight-2)/tileheight][(posX[0]+size-1)/tilewidth] == 9
-    ){   
+    ){
         cpct_clearScreen(0);
         drawMap(2);
   }
@@ -243,7 +243,7 @@ u8* checkKeyboard(u8 *x,u8 *y,u8 *atk,u8 *dir,u8 *s,u8 *size,u8 *finish,u8 *arro
       if(atk[0] >= 50) atk[0] =0;
       else atk[0] += 1;
       if(dir[0] == 6) {s = gladis_atk_dcha;}
-      else if(dir[0] == 4) {s = gladis_atk_izda;}     
+      else if(dir[0] == 4) {s = gladis_atk_izda;}
   }else{
     if(atk[0] < 20) atk[0] += 1;
     else atk[0] = 20;
@@ -289,20 +289,23 @@ u8* checkKeyboard(u8 *x,u8 *y,u8 *atk,u8 *dir,u8 *s,u8 *size,u8 *finish,u8 *arro
       }else {
         size[0] = 4;
         s = gladis_quieto_dcha;
-      } 
+      }
   }
-  
+
   if(cpct_isKeyPressed(Key_Esc)){
        finish[0] = 1;
   }
 
   return s;
-} 
+}
 
 /*JUEGO*/
 
-void game(){  
+void game(){
   TPlayer p = {0,80,0,80,gladis_quieto_dcha,3,6,4,4,0,0,2};
+  time_t dTimePrev = time(NULL);    //Tiempo en segundos de la iteracion anterior
+  time_t dTimeNow = dTimePrev;      //Tiempo en segundos de la iteracion actual
+  u8 dTimeDiff;                     //Diferencia entre ambos tiempos
 
   //players[0] =p;
    //u8 i = p.x;
@@ -323,7 +326,7 @@ void game(){
 
     //Desdibujar personajes
     erasePlayer(p.lx,p.ly,p.lsize);
-    
+
     //Dibujar personajes
     drawPlayer(p.x,p.y,p.sprite,p.size);
 
@@ -335,19 +338,36 @@ void game(){
     else if(p.atk > 20) drawFatiga(p.atk,16);
     else drawFatiga(p.atk,0);
 
+    //dTimeDiff = difftime(dTimeNow, dTimePrev);    //Calculo de la diferencia entre tiempos (falla)
+
     //guardar datos anteriores
     p.lx = p.x;
     p.ly = p.y;
     p.latk = p.atk;
     p.lsize = p.size;
-     
+
       //Comprobar teclado
       cpct_scanKeyboard_f();
       p.sprite = checkKeyboard(&p.x,&p.y,&p.atk,&p.dir,p.sprite,&p.size,&finish,&arrow);
       checkBoundsCollisions(&p.x,&p.y,p.lx,p.ly,p.size);
 
+    dTimePrev = dTimeNow;                           //El tiempo anterior se actualiza
+    dTimeNow = time(NULL);                          //El tiempo actual se actualiza (valga la redundancia)
 
-      
+    /********* LA IDEA **********/
+    /****************************
+    La idea era bastante simpe, restar el tiempo actual al anterior, ver los segundos
+    que han pasado y multiplicar ese tiempo por un factor "velocidad" que represente
+    los pixeles o bytes que el personaje puede moverse por segundo. Por alguna razon
+    el metodo difftime no funciona. He intentado restarlo a mano (dTimeNow - dTimePrev)
+    pero o no funcionaba o lo estaba haciendo mal. difftime esta en la linea 341 comentado.
+
+    difftime devuelve un double, tambien he probado a pasarle el resultado a un double
+    pero no parecia funcionar. Intentare preguntar si alguien lo ha conseguido.
+
+    *****************************
+    ****************************/
+
    }
 }
 
@@ -357,16 +377,16 @@ void credits(){
   u8* memptr;
   cpct_clearScreen(0);
   memptr = cpct_getScreenPtr(VMEM,10,10);
-  cpct_drawStringM0("Lounge Gladiator",memptr,1,0);  
+  cpct_drawStringM0("Lounge Gladiator",memptr,1,0);
 
   while (1){
-      
+
       cpct_scanKeyboard_f();
-     
-      
+
+
 
      if(cpct_isKeyPressed(Key_Esc)) {
-       
+
         return;
       }
 
@@ -375,11 +395,11 @@ void credits(){
 /*EMPIEZA EL CODIGO*/
 
 void main(void) {
- 
-  
+
+
   int x =0;
    init();
-  
+
    // Loop forever
    while(1){
       x=menu();
@@ -389,5 +409,5 @@ void main(void) {
         case 2: credits();break;
       }
    }
-      
+
 }

@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
-; Version 3.5.0 #9253 (Sep 26 2015) (CYGWIN)
-; This file was generated Tue Oct  6 23:45:44 2015
+; Version 3.5.0 #9253 (Sep 22 2015) (CYGWIN)
+; This file was generated Thu Oct  8 16:58:29 2015
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mz80
@@ -34,6 +34,7 @@
 	.globl _cpct_scanKeyboard
 	.globl _cpct_memset
 	.globl _cpct_disableFirmware
+	.globl _time
 	.globl _players
 	.globl _object
 	.globl _scene
@@ -929,7 +930,7 @@ _drawMap::
 	ld	hl,#-10
 	add	hl,sp
 	ld	sp,hl
-;src/main.c:112: if(t == 1){ 
+;src/main.c:112: if(t == 1){
 	ld	a,4 (ix)
 	dec	a
 	jr	NZ,00103$
@@ -976,7 +977,7 @@ _drawMap::
 	sbc	a, #0x80
 	jr	C,00113$
 00103$:
-;src/main.c:118: if(t == 2){ 
+;src/main.c:118: if(t == 2){
 	ld	a,4 (ix)
 	sub	a, #0x02
 	jr	NZ,00131$
@@ -1033,7 +1034,7 @@ _drawMap::
 	ld	-8 (ix),#0x00
 	ld	-7 (ix),#0x00
 00117$:
-;src/main.c:126: memptr = cpct_getScreenPtr(VMEM, posX*tilewidth, posY*tileheight); 
+;src/main.c:126: memptr = cpct_getScreenPtr(VMEM, posX*tilewidth, posY*tileheight);
 	ld	a,-10 (ix)
 	rlca
 	rlca
@@ -1436,7 +1437,7 @@ _checkBoundsCollisions::
 	ld	-15 (ix),a
 ;src/main.c:203: u8 bound = 0;
 	ld	-17 (ix),#0x00
-;src/main.c:204: if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 1   
+;src/main.c:204: if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 1
 	ld	l,-16 (ix)
 	ld	h,-15 (ix)
 	ld	a,(hl)
@@ -1518,7 +1519,7 @@ _checkBoundsCollisions::
 	ld	a,(hl)
 	dec	a
 	jp	Z,00118$
-;src/main.c:206: || scene[(posY[0]+playerheight-2)/tileheight][(posX[0])/tilewidth] == 1 
+;src/main.c:206: || scene[(posY[0]+playerheight-2)/tileheight][(posX[0])/tilewidth] == 1
 	ld	e,-7 (ix)
 	ld	d,#0x00
 	ld	hl,#0x000E
@@ -1627,7 +1628,7 @@ _checkBoundsCollisions::
 	ld	-17 (ix),#0x01
 	jp	00120$
 00119$:
-;src/main.c:213: else if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 6   
+;src/main.c:213: else if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 6
 	ld	a,-9 (ix)
 	sub	a, #0x06
 	jp	Z,00120$
@@ -1718,7 +1719,7 @@ _checkBoundsCollisions::
 	ld	a,(hl)
 	sub	a, #0x06
 	jp	Z,00120$
-;src/main.c:219: }else if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 5   
+;src/main.c:219: }else if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 5
 	ld	a,-9 (ix)
 	sub	a, #0x05
 	jp	Z,00120$
@@ -1809,7 +1810,7 @@ _checkBoundsCollisions::
 	ld	a,(hl)
 	sub	a, #0x05
 	jp	Z,00120$
-;src/main.c:225: }else if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 9   
+;src/main.c:225: }else if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 9
 	ld	a,-9 (ix)
 	sub	a, #0x09
 	jp	Z,00101$
@@ -1996,7 +1997,7 @@ _checkKeyboard::
 	ld	13 (ix),#>(_gladis_atk_dcha)
 	jp	00139$
 00107$:
-;src/main.c:246: else if(dir[0] == 4) {s = gladis_atk_izda;}     
+;src/main.c:246: else if(dir[0] == 4) {s = gladis_atk_izda;}
 	ld	a,h
 	sub	a, #0x04
 	jp	NZ,00139$
@@ -2255,7 +2256,7 @@ _checkKeyboard::
 	ld	sp, ix
 	pop	ix
 	ret
-;src/main.c:304: void game(){  
+;src/main.c:304: void game(){
 ;	---------------------------------
 ; Function game
 ; ---------------------------------
@@ -2281,76 +2282,85 @@ _game::
 	ld	(de),a
 	ld	hl,#0x0002
 	add	hl,bc
-	ld	-28 (ix),l
-	ld	-27 (ix),h
-	ld	l,-28 (ix)
-	ld	h,-27 (ix)
+	ld	-20 (ix),l
+	ld	-19 (ix),h
+	ld	l,-20 (ix)
+	ld	h,-19 (ix)
 	ld	(hl),#0x00
 	ld	hl,#0x0003
 	add	hl,bc
-	ld	-2 (ix),l
-	ld	-1 (ix),h
-	ld	l,-2 (ix)
-	ld	h,-1 (ix)
+	ld	-14 (ix),l
+	ld	-13 (ix),h
+	ld	l,-14 (ix)
+	ld	h,-13 (ix)
 	ld	(hl),#0x50
 	ld	hl,#0x0004
 	add	hl,bc
-	ld	-4 (ix),l
-	ld	-3 (ix),h
-	ld	l,-4 (ix)
-	ld	h,-3 (ix)
+	ld	-12 (ix),l
+	ld	-11 (ix),h
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
 	ld	(hl),#<(_gladis_quieto_dcha)
 	inc	hl
 	ld	(hl),#>(_gladis_quieto_dcha)
 	ld	hl,#0x0006
 	add	hl,bc
-	ld	-24 (ix),l
-	ld	-23 (ix),h
-	ld	l,-24 (ix)
-	ld	h,-23 (ix)
+	ld	-10 (ix),l
+	ld	-9 (ix),h
+	ld	l,-10 (ix)
+	ld	h,-9 (ix)
 	ld	(hl),#0x03
 	ld	hl,#0x0007
-	add	hl,bc
-	ld	-26 (ix),l
-	ld	-25 (ix),h
-	ld	l,-26 (ix)
-	ld	h,-25 (ix)
-	ld	(hl),#0x06
-	ld	hl,#0x0008
-	add	hl,bc
-	ld	-32 (ix),l
-	ld	-31 (ix),h
-	ld	l,-32 (ix)
-	ld	h,-31 (ix)
-	ld	(hl),#0x04
-	ld	hl,#0x0009
-	add	hl,bc
-	ld	-6 (ix),l
-	ld	-5 (ix),h
-	ld	l,-6 (ix)
-	ld	h,-5 (ix)
-	ld	(hl),#0x04
-	ld	hl,#0x000A
 	add	hl,bc
 	ld	-34 (ix),l
 	ld	-33 (ix),h
 	ld	l,-34 (ix)
 	ld	h,-33 (ix)
+	ld	(hl),#0x06
+	ld	hl,#0x0008
+	add	hl,bc
+	ld	-24 (ix),l
+	ld	-23 (ix),h
+	ld	l,-24 (ix)
+	ld	h,-23 (ix)
+	ld	(hl),#0x04
+	ld	hl,#0x0009
+	add	hl,bc
+	ld	-28 (ix),l
+	ld	-27 (ix),h
+	ld	l,-28 (ix)
+	ld	h,-27 (ix)
+	ld	(hl),#0x04
+	ld	hl,#0x000A
+	add	hl,bc
+	ld	-4 (ix),l
+	ld	-3 (ix),h
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	(hl),#0x00
 	ld	hl,#0x000B
 	add	hl,bc
-	ld	-8 (ix),l
-	ld	-7 (ix),h
-	ld	l,-8 (ix)
-	ld	h,-7 (ix)
+	ld	-2 (ix),l
+	ld	-1 (ix),h
+	ld	l,-2 (ix)
+	ld	h,-1 (ix)
 	ld	(hl),#0x00
 	ld	hl,#0x000C
 	add	hl,bc
 	ld	(hl),#0x02
-;src/main.c:311: u8 finish = 0,i=1,arrow=0;
-	ld	-36 (ix),#0x00
+;src/main.c:306: time_t dTimePrev = time(NULL);    //Tiempo en segundos de la iteracion anterior
+	push	bc
+	push	de
+	ld	hl,#0x0000
+	push	hl
+	call	_time
+	pop	af
+	pop	de
+	pop	bc
+;src/main.c:314: u8 finish = 0,i=1,arrow=0;
 	ld	-35 (ix),#0x00
-;src/main.c:316: cpct_clearScreen(0);
+	ld	-36 (ix),#0x00
+;src/main.c:319: cpct_clearScreen(0);
 	push	bc
 	push	de
 	ld	hl,#0x4000
@@ -2368,72 +2378,72 @@ _game::
 	inc	sp
 	pop	de
 	pop	bc
-;src/main.c:319: while (1){
+;src/main.c:322: while (1){
 00108$:
-;src/main.c:322: cpct_waitVSYNC();
+;src/main.c:325: cpct_waitVSYNC();
 	push	bc
 	push	de
 	call	_cpct_waitVSYNC
 	pop	de
 	pop	bc
-;src/main.c:325: erasePlayer(p.lx,p.ly,p.lsize);
-	ld	l,-6 (ix)
-	ld	h,-5 (ix)
-	ld	a,(hl)
-	ld	l,-2 (ix)
-	ld	h,-1 (ix)
-	push	af
-	ld	a,(hl)
-	ld	-29 (ix),a
-	pop	af
+;src/main.c:328: erasePlayer(p.lx,p.ly,p.lsize);
 	ld	l,-28 (ix)
 	ld	h,-27 (ix)
+	ld	a,(hl)
+	ld	l,-14 (ix)
+	ld	h,-13 (ix)
 	push	af
 	ld	a,(hl)
-	ld	-30 (ix),a
+	ld	-26 (ix),a
+	pop	af
+	ld	l,-20 (ix)
+	ld	h,-19 (ix)
+	push	af
+	ld	a,(hl)
+	ld	-25 (ix),a
 	pop	af
 	push	bc
 	push	de
 	push	af
 	inc	sp
-	ld	h,-29 (ix)
-	ld	l,-30 (ix)
+	ld	h,-26 (ix)
+	ld	l,-25 (ix)
 	push	hl
 	call	_erasePlayer
 	pop	af
 	inc	sp
 	pop	de
 	pop	bc
-;src/main.c:328: drawPlayer(p.x,p.y,p.sprite,p.size);
-	ld	l,-32 (ix)
-	ld	h,-31 (ix)
+;src/main.c:331: drawPlayer(p.x,p.y,p.sprite,p.size);
+	ld	l,-24 (ix)
+	ld	h,-23 (ix)
 	ld	a,(hl)
-	ld	l,-4 (ix)
-	ld	h,-3 (ix)
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
 	push	af
 	ld	a,(hl)
-	ld	-10 (ix),a
+	ld	-22 (ix),a
 	inc	hl
 	ld	a,(hl)
-	ld	-9 (ix),a
+	ld	-21 (ix),a
 	pop	af
 	push	af
 	ld	a,(de)
-	ld	-30 (ix),a
+	ld	-25 (ix),a
 	pop	af
 	push	af
 	ld	a,(bc)
-	ld	-29 (ix),a
+	ld	-26 (ix),a
 	pop	af
 	push	bc
 	push	de
 	push	af
 	inc	sp
-	ld	l,-10 (ix)
-	ld	h,-9 (ix)
+	ld	l,-22 (ix)
+	ld	h,-21 (ix)
 	push	hl
-	ld	h,-30 (ix)
-	ld	l,-29 (ix)
+	ld	h,-25 (ix)
+	ld	l,-26 (ix)
 	push	hl
 	call	_drawPlayer
 	pop	af
@@ -2441,9 +2451,9 @@ _game::
 	inc	sp
 	pop	de
 	pop	bc
-;src/main.c:331: drawVida(p.life);
-	ld	l,-24 (ix)
-	ld	h,-23 (ix)
+;src/main.c:334: drawVida(p.life);
+	ld	l,-10 (ix)
+	ld	h,-9 (ix)
 	ld	h,(hl)
 	push	bc
 	push	de
@@ -2453,11 +2463,11 @@ _game::
 	inc	sp
 	pop	de
 	pop	bc
-;src/main.c:334: if(p.atk < 20) drawFatiga(p.atk,2);
-	ld	l,-34 (ix)
-	ld	h,-33 (ix)
+;src/main.c:337: if(p.atk < 20) drawFatiga(p.atk,2);
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	a,(hl)
-	ld	-10 (ix), a
+	ld	-22 (ix), a
 	sub	a, #0x14
 	jr	NC,00105$
 	push	bc
@@ -2465,7 +2475,7 @@ _game::
 	ld	a,#0x02
 	push	af
 	inc	sp
-	ld	a,-10 (ix)
+	ld	a,-22 (ix)
 	push	af
 	inc	sp
 	call	_drawFatiga
@@ -2474,16 +2484,16 @@ _game::
 	pop	bc
 	jr	00106$
 00105$:
-;src/main.c:335: else if(p.atk > 20) drawFatiga(p.atk,16);
+;src/main.c:338: else if(p.atk > 20) drawFatiga(p.atk,16);
 	ld	a,#0x14
-	sub	a, -10 (ix)
+	sub	a, -22 (ix)
 	jr	NC,00102$
 	push	bc
 	push	de
 	ld	a,#0x10
 	push	af
 	inc	sp
-	ld	a,-10 (ix)
+	ld	a,-22 (ix)
 	push	af
 	inc	sp
 	call	_drawFatiga
@@ -2492,13 +2502,13 @@ _game::
 	pop	bc
 	jr	00106$
 00102$:
-;src/main.c:336: else drawFatiga(p.atk,0);
+;src/main.c:339: else drawFatiga(p.atk,0);
 	push	bc
 	push	de
 	xor	a, a
 	push	af
 	inc	sp
-	ld	a,-10 (ix)
+	ld	a,-22 (ix)
 	push	af
 	inc	sp
 	call	_drawFatiga
@@ -2506,78 +2516,72 @@ _game::
 	pop	de
 	pop	bc
 00106$:
-;src/main.c:339: p.lx = p.x;
+;src/main.c:344: p.lx = p.x;
 	ld	a,(bc)
-	ld	l,-28 (ix)
-	ld	h,-27 (ix)
+	ld	l,-20 (ix)
+	ld	h,-19 (ix)
 	ld	(hl),a
-;src/main.c:340: p.ly = p.y;
+;src/main.c:345: p.ly = p.y;
 	ld	a,(de)
+	ld	l,-14 (ix)
+	ld	h,-13 (ix)
+	ld	(hl),a
+;src/main.c:346: p.latk = p.atk;
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
+	ld	a,(hl)
 	ld	l,-2 (ix)
 	ld	h,-1 (ix)
 	ld	(hl),a
-;src/main.c:341: p.latk = p.atk;
-	ld	l,-34 (ix)
-	ld	h,-33 (ix)
+;src/main.c:347: p.lsize = p.size;
+	ld	l,-24 (ix)
+	ld	h,-23 (ix)
 	ld	a,(hl)
-	ld	l,-8 (ix)
-	ld	h,-7 (ix)
+	ld	l,-28 (ix)
+	ld	h,-27 (ix)
 	ld	(hl),a
-;src/main.c:342: p.lsize = p.size;
-	ld	l,-32 (ix)
-	ld	h,-31 (ix)
-	ld	a,(hl)
-	ld	l,-6 (ix)
-	ld	h,-5 (ix)
-	ld	(hl),a
-;src/main.c:345: cpct_scanKeyboard_f();
+;src/main.c:350: cpct_scanKeyboard_f();
 	push	bc
 	push	de
 	call	_cpct_scanKeyboard_f
 	pop	de
 	pop	bc
-;src/main.c:346: p.sprite = checkKeyboard(&p.x,&p.y,&p.atk,&p.dir,p.sprite,&p.size,&finish,&arrow);
-	ld	hl,#0x000E
-	add	hl,sp
-	ld	-10 (ix),l
-	ld	-9 (ix),h
+;src/main.c:351: p.sprite = checkKeyboard(&p.x,&p.y,&p.atk,&p.dir,p.sprite,&p.size,&finish,&arrow);
 	ld	hl,#0x000D
 	add	hl,sp
-	ld	-12 (ix),l
-	ld	-11 (ix),h
-	ld	h,-32 (ix)
-	ld	l,-31 (ix)
-	ld	-14 (ix),h
-	ld	-13 (ix),l
-	ld	l,-4 (ix)
-	ld	h,-3 (ix)
-	ld	a,(hl)
-	ld	-16 (ix),a
-	inc	hl
-	ld	a,(hl)
-	ld	-15 (ix),a
-	ld	h,-26 (ix)
-	ld	l,-25 (ix)
+	ld	-22 (ix),l
+	ld	-21 (ix),h
+	ld	hl,#0x000E
+	add	hl,sp
+	ld	-16 (ix),l
+	ld	-15 (ix),h
+	ld	h,-24 (ix)
+	ld	l,-23 (ix)
 	ld	-18 (ix),h
 	ld	-17 (ix),l
-	ld	h,-34 (ix)
-	ld	l,-33 (ix)
-	ld	-20 (ix),h
-	ld	-19 (ix),l
-	push	de
-	pop	iy
-	ld	-22 (ix), c
-	ld	-21 (ix), b
-	push	bc
-	push	de
-	ld	l,-10 (ix)
-	ld	h,-9 (ix)
-	push	hl
 	ld	l,-12 (ix)
 	ld	h,-11 (ix)
-	push	hl
-	ld	l,-14 (ix)
-	ld	h,-13 (ix)
+	ld	a,(hl)
+	ld	-30 (ix),a
+	inc	hl
+	ld	a,(hl)
+	ld	-29 (ix),a
+	ld	h,-34 (ix)
+	ld	l,-33 (ix)
+	ld	-32 (ix),h
+	ld	-31 (ix),l
+	ld	h,-4 (ix)
+	ld	l,-3 (ix)
+	ld	-6 (ix),h
+	ld	-5 (ix),l
+	push	de
+	pop	iy
+	ld	-8 (ix), c
+	ld	-7 (ix), b
+	push	bc
+	push	de
+	ld	l,-22 (ix)
+	ld	h,-21 (ix)
 	push	hl
 	ld	l,-16 (ix)
 	ld	h,-15 (ix)
@@ -2585,70 +2589,80 @@ _game::
 	ld	l,-18 (ix)
 	ld	h,-17 (ix)
 	push	hl
-	ld	l,-20 (ix)
-	ld	h,-19 (ix)
+	ld	l,-30 (ix)
+	ld	h,-29 (ix)
+	push	hl
+	ld	l,-32 (ix)
+	ld	h,-31 (ix)
+	push	hl
+	ld	l,-6 (ix)
+	ld	h,-5 (ix)
 	push	hl
 	push	iy
-	ld	l,-22 (ix)
-	ld	h,-21 (ix)
+	ld	l,-8 (ix)
+	ld	h,-7 (ix)
 	push	hl
 	call	_checkKeyboard
 	ld	iy,#16
 	add	iy,sp
 	ld	sp,iy
-	ld	-21 (ix),h
-	ld	-22 (ix),l
+	ld	-7 (ix),h
+	ld	-8 (ix),l
 	pop	de
 	pop	bc
-	ld	l,-4 (ix)
-	ld	h,-3 (ix)
-	ld	a,-22 (ix)
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
+	ld	a,-8 (ix)
 	ld	(hl),a
 	inc	hl
-	ld	a,-21 (ix)
+	ld	a,-7 (ix)
 	ld	(hl),a
-;src/main.c:347: checkBoundsCollisions(&p.x,&p.y,p.lx,p.ly,p.size);
-	ld	l,-32 (ix)
-	ld	h,-31 (ix)
+;src/main.c:352: checkBoundsCollisions(&p.x,&p.y,p.lx,p.ly,p.size);
+	ld	l,-24 (ix)
+	ld	h,-23 (ix)
 	ld	a,(hl)
-	ld	-22 (ix),a
-	ld	l,-2 (ix)
-	ld	h,-1 (ix)
+	ld	-8 (ix),a
+	ld	l,-14 (ix)
+	ld	h,-13 (ix)
 	ld	a,(hl)
-	ld	-20 (ix),a
-	ld	l,-28 (ix)
-	ld	h,-27 (ix)
+	ld	-6 (ix),a
+	ld	l,-20 (ix)
+	ld	h,-19 (ix)
 	ld	a,(hl)
-	ld	-18 (ix),a
+	ld	-32 (ix),a
 	push	de
 	pop	iy
-	ld	-16 (ix), c
-	ld	-15 (ix), b
+	ld	-30 (ix), c
+	ld	-29 (ix), b
 	push	bc
 	push	de
-	ld	h,-22 (ix)
-	ld	l,-20 (ix)
+	ld	h,-8 (ix)
+	ld	l,-6 (ix)
 	push	hl
-	ld	a,-18 (ix)
+	ld	a,-32 (ix)
 	push	af
 	inc	sp
 	push	iy
-	ld	l,-16 (ix)
-	ld	h,-15 (ix)
+	ld	l,-30 (ix)
+	ld	h,-29 (ix)
 	push	hl
 	call	_checkBoundsCollisions
 	ld	hl,#7
 	add	hl,sp
 	ld	sp,hl
+	ld	hl,#0x0000
+	push	hl
+	call	_time
+	pop	af
 	pop	de
 	pop	bc
 	jp	00108$
-;src/main.c:356: void credits(){
+;src/main.c:376: void credits(){
 ;	---------------------------------
 ; Function credits
 ; ---------------------------------
 _credits::
-;src/main.c:358: cpct_clearScreen(0);
+;src/main.c:378: cpct_clearScreen(0);
 	ld	hl,#0x4000
 	push	hl
 	xor	a, a
@@ -2657,13 +2671,13 @@ _credits::
 	ld	h, #0xC0
 	push	hl
 	call	_cpct_memset
-;src/main.c:359: memptr = cpct_getScreenPtr(VMEM,10,10);
+;src/main.c:379: memptr = cpct_getScreenPtr(VMEM,10,10);
 	ld	hl,#0x0A0A
 	push	hl
 	ld	hl,#0xC000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:360: cpct_drawStringM0("Lounge Gladiator",memptr,1,0);  
+;src/main.c:380: cpct_drawStringM0("Lounge Gladiator",memptr,1,0);
 	ex	de,hl
 	ld	bc,#___str_4+0
 	ld	hl,#0x0001
@@ -2674,35 +2688,35 @@ _credits::
 	ld	hl,#6
 	add	hl,sp
 	ld	sp,hl
-;src/main.c:362: while (1){
+;src/main.c:382: while (1){
 00104$:
-;src/main.c:364: cpct_scanKeyboard_f();
+;src/main.c:384: cpct_scanKeyboard_f();
 	call	_cpct_scanKeyboard_f
-;src/main.c:368: if(cpct_isKeyPressed(Key_Esc)) {
+;src/main.c:388: if(cpct_isKeyPressed(Key_Esc)) {
 	ld	hl,#0x0408
 	call	_cpct_isKeyPressed
 	ld	a,l
 	or	a, a
 	jr	Z,00104$
-;src/main.c:370: return;
+;src/main.c:390: return;
 	ret
 ___str_4:
 	.ascii "Lounge Gladiator"
 	.db 0x00
-;src/main.c:377: void main(void) {
+;src/main.c:397: void main(void) {
 ;	---------------------------------
 ; Function main
 ; ---------------------------------
 _main::
-;src/main.c:381: init();
+;src/main.c:401: init();
 	call	_init
-;src/main.c:384: while(1){
+;src/main.c:404: while(1){
 00106$:
-;src/main.c:385: x=menu();
+;src/main.c:405: x=menu();
 	call	_menu
 	ld	e, l
 	ld	d, h
-;src/main.c:386: switch(x){
+;src/main.c:406: switch(x){
 	bit	7, d
 	jr	NZ,00106$
 	ld	a,#0x02
@@ -2717,8 +2731,8 @@ _main::
 	ld	hl,#00123$
 	add	hl,de
 	add	hl,de
-;src/main.c:387: case 0: return;break;
-;src/main.c:388: case 1: game(); break;
+;src/main.c:407: case 0: return;break;
+;src/main.c:408: case 1: game(); break;
 	jp	(hl)
 00123$:
 	jr	00108$
@@ -2728,10 +2742,10 @@ _main::
 00102$:
 	call	_game
 	jr	00106$
-;src/main.c:389: case 2: credits();break;
+;src/main.c:409: case 2: credits();break;
 00103$:
 	call	_credits
-;src/main.c:390: }
+;src/main.c:410: }
 	jr	00106$
 00108$:
 	ret
