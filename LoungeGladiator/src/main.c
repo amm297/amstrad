@@ -190,8 +190,21 @@ void drawFatiga(u8 atk, u8 col){
 
 /*VIDA*/
 void drawVida(u8 life){
+
   u8* memptr;
-    if(life >= 1){
+     int p = 65;
+     u8 i =1;
+     for(i=1;i<=3;i++){
+      memptr = cpct_getScreenPtr(VMEM,p,192);
+      p+=5;
+      if(i<=life)  cpct_drawSpriteMasked(corazon_lleno, memptr, 4, 8);
+      else { 
+        cpct_drawSolidBox(memptr,0,4,8);
+        cpct_drawSpriteMasked(corazon_roto, memptr, 4, 8);
+      }
+     }
+ /* u8* memptr;
+    /*if(life >= 1){
         memptr = cpct_getScreenPtr(VMEM,65,192);
         cpct_drawSpriteMasked(corazon_lleno, memptr, 4, 8);
     }
@@ -204,7 +217,7 @@ void drawVida(u8 life){
     if(life >= 3)
         cpct_drawSpriteMasked(corazon_lleno, memptr, 4, 8);
     else
-        cpct_drawSpriteMasked(corazon_roto, memptr, 4, 8);
+        cpct_drawSpriteMasked(corazon_roto, memptr, 4, 8);*/
 
 }
 /*PROYECTILES*/
@@ -356,19 +369,19 @@ u8* checkKeyboard(u8 *x,u8 *y,u8 *atk,u8 *dir,u8 *s,u8 *size,u8 *bullets,u8 *fin
       }else if(cpct_isKeyPressed(Key_X) && arrow[0] == 0){
       if(bullets[0] > 0){
 
-        u8 *spr = flecha_dcha,xs=2,ys=8;
+        u8 *spr = flecha_dcha,xs=2,ys=8,ox=x[0]+4;
         switch(dir[0]){
-          case 6: spr = flecha_dcha; xs=4;ys=4; break;
-          case 4: spr = flecha_izda; xs=4;ys=4; break;
+          case 6: spr = flecha_dcha; xs=4;ys=4;ox=x[0]+4; break;
+          case 4: spr = flecha_izda; xs=4;ys=4;ox=x[0]-4; break;
           case 2: spr = flecha_abajo; xs=2;ys=8; break;
           case 8: spr = flecha_arriba; xs=2;ys=8; break;
         }
-        object.x = x[0]+4;
+        object.x = ox;
         object.y = y[0]+8;
         object.x = object.x;
         object.y = object.y;
         object.sprite = spr;
-        object.vivo = 0;
+        object.vivo = 1;
         object.dir = dir[0];
         object.sizeX = xs;
         object.sizeY = ys;
@@ -568,9 +581,11 @@ void game(){
       if(checkCollisions(p.x, p.y, e.x, e.y, p.atk) == 2){
         p.x = 0;
         p.y = 80;
-        p.life--;
-        if(p.life == 0)
+        p.life -= 1;
+        if(p.life == 0){
             gameOver();
+            break;
+        }
       }else if(checkCollisions(p.x, p.y, e.x, e.y, p.atk) == 1){
         e.life =0;
       }
