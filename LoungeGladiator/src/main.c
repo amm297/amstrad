@@ -434,6 +434,18 @@ void vissionSensor(u8 x,u8 y,u8 px,u8 py){
   u8 cy = (y)/tileheight;
   u8 pcx = (px)/tilewidth;
   u8 pcy = (py)/tileheight;
+  u8 lex,mex,ley,mey,mpx,lpx,mpy,lpy;
+
+  for(u8 i=0; i<3;i++){
+    lex = cx - i;
+    mex = cx + i;
+    lpx = pcx - i;
+    mpx = pcx + i;
+    ley = cy - i;
+    mey = cy + i;
+    lpy = pcy - i;
+    mpy = pcy + i;
+  }
 
 
 
@@ -453,7 +465,6 @@ u8* move(u8 *x,u8 *y,u8 lx, u8 ly,u8 sizeX,u8 sizeY,u8 *dir,u8 *s,u8 room,u8 px,
         if(detected == 0){
           if(following[0] == 1){
             followPlayer(px,py,&x[0],&y[0],lx,ly,&dir[0],room,sizeX,sizeY);
-            if()
           }else{
             patrol(dir[0],lx,ly,&x[0],&y[0],room,sizeX,sizeY);         
           }
