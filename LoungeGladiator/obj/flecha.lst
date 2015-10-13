@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 3.5.0 #9253 (Sep 26 2015) (CYGWIN)
-                              4 ; This file was generated Tue Oct  6 19:31:11 2015
+                              4 ; This file was generated Fri Oct  9 12:12:24 2015
                               5 ;--------------------------------------------------------
                               6 	.module flecha
                               7 	.optsdcc -mz80
@@ -9,10 +9,10 @@
                               9 ;--------------------------------------------------------
                              10 ; Public variables in this module
                              11 ;--------------------------------------------------------
-                             12 	.globl _flecha_abajo
-                             13 	.globl _flecha_arriba
-                             14 	.globl _flecha_izda
-                             15 	.globl _flecha_dcha
+                             12 	.globl _flecha_izda
+                             13 	.globl _flecha_dcha
+                             14 	.globl _flecha_abajo
+                             15 	.globl _flecha_arriba
                              16 ;--------------------------------------------------------
                              17 ; special function registers
                              18 ;--------------------------------------------------------
@@ -45,7 +45,7 @@
                              45 ;--------------------------------------------------------
                              46 	.area _CODE
                              47 	.area _CODE
-   0000                      48 _flecha_dcha:
+   0000                      48 _flecha_arriba:
    0000 FF                   49 	.db #0xFF	; 255
    0001 00                   50 	.db #0x00	; 0
    0002 55                   51 	.db #0x55	; 85	'U'
@@ -78,7 +78,7 @@
    001D 00                   78 	.db #0x00	; 0
    001E 55                   79 	.db #0x55	; 85	'U'
    001F 80                   80 	.db #0x80	; 128
-   0020                      81 _flecha_izda:
+   0020                      81 _flecha_abajo:
    0020 AA                   82 	.db #0xAA	; 170
    0021 40                   83 	.db #0x40	; 64
    0022 FF                   84 	.db #0xFF	; 255
@@ -111,7 +111,7 @@
    003D 40                  111 	.db #0x40	; 64
    003E FF                  112 	.db #0xFF	; 255
    003F 00                  113 	.db #0x00	; 0
-   0040                     114 _flecha_arriba:
+   0040                     114 _flecha_dcha:
    0040 FF                  115 	.db #0xFF	; 255
    0041 00                  116 	.db #0x00	; 0
    0042 FF                  117 	.db #0xFF	; 255
@@ -144,7 +144,7 @@
    005D 00                  144 	.db #0x00	; 0
    005E 55                  145 	.db #0x55	; 85	'U'
    005F 80                  146 	.db #0x80	; 128
-   0060                     147 _flecha_abajo:
+   0060                     147 _flecha_izda:
    0060 FF                  148 	.db #0xFF	; 255
    0061 00                  149 	.db #0x00	; 0
    0062 FF                  150 	.db #0xFF	; 255

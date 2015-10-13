@@ -106,18 +106,22 @@ int menu(){
 
 /*MAPA*/
 void drawMap(u8 t){
-   int posX=0,posY =0,x=0;
+   int posX=0,posY =0,x=0,y=0;
    u8* memptr;
 
    if(t == 1){ 
-    for(x=0;x<height;x++){
-      scene[x] = mapa1[x];
+    for(y=0;y<height;y++){
+      for(x=0;x<width;x++){
+        scene[y][x] = mapa1[y][x];
+      }
     }
   }
 
   if(t == 2){ 
-    for(x=0;x<height;x++){
-      scene[x] = mapa2[x];
+    for(y=0;y<height;y++){
+      for(x=0;x<width;x++){
+        scene[y][x] = mapa2[y][x];
+      }
     }
   }
    
@@ -136,21 +140,22 @@ void drawMap(u8 t){
 
 /*PERSONAJES*/
 
-void drawPlayer(u8 x,u8 y,u8 *sprite,u8 size){
+void drawPlayer(u8 x,u8 y,u8 *sprite,u8 sizeX,u8 sizeY){
   u8* memptr;
   //if(p.life > 0){
     memptr = cpct_getScreenPtr(VMEM,x,y);
-    cpct_drawSpriteMasked(sprite, memptr, size, 16);
+    cpct_drawSpriteMasked(sprite, memptr, sizeX, sizeY);
   //}
 }
 
-void erasePlayer(u8 x,u8 y,u8 size){
+void erasePlayer(u8 x,u8 y,u8 sizeX,u8 sizeY){
   u8* memptr;
   //if(p.life > 0){
     memptr = cpct_getScreenPtr(VMEM,x,y);
-    cpct_drawSolidBox(memptr,0,size,16);
+    cpct_drawSolidBox(memptr,0,sizeX,sizeY);
   //}
 }
+
 
 
 /*FATIGA*/
@@ -192,40 +197,76 @@ void drawVida(u8 life){
         cpct_drawSpriteMasked(corazon_roto, memptr, 4, 8);
 
 }
+/*PROYECTILES*/
+void drawBullets(u8 bullet){
+     u8* memptr;
+     int p = 50;
+     u8 i =1;
+     for(i=1;i<=3;i++){
+      memptr = cpct_getScreenPtr(VMEM,p,192);
+      p+=5;
+      if(i<=bullet) cpct_drawSpriteMasked(flecha_arriba, memptr, 2, 8);
+      else  cpct_drawSolidBox(memptr,0,2,8);
+     }
+    /*if(bullet == 1){
+        memptr = cpct_getScreenPtr(VMEM,50,192);
+        cpct_drawSpriteMasked(flecha_arriba, memptr, 2, 8);
+    }
+    memptr = cpct_getScreenPtr(VMEM,55,192);
+    if(bullet == 2)
+        cpct_drawSpriteMasked(flecha_arriba, memptr, 2, 8);
+    else
+       
+    memptr = cpct_getScreenPtr(VMEM,60,192);
+    if(bullet >= 3)
+        cpct_drawSolidBox(memptr,0,2,8);
+    else
+        cpct_drawSpriteMasked(flecha_arriba, memptr, 2, 8);*/
+
+}
 
 /*Colisiones*/
 
 
-u8 checkBoundsCollisions(u8 *x,u8 *y, u8 lx, u8 ly,u8 size){
+u8 checkBoundsCollisions(u8 *x,u8 *y, u8 lx, u8 ly,u8 sizeX,u8 sizeY){
 
   u8 *posX = x;
   u8 *posY = y;
   u8 bound = 0;
   if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 1   
-      || scene[(posY[0])/tileheight][(posX[0]+size-1)/tilewidth] == 1
-      || scene[(posY[0]+playerheight-2)/tileheight][(posX[0])/tilewidth] == 1 
-      || scene[(posY[0]+playerheight-2)/tileheight][(posX[0]+size-1)/tilewidth] == 1
+      || scene[(posY[0])/tileheight][(posX[0]+sizeX-1)/tilewidth] == 1
+      || scene[(posY[0]+sizeY-2)/tileheight][(posX[0])/tilewidth] == 1 
+      || scene[(posY[0]+sizeY-2)/tileheight][(posX[0]+sizeX-1)/tilewidth] == 1
     ){   
         *posX=lx;
         *posY=ly;
         bound = 1;
   }
+   else if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 2   
+      || scene[(posY[0])/tileheight][(posX[0]+sizeX-1)/tilewidth] == 2
+      || scene[(posY[0]+sizeY-2)/tileheight][(posX[0])/tilewidth] == 2
+      || scene[(posY[0]+sizeY-2)/tileheight][(posX[0]+sizeX-1)/tilewidth] == 2
+    ){
+      //Enemigo   
+      *posX=lx;
+      *posY=ly;
+  }
   else if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 6   
-      || scene[(posY[0])/tileheight][(posX[0]+size-1)/tilewidth] == 6
-      || scene[(posY[0]+playerheight-2)/tileheight][(posX[0])/tilewidth] == 6
-      || scene[(posY[0]+playerheight-2)/tileheight][(posX[0]+size-1)/tilewidth] == 6
+      || scene[(posY[0])/tileheight][(posX[0]+sizeX-1)/tilewidth] == 6
+      || scene[(posY[0]+sizeY-2)/tileheight][(posX[0])/tilewidth] == 6
+      || scene[(posY[0]+sizeY-2)/tileheight][(posX[0]+sizeX-1)/tilewidth] == 6
     ){   
        //Sumar corazones
   }else if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 5   
-      || scene[(posY[0])/tileheight][(posX[0]+size-1)/tilewidth] == 5
-      || scene[(posY[0]+playerheight-2)/tileheight][(posX[0])/tilewidth] == 5
-      || scene[(posY[0]+playerheight-2)/tileheight][(posX[0]+size-1)/tilewidth] == 5
+      || scene[(posY[0])/tileheight][(posX[0]+sizeX-1)/tilewidth] == 5
+      || scene[(posY[0]+sizeY-2)/tileheight][(posX[0])/tilewidth] == 5
+      || scene[(posY[0]+sizeY-2)/tileheight][(posX[0]+sizeX-1)/tilewidth] == 5
     ){   
         //Sumar municion
   }else if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 9   
-      || scene[(posY[0])/tileheight][(posX[0]+size-1)/tilewidth] == 9
-      || scene[(posY[0]+playerheight-2)/tileheight][(posX[0])/tilewidth] == 9
-      || scene[(posY[0]+playerheight-2)/tileheight][(posX[0]+size-1)/tilewidth] == 9
+      || scene[(posY[0])/tileheight][(posX[0]+sizeX-1)/tilewidth] == 9
+      || scene[(posY[0]+sizeY-2)/tileheight][(posX[0])/tilewidth] == 9
+      || scene[(posY[0]+sizeY-2)/tileheight][(posX[0]+sizeX-1)/tilewidth] == 9
     ){   
         cpct_clearScreen(0);
         drawMap(2);
@@ -233,10 +274,44 @@ u8 checkBoundsCollisions(u8 *x,u8 *y, u8 lx, u8 ly,u8 size){
   return bound;
 }
 
+void checkBoundsCollisionsEnemy(u8 *x,u8 *y, u8 lx, u8 ly,u8 sizeX,u8 sizeY){
+
+  u8 *posX = x;
+  u8 *posY = y;
+  if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 1   
+      || scene[(posY[0])/tileheight][(posX[0]+sizeX-1)/tilewidth] == 1
+      || scene[(posY[0]+sizeY-2)/tileheight][(posX[0])/tilewidth] == 1 
+      || scene[(posY[0]+sizeY-2)/tileheight][(posX[0]+sizeX-1)/tilewidth] == 1
+    ){   
+        *posX=lx;
+        *posY=ly;
+  }
+   else if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] != 3   
+      || scene[(posY[0])/tileheight][(posX[0]+sizeX-1)/tilewidth] != 3
+      || scene[(posY[0]+sizeY-2)/tileheight][(posX[0])/tilewidth] != 3
+      || scene[(posY[0]+sizeY-2)/tileheight][(posX[0]+sizeX-1)/tilewidth] != 3
+    ){ 
+      *posX=lx;
+      *posY=ly;
+  }
+  
+}
+void checkArrowCollisions(u8 *arrow){
+
+  u8 posX = object.x;
+  u8 posY = object.y;
+   if(    scene[(posY)/tileheight][(posX)/tilewidth] == 1   
+      || scene[(posY)/tileheight][(posX+object.sizeX-1)/tilewidth] == 1
+      || scene[(posY+object.sizeY-2)/tileheight][(posX)/tilewidth] == 1 
+      || scene[(posY+object.sizeY-2)/tileheight][(posX+object.sizeX-1)/tilewidth] == 1
+    ){
+      arrow[0] = 0;
+   }
+}
 
 /* TECLADO*/
 
-u8* checkKeyboard(u8 *x,u8 *y,u8 *atk,u8 *dir,u8 *s,u8 *size,u8 *finish,u8 *arrow){
+u8* checkKeyboard(u8 *x,u8 *y,u8 *atk,u8 *dir,u8 *s,u8 *size,u8 *bullets,u8 *finish,u8 *arrow){
   u8 *sprite = s;
   if(cpct_isKeyPressed(Key_Space) && atk[0]>=20){
       size[0] = 5;
@@ -267,14 +342,15 @@ u8* checkKeyboard(u8 *x,u8 *y,u8 *atk,u8 *dir,u8 *s,u8 *size,u8 *finish,u8 *arro
          dir[0] = 8;
          size[0] = 4;
          sprite = gladis_arriba_dcha;
-      }else if(cpct_isKeyPressed(Key_X) && arrow == 0){
-
-        u8 *spr,xs,ys;
+      }else if(cpct_isKeyPressed(Key_X) && arrow[0] == 0){
+      if(bullets[0] > 0){
+        
+        u8 *spr = flecha_dcha,xs=2,ys=8;
         switch(dir[0]){
-          case 6: spr = flecha_dcha; xs=2;ys=8; break;
-          case 4: spr = flecha_izda; xs=2;ys=8; break;
-          case 2: spr = flecha_arriba; xs=4;ys=4; break;
-          case 8: spr = flecha_abajo; xs=4;ys=4; break;
+          case 6: spr = flecha_dcha; xs=4;ys=4; break;
+          case 4: spr = flecha_izda; xs=4;ys=4; break;
+          case 2: spr = flecha_abajo; xs=2;ys=8; break;
+          case 8: spr = flecha_arriba; xs=2;ys=8; break;
         }
         object.x = x[0]+4;
         object.y = y[0]+8;
@@ -283,8 +359,10 @@ u8* checkKeyboard(u8 *x,u8 *y,u8 *atk,u8 *dir,u8 *s,u8 *size,u8 *finish,u8 *arro
         object.sprite = spr;
         object.vivo = 0;
         object.dir = dir[0];
-        object.xsize = xs;
-        object.ysize = ys;
+        object.sizeX = xs;
+        object.sizeY = ys;
+        bullets[0]--;
+      }
         arrow[0]=1;
       }else {
         size[0] = 4;
@@ -292,6 +370,10 @@ u8* checkKeyboard(u8 *x,u8 *y,u8 *atk,u8 *dir,u8 *s,u8 *size,u8 *finish,u8 *arro
       } 
   }
   
+
+  if(cpct_isKeyPressed(Key_L)){
+       arrow[0] = 0;
+  }
   if(cpct_isKeyPressed(Key_Esc)){
        finish[0] = 1;
   }
@@ -299,22 +381,114 @@ u8* checkKeyboard(u8 *x,u8 *y,u8 *atk,u8 *dir,u8 *s,u8 *size,u8 *finish,u8 *arro
   return s;
 } 
 
+void moveObject(){
+  object.lx = object.x;
+  object.ly = object.y;
+  switch(object.dir){
+    case 6: object.x += 1; break;
+    case 4: object.x -= 1; break;
+    case 2: object.y += 2; break;
+    case 8: object.y -= 2; break;
+  }
+}
+
+
+
+
+u8 followPlayer(u8 px,u8 py,u8 *x,u8 *y,u8 lx,u8 ly,u8 *dir,u8 room,u8 sizeX,u8 sizeY){
+  u8 following = 1;
+  dir[0] = setDirection(px,py,x[0],y[0]);
+  movement(dir[0],&x[0],&y[0]);
+  if(scene[(y[0])/tileheight][(x[0])/tilewidth] == 1   
+  || scene[(y[0])/tileheight][(x[0]+sizeX-1)/tilewidth] == 1
+  || scene[(y[0]+sizeY-2)/tileheight][(x[0])/tilewidth] == 1 
+  || scene[(y[0]+sizeY-2)/tileheight][(x[0]+sizeX-1)/tilewidth] == 1
+  ){   
+    *x=lx;
+    *y=ly;         
+  }
+  
+  return following;
+
+}
+
+void patrol(u8 dir,u8 lx,u8 ly,u8 *x,u8 *y,u8 room,u8 sizeX,u8 sizeY){
+  scene[(y[0])/tileheight][(x[0])/tilewidth] = room;
+  
+  movement(dir,&x[0],&y[0]);
+
+  if(scene[(y[0])/tileheight][(x[0])/tilewidth] != room   
+  || scene[(y[0])/tileheight][(x[0]+sizeX-1)/tilewidth] != room
+  || scene[(y[0]+sizeY-2)/tileheight][(x[0])/tilewidth] != room 
+  || scene[(y[0]+sizeY-2)/tileheight][(x[0]+sizeX-1)/tilewidth] != room
+  ){   
+    *x=lx;
+    *y=ly;         
+  } 
+  scene[(y[0])/tileheight][(x[0])/tilewidth] = 2;
+}
+
+
+void vissionSensor(u8 x,u8 y,u8 px,u8 py){
+  u8 cx = (x)/tilewidth;
+  u8 cy = (y)/tileheight;
+  u8 pcx = (px)/tilewidth;
+  u8 pcy = (py)/tileheight;
+
+
+
+}
+
+u8* move(u8 *x,u8 *y,u8 lx, u8 ly,u8 sizeX,u8 sizeY,u8 *dir,u8 *s,u8 room,u8 px,u8 py,u8 *following){
+  u8 *sprite = s;
+  u8 detected;
+  if(temp > 36){
+    dir[0] = chooseDirection(dir[0]);
+    temp = 0;
+  }
+  else{
+    //movimiento
+      if(temp%6== 0){
+        detected = detectPlayerRoom(px,py,room);
+        if(detected == 0){
+          if(following[0] == 1){
+            followPlayer(px,py,&x[0],&y[0],lx,ly,&dir[0],room,sizeX,sizeY);
+            if()
+          }else{
+            patrol(dir[0],lx,ly,&x[0],&y[0],room,sizeX,sizeY);         
+          }
+        }else{
+            following[0] = followPlayer(px,py,&x[0],&y[0],lx,ly,&dir[0],room,sizeX,sizeY);
+        }
+       
+    }    
+  }
+  temp += 2;
+  return sprite;
+}
+
+
+
 /*JUEGO*/
 
 void game(){  
-  TPlayer p = {0,80,0,80,gladis_quieto_dcha,3,6,4,4,0,0,2};
+  TPlayer p = {0,80,0,80,gladis_quieto_dcha,3,6,4,16,4,0,0,3,0,0};
+  TPlayer e = {52,80,52,80,chacho_quieto_dcha,3,6,4,16,4,0,0,0,1,3};
 
   //players[0] =p;
    //u8 i = p.x;
 
    //u8* memptr;
-   u8 finish = 0,i=1,arrow=0;
+   u8 finish = 0,i=1,arrow=0,following = 0;
     //u8* memptr;
    u8 bound =0;
+   temp = 0;
 
 
    cpct_clearScreen(0);
    drawMap(i);
+
+  
 
    while (1){
 
@@ -322,13 +496,21 @@ void game(){
     cpct_waitVSYNC();
 
     //Desdibujar personajes
-    erasePlayer(p.lx,p.ly,p.lsize);
+    erasePlayer(p.lx,p.ly,p.lsize,p.sizeY);
+    erasePlayer(e.lx,e.ly,e.lsize,e.sizeY);
+    if(arrow == 1){
+      erasePlayer(object.lx,object.ly,object.sizeX,object.sizeY);
+      if(bound == 1) arrow = 0;
+    } 
     
     //Dibujar personajes
-    drawPlayer(p.x,p.y,p.sprite,p.size);
+    drawPlayer(p.x,p.y,p.sprite,p.sizeX,p.sizeY);
+    drawPlayer(e.x,e.y,e.sprite,e.sizeX,e.sizeY);
+    if(arrow == 1) drawPlayer(object.x,object.y,object.sprite,object.sizeX,object.sizeY);
 
     //Dibujar vida
     drawVida(p.life);
+    drawBullets(p.bullets);
 
     //Dibujar fatiga
     if(p.atk < 20) drawFatiga(p.atk,2);
@@ -338,15 +520,22 @@ void game(){
     //guardar datos anteriores
     p.lx = p.x;
     p.ly = p.y;
+    e.lx = e.x;
+    e.ly = e.y;
     p.latk = p.atk;
-    p.lsize = p.size;
+    p.lsize = p.sizeX;
      
       //Comprobar teclado
       cpct_scanKeyboard_f();
-      p.sprite = checkKeyboard(&p.x,&p.y,&p.atk,&p.dir,p.sprite,&p.size,&finish,&arrow);
-      checkBoundsCollisions(&p.x,&p.y,p.lx,p.ly,p.size);
-
-
+      p.sprite = checkKeyboard(&p.x,&p.y,&p.atk,&p.dir,p.sprite,&p.sizeX,&p.bullets,&finish,&arrow);
+      checkBoundsCollisions(&p.x,&p.y,p.lx,p.ly,p.sizeX,p.sizeY);
+      e.sprite = move(&e.x,&e.y,e.lx,e.ly,e.sizeX,e.sizeY,&e.dir,e.sprite,e.room,p.x,p.y,&following);
+      if(arrow == 1){
+        moveObject();
+        bound = checkBoundsCollisions(&object.x,&object.y,object.lx,object.ly,object.sizeX,object.sizeY);
+      } 
+    
+      if(finish == 1) return;
       
    }
 }

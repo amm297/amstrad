@@ -7,13 +7,18 @@ Symbol Table
     .__.ABS.                                                    =  0000 G
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
-  0 ___str_0                                                       03EC R
-  0 ___str_1                                                       03FD R
-  0 ___str_2                                                       040B R
-  0 ___str_3                                                       0414 R
-  0 ___str_4                                                       0FE6 R
-  0 _checkBoundsCollisions                                         06E2 GR
-  0 _checkKeyboard                                                 0AA1 GR
+  0 ___str_0                                                       04D7 R
+  0 ___str_1                                                       04E8 R
+  0 ___str_2                                                       04F6 R
+  0 ___str_3                                                       04FF R
+  0 ___str_4                                                       209E R
+    __modsint                                                      **** GX
+    _chacho_quieto_dcha                                            **** GX
+  0 _checkArrowCollisions                                          0FEF GR
+  0 _checkBoundsCollisions                                         08F5 GR
+  0 _checkBoundsCollisionsEnemy                                    0D9A GR
+  0 _checkKeyboard                                                 1155 GR
+  0 _chooseDirection                                               021C GR
     _corazon_lleno                                                 **** GX
     _corazon_roto                                                  **** GX
     _cpct_disableFirmware                                          **** GX
@@ -29,38 +34,53 @@ Symbol Table
     _cpct_setPalette                                               **** GX
     _cpct_setVideoMode                                             **** GX
     _cpct_waitVSYNC                                                **** GX
-  0 _credits                                                       0FAE GR
-  0 _drawFatiga                                                    05CB GR
-  0 _drawMap                                                       041A GR
-  0 _drawPlayer                                                    0570 GR
-  0 _drawVida                                                      065F GR
-  0 _erasePlayer                                                   059F GR
+  0 _credits                                                       2066 GR
+  0 _detectPlayerRoom                                              0000 GR
+  0 _drawBullets                                                   0899 GR
+  0 _drawFatiga                                                    0782 GR
+  0 _drawMap                                                       0505 GR
+  0 _drawPlayer                                                    0721 GR
+  0 _drawVida                                                      0816 GR
+  0 _erasePlayer                                                   0753 GR
     _flecha_abajo                                                  **** GX
     _flecha_arriba                                                 **** GX
     _flecha_dcha                                                   **** GX
     _flecha_izda                                                   **** GX
-  0 _g_palette                                                     0025 GR
-  0 _game                                                          0CCC GR
+  0 _followPlayer                                                  149D GR
+  0 _g_palette                                                     0038 GR
+  0 _game                                                          1988 GR
     _gladis_atk_dcha                                               **** GX
     _gladis_atk_izda                                               **** GX
     _gladis_quieto_dcha                                            **** GX
-  0 _init                                                          0000 GR
-  0 _main                                                          0FF7 GR
-  0 _mapa1                                                         0029 GR
-  0 _mapa2                                                         0119 GR
-  0 _menu                                                          0209 GR
-  1 _object                                                        0018 GR
-  1 _players                                                       0022 GR
-  1 _scene                                                         0000 GR
-
-
+  0 _init                                                          02D2 GR
+  0 _main                                                          20AF GR
+  0 _mapa1                                                         003C GR
+  0 _mapa2                                                         012C GR
+  0 _menu                                                          02F7 GR
+  0 _move                                                          1860 GR
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+  0 _moveObject                                                    1468 GR
+  0 _movement                                                      028B GR
+  1 _object                                                        00F2 GR
+  0 _patrol                                                        165D GR
+  1 _players                                                       00FC GR
+    _rand                                                          **** GX
+  1 _scene                                                         0000 GR
+  0 _setDirection                                                  025A GR
+  1 _temp                                                          00F0 GR
+
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 3.
 Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size 102C   flags    0
-   1 _DATA                                      size   3C   flags    0
+   0 _CODE                                      size 20E4   flags    0
+   1 _DATA                                      size  11C   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8
    4 _HOME                                      size    0   flags    0
