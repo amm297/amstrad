@@ -1,11 +1,14 @@
 #ifndef CALCCOLISION_H
 #define CALCCOLISION_H
 
-u8 checkCollisions(u8 pX, u8 pY, u8 eX, u8 eY, u8* dir, u8* atk){
-    u8 popX = pX + 4;
-    u8 popY = pY + 16;
-    u8 eopX = eX + 4;
-    u8 eopY = eY + 16;
+
+
+
+u8 checkCollisions(u8 pX, u8 pY, u8 eX, u8 eY, u8 atk){
+    u8 popX = pX + tilewidth;
+    u8 popY = pY + tileheight;
+    u8 eopX = eX + tilewidth;
+    u8 eopY = eY + tileheight;
 
     if(eopX >= pX && eopX <= popX && eY >= pY && eY <= popY)
         if(atk >= 21)

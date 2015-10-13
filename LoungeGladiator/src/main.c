@@ -38,6 +38,15 @@ void init(){
    cpct_setPalette(g_palette,4);
 }
 
+/*GAME OVER*/
+void gameOver(){
+    u8* memptr;
+  cpct_clearScreen(0);
+  memptr = cpct_getScreenPtr(VMEM,10,10);
+  cpct_drawStringM0("Lounge Gladiator",memptr,1,0);
+
+}
+
 /*MENU*/
 int menu(){
    u8* memptr;
@@ -141,12 +150,12 @@ void drawMap(u8 t){
 
 /*PERSONAJES*/
 
-void drawPlayer(u8 x,u8 y,u8 *sprite,u8 sizeX,u8 sizeY){
+void drawPlayer(u8 x,u8 y,u8 *sprite,u8 sizeX,u8 sizeY,u8 life){
   u8* memptr;
-  //if(p.life > 0){
+  if(life > 0){
     memptr = cpct_getScreenPtr(VMEM,x,y);
     cpct_drawSpriteMasked(sprite, memptr, sizeX, sizeY);
-  //}
+  }
 }
 
 void erasePlayer(u8 x,u8 y,u8 sizeX,u8 sizeY){
@@ -229,6 +238,42 @@ void drawBullets(u8 bullet){
 /*Colisiones*/
 
 
+
+void checkBoundsCollisionsEnemy(u8 *x,u8 *y, u8 lx, u8 ly,u8 sizeX,u8 sizeY){
+
+  u8 *posX = x;
+  u8 *posY = y;
+  if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 1
+      || scene[(posY[0])/tileheight][(posX[0]+sizeX-1)/tilewidth] == 1
+      || scene[(posY[0]+sizeY-2)/tileheight][(posX[0])/tilewidth] == 1
+      || scene[(posY[0]+sizeY-2)/tileheight][(posX[0]+sizeX-1)/tilewidth] == 1
+    ){
+        *posX=lx;
+        *posY=ly;
+  }
+   else if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] != 3
+      || scene[(posY[0])/tileheight][(posX[0]+sizeX-1)/tilewidth] != 3
+      || scene[(posY[0]+sizeY-2)/tileheight][(posX[0])/tilewidth] != 3
+      || scene[(posY[0]+sizeY-2)/tileheight][(posX[0]+sizeX-1)/tilewidth] != 3
+    ){
+      *posX=lx;
+      *posY=ly;
+  }
+
+}
+void checkArrowCollisions(u8 *arrow){
+
+  u8 posX = object.x;
+  u8 posY = object.y;
+   if(    scene[(posY)/tileheight][(posX)/tilewidth] == 1
+      || scene[(posY)/tileheight][(posX+object.sizeX-1)/tilewidth] == 1
+      || scene[(posY+object.sizeY-2)/tileheight][(posX)/tilewidth] == 1
+      || scene[(posY+object.sizeY-2)/tileheight][(posX+object.sizeX-1)/tilewidth] == 1
+    ){
+      arrow[0] = 0;
+   }
+}
+
 u8 checkBoundsCollisions(u8 *x,u8 *y, u8 lx, u8 ly,u8 sizeX,u8 sizeY){
 
   u8 *posX = x;
@@ -273,41 +318,6 @@ u8 checkBoundsCollisions(u8 *x,u8 *y, u8 lx, u8 ly,u8 sizeX,u8 sizeY){
         drawMap(2);
   }
   return bound;
-}
-
-void checkBoundsCollisionsEnemy(u8 *x,u8 *y, u8 lx, u8 ly,u8 sizeX,u8 sizeY){
-
-  u8 *posX = x;
-  u8 *posY = y;
-  if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 1
-      || scene[(posY[0])/tileheight][(posX[0]+sizeX-1)/tilewidth] == 1
-      || scene[(posY[0]+sizeY-2)/tileheight][(posX[0])/tilewidth] == 1
-      || scene[(posY[0]+sizeY-2)/tileheight][(posX[0]+sizeX-1)/tilewidth] == 1
-    ){
-        *posX=lx;
-        *posY=ly;
-  }
-   else if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] != 3
-      || scene[(posY[0])/tileheight][(posX[0]+sizeX-1)/tilewidth] != 3
-      || scene[(posY[0]+sizeY-2)/tileheight][(posX[0])/tilewidth] != 3
-      || scene[(posY[0]+sizeY-2)/tileheight][(posX[0]+sizeX-1)/tilewidth] != 3
-    ){
-      *posX=lx;
-      *posY=ly;
-  }
-
-}
-void checkArrowCollisions(u8 *arrow){
-
-  u8 posX = object.x;
-  u8 posY = object.y;
-   if(    scene[(posY)/tileheight][(posX)/tilewidth] == 1
-      || scene[(posY)/tileheight][(posX+object.sizeX-1)/tilewidth] == 1
-      || scene[(posY+object.sizeY-2)/tileheight][(posX)/tilewidth] == 1
-      || scene[(posY+object.sizeY-2)/tileheight][(posX+object.sizeX-1)/tilewidth] == 1
-    ){
-      arrow[0] = 0;
-   }
 }
 
 /* TECLADO*/
@@ -528,9 +538,9 @@ void game(){
     }
 
     //Dibujar personajes
-    drawPlayer(p.x,p.y,p.sprite,p.sizeX,p.sizeY);
-    drawPlayer(e.x,e.y,e.sprite,e.sizeX,e.sizeY);
-    if(arrow == 1) drawPlayer(object.x,object.y,object.sprite,object.sizeX,object.sizeY);
+    drawPlayer(p.x,p.y,p.sprite,p.sizeX,p.sizeY,p.life);
+    drawPlayer(e.x,e.y,e.sprite,e.sizeX,e.sizeY,e.life);
+    if(arrow == 1) drawPlayer(object.x,object.y,object.sprite,object.sizeX,object.sizeY,object.vivo);
 
     //Dibujar vida
     drawVida(p.life);
@@ -555,13 +565,15 @@ void game(){
       checkBoundsCollisions(&p.x,&p.y,p.lx,p.ly,p.sizeX,p.sizeY);
       e.sprite = move(&e.x,&e.y,e.lx,e.ly,e.sizeX,e.sizeY,&e.dir,e.sprite,e.room,p.x,p.y,&following);
 
-      if(checkCollisions(p.x, p.y, e.x, e.y, p.dir, p.atk) == 2){
+      if(checkCollisions(p.x, p.y, e.x, e.y, p.atk) == 2){
         p.x = 0;
         p.y = 80;
         p.life--;
         if(p.life == 0)
             gameOver();
-      }else if(checkCollisions(p.x, p.y, e.x, e.y, p.dir, p.atk) == 1)
+      }else if(checkCollisions(p.x, p.y, e.x, e.y, p.atk) == 1){
+        e.life =0;
+      }
         //falta la funcion para matar al enemigo
 
       if(arrow == 1){
@@ -599,14 +611,7 @@ void credits(){
 }
 
 
-/*GAME OVER*/
-void gameOver(){
-    u8* memptr;
-  cpct_clearScreen(0);
-  memptr = cpct_getScreenPtr(VMEM,10,10);
-  cpct_drawStringM0("Lounge Gladiator",memptr,1,0);
 
-}
 /*EMPIEZA EL CODIGO*/
 
 void main(void) {

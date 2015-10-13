@@ -9,7 +9,6 @@
 -l z80
 obj/gladis.rel
 obj/chacho-quieto.rel
-obj/CalcColision.rel
 obj/ia.rel
 obj/vida.rel
 obj/main.rel
