@@ -144,6 +144,12 @@ void drawMap(u8 t){
          if(scene[posY][posX] == 9){
             cpct_drawSolidBox(memptr, 9, tilewidth, tileheight);
          }
+         if(scene[posY][posX] == 5){
+            cpct_drawSpriteMasked(flecha_arriba, memptr, 2, 8);
+         }
+         if(scene[posY][posX] == 2){
+            cpct_drawSpriteMasked(corazon_lleno, memptr, 4, 8);
+         }
       }
    }
 }
@@ -176,15 +182,39 @@ void drawFatiga(u8 atk, u8 col){
         col = 2;
     if(atk > 30 || atk <= 20){
         memptr = cpct_getScreenPtr(VMEM,4,192);
-        cpct_drawSolidBox(memptr, col, 2, 8);
+        switch(col){
+        case 0:
+            cpct_drawSolidBox(memptr, col, 2, 8);
+            break;
+        case 1:
+            cpct_drawSpriteMasked(fatiga_nor, memptr, 2, 8);
+            break;
+        case 2:
+            cpct_drawSpriteMasked(fatiga_full, memptr, 2, 8);
+        }
     }
     if(atk > 40 || atk <= 20){
         memptr = cpct_getScreenPtr(VMEM,7,192);
-        cpct_drawSolidBox(memptr, col, 2, 8);
+        switch(col){
+        case 0:
+            cpct_drawSolidBox(memptr, col, 2, 8);
+            break;
+        case 1:
+            cpct_drawSpriteMasked(fatiga_nor, memptr, 2, 8);
+            break;
+        case 2:
+            cpct_drawSpriteMasked(fatiga_full, memptr, 2, 8);
+        }
     }
     if(atk <= 20){
         memptr = cpct_getScreenPtr(VMEM,10,192);
-        cpct_drawSolidBox(memptr, col, 2, 8);
+        switch(col){
+        case 0:
+            cpct_drawSolidBox(memptr, col, 2, 8);
+            break;
+        case 2:
+            cpct_drawSpriteMasked(fatiga_full, memptr, 2, 8);
+        }
     }
 }
 
@@ -306,17 +336,9 @@ u8 checkBoundsCollisions(u8 *x,u8 *y, u8 lx, u8 ly,u8 sizeX,u8 sizeY){
       || scene[(posY[0]+sizeY-2)/tileheight][(posX[0])/tilewidth] == 2
       || scene[(posY[0]+sizeY-2)/tileheight][(posX[0]+sizeX-1)/tilewidth] == 2
     ){
-      //Enemigo
-      *posX=lx;
-      *posY=ly;
+      //Sumar corazones
   }
-  else if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 6
-      || scene[(posY[0])/tileheight][(posX[0]+sizeX-1)/tilewidth] == 6
-      || scene[(posY[0]+sizeY-2)/tileheight][(posX[0])/tilewidth] == 6
-      || scene[(posY[0]+sizeY-2)/tileheight][(posX[0]+sizeX-1)/tilewidth] == 6
-    ){
-       //Sumar corazones
-  }else if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 5
+  else if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 5
       || scene[(posY[0])/tileheight][(posX[0]+sizeX-1)/tilewidth] == 5
       || scene[(posY[0]+sizeY-2)/tileheight][(posX[0])/tilewidth] == 5
       || scene[(posY[0]+sizeY-2)/tileheight][(posX[0]+sizeX-1)/tilewidth] == 5
@@ -520,7 +542,7 @@ u8* move(u8 *x,u8 *y,u8 lx, u8 ly,u8 sizeX,u8 sizeY,u8 *dir,u8 *s,u8 room,u8 px,
 /*JUEGO*/
 
 void game(){
-  TPlayer p = {0,80,0,80,gladis_quieto_dcha,3,6,4,16,4,0,0,3,0,0};
+  TPlayer p = {0,80,0,80,gladis_quieto_dcha,3,6,4,16,4,20,20,3,0,0};
   TPlayer e = {52,80,52,80,chacho_quieto_dcha,3,6,4,16,4,0,0,0,1,3};
 
   //players[0] =p;
@@ -561,7 +583,7 @@ void game(){
 
     //Dibujar fatiga
     if(p.atk < 20) drawFatiga(p.atk,2);
-    else if(p.atk > 20) drawFatiga(p.atk,16);
+    else if(p.atk > 20) drawFatiga(p.atk,1);
     else drawFatiga(p.atk,0);
 
     //guardar datos anteriores
