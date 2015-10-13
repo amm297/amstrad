@@ -3,7 +3,7 @@
                               3 ; Version 3.5.0 #9253 (Sep 22 2015) (CYGWIN)
                               4 ; This file was generated Tue Oct 13 11:36:26 2015
                               5 ;--------------------------------------------------------
-                              6 	.module ia
+                              6 	.module CalcColision
                               7 	.optsdcc -mz80
                               8 	
                               9 ;--------------------------------------------------------
