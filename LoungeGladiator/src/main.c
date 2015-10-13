@@ -203,22 +203,6 @@ void drawVida(u8 life){
         cpct_drawSpriteMasked(corazon_roto, memptr, 4, 8);
       }
      }
- /* u8* memptr;
-    /*if(life >= 1){
-        memptr = cpct_getScreenPtr(VMEM,65,192);
-        cpct_drawSpriteMasked(corazon_lleno, memptr, 4, 8);
-    }
-    memptr = cpct_getScreenPtr(VMEM,70,192);
-    if(life >= 2)
-        cpct_drawSpriteMasked(corazon_lleno, memptr, 4, 8);
-    else
-        cpct_drawSpriteMasked(corazon_roto, memptr, 4, 8);
-    memptr = cpct_getScreenPtr(VMEM,75,192);
-    if(life >= 3)
-        cpct_drawSpriteMasked(corazon_lleno, memptr, 4, 8);
-    else
-        cpct_drawSpriteMasked(corazon_roto, memptr, 4, 8);*/
-
 }
 /*PROYECTILES*/
 void drawBullets(u8 bullet){
@@ -231,21 +215,6 @@ void drawBullets(u8 bullet){
       if(i<=bullet) cpct_drawSpriteMasked(flecha_arriba, memptr, 2, 8);
       else  cpct_drawSolidBox(memptr,0,2,8);
      }
-    /*if(bullet == 1){
-        memptr = cpct_getScreenPtr(VMEM,50,192);
-        cpct_drawSpriteMasked(flecha_arriba, memptr, 2, 8);
-    }
-    memptr = cpct_getScreenPtr(VMEM,55,192);
-    if(bullet == 2)
-        cpct_drawSpriteMasked(flecha_arriba, memptr, 2, 8);
-    else
-
-    memptr = cpct_getScreenPtr(VMEM,60,192);
-    if(bullet >= 3)
-        cpct_drawSolidBox(memptr,0,2,8);
-    else
-        cpct_drawSpriteMasked(flecha_arriba, memptr, 2, 8);*/
-
 }
 
 /*Colisiones*/
@@ -437,7 +406,7 @@ u8 followPlayer(u8 px,u8 py,u8 *x,u8 *y,u8 lx,u8 ly,u8 *dir,u8 room,u8 sizeX,u8 
 }
 
 void patrol(u8 dir,u8 lx,u8 ly,u8 *x,u8 *y,u8 room,u8 sizeX,u8 sizeY){
-  scene[(y[0])/tileheight][(x[0])/tilewidth] = room;
+  //scene[(y[0])/tileheight][(x[0])/tilewidth] = room;
 
   movement(dir,&x[0],&y[0]);
 
@@ -449,7 +418,7 @@ void patrol(u8 dir,u8 lx,u8 ly,u8 *x,u8 *y,u8 room,u8 sizeX,u8 sizeY){
     *x=lx;
     *y=ly;
   }
-  scene[(y[0])/tileheight][(x[0])/tilewidth] = 2;
+  //scene[(y[0])/tileheight][(x[0])/tilewidth] = 2;
 }
 
 u8 vissionSensor(u8 x,u8 y,u8 px,u8 py){
@@ -475,6 +444,10 @@ u8 vissionSensor(u8 x,u8 y,u8 px,u8 py){
 }
 
 
+void backHome(u8 *x,u8 *y){
+
+}
+
 u8* move(u8 *x,u8 *y,u8 lx, u8 ly,u8 sizeX,u8 sizeY,u8 *dir,u8 *s,u8 room,u8 px,u8 py,u8 *following){
   u8 *sprite = s;
   u8 detected;
@@ -497,8 +470,9 @@ u8* move(u8 *x,u8 *y,u8 lx, u8 ly,u8 sizeX,u8 sizeY,u8 *dir,u8 *s,u8 room,u8 px,
             }else{
               //volver a casa
               //cambiar 4, 12 por las posiciones originales de cada enemigo
-              x[0] = 52;
-              y[0] = 80;
+              //x[0] = 52;
+              //y[0] = 80;
+              backHome(&x[0],&y[0]);
              
               
             }
