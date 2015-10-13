@@ -460,29 +460,29 @@ void patrol(u8 dir,u8 lx,u8 ly,u8 *x,u8 *y,u8 room,u8 sizeX,u8 sizeY){
   scene[(y[0])/tileheight][(x[0])/tilewidth] = 2;
 }
 
-/*
-void vissionSensor(u8 x,u8 y,u8 px,u8 py){
-  u8 cx = (x)/tilewidth;
-  u8 cy = (y)/tileheight;
-  u8 pcx = (px)/tilewidth;
-  u8 pcy = (py)/tileheight;
-  u8 lex,mex,ley,mey,mpx,lpx,mpy,lpy;
-
-  for(u8 i=0; i<3;i++){
+u8 vissionSensor(u8 x,u8 y,u8 px,u8 py){
+  u8 following = 0;
+  u8 cx = x/tilewidth;
+  u8 cy = y/tilewidth;
+  u8 pcx = px/tilewidth;
+  u8 pcy = py/tilewidth;
+  u8 lex,mex,ley,mey;
+  u8 i=0;
+  for(i=0;i<3;i++){
     lex = cx - i;
-    mex = cx + i;
-    lpx = pcx - i;
-    mpx = pcx + i;
     ley = cy - i;
+    mex = cx + i;
     mey = cy + i;
-    lpy = pcy - i;
-    mpy = pcy + i;
+    if(lex == pcx || ley == pcy || mex == pcx || mey == pcy){
+      following = 1;
+    }
   }
-
-
+ 
+  return following;
 
 }
-*/
+
+
 u8* move(u8 *x,u8 *y,u8 lx, u8 ly,u8 sizeX,u8 sizeY,u8 *dir,u8 *s,u8 room,u8 px,u8 py,u8 *following){
   u8 *sprite = s;
   u8 detected;
@@ -491,20 +491,33 @@ u8* move(u8 *x,u8 *y,u8 lx, u8 ly,u8 sizeX,u8 sizeY,u8 *dir,u8 *s,u8 room,u8 px,
     temp = 0;
   }
   else{
-    //movimiento
-      if(temp%6== 0){
+    if(temp%6== 0){
         detected = detectPlayerRoom(px,py,room);
         if(detected == 0){
           if(following[0] == 1){
             followPlayer(px,py,&x[0],&y[0],lx,ly,&dir[0],room,sizeX,sizeY);
+            following[0] = vissionSensor(x[0],y[0],px,py);
           }else{
-            patrol(dir[0],lx,ly,&x[0],&y[0],room,sizeX,sizeY);
+            if(scene[(y[0])/tileheight][(x[0]+sizeX-1)/tilewidth] != 0
+            || scene[(y[0]+sizeY-2)/tileheight][(x[0])/tilewidth] != 0 
+            || scene[(y[0]+sizeY-2)/tileheight][(x[0]+sizeX-1)/tilewidth] != 0){
+              patrol(dir[0],lx,ly,&x[0],&y[0],room,sizeX,sizeY);   
+            }else{
+              //volver a casa
+              //cambiar 4, 12 por las posiciones originales de cada enemigo
+              x[0] = 52;
+              y[0] = 80;
+             
+              
+            }
+            
+                 
           }
         }else{
             following[0] = followPlayer(px,py,&x[0],&y[0],lx,ly,&dir[0],room,sizeX,sizeY);
         }
-
-    }
+       
+    } 
   }
   temp += 2;
   return sprite;
@@ -578,14 +591,18 @@ void game(){
         p.y = 80;
         p.life--;
         if(p.life == 0)
-            return;
+            gameOver();
       }else if(checkCollisions(p.x, p.y, e.x, e.y, p.dir, p.atk) == 1)
         //falta la funcion para matar al enemigo
 
       if(arrow == 1){
         moveObject();
         bound = checkBoundsCollisions(&object.x,&object.y,object.lx,object.ly,object.sizeX,object.sizeY);
+<<<<<<< HEAD
         if(checkCollisions(object.x,object.y,e.x, e.y, &object.dir, 21) == 1)
+=======
+        //if(checkCollisions(&object.x,&object.y,e.x, e.y, &object.dir, 21) == 1)
+>>>>>>> 1d591ec858e5808bd711a1d644da821841a01645
             //falta la funcion para matar al enemigo
       }
 
@@ -614,6 +631,16 @@ void credits(){
       }
 
    }
+}
+
+
+/*GAME OVER*/
+void gameOver(){
+    u8* memptr;
+  cpct_clearScreen(0);
+  memptr = cpct_getScreenPtr(VMEM,10,10);
+  cpct_drawStringM0("Lounge Gladiator",memptr,1,0);
+
 }
 /*EMPIEZA EL CODIGO*/
 
