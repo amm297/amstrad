@@ -28,7 +28,6 @@
 #include "mapa.h"
 #include "vida.h"
 #include "ia.h"
-#include "CalcColision.h"
 
 /*INICIALIZACION*/
 void init(){
@@ -228,6 +227,38 @@ void drawBullets(u8 bullet){
 
 /*Colisiones*/
 
+u8 checkCollisions(u8 pX, u8 pY, u8 eX, u8 eY, u8* dir, u8* atk){
+    u8 popX = pX + 4;
+    u8 popY = pY + 16;
+    u8 eopX = eX + 4;
+    u8 eopY = eY + 16;
+
+    if(eopX >= pX && eopX <= popX && eY >= pY && eY <= popY)
+        if(atk >= 21)
+            return 1;
+        else
+            return 2;
+
+    if(eX >= pX && eX <= popX && eY >= pY && eY <= popY)
+        if(atk >= 21)
+            return 1;
+        else
+            return 2;
+
+    if(eX >= pX && eX <= popX && eopY >= pY && eopY <= popY)
+        if(atk >= 21)
+            return 1;
+        else
+            return 2;
+
+    if(eopX >= pX && eopX <= popX && eopY >= pY && eopY <= popY)
+        if(atk >= 21)
+            return 1;
+        else
+            return 2;
+
+    return 0;
+}
 
 u8 checkBoundsCollisions(u8 *x,u8 *y, u8 lx, u8 ly,u8 sizeX,u8 sizeY){
 
@@ -543,8 +574,8 @@ void game(){
       e.sprite = move(&e.x,&e.y,e.lx,e.ly,e.sizeX,e.sizeY,&e.dir,e.sprite,e.room,p.x,p.y,&following);
 
       if(checkCollisions(p.x, p.y, e.x, e.y, p.dir, p.atk) == 2){
-        p.x = 2;
-        p.y = 100;
+        p.x = 0;
+        p.y = 80;
         p.life--;
         if(p.life == 0)
             return;
@@ -554,7 +585,7 @@ void game(){
       if(arrow == 1){
         moveObject();
         bound = checkBoundsCollisions(&object.x,&object.y,object.lx,object.ly,object.sizeX,object.sizeY);
-        if(checkCollisions(&object.x,&object.y,e.x, e.y, &object.dir, 21) == 1)
+        if(checkCollisions(object.x,object.y,e.x, e.y, &object.dir, 21) == 1)
             //falta la funcion para matar al enemigo
       }
 
