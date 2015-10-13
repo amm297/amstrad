@@ -11,7 +11,7 @@ Symbol Table
   0 ___str_1                                                       04E8 R
   0 ___str_2                                                       04F6 R
   0 ___str_3                                                       04FF R
-  0 ___str_4                                                       209E R
+  0 ___str_4                                                       2406 R
     __modsint                                                      **** GX
     _chacho_quieto_dcha                                            **** GX
   0 _checkArrowCollisions                                          0FEF GR
@@ -34,7 +34,7 @@ Symbol Table
     _cpct_setPalette                                               **** GX
     _cpct_setVideoMode                                             **** GX
     _cpct_waitVSYNC                                                **** GX
-  0 _credits                                                       2066 GR
+  0 _credits                                                       23CE GR
   0 _detectPlayerRoom                                              0000 GR
   0 _drawBullets                                                   0899 GR
   0 _drawFatiga                                                    0782 GR
@@ -48,16 +48,16 @@ Symbol Table
     _flecha_izda                                                   **** GX
   0 _followPlayer                                                  149D GR
   0 _g_palette                                                     0038 GR
-  0 _game                                                          1988 GR
+  0 _game                                                          1CE8 GR
     _gladis_atk_dcha                                               **** GX
     _gladis_atk_izda                                               **** GX
     _gladis_quieto_dcha                                            **** GX
   0 _init                                                          02D2 GR
-  0 _main                                                          20AF GR
+  0 _main                                                          2417 GR
   0 _mapa1                                                         003C GR
   0 _mapa2                                                         012C GR
   0 _menu                                                          02F7 GR
-  0 _move                                                          1860 GR
+  0 _move                                                          18F7 GR
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
 Hexadecimal [16-Bits]
 
@@ -65,13 +65,16 @@ Symbol Table
 
   0 _moveObject                                                    1468 GR
   0 _movement                                                      028B GR
-  1 _object                                                        00F2 GR
+  1 _object                                                        00F3 GR
+  1 _path                                                          00F2 GR
+  0 _pathfinding                                                   18F6 GR
   0 _patrol                                                        165D GR
-  1 _players                                                       00FC GR
+  1 _players                                                       00FD GR
     _rand                                                          **** GX
   1 _scene                                                         0000 GR
   0 _setDirection                                                  025A GR
   1 _temp                                                          00F0 GR
+  0 _vissionSensor                                                 1860 GR
 
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 3.
@@ -79,8 +82,8 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size 20E4   flags    0
-   1 _DATA                                      size  11C   flags    0
+   0 _CODE                                      size 244C   flags    0
+   1 _DATA                                      size  11D   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8
    4 _HOME                                      size    0   flags    0
