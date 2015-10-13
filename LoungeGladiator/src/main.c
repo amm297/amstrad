@@ -198,11 +198,27 @@ void drawVida(u8 life){
       memptr = cpct_getScreenPtr(VMEM,p,192);
       p+=5;
       if(i<=life)  cpct_drawSpriteMasked(corazon_lleno, memptr, 4, 8);
-      else { 
+      else {
         cpct_drawSolidBox(memptr,0,4,8);
         cpct_drawSpriteMasked(corazon_roto, memptr, 4, 8);
       }
      }
+ /* u8* memptr;
+    /*if(life >= 1){
+        memptr = cpct_getScreenPtr(VMEM,65,192);
+        cpct_drawSpriteMasked(corazon_lleno, memptr, 4, 8);
+    }
+    memptr = cpct_getScreenPtr(VMEM,70,192);
+    if(life >= 2)
+        cpct_drawSpriteMasked(corazon_lleno, memptr, 4, 8);
+    else
+        cpct_drawSpriteMasked(corazon_roto, memptr, 4, 8);
+    memptr = cpct_getScreenPtr(VMEM,75,192);
+    if(life >= 3)
+        cpct_drawSpriteMasked(corazon_lleno, memptr, 4, 8);
+    else
+        cpct_drawSpriteMasked(corazon_roto, memptr, 4, 8);*/
+
 }
 /*PROYECTILES*/
 void drawBullets(u8 bullet){
@@ -215,6 +231,21 @@ void drawBullets(u8 bullet){
       if(i<=bullet) cpct_drawSpriteMasked(flecha_arriba, memptr, 2, 8);
       else  cpct_drawSolidBox(memptr,0,2,8);
      }
+    /*if(bullet == 1){
+        memptr = cpct_getScreenPtr(VMEM,50,192);
+        cpct_drawSpriteMasked(flecha_arriba, memptr, 2, 8);
+    }
+    memptr = cpct_getScreenPtr(VMEM,55,192);
+    if(bullet == 2)
+        cpct_drawSpriteMasked(flecha_arriba, memptr, 2, 8);
+    else
+
+    memptr = cpct_getScreenPtr(VMEM,60,192);
+    if(bullet >= 3)
+        cpct_drawSolidBox(memptr,0,2,8);
+    else
+        cpct_drawSpriteMasked(flecha_arriba, memptr, 2, 8);*/
+
 }
 
 /*Colisiones*/
@@ -438,15 +469,11 @@ u8 vissionSensor(u8 x,u8 y,u8 px,u8 py){
       following = 1;
     }
   }
- 
+
   return following;
 
 }
 
-
-void backHome(u8 *x,u8 *y){
-
-}
 
 u8* move(u8 *x,u8 *y,u8 lx, u8 ly,u8 sizeX,u8 sizeY,u8 *dir,u8 *s,u8 room,u8 px,u8 py,u8 *following){
   u8 *sprite = s;
@@ -464,26 +491,25 @@ u8* move(u8 *x,u8 *y,u8 lx, u8 ly,u8 sizeX,u8 sizeY,u8 *dir,u8 *s,u8 room,u8 px,
             following[0] = vissionSensor(x[0],y[0],px,py);
           }else{
             if(scene[(y[0])/tileheight][(x[0]+sizeX-1)/tilewidth] != 0
-            || scene[(y[0]+sizeY-2)/tileheight][(x[0])/tilewidth] != 0 
+            || scene[(y[0]+sizeY-2)/tileheight][(x[0])/tilewidth] != 0
             || scene[(y[0]+sizeY-2)/tileheight][(x[0]+sizeX-1)/tilewidth] != 0){
-              patrol(dir[0],lx,ly,&x[0],&y[0],room,sizeX,sizeY);   
+              patrol(dir[0],lx,ly,&x[0],&y[0],room,sizeX,sizeY);
             }else{
               //volver a casa
               //cambiar 4, 12 por las posiciones originales de cada enemigo
-              //x[0] = 52;
-              //y[0] = 80;
-              backHome(&x[0],&y[0]);
-             
-              
+              x[0] = 52;
+              y[0] = 80;
+
+
             }
-            
-                 
+
+
           }
         }else{
             following[0] = followPlayer(px,py,&x[0],&y[0],lx,ly,&dir[0],room,sizeX,sizeY);
         }
-       
-    } 
+
+    }
   }
   temp += 2;
   return sprite;
@@ -526,7 +552,7 @@ void game(){
 
     //Dibujar personajes
     drawPlayer(p.x,p.y,p.sprite,p.sizeX,p.sizeY,p.life);
-    drawPlayer(e.x,e.y,e.sprite,e.sizeX,e.sizeY,e.life);
+    if(e.life > 0) drawPlayer(e.x,e.y,e.sprite,e.sizeX,e.sizeY,e.life);
     if(arrow == 1) drawPlayer(object.x,object.y,object.sprite,object.sizeX,object.sizeY,object.vivo);
 
     //Dibujar vida
@@ -550,26 +576,30 @@ void game(){
       cpct_scanKeyboard_f();
       p.sprite = checkKeyboard(&p.x,&p.y,&p.atk,&p.dir,p.sprite,&p.sizeX,&p.bullets,&finish,&arrow);
       checkBoundsCollisions(&p.x,&p.y,p.lx,p.ly,p.sizeX,p.sizeY);
-      e.sprite = move(&e.x,&e.y,e.lx,e.ly,e.sizeX,e.sizeY,&e.dir,e.sprite,e.room,p.x,p.y,&following);
+      if(e.life > 0)
+        e.sprite = move(&e.x,&e.y,e.lx,e.ly,e.sizeX,e.sizeY,&e.dir,e.sprite,e.room,p.x,p.y,&following);
 
-      if(checkCollisions(p.x, p.y, e.x, e.y, p.atk) == 2){
-        p.x = 0;
-        p.y = 80;
-        p.life -= 1;
-        if(p.life == 0){
-            gameOver();
-            break;
-        }
-      }else if(checkCollisions(p.x, p.y, e.x, e.y, p.atk) == 1){
-        e.life =0;
-      }
+      if(e.life > 0)
+          if(checkCollisions(p.x, p.y, e.x, e.y, p.atk) == 2){
+            p.x = 0;
+            p.y = 80;
+            p.life -= 1;
+            if(p.life == 0){
+                gameOver();
+                break;
+            }
+          }else if(checkCollisions(p.x, p.y, e.x, e.y, p.atk) == 1){
+            e.life =0;
+          }
         //falta la funcion para matar al enemigo
 
       if(arrow == 1){
         moveObject();
         bound = checkBoundsCollisions(&object.x,&object.y,object.lx,object.ly,object.sizeX,object.sizeY);
-        //if(checkCollisions(&object.x,&object.y,e.x, e.y, &object.dir, 21) == 1)
-            //falta la funcion para matar al enemigo
+        if(checkCollisions(object.x, object.y, e.x, e.y, 21) == 1){
+            e.life = 0;
+            object.vivo = 0;
+        }
       }
 
       if(finish == 1) return;
