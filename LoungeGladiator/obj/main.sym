@@ -12,14 +12,14 @@ Symbol Table
   0 ___str_2                                                       062F R
   0 ___str_3                                                       063D R
   0 ___str_4                                                       0646 R
-  0 ___str_5                                                       26BB R
+  0 ___str_5                                                       275E R
     __modsint                                                      **** GX
     _chacho_quieto_dcha                                            **** GX
-  0 _checkArrowCollisions                                          0DD3 GR
-  0 _checkBoundsCollisions                                         0F39 GR
-  0 _checkBoundsCollisionsEnemy                                    0B7E GR
+  0 _checkArrowCollisions                                          0D70 GR
+  0 _checkBoundsCollisions                                         0ED6 GR
+  0 _checkBoundsCollisionsEnemy                                    0B1B GR
   0 _checkCollisions                                               02D2 GR
-  0 _checkKeyboard                                                 130D GR
+  0 _checkKeyboard                                                 12EA GR
   0 _chooseDirection                                               021C GR
     _corazon_lleno                                                 **** GX
     _corazon_roto                                                  **** GX
@@ -36,57 +36,57 @@ Symbol Table
     _cpct_setPalette                                               **** GX
     _cpct_setVideoMode                                             **** GX
     _cpct_waitVSYNC                                                **** GX
-  0 _credits                                                       2683 GR
+  0 _credits                                                       2726 GR
   0 _detectPlayerRoom                                              0000 GR
-  0 _drawBullets                                                   0B22 GR
-  0 _drawFatiga                                                    0992 GR
+  0 _drawBullets                                                   0ABF GR
+  0 _drawFatiga                                                    08C7 GR
   0 _drawMap                                                       064C GR
-  0 _drawPlayer                                                    0930 GR
-  0 _drawVida                                                      0AB8 GR
-  0 _erasePlayer                                                   0963 GR
+  0 _drawPickUps                                                   09ED GR
+  0 _drawPlayer                                                    0865 GR
+  0 _drawVida                                                      0A55 GR
+  0 _erasePlayer                                                   0898 GR
     _fatiga_full                                                   **** GX
     _fatiga_nor                                                    **** GX
     _flecha_abajo                                                  **** GX
     _flecha_arriba                                                 **** GX
     _flecha_dcha                                                   **** GX
     _flecha_izda                                                   **** GX
-  0 _followPlayer                                                  166F GR
+  0 _followPlayer                                                  164C GR
   0 _g_palette                                                     0038 GR
-  0 _game                                                          1E64 GR
+  0 _game                                                          1E41 GR
   0 _gameOver                                                      03FE GR
     _gladis_atk_dcha                                               **** GX
     _gladis_atk_izda                                               **** GX
     _gladis_quieto_dcha                                            **** GX
-  0 _init                                                          03D9 GR
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
 Hexadecimal [16-Bits]
 
 Symbol Table
 
-  0 _main                                                          26CC GR
+  0 _init                                                          03D9 GR
+  0 _main                                                          276F GR
   0 _mapa1                                                         003C GR
   0 _mapa2                                                         012C GR
   0 _menu                                                          043B GR
-  0 _move                                                          1A73 GR
-  0 _moveObject                                                    163A GR
+  0 _move                                                          1A50 GR
+  0 _moveObject                                                    1617 GR
   0 _movement                                                      028B GR
   1 _object                                                        00F3 GR
   1 _path                                                          00F2 GR
-  0 _patrol                                                        182F GR
+  0 _patrol                                                        180C GR
   1 _players                                                       00FD GR
     _rand                                                          **** GX
   1 _scene                                                         0000 GR
   0 _setDirection                                                  025A GR
   1 _temp                                                          00F0 GR
-  0 _vissionSensor                                                 19DD GR
-
+  0 _vissionSensor                                                 19BA GR
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 3.
 Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size 2701   flags    0
+   0 _CODE                                      size 27A4   flags    0
    1 _DATA                                      size  11D   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8

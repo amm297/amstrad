@@ -143,13 +143,13 @@ void drawMap(u8 t){
          }
          if(scene[posY][posX] == 9){
             cpct_drawSolidBox(memptr, 9, tilewidth, tileheight);
-         }
+         }/*
          if(scene[posY][posX] == 5){
             cpct_drawSpriteMasked(flecha_arriba, memptr, 2, 8);
          }
          if(scene[posY][posX] == 2){
             cpct_drawSpriteMasked(corazon_lleno, memptr, 4, 8);
-         }
+         }*/
       }
    }
 }
@@ -216,6 +216,24 @@ void drawFatiga(u8 atk, u8 col){
             cpct_drawSpriteMasked(fatiga_full, memptr, 2, 8);
         }
     }
+}
+
+/*PICK-UPS*/
+void drawPickUps(u8 corazon, u8 bullet){
+    u8* memptr;
+
+    memptr = cpct_getScreenPtr(VMEM, 1*tilewidth, 10*tileheight);
+    if(corazon == 0)
+        cpct_drawSpriteMasked(corazon_lleno,memptr,4,8);
+    else
+        cpct_drawSolidBox(memptr, 0, 4, 8);
+
+    memptr = cpct_getScreenPtr(VMEM, 2*tilewidth, 1*tileheight);
+    if(bullet == 0)
+        cpct_drawSpriteMasked(flecha_arriba,memptr,2,8);
+    else
+        cpct_drawSolidBox(memptr, 0, 2, 8);
+
 }
 
 /*VIDA*/
@@ -317,7 +335,7 @@ void checkArrowCollisions(u8 *arrow){
    }
 }
 
-u8 checkBoundsCollisions(u8 *x,u8 *y, u8 lx, u8 ly,u8 sizeX,u8 sizeY){
+u8 checkBoundsCollisions(u8 *x,u8 *y, u8 lx, u8 ly,u8 sizeX,u8 sizeY,u8 *life,u8 *bullets,u8 *corazon, u8 *flecha){
 
   u8 *posX = x;
   u8 *posY = y;
@@ -336,14 +354,20 @@ u8 checkBoundsCollisions(u8 *x,u8 *y, u8 lx, u8 ly,u8 sizeX,u8 sizeY){
       || scene[(posY[0]+sizeY-2)/tileheight][(posX[0])/tilewidth] == 2
       || scene[(posY[0]+sizeY-2)/tileheight][(posX[0]+sizeX-1)/tilewidth] == 2
     ){
-      //Sumar corazones
+      if(*life < 3 && *corazon == 0){
+        *life += 1;
+        *corazon = 1;
+      }
   }
   else if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 5
       || scene[(posY[0])/tileheight][(posX[0]+sizeX-1)/tilewidth] == 5
       || scene[(posY[0]+sizeY-2)/tileheight][(posX[0])/tilewidth] == 5
       || scene[(posY[0]+sizeY-2)/tileheight][(posX[0]+sizeX-1)/tilewidth] == 5
     ){
-        //Sumar municion
+      if(*bullets < 3 && *flecha == 0){
+        *bullets += 1;
+        *flecha = 1;
+      }
   }else if(    scene[(posY[0])/tileheight][(posX[0])/tilewidth] == 9
       || scene[(posY[0])/tileheight][(posX[0]+sizeX-1)/tilewidth] == 9
       || scene[(posY[0]+sizeY-2)/tileheight][(posX[0])/tilewidth] == 9
@@ -544,6 +568,7 @@ u8* move(u8 *x,u8 *y,u8 lx, u8 ly,u8 sizeX,u8 sizeY,u8 *dir,u8 *s,u8 room,u8 px,
 void game(){
   TPlayer p = {0,80,0,80,gladis_quieto_dcha,3,6,4,16,4,20,20,3,0,0};
   TPlayer e = {52,80,52,80,chacho_quieto_dcha,3,6,4,16,4,0,0,0,1,3};
+  TNivel n = {0,0,0};
 
   //players[0] =p;
    //u8 i = p.x;
@@ -572,6 +597,9 @@ void game(){
       if(bound == 1) arrow = 0;
     }
 
+    //Dibujar pickups
+    drawPickUps(n.corazon,n.bullet);
+
     //Dibujar personajes
     drawPlayer(p.x,p.y,p.sprite,p.sizeX,p.sizeY,p.life);
     if(e.life > 0) drawPlayer(e.x,e.y,e.sprite,e.sizeX,e.sizeY,e.life);
@@ -597,7 +625,7 @@ void game(){
       //Comprobar teclado
       cpct_scanKeyboard_f();
       p.sprite = checkKeyboard(&p.x,&p.y,&p.atk,&p.dir,p.sprite,&p.sizeX,&p.bullets,&finish,&arrow);
-      checkBoundsCollisions(&p.x,&p.y,p.lx,p.ly,p.sizeX,p.sizeY);
+      checkBoundsCollisions(&p.x,&p.y,p.lx,p.ly,p.sizeX,p.sizeY,&p.life,&p.bullets,&n.corazon,&n.bullet);
       if(e.life > 0)
         e.sprite = move(&e.x,&e.y,e.lx,e.ly,e.sizeX,e.sizeY,&e.dir,e.sprite,e.room,p.x,p.y,&following);
 
@@ -617,7 +645,7 @@ void game(){
 
       if(arrow == 1){
         moveObject();
-        bound = checkBoundsCollisions(&object.x,&object.y,object.lx,object.ly,object.sizeX,object.sizeY);
+        bound = checkBoundsCollisions(&object.x,&object.y,object.lx,object.ly,object.sizeX,object.sizeY,0,0,0,0);
         if(checkCollisions(object.x, object.y, e.x, e.y, 21) == 1){
             e.life = 0;
             object.vivo = 0;
