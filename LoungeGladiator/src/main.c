@@ -387,31 +387,45 @@ u8* checkKeyboard(u8 *x,u8 *y,u8 *atk,u8 *dir,u8 *s,u8 *size,u8 *bullets,u8 *fin
       size[0] = 5;
       if(atk[0] >= 50) atk[0] =0;
       else atk[0] += 1;
-      if(dir[0] == 6) {s = gladis_atk_dcha;}
-      else if(dir[0] == 4) {s = gladis_atk_izda;}
+      switch(dir[0]){
+        case 4:
+            s = gladis_atk_izda;
+            break;
+        case 6:
+            s = gladis_atk_dcha;
+            break;
+        case 8:
+            s = gladis_atk_arriba;
+            size[0] = 4;
+            break;
+        case 2:
+            s = gladis_atk_abajo;
+            size[0] = 4;
+            break;
+        }
   }else{
     if(atk[0] < 20) atk[0] += 1;
     else atk[0] = 20;
-    if(cpct_isKeyPressed(Key_CursorRight) && x[0] < 76 ){
+    if(cpct_isKeyPressed(Key_CursorRight) && x[0] < 76){
          x[0] += 1;
          dir[0] = 6;
          size[0] = 4;
-         sprite = gladis_quieto_dcha;
-      }else if(cpct_isKeyPressed(Key_CursorLeft) && x[0] > 0 ){
+         s = gladis_quieto_dcha;
+      }else if(cpct_isKeyPressed(Key_CursorLeft) && x[0] > 0){
          x[0] -= 1;
          dir[0] = 4;
          size[0] = 4;
-         sprite = gladis_quieto_izda;
+         s = gladis_quieto_izda;
       }else  if(cpct_isKeyPressed(Key_CursorDown) && y[0] < 180){
          y[0] += 2;
          dir[0] = 2;
          size[0] = 4;
-         sprite = gladis_quieto_dcha;
+         s = gladis_abajo;
       }else if(cpct_isKeyPressed(Key_CursorUp) && y[0] > 0 ){
          y[0] -= 2;
          dir[0] = 8;
          size[0] = 4;
-         sprite = gladis_arriba_dcha;
+         s = gladis_arriba;
       }else if(cpct_isKeyPressed(Key_X) && arrow[0] == 0){
       if(bullets[0] > 0){
 
@@ -435,8 +449,21 @@ u8* checkKeyboard(u8 *x,u8 *y,u8 *atk,u8 *dir,u8 *s,u8 *size,u8 *bullets,u8 *fin
       }
         arrow[0]=1;
       }else {
+        switch(dir[0]){
+        case 4:
+            s = gladis_quieto_izda;
+            break;
+        case 6:
+            s = gladis_quieto_dcha;
+            break;
+        case 8:
+            s = gladis_arriba;
+            break;
+        case 2:
+            s = gladis_abajo;
+            break;
+        }
         size[0] = 4;
-        s = gladis_quieto_dcha;
       }
   }
 

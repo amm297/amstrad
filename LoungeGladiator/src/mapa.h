@@ -56,7 +56,7 @@ typedef struct{
 }TNivel;
 
 //const u8* sprite = gladis_quieto_dcha;
-const u8 g_palette[4] = { 0,26,6,18 };
+const u8 g_palette[5] = { 0,26,6,13 };
 u8 scene[height][width];
 int temp;
 u8 path;
