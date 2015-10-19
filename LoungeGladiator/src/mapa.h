@@ -20,11 +20,10 @@
 #define numplayers 2
 
 
-typedef struct 
+typedef struct
 {
   u8 x,y; //posicion personaje
   u8 lx,ly; //posicion personaje
-  u8 ox,oy; //posicion origen
   u8 *sprite; //sprite persnaje
   u8 life; //vida personaje
   u8 dir; //direccion personaje
@@ -39,7 +38,7 @@ typedef struct
 }TPlayer;
 
 
-typedef struct 
+typedef struct
 {
   u8 x,y; //posicion objeto
   u8 lx,ly; //posicion objeto
@@ -50,17 +49,16 @@ typedef struct
   u8 sizeY;
 }TObject;
 
-typedef struct 
-{
+typedef struct{
   u8 num;
   u8 corazon;
   u8 bullet;
 }TNivel;
 
 //const u8* sprite = gladis_quieto_dcha;
-const u8 g_palette[4] = { 0,26,6,18 };
+const u8 g_palette[5] = { 0,26,6,13 };
 u8 scene[height][width];
-u8 temp;
+int temp;
 u8 path;
 TObject object;
 TPlayer players[numplayers];
@@ -78,7 +76,7 @@ TPlayer players[numplayers];
   //10 -> puertas a zonas
 
 const u8 mapa1[height][width] = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-                                 {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+                                 {1,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
                                  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
                                  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1},
                                  {1,0,0,0,0,0,0,0,0,0,0,1,3,3,3,3,3,3,3,1},
@@ -87,7 +85,7 @@ const u8 mapa1[height][width] = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
                                  {1,0,1,0,0,0,0,1,0,0,0,1,3,3,3,3,3,3,3,1},
                                  {1,0,1,0,0,0,0,1,0,0,0,1,3,3,3,3,3,3,3,1},
                                  {1,0,1,0,0,0,0,1,0,0,0,1,3,3,3,3,3,3,3,1},
-                                 {1,5,1,0,0,0,0,1,0,0,0,0,3,3,3,3,3,3,3,1},
+                                 {1,2,1,0,0,0,0,1,0,0,0,10,3,3,3,3,3,3,3,1},
                                  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,9,9,1,1,1}};
 
 const u8 mapa2[height][width] = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
