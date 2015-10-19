@@ -156,39 +156,20 @@ void drawMap(u8 t){
 
 /*PERSONAJES*/
 
-void drawPlayer(u8 x,u8 y,u8 *sprite,u8 life,u8 mode){
-    u8* memptr;
-    if(life > 0){
-        memptr = cpct_getScreenPtr(VMEM,x,y);
-        switch(mode){
-        case 0:
-            cpct_drawSpriteMasked(sprite, memptr, 4, 16);
-            break;
-        case 1:
-            cpct_drawSpriteMasked(sprite, memptr, 2, 8);
-            break;
-        case 2:
-            cpct_drawSpriteMasked(sprite, memptr, 4, 4);
-            break;
-        }
-    }
+void drawPlayer(u8 x,u8 y,u8 *sprite,u8 life){
+  u8* memptr;
+  if(life > 0){
+    memptr = cpct_getScreenPtr(VMEM,x,y);
+    cpct_drawSpriteMasked(sprite, memptr, 4, 16);
+  }
 }
 
-void erasePlayer(u8 x,u8 y,u8 mode){
-    u8* memptr;
-
+void erasePlayer(u8 x,u8 y){
+  u8* memptr;
+  //if(p.life > 0){
     memptr = cpct_getScreenPtr(VMEM,x,y);
-    switch(mode){
-    case 0:
-        cpct_drawSolidBox(memptr,0,4,16);
-        break;
-    case 1:
-        cpct_drawSolidBox(memptr,0,2,8);
-        break;
-    case 2:
-        cpct_drawSolidBox(memptr,0,4,4);
-        break;
-    }
+    cpct_drawSolidBox(memptr,0,4,16);
+  //}
 }
 
 
@@ -445,16 +426,16 @@ u8* checkKeyboard(u8 *x,u8 *y,u8 *atk,u8 *dir,u8 *s,u8 *size,u8 *bullets,u8 *fin
          dir[0] = 8;
          size[0] = 4;
          s = gladis_arriba;
-      }else if(cpct_isKeyPressed(Key_X) && arrow[0] == 0 && atk[0] == 20){
+      }else if(cpct_isKeyPressed(Key_X) && arrow[0] == 0){
       if(bullets[0] > 0){
+
         u8 *spr = flecha_dcha,xs=2,ys=8,ox=x[0]+4;
         switch(dir[0]){
-          case 6: spr = flecha_dcha; xs=4;ys=4;ox=x[0]; break;
-          case 4: spr = flecha_izda; xs=4;ys=4;ox=x[0]; break;
-          case 2: spr = flecha_abajo; xs=2;ys=8;ox=x[0]; break;
-          case 8: spr = flecha_arriba; xs=2;ys=8;ox=x[0]; break;
+          case 6: spr = flecha_dcha; xs=4;ys=4;ox=x[0]+4; break;
+          case 4: spr = flecha_izda; xs=4;ys=4;ox=x[0]-4; break;
+          case 2: spr = flecha_abajo; xs=2;ys=8; break;
+          case 8: spr = flecha_arriba; xs=2;ys=8; break;
         }
-        atk[0] = 0;
         object.x = ox;
         object.y = y[0]+8;
         object.x = object.x;
@@ -636,29 +617,20 @@ void game(){
     cpct_waitVSYNC();
 
     //Desdibujar personajes
-    erasePlayer(p.lx,p.ly,0);
-    erasePlayer(e.lx,e.ly,0);
+    erasePlayer(p.lx,p.ly);
+    erasePlayer(e.lx,e.ly);
     if(arrow == 1){
-        if(object.dir == 4 || object.dir == 6)
-            erasePlayer(object.lx,object.ly,2);
-        else
-            erasePlayer(object.lx,object.ly,1);
-        if(bound == 1) arrow = 0;
+      erasePlayer(object.lx,object.ly);
+      if(bound == 1) arrow = 0;
     }
 
     //Dibujar pickups
     drawPickUps(n.corazon,n.bullet);
 
     //Dibujar personajes
-    drawPlayer(p.x,p.y,p.sprite,p.life,0);
-    if(e.life > 0) drawPlayer(e.x,e.y,e.sprite,e.life,0);
-    if(arrow == 1){
-        if(object.dir == 4 || object.dir == 6)
-            drawPlayer(object.x,object.y,object.sprite,object.vivo,2);
-        else if(object.dir == 2 || object.dir == 8)
-            drawPlayer(object.x,object.y,object.sprite,object.vivo,1);
-    }
-
+    drawPlayer(p.x,p.y,p.sprite,p.life);
+    if(e.life > 0) drawPlayer(e.x,e.y,e.sprite,e.life);
+    if(arrow == 1) drawPlayer(object.x,object.y,object.sprite,object.vivo);
 
     //Dibujar vida
     drawVida(p.life);
