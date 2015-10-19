@@ -50,6 +50,13 @@ typedef struct
   u8 sizeY;
 }TObject;
 
+typedef struct 
+{
+  u8 num;
+  u8 corazon;
+  u8 bullet;
+}TNivel;
+
 //const u8* sprite = gladis_quieto_dcha;
 const u8 g_palette[4] = { 0,26,6,18 };
 u8 scene[height][width];
