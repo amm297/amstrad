@@ -45,137 +45,137 @@
                              45 ;--------------------------------------------------------
                              46 	.area _CODE
                              47 	.area _CODE
-   6D39                      48 _flecha_arriba:
-   6D39 FF                   49 	.db #0xFF	; 255
-   6D3A 00                   50 	.db #0x00	; 0
-   6D3B 55                   51 	.db #0x55	; 85	'U'
-   6D3C 80                   52 	.db #0x80	; 128
-   6D3D AA                   53 	.db #0xAA	; 170
-   6D3E 40                   54 	.db #0x40	; 64
-   6D3F AA                   55 	.db #0xAA	; 170
-   6D40 40                   56 	.db #0x40	; 64
-   6D41 FF                   57 	.db #0xFF	; 255
-   6D42 00                   58 	.db #0x00	; 0
-   6D43 55                   59 	.db #0x55	; 85	'U'
-   6D44 80                   60 	.db #0x80	; 128
-   6D45 FF                   61 	.db #0xFF	; 255
-   6D46 00                   62 	.db #0x00	; 0
-   6D47 55                   63 	.db #0x55	; 85	'U'
-   6D48 80                   64 	.db #0x80	; 128
-   6D49 FF                   65 	.db #0xFF	; 255
-   6D4A 00                   66 	.db #0x00	; 0
-   6D4B 55                   67 	.db #0x55	; 85	'U'
-   6D4C 80                   68 	.db #0x80	; 128
-   6D4D FF                   69 	.db #0xFF	; 255
-   6D4E 00                   70 	.db #0x00	; 0
-   6D4F 55                   71 	.db #0x55	; 85	'U'
-   6D50 80                   72 	.db #0x80	; 128
-   6D51 FF                   73 	.db #0xFF	; 255
-   6D52 00                   74 	.db #0x00	; 0
-   6D53 55                   75 	.db #0x55	; 85	'U'
-   6D54 80                   76 	.db #0x80	; 128
-   6D55 FF                   77 	.db #0xFF	; 255
-   6D56 00                   78 	.db #0x00	; 0
-   6D57 55                   79 	.db #0x55	; 85	'U'
-   6D58 80                   80 	.db #0x80	; 128
-   6D59                      81 _flecha_abajo:
-   6D59 AA                   82 	.db #0xAA	; 170
-   6D5A 40                   83 	.db #0x40	; 64
-   6D5B FF                   84 	.db #0xFF	; 255
-   6D5C 00                   85 	.db #0x00	; 0
-   6D5D AA                   86 	.db #0xAA	; 170
-   6D5E 40                   87 	.db #0x40	; 64
-   6D5F FF                   88 	.db #0xFF	; 255
-   6D60 00                   89 	.db #0x00	; 0
-   6D61 AA                   90 	.db #0xAA	; 170
-   6D62 40                   91 	.db #0x40	; 64
-   6D63 FF                   92 	.db #0xFF	; 255
-   6D64 00                   93 	.db #0x00	; 0
-   6D65 AA                   94 	.db #0xAA	; 170
-   6D66 40                   95 	.db #0x40	; 64
-   6D67 FF                   96 	.db #0xFF	; 255
-   6D68 00                   97 	.db #0x00	; 0
-   6D69 AA                   98 	.db #0xAA	; 170
-   6D6A 40                   99 	.db #0x40	; 64
-   6D6B FF                  100 	.db #0xFF	; 255
-   6D6C 00                  101 	.db #0x00	; 0
-   6D6D AA                  102 	.db #0xAA	; 170
-   6D6E 40                  103 	.db #0x40	; 64
-   6D6F FF                  104 	.db #0xFF	; 255
-   6D70 00                  105 	.db #0x00	; 0
-   6D71 55                  106 	.db #0x55	; 85	'U'
-   6D72 80                  107 	.db #0x80	; 128
-   6D73 55                  108 	.db #0x55	; 85	'U'
-   6D74 80                  109 	.db #0x80	; 128
-   6D75 AA                  110 	.db #0xAA	; 170
-   6D76 40                  111 	.db #0x40	; 64
-   6D77 FF                  112 	.db #0xFF	; 255
-   6D78 00                  113 	.db #0x00	; 0
-   6D79                     114 _flecha_dcha:
-   6D79 FF                  115 	.db #0xFF	; 255
-   6D7A 00                  116 	.db #0x00	; 0
-   6D7B FF                  117 	.db #0xFF	; 255
-   6D7C 00                  118 	.db #0x00	; 0
-   6D7D FF                  119 	.db #0xFF	; 255
-   6D7E 00                  120 	.db #0x00	; 0
-   6D7F FF                  121 	.db #0xFF	; 255
-   6D80 00                  122 	.db #0x00	; 0
-   6D81 FF                  123 	.db #0xFF	; 255
-   6D82 00                  124 	.db #0x00	; 0
-   6D83 FF                  125 	.db #0xFF	; 255
-   6D84 00                  126 	.db #0x00	; 0
-   6D85 FF                  127 	.db #0xFF	; 255
-   6D86 00                  128 	.db #0x00	; 0
-   6D87 55                  129 	.db #0x55	; 85	'U'
-   6D88 80                  130 	.db #0x80	; 128
-   6D89 00                  131 	.db #0x00	; 0
-   6D8A C0                  132 	.db #0xC0	; 192
-   6D8B 00                  133 	.db #0x00	; 0
-   6D8C C0                  134 	.db #0xC0	; 192
-   6D8D 00                  135 	.db #0x00	; 0
-   6D8E C0                  136 	.db #0xC0	; 192
-   6D8F AA                  137 	.db #0xAA	; 170
-   6D90 40                  138 	.db #0x40	; 64
-   6D91 FF                  139 	.db #0xFF	; 255
-   6D92 00                  140 	.db #0x00	; 0
-   6D93 FF                  141 	.db #0xFF	; 255
-   6D94 00                  142 	.db #0x00	; 0
-   6D95 FF                  143 	.db #0xFF	; 255
-   6D96 00                  144 	.db #0x00	; 0
-   6D97 55                  145 	.db #0x55	; 85	'U'
-   6D98 80                  146 	.db #0x80	; 128
-   6D99                     147 _flecha_izda:
-   6D99 FF                  148 	.db #0xFF	; 255
-   6D9A 00                  149 	.db #0x00	; 0
-   6D9B FF                  150 	.db #0xFF	; 255
-   6D9C 00                  151 	.db #0x00	; 0
-   6D9D FF                  152 	.db #0xFF	; 255
-   6D9E 00                  153 	.db #0x00	; 0
-   6D9F FF                  154 	.db #0xFF	; 255
-   6DA0 00                  155 	.db #0x00	; 0
-   6DA1 AA                  156 	.db #0xAA	; 170
-   6DA2 40                  157 	.db #0x40	; 64
-   6DA3 FF                  158 	.db #0xFF	; 255
-   6DA4 00                  159 	.db #0x00	; 0
-   6DA5 FF                  160 	.db #0xFF	; 255
-   6DA6 00                  161 	.db #0x00	; 0
-   6DA7 FF                  162 	.db #0xFF	; 255
-   6DA8 00                  163 	.db #0x00	; 0
-   6DA9 55                  164 	.db #0x55	; 85	'U'
-   6DAA 80                  165 	.db #0x80	; 128
-   6DAB 00                  166 	.db #0x00	; 0
-   6DAC C0                  167 	.db #0xC0	; 192
-   6DAD 00                  168 	.db #0x00	; 0
-   6DAE C0                  169 	.db #0xC0	; 192
-   6DAF 00                  170 	.db #0x00	; 0
-   6DB0 C0                  171 	.db #0xC0	; 192
-   6DB1 AA                  172 	.db #0xAA	; 170
-   6DB2 40                  173 	.db #0x40	; 64
-   6DB3 FF                  174 	.db #0xFF	; 255
-   6DB4 00                  175 	.db #0x00	; 0
-   6DB5 FF                  176 	.db #0xFF	; 255
-   6DB6 00                  177 	.db #0x00	; 0
-   6DB7 FF                  178 	.db #0xFF	; 255
-   6DB8 00                  179 	.db #0x00	; 0
+   6B6F                      48 _flecha_arriba:
+   6B6F FF                   49 	.db #0xFF	; 255
+   6B70 00                   50 	.db #0x00	; 0
+   6B71 55                   51 	.db #0x55	; 85	'U'
+   6B72 80                   52 	.db #0x80	; 128
+   6B73 AA                   53 	.db #0xAA	; 170
+   6B74 40                   54 	.db #0x40	; 64
+   6B75 AA                   55 	.db #0xAA	; 170
+   6B76 40                   56 	.db #0x40	; 64
+   6B77 FF                   57 	.db #0xFF	; 255
+   6B78 00                   58 	.db #0x00	; 0
+   6B79 55                   59 	.db #0x55	; 85	'U'
+   6B7A 80                   60 	.db #0x80	; 128
+   6B7B FF                   61 	.db #0xFF	; 255
+   6B7C 00                   62 	.db #0x00	; 0
+   6B7D 55                   63 	.db #0x55	; 85	'U'
+   6B7E 80                   64 	.db #0x80	; 128
+   6B7F FF                   65 	.db #0xFF	; 255
+   6B80 00                   66 	.db #0x00	; 0
+   6B81 55                   67 	.db #0x55	; 85	'U'
+   6B82 80                   68 	.db #0x80	; 128
+   6B83 FF                   69 	.db #0xFF	; 255
+   6B84 00                   70 	.db #0x00	; 0
+   6B85 55                   71 	.db #0x55	; 85	'U'
+   6B86 80                   72 	.db #0x80	; 128
+   6B87 FF                   73 	.db #0xFF	; 255
+   6B88 00                   74 	.db #0x00	; 0
+   6B89 55                   75 	.db #0x55	; 85	'U'
+   6B8A 80                   76 	.db #0x80	; 128
+   6B8B FF                   77 	.db #0xFF	; 255
+   6B8C 00                   78 	.db #0x00	; 0
+   6B8D 55                   79 	.db #0x55	; 85	'U'
+   6B8E 80                   80 	.db #0x80	; 128
+   6B8F                      81 _flecha_abajo:
+   6B8F AA                   82 	.db #0xAA	; 170
+   6B90 40                   83 	.db #0x40	; 64
+   6B91 FF                   84 	.db #0xFF	; 255
+   6B92 00                   85 	.db #0x00	; 0
+   6B93 AA                   86 	.db #0xAA	; 170
+   6B94 40                   87 	.db #0x40	; 64
+   6B95 FF                   88 	.db #0xFF	; 255
+   6B96 00                   89 	.db #0x00	; 0
+   6B97 AA                   90 	.db #0xAA	; 170
+   6B98 40                   91 	.db #0x40	; 64
+   6B99 FF                   92 	.db #0xFF	; 255
+   6B9A 00                   93 	.db #0x00	; 0
+   6B9B AA                   94 	.db #0xAA	; 170
+   6B9C 40                   95 	.db #0x40	; 64
+   6B9D FF                   96 	.db #0xFF	; 255
+   6B9E 00                   97 	.db #0x00	; 0
+   6B9F AA                   98 	.db #0xAA	; 170
+   6BA0 40                   99 	.db #0x40	; 64
+   6BA1 FF                  100 	.db #0xFF	; 255
+   6BA2 00                  101 	.db #0x00	; 0
+   6BA3 AA                  102 	.db #0xAA	; 170
+   6BA4 40                  103 	.db #0x40	; 64
+   6BA5 FF                  104 	.db #0xFF	; 255
+   6BA6 00                  105 	.db #0x00	; 0
+   6BA7 55                  106 	.db #0x55	; 85	'U'
+   6BA8 80                  107 	.db #0x80	; 128
+   6BA9 55                  108 	.db #0x55	; 85	'U'
+   6BAA 80                  109 	.db #0x80	; 128
+   6BAB AA                  110 	.db #0xAA	; 170
+   6BAC 40                  111 	.db #0x40	; 64
+   6BAD FF                  112 	.db #0xFF	; 255
+   6BAE 00                  113 	.db #0x00	; 0
+   6BAF                     114 _flecha_dcha:
+   6BAF FF                  115 	.db #0xFF	; 255
+   6BB0 00                  116 	.db #0x00	; 0
+   6BB1 FF                  117 	.db #0xFF	; 255
+   6BB2 00                  118 	.db #0x00	; 0
+   6BB3 FF                  119 	.db #0xFF	; 255
+   6BB4 00                  120 	.db #0x00	; 0
+   6BB5 FF                  121 	.db #0xFF	; 255
+   6BB6 00                  122 	.db #0x00	; 0
+   6BB7 FF                  123 	.db #0xFF	; 255
+   6BB8 00                  124 	.db #0x00	; 0
+   6BB9 FF                  125 	.db #0xFF	; 255
+   6BBA 00                  126 	.db #0x00	; 0
+   6BBB FF                  127 	.db #0xFF	; 255
+   6BBC 00                  128 	.db #0x00	; 0
+   6BBD 55                  129 	.db #0x55	; 85	'U'
+   6BBE 80                  130 	.db #0x80	; 128
+   6BBF 00                  131 	.db #0x00	; 0
+   6BC0 C0                  132 	.db #0xC0	; 192
+   6BC1 00                  133 	.db #0x00	; 0
+   6BC2 C0                  134 	.db #0xC0	; 192
+   6BC3 00                  135 	.db #0x00	; 0
+   6BC4 C0                  136 	.db #0xC0	; 192
+   6BC5 AA                  137 	.db #0xAA	; 170
+   6BC6 40                  138 	.db #0x40	; 64
+   6BC7 FF                  139 	.db #0xFF	; 255
+   6BC8 00                  140 	.db #0x00	; 0
+   6BC9 FF                  141 	.db #0xFF	; 255
+   6BCA 00                  142 	.db #0x00	; 0
+   6BCB FF                  143 	.db #0xFF	; 255
+   6BCC 00                  144 	.db #0x00	; 0
+   6BCD 55                  145 	.db #0x55	; 85	'U'
+   6BCE 80                  146 	.db #0x80	; 128
+   6BCF                     147 _flecha_izda:
+   6BCF FF                  148 	.db #0xFF	; 255
+   6BD0 00                  149 	.db #0x00	; 0
+   6BD1 FF                  150 	.db #0xFF	; 255
+   6BD2 00                  151 	.db #0x00	; 0
+   6BD3 FF                  152 	.db #0xFF	; 255
+   6BD4 00                  153 	.db #0x00	; 0
+   6BD5 FF                  154 	.db #0xFF	; 255
+   6BD6 00                  155 	.db #0x00	; 0
+   6BD7 AA                  156 	.db #0xAA	; 170
+   6BD8 40                  157 	.db #0x40	; 64
+   6BD9 FF                  158 	.db #0xFF	; 255
+   6BDA 00                  159 	.db #0x00	; 0
+   6BDB FF                  160 	.db #0xFF	; 255
+   6BDC 00                  161 	.db #0x00	; 0
+   6BDD FF                  162 	.db #0xFF	; 255
+   6BDE 00                  163 	.db #0x00	; 0
+   6BDF 55                  164 	.db #0x55	; 85	'U'
+   6BE0 80                  165 	.db #0x80	; 128
+   6BE1 00                  166 	.db #0x00	; 0
+   6BE2 C0                  167 	.db #0xC0	; 192
+   6BE3 00                  168 	.db #0x00	; 0
+   6BE4 C0                  169 	.db #0xC0	; 192
+   6BE5 00                  170 	.db #0x00	; 0
+   6BE6 C0                  171 	.db #0xC0	; 192
+   6BE7 AA                  172 	.db #0xAA	; 170
+   6BE8 40                  173 	.db #0x40	; 64
+   6BE9 FF                  174 	.db #0xFF	; 255
+   6BEA 00                  175 	.db #0x00	; 0
+   6BEB FF                  176 	.db #0xFF	; 255
+   6BEC 00                  177 	.db #0x00	; 0
+   6BED FF                  178 	.db #0xFF	; 255
+   6BEE 00                  179 	.db #0x00	; 0
                             180 	.area _INITIALIZER
                             181 	.area _CABS (ABS)

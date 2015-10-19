@@ -24,6 +24,7 @@ typedef struct
 {
   u8 x,y; //posicion personaje
   u8 lx,ly; //posicion personaje
+  u8 ox,oy; //posicion origen
   u8 *sprite; //sprite persnaje
   u8 life; //vida personaje
   u8 dir; //direccion personaje
@@ -52,7 +53,7 @@ typedef struct
 //const u8* sprite = gladis_quieto_dcha;
 const u8 g_palette[4] = { 0,26,6,18 };
 u8 scene[height][width];
-int temp;
+u8 temp;
 u8 path;
 TObject object;
 TPlayer players[numplayers];
@@ -79,7 +80,7 @@ const u8 mapa1[height][width] = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
                                  {1,0,1,0,0,0,0,1,0,0,0,1,3,3,3,3,3,3,3,1},
                                  {1,0,1,0,0,0,0,1,0,0,0,1,3,3,3,3,3,3,3,1},
                                  {1,0,1,0,0,0,0,1,0,0,0,1,3,3,3,3,3,3,3,1},
-                                 {1,5,1,0,0,0,0,1,0,0,0,10,3,3,3,3,3,3,3,1},
+                                 {1,5,1,0,0,0,0,1,0,0,0,0,3,3,3,3,3,3,3,1},
                                  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,9,9,1,1,1}};
 
 const u8 mapa2[height][width] = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},

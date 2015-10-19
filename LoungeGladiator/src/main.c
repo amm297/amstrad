@@ -39,11 +39,23 @@ void init(){
 }
 
 /*GAME OVER*/
-void gameOver(){
+u8 gameOver(){
     u8* memptr;
   cpct_clearScreen(0);
   memptr = cpct_getScreenPtr(VMEM,10,10);
   cpct_drawStringM0("Lounge Gladiator",memptr,1,0);
+  while (1){
+
+      cpct_scanKeyboard_f();
+
+
+
+     if(cpct_isKeyPressed(Key_Enter)) {
+
+        return 1;
+      }
+
+   }
 
 }
 
@@ -106,11 +118,7 @@ int menu(){
 
    }
 
-   /*
-   do{
-
-   }while(!cpct_isKeyPressed(Key_Enter));
-  */
+  
 }
 
 
@@ -203,21 +211,6 @@ void drawVida(u8 life){
         cpct_drawSpriteMasked(corazon_roto, memptr, 4, 8);
       }
      }
- /* u8* memptr;
-    /*if(life >= 1){
-        memptr = cpct_getScreenPtr(VMEM,65,192);
-        cpct_drawSpriteMasked(corazon_lleno, memptr, 4, 8);
-    }
-    memptr = cpct_getScreenPtr(VMEM,70,192);
-    if(life >= 2)
-        cpct_drawSpriteMasked(corazon_lleno, memptr, 4, 8);
-    else
-        cpct_drawSpriteMasked(corazon_roto, memptr, 4, 8);
-    memptr = cpct_getScreenPtr(VMEM,75,192);
-    if(life >= 3)
-        cpct_drawSpriteMasked(corazon_lleno, memptr, 4, 8);
-    else
-        cpct_drawSpriteMasked(corazon_roto, memptr, 4, 8);*/
 
 }
 /*PROYECTILES*/
@@ -231,21 +224,7 @@ void drawBullets(u8 bullet){
       if(i<=bullet) cpct_drawSpriteMasked(flecha_arriba, memptr, 2, 8);
       else  cpct_drawSolidBox(memptr,0,2,8);
      }
-    /*if(bullet == 1){
-        memptr = cpct_getScreenPtr(VMEM,50,192);
-        cpct_drawSpriteMasked(flecha_arriba, memptr, 2, 8);
-    }
-    memptr = cpct_getScreenPtr(VMEM,55,192);
-    if(bullet == 2)
-        cpct_drawSpriteMasked(flecha_arriba, memptr, 2, 8);
-    else
-
-    memptr = cpct_getScreenPtr(VMEM,60,192);
-    if(bullet >= 3)
-        cpct_drawSolidBox(memptr,0,2,8);
-    else
-        cpct_drawSpriteMasked(flecha_arriba, memptr, 2, 8);*/
-
+   
 }
 
 /*Colisiones*/
@@ -475,7 +454,44 @@ u8 vissionSensor(u8 x,u8 y,u8 px,u8 py){
 }
 
 
-u8* move(u8 *x,u8 *y,u8 lx, u8 ly,u8 sizeX,u8 sizeY,u8 *dir,u8 *s,u8 room,u8 px,u8 py,u8 *following){
+u8  homeDirection(u8 x,u8 y,u8 sizeX){
+  u8 dir= 2;
+  u8 i = 0; 
+  /*for(i=0;i<height;i++){
+    if(scene[i][(x+sizeX)/tilewidth] == 10){
+        if(i > y/tileheight) dir=2;
+        else dir = 8;
+    }
+  }*///
+  return dir;
+}
+
+void backHome(u8 *x,u8 *y,u8 ox,u8 oy,u8 lx,u8 ly,u8 sizeX,u8 sizeY,u8 *dir){
+
+
+  if(x[0] < ox){
+    if(scene[y[0]/tileheight][(x[0]+sizeX)/tilewidth] == 1){
+      if(path == 0){
+        dir[0] = homeDirection(x[0],y[0],sizeX);
+        path = 1;
+      } 
+      switch(dir[0]){
+        case 2: y[0] += 2; break;
+        case 8: y[0] -= 2; break;
+      }
+    }else{
+      x[0] += 1;
+    }
+    
+    
+  }
+  else{
+    x[0] -= 1;
+  }
+
+}
+
+u8* move(u8 *x,u8 *y,u8 lx, u8 ly,u8 ox,u8 oy,u8 sizeX,u8 sizeY,u8 *dir,u8 *s,u8 room,u8 px,u8 py,u8 *following){
   u8 *sprite = s;
   u8 detected;
   if(temp > 36){
@@ -490,16 +506,14 @@ u8* move(u8 *x,u8 *y,u8 lx, u8 ly,u8 sizeX,u8 sizeY,u8 *dir,u8 *s,u8 room,u8 px,
             followPlayer(px,py,&x[0],&y[0],lx,ly,&dir[0],room,sizeX,sizeY);
             following[0] = vissionSensor(x[0],y[0],px,py);
           }else{
-            if(scene[(y[0])/tileheight][(x[0]+sizeX-1)/tilewidth] != 0
-            || scene[(y[0]+sizeY-2)/tileheight][(x[0])/tilewidth] != 0
-            || scene[(y[0]+sizeY-2)/tileheight][(x[0]+sizeX-1)/tilewidth] != 0){
+            if(scene[(y[0])/tileheight][(x[0])/tilewidth] == 3){
               patrol(dir[0],lx,ly,&x[0],&y[0],room,sizeX,sizeY);
             }else{
               //volver a casa
               //cambiar 4, 12 por las posiciones originales de cada enemigo
-              x[0] = 52;
-              y[0] = 80;
-
+              //x[0] = 52;
+              //y[0] = 80;
+              backHome(&x[0],&y[0],ox,oy,lx,ly,sizeX,sizeY,&dir[0]);
 
             }
 
@@ -520,8 +534,8 @@ u8* move(u8 *x,u8 *y,u8 lx, u8 ly,u8 sizeX,u8 sizeY,u8 *dir,u8 *s,u8 room,u8 px,
 /*JUEGO*/
 
 void game(){
-  TPlayer p = {0,80,0,80,gladis_quieto_dcha,3,6,4,16,4,0,0,3,0,0};
-  TPlayer e = {52,80,52,80,chacho_quieto_dcha,3,6,4,16,4,0,0,0,1,3};
+  TPlayer p = {0,80,0,80,0,80,gladis_quieto_dcha,3,6,4,16,4,0,0,3,0,0};
+  TPlayer e = {52,80,52,80,52,80,chacho_quieto_dcha,3,6,4,16,4,0,0,0,1,3};
 
   //players[0] =p;
    //u8 i = p.x;
@@ -531,6 +545,7 @@ void game(){
     //u8* memptr;
    u8 bound =0;
    temp = 0;
+   path = 0;
 
    cpct_clearScreen(0);
    drawMap(i);
@@ -577,29 +592,28 @@ void game(){
       p.sprite = checkKeyboard(&p.x,&p.y,&p.atk,&p.dir,p.sprite,&p.sizeX,&p.bullets,&finish,&arrow);
       checkBoundsCollisions(&p.x,&p.y,p.lx,p.ly,p.sizeX,p.sizeY);
       if(e.life > 0)
-        e.sprite = move(&e.x,&e.y,e.lx,e.ly,e.sizeX,e.sizeY,&e.dir,e.sprite,e.room,p.x,p.y,&following);
+        e.sprite = move(&e.x,&e.y,e.lx,e.ly,e.ox,e.oy,e.sizeX,e.sizeY,&e.dir,e.sprite,e.room,p.x,p.y,&following);
 
-      if(e.life > 0)
-          if(checkCollisions(p.x, p.y, e.x, e.y, p.atk) == 2){
-            p.x = 0;
-            p.y = 80;
+      /*if(e.life > 0)
+          /*if(checkCollisions(p.x, p.y, e.x, e.y, p.atk) == 2){
+            p.x = p.ox;
+            p.y = p.oy;
             p.life -= 1;
             if(p.life == 0){
-                gameOver();
-                break;
+              finish = gameOver();
             }
           }else if(checkCollisions(p.x, p.y, e.x, e.y, p.atk) == 1){
             e.life =0;
-          }
+          }*/
         //falta la funcion para matar al enemigo
 
       if(arrow == 1){
         moveObject();
         bound = checkBoundsCollisions(&object.x,&object.y,object.lx,object.ly,object.sizeX,object.sizeY);
-        if(checkCollisions(object.x, object.y, e.x, e.y, 21) == 1){
+        /*if(checkCollisions(object.x, object.y, e.x, e.y, 21) == 1){
             e.life = 0;
             object.vivo = 0;
-        }
+        }*/
       }
 
       if(finish == 1) return;
