@@ -4,8 +4,9 @@
 
 #include <cpctelera.h>
 
-extern u8* const g_tile_tileset[2];
 extern const u8 corazon_lleno[64];
 extern const u8 corazon_roto[64];
+extern const u8 fatiga_nor[32];
+extern const u8 fatiga_full[32];
 
 #endif
