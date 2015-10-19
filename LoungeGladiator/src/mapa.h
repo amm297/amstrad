@@ -17,7 +17,7 @@
 #define tileheight 16
 #define playerwidth 4
 #define playerheight 16
-#define numplayers 2
+#define numenemies 3
 
 
 typedef struct
@@ -33,7 +33,7 @@ typedef struct
   u8 atk; //Ataque personaje
   u8 latk; //Ataque previo personaje
   u8 bullets; //Municion restante
-  u8 type; // tipoe de jugador 0->Jugaor 1->Enemigo
+  u8 type; // tipoe de jugador 0->Jugaor 1->Enemigo mele 2->Enemigo distanca
   u8 room; //habitacion que ocupa el enemigo
 }TPlayer;
 
@@ -59,9 +59,11 @@ typedef struct{
 const u8 g_palette[5] = { 0,26,6,13 };
 u8 scene[height][width];
 int temp;
+u8 map;
 u8 path;
 TObject object;
-TPlayer players[numplayers];
+TPlayer player;
+TPlayer enemies[numenemies];
 
 
 //Definicion de mapa

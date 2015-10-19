@@ -38,6 +38,78 @@ void init(){
    cpct_setPalette(g_palette,4);
 }
 
+
+void initPlayer(){
+  u8 *sprite = gladis_quieto_dcha;
+  player.x = 0;
+  player.y = 80;
+  player.lx = 0;
+  player.ly = 80;
+  player.sprite = sprite;
+  player.life = 3;
+  player.dir = 6;
+  player.sizeX = 4;
+  player.sizeY = 16;
+  player.lsize = 4;
+  player.atk = 20;
+  player.latk = 20;
+  player.bullets = 3;
+  player.type = 0;
+  player.room = 0;
+}
+
+void initEnemies(){
+  u8 *sprite = chacho_dcha;
+    enemies[0].x = 52;
+    enemies[0].y = 80;
+    enemies[0].lx = 52;
+    enemies[0].ly = 80;
+    enemies[0].sprite = sprite;
+    enemies[0].life = 1;
+    enemies[0].dir = 6;
+    enemies[0].sizeX = 4;
+    enemies[0].sizeY = 16;
+    enemies[0].lsize = 4;
+    enemies[0].atk = 0;
+    enemies[0].latk = 0;
+    enemies[0].bullets = 0;
+    enemies[0].type = 1;
+    enemies[0].room = 3;
+
+    enemies[1].x = 40;
+    enemies[1].y = 64;
+    enemies[1].lx = 40;
+    enemies[1].ly = 64;
+    enemies[1].sprite = sprite;
+    enemies[1].life = 1;
+    enemies[1].dir = 6;
+    enemies[1].sizeX = 4;
+    enemies[1].sizeY = 16;
+    enemies[1].lsize = 4;
+    enemies[1].atk = 0;
+    enemies[1].latk = 0;
+    enemies[1].bullets = 1;
+    enemies[1].type = 2;
+    enemies[1].room = 0;
+
+    enemies[2].x = 16;
+    enemies[2].y = 96;
+    enemies[2].lx = 16;
+    enemies[2].ly = 96;
+    enemies[2].sprite = sprite;
+    enemies[2].life = 1;
+    enemies[2].dir = 6;
+    enemies[2].sizeX = 4;
+    enemies[2].sizeY = 16;
+    enemies[2].lsize = 4;
+    enemies[2].atk = 0;
+    enemies[2].latk = 0;
+    enemies[2].bullets = 0;
+    enemies[2].type = 1;
+    enemies[2].room = 3;
+
+  
+}
 /*GAME OVER*/
 void gameOver(){
     u8* memptr;
@@ -143,13 +215,7 @@ void drawMap(u8 t){
          }
          if(scene[posY][posX] == 9){
             cpct_drawSolidBox(memptr, 9, tilewidth, tileheight);
-         }/*
-         if(scene[posY][posX] == 5){
-            cpct_drawSpriteMasked(flecha_arriba, memptr, 2, 8);
          }
-         if(scene[posY][posX] == 2){
-            cpct_drawSpriteMasked(corazon_lleno, memptr, 4, 8);
-         }*/
       }
    }
 }
@@ -173,6 +239,24 @@ void erasePlayer(u8 x,u8 y,u8 sizeX,u8 sizeY){
 }
 
 
+
+void erasePlayers(){
+  u8 i=0;
+  erasePlayer(player.lx,player.ly,player.lsize,player.sizeY);
+    for(i=0;i<numenemies;i++){
+      if(enemies[i].life > 0)
+        erasePlayer(enemies[i].lx,enemies[i].ly,enemies[i].lsize,enemies[i].sizeY);
+    }
+}
+
+void drawPlayers(){
+  u8 i=0;
+  drawPlayer(player.x,player.y,player.sprite,player.sizeX,player.sizeY,player.life);
+    for(i=0;i<numenemies;i++){
+      if(enemies[i].life > 0)
+        drawPlayer(enemies[i].x,enemies[i].y,enemies[i].sprite,enemies[i].sizeX,enemies[i].sizeY,enemies[i].life);
+    }
+}
 
 /*FATIGA*/
 
@@ -251,21 +335,6 @@ void drawVida(u8 life){
         cpct_drawSpriteMasked(corazon_roto, memptr, 4, 8);
       }
      }
- /* u8* memptr;
-    /*if(life >= 1){
-        memptr = cpct_getScreenPtr(VMEM,65,192);
-        cpct_drawSpriteMasked(corazon_lleno, memptr, 4, 8);
-    }
-    memptr = cpct_getScreenPtr(VMEM,70,192);
-    if(life >= 2)
-        cpct_drawSpriteMasked(corazon_lleno, memptr, 4, 8);
-    else
-        cpct_drawSpriteMasked(corazon_roto, memptr, 4, 8);
-    memptr = cpct_getScreenPtr(VMEM,75,192);
-    if(life >= 3)
-        cpct_drawSpriteMasked(corazon_lleno, memptr, 4, 8);
-    else
-        cpct_drawSpriteMasked(corazon_roto, memptr, 4, 8);*/
 
 }
 /*PROYECTILES*/
@@ -279,20 +348,6 @@ void drawBullets(u8 bullet){
       if(i<=bullet) cpct_drawSpriteMasked(flecha_arriba, memptr, 2, 8);
       else  cpct_drawSolidBox(memptr,0,2,8);
      }
-    /*if(bullet == 1){
-        memptr = cpct_getScreenPtr(VMEM,50,192);
-        cpct_drawSpriteMasked(flecha_arriba, memptr, 2, 8);
-    }
-    memptr = cpct_getScreenPtr(VMEM,55,192);
-    if(bullet == 2)
-        cpct_drawSpriteMasked(flecha_arriba, memptr, 2, 8);
-    else
-
-    memptr = cpct_getScreenPtr(VMEM,60,192);
-    if(bullet >= 3)
-        cpct_drawSolidBox(memptr,0,2,8);
-    else
-        cpct_drawSpriteMasked(flecha_arriba, memptr, 2, 8);*/
 
 }
 
@@ -491,192 +546,73 @@ void moveObject(){
 
 
 
-
-u8 followPlayer(u8 px,u8 py,u8 *x,u8 *y,u8 lx,u8 ly,u8 *dir,u8 room,u8 sizeX,u8 sizeY){
-  u8 following = 1;
-  dir[0] = setDirection(px,py,x[0],y[0]);
-  movement(dir[0],&x[0],&y[0]);
-  if(scene[(y[0])/tileheight][(x[0])/tilewidth] == 1
-  || scene[(y[0])/tileheight][(x[0]+sizeX-1)/tilewidth] == 1
-  || scene[(y[0]+sizeY-2)/tileheight][(x[0])/tilewidth] == 1
-  || scene[(y[0]+sizeY-2)/tileheight][(x[0]+sizeX-1)/tilewidth] == 1
-  ){
-    *x=lx;
-    *y=ly;
-  }
-
-  return following;
-
-}
-
-void patrol(u8 dir,u8 lx,u8 ly,u8 *x,u8 *y,u8 room,u8 sizeX,u8 sizeY){
-  //scene[(y[0])/tileheight][(x[0])/tilewidth] = room;
-
-  movement(dir,&x[0],&y[0]);
-
-  if(scene[(y[0])/tileheight][(x[0])/tilewidth] != room
-  || scene[(y[0])/tileheight][(x[0]+sizeX-1)/tilewidth] != room
-  || scene[(y[0]+sizeY-2)/tileheight][(x[0])/tilewidth] != room
-  || scene[(y[0]+sizeY-2)/tileheight][(x[0]+sizeX-1)/tilewidth] != room
-  ){
-    *x=lx;
-    *y=ly;
-  }
-  //scene[(y[0])/tileheight][(x[0])/tilewidth] = 2;
-}
-
-u8 vissionSensor(u8 x,u8 y,u8 px,u8 py){
-  u8 following = 0;
-  u8 cx = x/tilewidth;
-  u8 cy = y/tilewidth;
-  u8 pcx = px/tilewidth;
-  u8 pcy = py/tilewidth;
-  u8 lex,mex,ley,mey;
-  u8 i=0;
-  for(i=0;i<3;i++){
-    lex = cx - i;
-    ley = cy - i;
-    mex = cx + i;
-    mey = cy + i;
-    if(lex == pcx || ley == pcy || mex == pcx || mey == pcy){
-      following = 1;
-    }
-  }
-
-  return following;
-
-}
+u8* move(){
+  u8* sprite = chacho_dcha;
 
 
-u8* move(u8 *x,u8 *y,u8 lx, u8 ly,u8 sizeX,u8 sizeY,u8 *dir,u8 *s,u8 room,u8 px,u8 py,u8 *following){
-  u8 *sprite = s;
-  u8 detected;
-  if(temp > 36){
-    dir[0] = chooseDirection(dir[0]);
-    temp = 0;
-  }
-  else{
-    if(temp%6== 0){
-        detected = detectPlayerRoom(px,py,room);
-        if(detected == 0){
-          if(following[0] == 1){
-            followPlayer(px,py,&x[0],&y[0],lx,ly,&dir[0],room,sizeX,sizeY);
-            following[0] = vissionSensor(x[0],y[0],px,py);
-          }else{
-            if(scene[(y[0])/tileheight][(x[0]+sizeX-1)/tilewidth] != 0
-            || scene[(y[0]+sizeY-2)/tileheight][(x[0])/tilewidth] != 0
-            || scene[(y[0]+sizeY-2)/tileheight][(x[0]+sizeX-1)/tilewidth] != 0){
-              patrol(dir[0],lx,ly,&x[0],&y[0],room,sizeX,sizeY);
-            }else{
-              //volver a casa
-              //cambiar 4, 12 por las posiciones originales de cada enemigo
-              x[0] = 52;
-              y[0] = 80;
-
-
-            }
-
-
-          }
-        }else{
-            following[0] = followPlayer(px,py,&x[0],&y[0],lx,ly,&dir[0],room,sizeX,sizeY);
-        }
-
-    }
-  }
-  temp += 2;
   return sprite;
 }
-
-
 
 /*JUEGO*/
 
 void game(){
-  TPlayer p = {0,80,0,80,gladis_quieto_dcha,3,6,4,16,4,20,20,3,0,0};
-  TPlayer e = {52,80,52,80,chacho_dcha,3,6,4,16,4,0,0,0,1,3};
   TNivel n = {0,0,0};
+  u8 finish = 0,arrow=0,following = 0, bound =0,i=0;
+  
+  temp = 0;
+  map = 1;
 
-  //players[0] =p;
-   //u8 i = p.x;
-
-   //u8* memptr;
-   u8 finish = 0,i=1,arrow=0,following = 0;
-    //u8* memptr;
-   u8 bound =0;
-   temp = 0;
-
+  initPlayer();
+  initEnemies();
    cpct_clearScreen(0);
-   drawMap(i);
+   drawMap(map);
 
 
 
    while (1){
 
-    //Esperar el retrazado
+    //Esplayererar el retrazado
     cpct_waitVSYNC();
 
-    //Desdibujar personajes
-    erasePlayer(p.lx,p.ly,p.lsize,p.sizeY);
-    erasePlayer(e.lx,e.ly,e.lsize,e.sizeY);
+    //Desdibujar playerersonajes
+    erasePlayers();
+    
     if(arrow == 1){
       erasePlayer(object.lx,object.ly,object.sizeX,object.sizeY);
       if(bound == 1) arrow = 0;
     }
 
-    //Dibujar pickups
+    //Dibujar playerickuplayers
     drawPickUps(n.corazon,n.bullet);
 
-    //Dibujar personajes
-    drawPlayer(p.x,p.y,p.sprite,p.sizeX,p.sizeY,p.life);
-    if(e.life > 0) drawPlayer(e.x,e.y,e.sprite,e.sizeX,e.sizeY,e.life);
+    //Dibujar playerersonajes
+    drawPlayers();
     if(arrow == 1) drawPlayer(object.x,object.y,object.sprite,object.sizeX,object.sizeY,object.vivo);
 
     //Dibujar vida
-    drawVida(p.life);
-    drawBullets(p.bullets);
+    drawVida(player.life);
+    drawBullets(player.bullets);
 
     //Dibujar fatiga
-    if(p.atk < 20) drawFatiga(p.atk,2);
-    else if(p.atk > 20) drawFatiga(p.atk,1);
-    else drawFatiga(p.atk,0);
+    if(player.atk < 20) drawFatiga(player.atk,2);
+    else if(player.atk > 20) drawFatiga(player.atk,1);
+    else drawFatiga(player.atk,0);
 
     //guardar datos anteriores
-    p.lx = p.x;
-    p.ly = p.y;
-    e.lx = e.x;
-    e.ly = e.y;
-    p.latk = p.atk;
-    p.lsize = p.sizeX;
+    player.lx = player.x;
+    player.ly = player.y;
+    player.latk = player.atk;
+    player.lsize = player.sizeX;
 
-      //Comprobar teclado
+      //Complayerrobar teclado
       cpct_scanKeyboard_f();
-      p.sprite = checkKeyboard(&p.x,&p.y,&p.atk,&p.dir,p.sprite,&p.sizeX,&p.bullets,&finish,&arrow);
-      checkBoundsCollisions(&p.x,&p.y,p.lx,p.ly,p.sizeX,p.sizeY,&p.life,&p.bullets,&n.corazon,&n.bullet);
-      if(e.life > 0)
-        e.sprite = move(&e.x,&e.y,e.lx,e.ly,e.sizeX,e.sizeY,&e.dir,e.sprite,e.room,p.x,p.y,&following);
-
-      if(e.life > 0)
-          if(checkCollisions(p.x, p.y, e.x, e.y, p.atk) == 2){
-            p.x = 0;
-            p.y = 80;
-            p.life -= 1;
-            if(p.life == 0){
-                gameOver();
-                break;
-            }
-          }else if(checkCollisions(p.x, p.y, e.x, e.y, p.atk) == 1){
-            e.life =0;
-          }
-        //falta la funcion para matar al enemigo
-
+      player.sprite = checkKeyboard(&player.x,&player.y,&player.atk,&player.dir,player.sprite,&player.sizeX,&player.bullets,&finish,&arrow);
+      checkBoundsCollisions(&player.x,&player.y,player.lx,player.ly,player.sizeX,player.sizeY,&player.life,&player.bullets,&n.corazon,&n.bullet);
+      
       if(arrow == 1){
         moveObject();
         bound = checkBoundsCollisions(&object.x,&object.y,object.lx,object.ly,object.sizeX,object.sizeY,0,0,0,0);
-        if(checkCollisions(object.x, object.y, e.x, e.y, 21) == 1){
-            e.life = 0;
-            object.vivo = 0;
-        }
+      
       }
 
       if(finish == 1) return;
