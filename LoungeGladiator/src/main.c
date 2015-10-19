@@ -594,7 +594,7 @@ u8* move(u8 *x,u8 *y,u8 lx, u8 ly,u8 sizeX,u8 sizeY,u8 *dir,u8 *s,u8 room,u8 px,
 
 void game(){
   TPlayer p = {0,80,0,80,gladis_quieto_dcha,3,6,4,16,4,20,20,3,0,0};
-  TPlayer e = {52,80,52,80,chacho_quieto_dcha,3,6,4,16,4,0,0,0,1,3};
+  TPlayer e = {52,80,52,80,chacho_dcha,3,6,4,16,4,0,0,0,1,3};
   TNivel n = {0,0,0};
 
   //players[0] =p;

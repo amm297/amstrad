@@ -4,7 +4,9 @@
 
 #include <cpctelera.h>
 
-extern const u8 chacho_quieto_dcha[128];
-extern const u8 chacho_quieto_izda[128];
+extern const u8 chacho_dcha[128];
+extern const u8 chacho_izda[128];
+extern const u8 chacho_abajo[128];
+extern const u8 chacho_arriba[128];
 
 #endif

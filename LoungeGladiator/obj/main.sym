@@ -14,7 +14,7 @@ Symbol Table
   0 ___str_4                                                       0647 R
   0 ___str_5                                                       2749 R
     __modsint                                                      **** GX
-    _chacho_quieto_dcha                                            **** GX
+    _chacho_dcha                                                   **** GX
   0 _checkArrowCollisions                                          0D71 GR
   0 _checkBoundsCollisions                                         0ED7 GR
   0 _checkBoundsCollisionsEnemy                                    0B1C GR

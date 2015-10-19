@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.5.0 #9253 (Sep 22 2015) (CYGWIN)
-; This file was generated Sat Oct 17 18:03:42 2015
+; This file was generated Mon Oct 19 09:42:28 2015
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mz80
@@ -4948,7 +4948,7 @@ _game::
 	adc	a, #0x00
 	ld	h,a
 	ld	(hl),#0x00
-;src/main.c:597: TPlayer e = {52,80,52,80,chacho_quieto_dcha,3,6,4,16,4,0,0,0,1,3};
+;src/main.c:597: TPlayer e = {52,80,52,80,chacho_dcha,3,6,4,16,4,0,0,0,1,3};
 	ld	hl,#0x0013
 	add	hl,sp
 	ld	(hl),#0x34
@@ -4991,9 +4991,9 @@ _game::
 	ld	-80 (ix),a
 	ld	l,-81 (ix)
 	ld	h,-80 (ix)
-	ld	(hl),#<(_chacho_quieto_dcha)
+	ld	(hl),#<(_chacho_dcha)
 	inc	hl
-	ld	(hl),#>(_chacho_quieto_dcha)
+	ld	(hl),#>(_chacho_dcha)
 	ld	a,-87 (ix)
 	add	a, #0x06
 	ld	-4 (ix),a
