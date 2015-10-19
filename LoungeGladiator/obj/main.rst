@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 3.5.0 #9253 (Sep 22 2015) (CYGWIN)
-                              4 ; This file was generated Mon Oct 19 11:12:23 2015
+                              4 ; This file was generated Mon Oct 19 11:16:49 2015
                               5 ;--------------------------------------------------------
                               6 	.module main
                               7 	.optsdcc -mz80
@@ -3722,10 +3722,10 @@
    5CF6 DD 77 ED      [19] 3715 	ld	-19 (ix),a
                            3716 ;src/main.c:456: }
    5CF9                    3717 00116$:
-                           3718 ;src/main.c:457: atk[0] = 10;
+                           3718 ;src/main.c:457: atk[0] = 0;
    5CF9 DD 6E F0      [19] 3719 	ld	l,-16 (ix)
    5CFC DD 66 F1      [19] 3720 	ld	h,-15 (ix)
-   5CFF 36 0A         [10] 3721 	ld	(hl),#0x0A
+   5CFF 36 00         [10] 3721 	ld	(hl),#0x00
                            3722 ;src/main.c:458: object.x = ox;
    5D01 21 07 77      [10] 3723 	ld	hl,#_object+0
    5D04 DD 7E ED      [19] 3724 	ld	a,-19 (ix)

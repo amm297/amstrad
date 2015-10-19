@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.5.0 #9253 (Sep 22 2015) (CYGWIN)
-; This file was generated Mon Oct 19 11:12:23 2015
+; This file was generated Mon Oct 19 11:16:49 2015
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mz80
@@ -3715,10 +3715,10 @@ _checkKeyboard::
 	ld	-19 (ix),a
 ;src/main.c:456: }
 00116$:
-;src/main.c:457: atk[0] = 10;
+;src/main.c:457: atk[0] = 0;
 	ld	l,-16 (ix)
 	ld	h,-15 (ix)
-	ld	(hl),#0x0A
+	ld	(hl),#0x00
 ;src/main.c:458: object.x = ox;
 	ld	hl,#_object+0
 	ld	a,-19 (ix)
