@@ -1,6 +1,6 @@
 // Data created with Img2CPC - (c) Retroworks - 2007-2015
-#ifndef _CHACHO_MUEVE_LADO1COL_H_
-#define _CHACHO_MUEVE_LADO1COL_H_
+#ifndef _GLADIS_ATK2COL_H_
+#define _GLADIS_ATK2COL_H_
 
 #include <cpctelera.h>
 

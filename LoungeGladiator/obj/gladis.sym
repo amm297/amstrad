@@ -7,12 +7,12 @@ Symbol Table
     .__.ABS.                                                    =  0000 G
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
-  0 _gladis_abajo                                                  02C0 GR
-  0 _gladis_arriba                                                 0240 GR
-  0 _gladis_atk_abajo                                              0340 GR
-  0 _gladis_atk_arriba                                             03C0 GR
+  0 _gladis_abajo                                                  0280 GR
+  0 _gladis_arriba                                                 0200 GR
+  0 _gladis_atk_abajo                                              0300 GR
+  0 _gladis_atk_arriba                                             0380 GR
   0 _gladis_atk_dcha                                               0100 GR
-  0 _gladis_atk_izda                                               01A0 GR
+  0 _gladis_atk_izda                                               0180 GR
   0 _gladis_quieto_dcha                                            0000 GR
   0 _gladis_quieto_izda                                            0080 GR
 
@@ -21,7 +21,7 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size  440   flags    0
+   0 _CODE                                      size  400   flags    0
    1 _DATA                                      size    0   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8
