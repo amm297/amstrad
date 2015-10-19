@@ -528,15 +528,15 @@ u8 followPlayer(u8 px,u8 py,u8 *x,u8 *y,u8 lx,u8 ly,u8 *dir,u8 room,u8 sizeX,u8 
 
 }
 
-void patrol(u8 dir,u8 lx,u8 ly,u8 *x,u8 *y,u8 room,u8 sizeX,u8 sizeY){
+void patrol(u8 dir,u8 lx,u8 ly,u8 *x,u8 *y,u8 room){
   //scene[(y[0])/tileheight][(x[0])/tilewidth] = room;
 
   movement(dir,&x[0],&y[0]);
 
   if(scene[(y[0])/tileheight][(x[0])/tilewidth] != room
-  || scene[(y[0])/tileheight][(x[0]+sizeX-1)/tilewidth] != room
-  || scene[(y[0]+sizeY-2)/tileheight][(x[0])/tilewidth] != room
-  || scene[(y[0]+sizeY-2)/tileheight][(x[0]+sizeX-1)/tilewidth] != room
+  || scene[(y[0])/tileheight][(x[0]+tilewidth-1)/tilewidth] != room
+  || scene[(y[0]+tileheight-2)/tileheight][(x[0])/tilewidth] != room
+  || scene[(y[0]+tileheight-2)/tileheight][(x[0]+tilewidth-1)/tilewidth] != room
   ){
     *x=lx;
     *y=ly;
@@ -567,17 +567,19 @@ u8 vissionSensor(u8 x,u8 y,u8 px,u8 py){
 }
 
 
-u8* move(u8 *x,u8 *y,u8 lx, u8 ly,u8 sizeX,u8 sizeY,u8 *dir,u8 *s,u8 room,u8 px,u8 py,u8 *following){
-  u8 *sprite = s;
-  u8 detected;
-  if(temp > 36){
-    dir[0] = chooseDirection(dir[0]);
-    temp = 0;
+void move(u8 *x,u8 *y,u8 lx, u8 ly,u8 *dir,u8 *s,u8 room,u8 px,u8 py,u8 *following){
+    if(temp > 20){
+        dir[0] = chooseDirection(dir[0]);
+        following[0] = detectPlayerRoom(px,py,room);
+        temp = 0;
+    }else{
+        patrol(dir[0],lx,ly,&x[0],&y[0],room);
+    }
+    temp += 1;
   }
-  else{
-    if(temp%6== 0){
-        detected = detectPlayerRoom(px,py,room);
-        if(detected == 0){
+
+/*
+if(detected == 0){
           if(following[0] == 1){
             followPlayer(px,py,&x[0],&y[0],lx,ly,&dir[0],room,sizeX,sizeY);
             following[0] = vissionSensor(x[0],y[0],px,py);
@@ -586,34 +588,13 @@ u8* move(u8 *x,u8 *y,u8 lx, u8 ly,u8 sizeX,u8 sizeY,u8 *dir,u8 *s,u8 room,u8 px,
             || scene[(y[0]+sizeY-2)/tileheight][(x[0])/tilewidth] != 0
             || scene[(y[0]+sizeY-2)/tileheight][(x[0]+sizeX-1)/tilewidth] != 0){
               patrol(dir[0],lx,ly,&x[0],&y[0],room,sizeX,sizeY);
-            }else{
-              //volver a casa
-              //cambiar 4, 12 por las posiciones originales de cada enemigo
-              x[0] = 52;
-              y[0] = 80;
-
-
-            }
-
-
-          }
-        }else{
-            following[0] = followPlayer(px,py,&x[0],&y[0],lx,ly,&dir[0],room,sizeX,sizeY);
-        }
-
-    }
-  }
-  temp += 2;
-  return sprite;
-}
-
-
+*/
 
 /*JUEGO*/
 
 void game(){
-  TPlayer p = {0,80,0,80,gladis_quieto_dcha,3,6,4,16,4,20,20,3,0,0};
-  TPlayer e = {52,80,52,80,chacho_dcha,3,6,4,16,4,0,0,0,1,3};
+  TPlayer p = {0,80,0,80,gladis_quieto_dcha,3,6,4,16,4,20,20,3};
+  TEnemy e = {52,80,52,80,52,80,chacho_dcha,3,2,3,3,0,0};
   TNivel n = {0,0,0};
 
   //players[0] =p;
@@ -622,7 +603,7 @@ void game(){
    //u8* memptr;
    u8 finish = 0,i=1,arrow=0,following = 0;
     //u8* memptr;
-   u8 bound =0;
+   u8 bound = 0;
    temp = 0;
 
    cpct_clearScreen(0);
@@ -652,6 +633,7 @@ void game(){
     //Dibujar personajes
     drawPlayer(p.x,p.y,p.sprite,p.life,0);
     if(e.life > 0) drawPlayer(e.x,e.y,e.sprite,e.life,0);
+
     if(arrow == 1){
         if(object.dir == 4 || object.dir == 6)
             drawPlayer(object.x,object.y,object.sprite,object.vivo,2);
@@ -682,7 +664,7 @@ void game(){
       p.sprite = checkKeyboard(&p.x,&p.y,&p.atk,&p.dir,p.sprite,&p.sizeX,&p.bullets,&finish,&arrow);
       checkBoundsCollisions(&p.x,&p.y,p.lx,p.ly,p.sizeX,p.sizeY,&p.life,&p.bullets,&n.corazon,&n.bullet);
       if(e.life > 0)
-        e.sprite = move(&e.x,&e.y,e.lx,e.ly,e.sizeX,e.sizeY,&e.dir,e.sprite,e.room,p.x,p.y,&following);
+        move(&e.x,&e.y,e.lx,e.ly,&e.dir,e.sprite,e.room,p.x,p.y,&following);
 
       if(e.life > 0)
           if(checkCollisions(p.x, p.y, e.x, e.y, p.atk) == 2){

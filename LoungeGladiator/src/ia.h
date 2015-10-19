@@ -16,7 +16,7 @@ u8 detectPlayerRoom(u8 px,u8 py,u8 room){
 }
 
 u8 chooseDirection(u8 d){
- 
+
   u8 dir = 0;
    u8 rnd = (rand()%4)+1;
     switch(rnd){
@@ -25,7 +25,7 @@ u8 chooseDirection(u8 d){
       case 2: dir = 2;break;
       case 1: dir = 8;break;
     }
-  
+
   return dir;
 }
 
@@ -42,7 +42,7 @@ u8 setDirection(u8 px,u8 py,u8 x,u8 y){
 void movement(u8 dir,u8 *x,u8 *y){
   switch(dir){
       case 6: x[0] += 1; break;
-      case 4: x[0] -= 1; break; 
+      case 4: x[0] -= 1; break;
       case 8: y[0] -= 2; break;
       case 2: y[0] += 2; break;
     }
