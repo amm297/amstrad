@@ -620,11 +620,11 @@ u8 vissionSensor(u8 x,u8 y,u8 px,u8 py){
 }
 
 
-void move(u8 *x,u8 *y,u8 lx, u8 ly,u8 *dir,u8 *s,u8 room,u8 px,u8 py,u8 *seenX,u8 *seenY,u8 *following,u8 *pursue){
+void move(u8 *x,u8 *y,u8 lx, u8 ly,u8 *dir,u8 *s,u8 *room,u8 px,u8 py,u8 *seenX,u8 *seenY,u8 *following,u8 *pursue){
     if(temp > 4){
         dir[0] = chooseDirection();
         following[0] = detectPlayerRoom(px,py);
-        if(following[0] == room || *pursue != 0){
+        if(following[0] == room[0] || *pursue != 0){
             if(pursue == 0)
                 *pursue = 1;
             else
@@ -634,17 +634,18 @@ void move(u8 *x,u8 *y,u8 lx, u8 ly,u8 *dir,u8 *s,u8 room,u8 px,u8 py,u8 *seenX,u
     }else{
         if(temp%2 == 0)
         if(*pursue >= 1){
-            followPlayer(px,py,x,y,*seenX,*seenY,room);
+            followPlayer(px,py,x,y,*seenX,*seenY,room[0]);
             if(*seenX == *x && *seenY == *y)
                 *pursue = 0;
         }else{
-            patrol(dir[0],lx,ly,&x[0],&y[0],room);
+            patrol(dir[0],lx,ly,&x[0],&y[0],room[0]);
         }
     }
     if((detectPlayerRoom(lx,ly) != detectPlayerRoom(px,py)) && pursue != 0){
         *seenX = px;
         *seenY = py;
     }
+    *room = detectPlayerRoom(x[0],y[0]);
     temp += 1;
 }
 
@@ -734,7 +735,7 @@ void game(){
       p.sprite = checkKeyboard(&p.x,&p.y,&p.atk,&p.dir,p.sprite,&p.sizeX,&p.bullets,&finish,&arrow);
       checkBoundsCollisions(&p.x,&p.y,p.lx,p.ly,p.sizeX,p.sizeY,&p.life,&p.bullets,&n.corazon,&n.bullet);
       if(e.life > 0)
-        move(&e.x,&e.y,p.lx,p.ly,&e.dir,e.sprite,e.room,p.x,p.y,&e.seenX,&e.seenY,&following,&e.pursue);
+        move(&e.x,&e.y,p.lx,p.ly,&e.dir,e.sprite,&e.room,p.x,p.y,&e.seenX,&e.seenY,&following,&e.pursue);
 
       if(e.life > 0)
           if(checkCollisions(p.x, p.y, e.x, e.y, p.atk) == 2){
