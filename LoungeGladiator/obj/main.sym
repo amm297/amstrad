@@ -12,7 +12,7 @@ Symbol Table
   0 ___str_2                                                       0622 R
   0 ___str_3                                                       0630 R
   0 ___str_4                                                       0639 R
-  0 ___str_5                                                       27B1 R
+  0 ___str_5                                                       281E R
     __modsint                                                      **** GX
     _chacho_dcha                                                   **** GX
   0 _checkArrowCollisions                                          0DC1 GR
@@ -36,7 +36,7 @@ Symbol Table
     _cpct_setPalette                                               **** GX
     _cpct_setVideoMode                                             **** GX
     _cpct_waitVSYNC                                                **** GX
-  0 _credits                                                       2779 GR
+  0 _credits                                                       27E6 GR
   0 _detectPlayerRoom                                              0000 GR
   0 _drawBullets                                                   0B10 GR
   0 _drawFatiga                                                    0918 GR
@@ -53,7 +53,7 @@ Symbol Table
     _flecha_izda                                                   **** GX
   0 _followPlayer                                                  174D GR
   0 _g_palette                                                     002D GR
-  0 _game                                                          1EB5 GR
+  0 _game                                                          1F16 GR
   0 _gameOver                                                      03F4 GR
     _gladis_abajo                                                  **** GX
     _gladis_arriba                                                 **** GX
@@ -69,7 +69,7 @@ Symbol Table
     _gladis_quieto_dcha                                            **** GX
     _gladis_quieto_izda                                            **** GX
   0 _init                                                          03CF GR
-  0 _main                                                          27C2 GR
+  0 _main                                                          282F GR
   0 _mapa1                                                         0032 GR
   0 _mapa2                                                         0122 GR
   0 _menu                                                          0431 GR
@@ -92,7 +92,7 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size 27F7   flags    0
+   0 _CODE                                      size 2864   flags    0
    1 _DATA                                      size  11D   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8
