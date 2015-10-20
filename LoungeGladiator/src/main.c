@@ -620,7 +620,7 @@ u8 vissionSensor(u8 x,u8 y,u8 px,u8 py){
 
 
 void move(u8 *x,u8 *y,u8 lx, u8 ly,u8 *dir,u8 *s,u8 *room,u8 px,u8 py,u8 *seenX,u8 *seenY,u8 *following,u8 *pursue){
-    if(temp > 4){
+    if(temp > 10){
         dir[0] = chooseDirection();
         following[0] = detectPlayerRoom(px,py);
         if(following[0] == room[0] || *pursue != 0){
@@ -631,7 +631,6 @@ void move(u8 *x,u8 *y,u8 lx, u8 ly,u8 *dir,u8 *s,u8 *room,u8 px,u8 py,u8 *seenX,
         }
         temp = 0;
     }else{
-        if(temp%2 == 0)
         if(*pursue >= 1){
             followPlayer(px,py,x,y,*seenX,*seenY,room[0]);
             if(*seenX == *x && *seenY == *y)
@@ -674,6 +673,7 @@ void game(){
    u8 finish = 0,i=1,arrow=0,following = 0;
     //u8* memptr;
    u8 bound = 0;
+   u8 fr = 0;
    temp = 0;
 
    cpct_clearScreen(0);
@@ -698,6 +698,7 @@ void game(){
     }
 
     //Dibujar pickups
+    if(fr == 4)
     drawPickUps(n.corazon,n.bullet);
 
     //Dibujar personajes
@@ -711,15 +712,17 @@ void game(){
             drawPlayer(object.x,object.y,object.sprite,object.vivo,1);
     }
 
+    if(fr == 4){
+        //Dibujar vida
+        drawVida(p.life);
+        drawBullets(p.bullets);
 
-    //Dibujar vida
-    drawVida(p.life);
-    drawBullets(p.bullets);
-
-    //Dibujar fatiga
-    if(p.atk < 20) drawFatiga(p.atk,2);
-    else if(p.atk > 20) drawFatiga(p.atk,1);
-    else drawFatiga(p.atk,0);
+        //Dibujar fatiga
+        if(p.atk < 20) drawFatiga(p.atk,2);
+        else if(p.atk > 20) drawFatiga(p.atk,1);
+        else drawFatiga(p.atk,0);
+        fr = 0;
+    }
 
     //guardar datos anteriores
     p.lx = p.x;
@@ -758,7 +761,7 @@ void game(){
             object.vivo = 0;
         }
       }
-
+      fr++;
       if(finish == 1) return;
 
    }

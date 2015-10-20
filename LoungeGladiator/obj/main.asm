@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.5.0 #9253 (Sep 22 2015) (CYGWIN)
-; This file was generated Tue Oct 20 17:44:26 2015
+; This file was generated Tue Oct 20 18:34:22 2015
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mz80
@@ -208,12 +208,6 @@ _mapa1:
 	.db #0x01	; 1
 	.db #0x01	; 1
 	.db #0x01	; 1
-	.db #0x07	; 7
-	.db #0x07	; 7
-	.db #0x01	; 1
-	.db #0x01	; 1
-	.db #0x01	; 1
-	.db #0x01	; 1
 	.db #0x01	; 1
 	.db #0x07	; 7
 	.db #0x07	; 7
@@ -221,6 +215,12 @@ _mapa1:
 	.db #0x01	; 1
 	.db #0x01	; 1
 	.db #0x01	; 1
+	.db #0x07	; 7
+	.db #0x07	; 7
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
+	.db #0x01	; 1
 	.db #0x00	; 0
 	.db #0x00	; 0
 	.db #0x00	; 0
@@ -228,9 +228,9 @@ _mapa1:
 	.db #0x00	; 0
 	.db #0x00	; 0
 	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
+	.db #0x06	; 6
+	.db #0x06	; 6
+	.db #0x06	; 6
 	.db #0x01	; 1
 	.db #0x03	; 3
 	.db #0x03	; 3
@@ -4749,77 +4749,77 @@ _move::
 	ld	sp,hl
 ;src/main.c:624: dir[0] = chooseDirection();
 	ld	a,10 (ix)
-	ld	-7 (ix),a
+	ld	-10 (ix),a
 	ld	a,11 (ix)
-	ld	-6 (ix),a
+	ld	-9 (ix),a
 ;src/main.c:626: if(following[0] == room[0] || *pursue != 0){
 	ld	a,14 (ix)
-	ld	-2 (ix),a
+	ld	-8 (ix),a
 	ld	a,15 (ix)
-	ld	-1 (ix),a
+	ld	-7 (ix),a
 	ld	a,24 (ix)
-	ld	-11 (ix),a
-	ld	a,25 (ix)
-	ld	-10 (ix),a
-;src/main.c:636: followPlayer(px,py,x,y,*seenX,*seenY,room[0]);
-	ld	a,20 (ix)
-	ld	-13 (ix),a
-	ld	a,21 (ix)
-	ld	-12 (ix),a
-	ld	a,18 (ix)
-	ld	-17 (ix),a
-	ld	a,19 (ix)
-	ld	-16 (ix),a
-;src/main.c:637: if(*seenX == *x && *seenY == *y)
-	ld	a,4 (ix)
-	ld	-15 (ix),a
-	ld	a,5 (ix)
-	ld	-14 (ix),a
-	ld	a,6 (ix)
-	ld	-5 (ix),a
-	ld	a,7 (ix)
 	ld	-4 (ix),a
-;src/main.c:623: if(temp > 4){
-	ld	a,#0x04
+	ld	a,25 (ix)
+	ld	-3 (ix),a
+;src/main.c:635: followPlayer(px,py,x,y,*seenX,*seenY,room[0]);
+	ld	a,20 (ix)
+	ld	-2 (ix),a
+	ld	a,21 (ix)
+	ld	-1 (ix),a
+	ld	a,18 (ix)
+	ld	-6 (ix),a
+	ld	a,19 (ix)
+	ld	-5 (ix),a
+;src/main.c:636: if(*seenX == *x && *seenY == *y)
+	ld	a,4 (ix)
+	ld	-12 (ix),a
+	ld	a,5 (ix)
+	ld	-11 (ix),a
+	ld	a,6 (ix)
+	ld	-17 (ix),a
+	ld	a,7 (ix)
+	ld	-16 (ix),a
+;src/main.c:623: if(temp > 10){
+	ld	a,#0x0A
 	ld	iy,#_temp
 	cp	a, 0 (iy)
 	ld	a,#0x00
 	ld	iy,#_temp
 	sbc	a, 1 (iy)
-	jp	PO, 00159$
+	jp	PO, 00153$
 	xor	a, #0x80
-00159$:
-	jp	P,00116$
+00153$:
+	jp	P,00114$
 ;src/main.c:624: dir[0] = chooseDirection();
 	call	_chooseDirection
-	ld	-3 (ix),l
-	ld	l,-7 (ix)
-	ld	h,-6 (ix)
-	ld	a,-3 (ix)
+	ld	-13 (ix),l
+	ld	l,-10 (ix)
+	ld	h,-9 (ix)
+	ld	a,-13 (ix)
 	ld	(hl),a
 ;src/main.c:625: following[0] = detectPlayerRoom(px,py);
 	ld	a,22 (ix)
-	ld	-9 (ix),a
+	ld	-15 (ix),a
 	ld	a,23 (ix)
-	ld	-8 (ix),a
+	ld	-14 (ix),a
 	ld	h,17 (ix)
 	ld	l,16 (ix)
 	push	hl
 	call	_detectPlayerRoom
 	pop	af
 	ld	d,l
-	ld	l,-9 (ix)
-	ld	h,-8 (ix)
+	ld	l,-15 (ix)
+	ld	h,-14 (ix)
 	ld	(hl),d
 ;src/main.c:626: if(following[0] == room[0] || *pursue != 0){
-	ld	l,-2 (ix)
-	ld	h,-1 (ix)
+	ld	l,-8 (ix)
+	ld	h,-7 (ix)
 	ld	e,(hl)
 	ld	a,d
 	sub	a, e
 	jr	Z,00104$
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	a,(hl)
 	or	a, a
 	jr	Z,00105$
@@ -4829,54 +4829,43 @@ _move::
 	or	a,24 (ix)
 	jr	NZ,00102$
 ;src/main.c:628: *pursue = 1;
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	(hl),#0x01
 	jr	00105$
 00102$:
 ;src/main.c:630: *pursue -=1;
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	d,(hl)
 	dec	d
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	(hl),d
 00105$:
 ;src/main.c:632: temp = 0;
 	ld	hl,#0x0000
 	ld	(_temp),hl
-	jp	00117$
-00116$:
-;src/main.c:634: if(temp%2 == 0)
-	ld	hl,#0x0002
-	push	hl
-	ld	hl,(_temp)
-	push	hl
-	call	__modsint
-	pop	af
-	pop	af
-	ld	a,h
-	or	a,l
-	jp	NZ,00117$
-;src/main.c:635: if(*pursue >= 1){
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
+	jp	00115$
+00114$:
+;src/main.c:634: if(*pursue >= 1){
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	d,(hl)
 ;src/main.c:626: if(following[0] == room[0] || *pursue != 0){
-	ld	l,-2 (ix)
-	ld	h,-1 (ix)
+	ld	l,-8 (ix)
+	ld	h,-7 (ix)
 	ld	b,(hl)
-;src/main.c:635: if(*pursue >= 1){
+;src/main.c:634: if(*pursue >= 1){
 	ld	a,d
 	sub	a, #0x01
 	jr	C,00111$
-;src/main.c:636: followPlayer(px,py,x,y,*seenX,*seenY,room[0]);
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
+;src/main.c:635: followPlayer(px,py,x,y,*seenX,*seenY,room[0]);
+	ld	l,-2 (ix)
+	ld	h,-1 (ix)
 	ld	a,(hl)
-	pop	hl
-	push	hl
+	ld	l,-6 (ix)
+	ld	h,-5 (ix)
 	ld	d,(hl)
 	push	bc
 	inc	sp
@@ -4897,56 +4886,56 @@ _move::
 	ld	hl,#9
 	add	hl,sp
 	ld	sp,hl
-;src/main.c:637: if(*seenX == *x && *seenY == *y)
+;src/main.c:636: if(*seenX == *x && *seenY == *y)
+	ld	l,-6 (ix)
+	ld	h,-5 (ix)
+	ld	d,(hl)
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
+	ld	e,(hl)
+	ld	a,d
+	sub	a, e
+	jr	NZ,00115$
+	ld	l,-2 (ix)
+	ld	h,-1 (ix)
+	ld	d,(hl)
 	pop	hl
 	push	hl
-	ld	d,(hl)
-	ld	l,-15 (ix)
-	ld	h,-14 (ix)
 	ld	e,(hl)
 	ld	a,d
 	sub	a, e
-	jr	NZ,00117$
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
-	ld	d,(hl)
-	ld	l,-5 (ix)
-	ld	h,-4 (ix)
-	ld	e,(hl)
-	ld	a,d
-	sub	a, e
-	jr	NZ,00117$
-;src/main.c:638: *pursue = 0;
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
+	jr	NZ,00115$
+;src/main.c:637: *pursue = 0;
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	(hl),#0x00
-	jr	00117$
+	jr	00115$
 00111$:
-;src/main.c:640: patrol(dir[0],lx,ly,&x[0],&y[0],room[0]);
-	ld	l,-7 (ix)
-	ld	h,-6 (ix)
+;src/main.c:639: patrol(dir[0],lx,ly,&x[0],&y[0],room[0]);
+	ld	l,-10 (ix)
+	ld	h,-9 (ix)
 	ld	a,(hl)
-	ld	-9 (ix),a
+	ld	-15 (ix),a
 	push	bc
 	inc	sp
-	ld	l,-5 (ix)
-	ld	h,-4 (ix)
+	ld	l,-17 (ix)
+	ld	h,-16 (ix)
 	push	hl
-	ld	l,-15 (ix)
-	ld	h,-14 (ix)
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
 	push	hl
 	ld	h,9 (ix)
 	ld	l,8 (ix)
 	push	hl
-	ld	a,-9 (ix)
+	ld	a,-15 (ix)
 	push	af
 	inc	sp
 	call	_patrol
 	ld	hl,#8
 	add	hl,sp
 	ld	sp,hl
-00117$:
-;src/main.c:643: if((detectPlayerRoom(lx,ly) != detectPlayerRoom(px,py)) && pursue != 0){
+00115$:
+;src/main.c:642: if((detectPlayerRoom(lx,ly) != detectPlayerRoom(px,py)) && pursue != 0){
 	ld	h,9 (ix)
 	ld	l,8 (ix)
 	push	hl
@@ -4963,27 +4952,27 @@ _move::
 	pop	de
 	ld	a,d
 	sub	a, b
-	jr	Z,00119$
+	jr	Z,00117$
 	ld	a,25 (ix)
 	or	a,24 (ix)
-	jr	Z,00119$
-;src/main.c:644: *seenX = px;
-	pop	hl
-	push	hl
+	jr	Z,00117$
+;src/main.c:643: *seenX = px;
+	ld	l,-6 (ix)
+	ld	h,-5 (ix)
 	ld	a,16 (ix)
 	ld	(hl),a
-;src/main.c:645: *seenY = py;
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
+;src/main.c:644: *seenY = py;
+	ld	l,-2 (ix)
+	ld	h,-1 (ix)
 	ld	a,17 (ix)
 	ld	(hl),a
-00119$:
-;src/main.c:647: *room = detectPlayerRoom(x[0],y[0]);
-	ld	l,-5 (ix)
-	ld	h,-4 (ix)
+00117$:
+;src/main.c:646: *room = detectPlayerRoom(x[0],y[0]);
+	pop	hl
+	push	hl
 	ld	d,(hl)
-	ld	l,-15 (ix)
-	ld	h,-14 (ix)
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
 	ld	b,(hl)
 	push	de
 	inc	sp
@@ -4992,20 +4981,20 @@ _move::
 	call	_detectPlayerRoom
 	pop	af
 	ld	a,l
-	ld	l,-2 (ix)
-	ld	h,-1 (ix)
+	ld	l,-8 (ix)
+	ld	h,-7 (ix)
 	ld	(hl),a
-;src/main.c:648: temp += 1;
+;src/main.c:647: temp += 1;
 	ld	hl, #_temp+0
 	inc	(hl)
-	jr	NZ,00166$
+	jr	NZ,00160$
 	ld	hl, #_temp+1
 	inc	(hl)
-00166$:
+00160$:
 	ld	sp, ix
 	pop	ix
 	ret
-;src/main.c:665: void game(){
+;src/main.c:664: void game(){
 ;	---------------------------------
 ; Function game
 ; ---------------------------------
@@ -5013,291 +5002,293 @@ _game::
 	push	ix
 	ld	ix,#0
 	add	ix,sp
-	ld	hl,#-134
+	ld	hl,#-135
 	add	hl,sp
 	ld	sp,hl
-;src/main.c:666: TPlayer p = {0,80,0,80,gladis_quieto_dcha,3,6,4,16,4,20,20,3};
+;src/main.c:665: TPlayer p = {0,80,0,80,gladis_quieto_dcha,3,6,4,16,4,20,20,3};
 	ld	hl,#0x0001
 	add	hl,sp
 	ld	(hl),#0x00
 	ld	hl,#0x0001
 	add	hl,sp
-	ld	-79 (ix),l
-	ld	-78 (ix),h
-	ld	a,-79 (ix)
+	ld	-75 (ix),l
+	ld	-74 (ix),h
+	ld	a,-75 (ix)
 	add	a, #0x01
-	ld	-77 (ix),a
-	ld	a,-78 (ix)
-	adc	a, #0x00
-	ld	-76 (ix),a
-	ld	l,-77 (ix)
-	ld	h,-76 (ix)
-	ld	(hl),#0x50
-	ld	a,-79 (ix)
-	add	a, #0x02
-	ld	-2 (ix),a
-	ld	a,-78 (ix)
-	adc	a, #0x00
-	ld	-1 (ix),a
-	ld	l,-2 (ix)
-	ld	h,-1 (ix)
-	ld	(hl),#0x00
-	ld	a,-79 (ix)
-	add	a, #0x03
-	ld	-4 (ix),a
-	ld	a,-78 (ix)
-	adc	a, #0x00
-	ld	-3 (ix),a
-	ld	l,-4 (ix)
-	ld	h,-3 (ix)
-	ld	(hl),#0x50
-	ld	a,-79 (ix)
-	add	a, #0x04
-	ld	-70 (ix),a
-	ld	a,-78 (ix)
-	adc	a, #0x00
-	ld	-69 (ix),a
-	ld	l,-70 (ix)
-	ld	h,-69 (ix)
-	ld	(hl),#<(_gladis_quieto_dcha)
-	inc	hl
-	ld	(hl),#>(_gladis_quieto_dcha)
-	ld	a,-79 (ix)
-	add	a, #0x06
-	ld	-72 (ix),a
-	ld	a,-78 (ix)
-	adc	a, #0x00
-	ld	-71 (ix),a
-	ld	l,-72 (ix)
-	ld	h,-71 (ix)
-	ld	(hl),#0x03
-	ld	a,-79 (ix)
-	add	a, #0x07
-	ld	-66 (ix),a
-	ld	a,-78 (ix)
-	adc	a, #0x00
-	ld	-65 (ix),a
-	ld	l,-66 (ix)
-	ld	h,-65 (ix)
-	ld	(hl),#0x06
-	ld	a,-79 (ix)
-	add	a, #0x08
-	ld	-68 (ix),a
-	ld	a,-78 (ix)
-	adc	a, #0x00
-	ld	-67 (ix),a
-	ld	l,-68 (ix)
-	ld	h,-67 (ix)
-	ld	(hl),#0x04
-	ld	a,-79 (ix)
-	add	a, #0x09
-	ld	-81 (ix),a
-	ld	a,-78 (ix)
-	adc	a, #0x00
-	ld	-80 (ix),a
-	ld	l,-81 (ix)
-	ld	h,-80 (ix)
-	ld	(hl),#0x10
-	ld	a,-79 (ix)
-	add	a, #0x0A
-	ld	-83 (ix),a
-	ld	a,-78 (ix)
-	adc	a, #0x00
-	ld	-82 (ix),a
-	ld	l,-83 (ix)
-	ld	h,-82 (ix)
-	ld	(hl),#0x04
-	ld	a,-79 (ix)
-	add	a, #0x0B
-	ld	-50 (ix),a
-	ld	a,-78 (ix)
-	adc	a, #0x00
-	ld	-49 (ix),a
-	ld	l,-50 (ix)
-	ld	h,-49 (ix)
-	ld	(hl),#0x14
-	ld	a,-79 (ix)
-	add	a, #0x0C
-	ld	-52 (ix),a
-	ld	a,-78 (ix)
-	adc	a, #0x00
-	ld	-51 (ix),a
-	ld	l,-52 (ix)
-	ld	h,-51 (ix)
-	ld	(hl),#0x14
-	ld	a,-79 (ix)
-	add	a, #0x0D
 	ld	-6 (ix),a
-	ld	a,-78 (ix)
+	ld	a,-74 (ix)
 	adc	a, #0x00
 	ld	-5 (ix),a
 	ld	l,-6 (ix)
 	ld	h,-5 (ix)
+	ld	(hl),#0x50
+	ld	a,-75 (ix)
+	add	a, #0x02
+	ld	-77 (ix),a
+	ld	a,-74 (ix)
+	adc	a, #0x00
+	ld	-76 (ix),a
+	ld	l,-77 (ix)
+	ld	h,-76 (ix)
+	ld	(hl),#0x00
+	ld	a,-75 (ix)
+	add	a, #0x03
+	ld	-30 (ix),a
+	ld	a,-74 (ix)
+	adc	a, #0x00
+	ld	-29 (ix),a
+	ld	l,-30 (ix)
+	ld	h,-29 (ix)
+	ld	(hl),#0x50
+	ld	a,-75 (ix)
+	add	a, #0x04
+	ld	-93 (ix),a
+	ld	a,-74 (ix)
+	adc	a, #0x00
+	ld	-92 (ix),a
+	ld	l,-93 (ix)
+	ld	h,-92 (ix)
+	ld	(hl),#<(_gladis_quieto_dcha)
+	inc	hl
+	ld	(hl),#>(_gladis_quieto_dcha)
+	ld	a,-75 (ix)
+	add	a, #0x06
+	ld	-59 (ix),a
+	ld	a,-74 (ix)
+	adc	a, #0x00
+	ld	-58 (ix),a
+	ld	l,-59 (ix)
+	ld	h,-58 (ix)
 	ld	(hl),#0x03
-	ld	a,-79 (ix)
+	ld	a,-75 (ix)
+	add	a, #0x07
+	ld	-2 (ix),a
+	ld	a,-74 (ix)
+	adc	a, #0x00
+	ld	-1 (ix),a
+	ld	l,-2 (ix)
+	ld	h,-1 (ix)
+	ld	(hl),#0x06
+	ld	a,-75 (ix)
+	add	a, #0x08
+	ld	-4 (ix),a
+	ld	a,-74 (ix)
+	adc	a, #0x00
+	ld	-3 (ix),a
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
+	ld	(hl),#0x04
+	ld	a,-75 (ix)
+	add	a, #0x09
+	ld	-95 (ix),a
+	ld	a,-74 (ix)
+	adc	a, #0x00
+	ld	-94 (ix),a
+	ld	l,-95 (ix)
+	ld	h,-94 (ix)
+	ld	(hl),#0x10
+	ld	a,-75 (ix)
+	add	a, #0x0A
+	ld	-97 (ix),a
+	ld	a,-74 (ix)
+	adc	a, #0x00
+	ld	-96 (ix),a
+	ld	l,-97 (ix)
+	ld	h,-96 (ix)
+	ld	(hl),#0x04
+	ld	a,-75 (ix)
+	add	a, #0x0B
+	ld	-89 (ix),a
+	ld	a,-74 (ix)
+	adc	a, #0x00
+	ld	-88 (ix),a
+	ld	l,-89 (ix)
+	ld	h,-88 (ix)
+	ld	(hl),#0x14
+	ld	a,-75 (ix)
+	add	a, #0x0C
+	ld	-91 (ix),a
+	ld	a,-74 (ix)
+	adc	a, #0x00
+	ld	-90 (ix),a
+	ld	l,-91 (ix)
+	ld	h,-90 (ix)
+	ld	(hl),#0x14
+	ld	a,-75 (ix)
+	add	a, #0x0D
+	ld	-53 (ix),a
+	ld	a,-74 (ix)
+	adc	a, #0x00
+	ld	-52 (ix),a
+	ld	l,-53 (ix)
+	ld	h,-52 (ix)
+	ld	(hl),#0x03
+	ld	a,-75 (ix)
 	add	a, #0x0E
 	ld	l,a
-	ld	a,-78 (ix)
+	ld	a,-74 (ix)
 	adc	a, #0x00
 	ld	h,a
 	ld	(hl),#0x00
-	ld	a,-79 (ix)
+	ld	a,-75 (ix)
 	add	a, #0x0F
 	ld	l,a
-	ld	a,-78 (ix)
+	ld	a,-74 (ix)
 	adc	a, #0x00
 	ld	h,a
 	ld	(hl),#0x00
-;src/main.c:667: TEnemy e = {52,80,52,80,52,80,chacho_dcha,3,2,3,3,0,0,0};
+;src/main.c:666: TEnemy e = {52,80,52,80,52,80,chacho_dcha,3,2,3,3,0,0,0};
 	ld	hl,#0x0012
 	add	hl,sp
 	ld	(hl),#0x34
 	ld	hl,#0x0012
 	add	hl,sp
-	ld	-8 (ix),l
-	ld	-7 (ix),h
-	ld	a,-8 (ix)
+	ld	-55 (ix),l
+	ld	-54 (ix),h
+	ld	a,-55 (ix)
 	add	a, #0x01
-	ld	-62 (ix),a
-	ld	a,-7 (ix)
+	ld	-57 (ix),a
+	ld	a,-54 (ix)
 	adc	a, #0x00
-	ld	-61 (ix),a
-	ld	l,-62 (ix)
-	ld	h,-61 (ix)
+	ld	-56 (ix),a
+	ld	l,-57 (ix)
+	ld	h,-56 (ix)
 	ld	(hl),#0x50
-	ld	a,-8 (ix)
+	ld	a,-55 (ix)
 	add	a, #0x02
-	ld	-64 (ix),a
-	ld	a,-7 (ix)
+	ld	-61 (ix),a
+	ld	a,-54 (ix)
 	adc	a, #0x00
-	ld	-63 (ix),a
-	ld	l,-64 (ix)
-	ld	h,-63 (ix)
+	ld	-60 (ix),a
+	ld	l,-61 (ix)
+	ld	h,-60 (ix)
 	ld	(hl),#0x34
-	ld	a,-8 (ix)
+	ld	a,-55 (ix)
 	add	a, #0x03
-	ld	-85 (ix),a
-	ld	a,-7 (ix)
+	ld	-63 (ix),a
+	ld	a,-54 (ix)
 	adc	a, #0x00
-	ld	-84 (ix),a
-	ld	l,-85 (ix)
-	ld	h,-84 (ix)
+	ld	-62 (ix),a
+	ld	l,-63 (ix)
+	ld	h,-62 (ix)
 	ld	(hl),#0x50
-	ld	a,-8 (ix)
+	ld	a,-55 (ix)
 	add	a, #0x04
 	ld	l,a
-	ld	a,-7 (ix)
+	ld	a,-54 (ix)
 	adc	a, #0x00
 	ld	h,a
 	ld	(hl),#0x34
-	ld	a,-8 (ix)
+	ld	a,-55 (ix)
 	add	a, #0x05
 	ld	l,a
-	ld	a,-7 (ix)
+	ld	a,-54 (ix)
 	adc	a, #0x00
 	ld	h,a
 	ld	(hl),#0x50
-	ld	a,-8 (ix)
+	ld	a,-55 (ix)
 	add	a, #0x06
-	ld	-87 (ix),a
-	ld	a,-7 (ix)
+	ld	-65 (ix),a
+	ld	a,-54 (ix)
 	adc	a, #0x00
-	ld	-86 (ix),a
-	ld	l,-87 (ix)
-	ld	h,-86 (ix)
+	ld	-64 (ix),a
+	ld	l,-65 (ix)
+	ld	h,-64 (ix)
 	ld	(hl),#<(_chacho_dcha)
 	inc	hl
 	ld	(hl),#>(_chacho_dcha)
-	ld	a,-8 (ix)
+	ld	a,-55 (ix)
 	add	a, #0x08
-	ld	-29 (ix),a
-	ld	a,-7 (ix)
+	ld	-8 (ix),a
+	ld	a,-54 (ix)
 	adc	a, #0x00
-	ld	-28 (ix),a
-	ld	l,-29 (ix)
-	ld	h,-28 (ix)
+	ld	-7 (ix),a
+	ld	l,-8 (ix)
+	ld	h,-7 (ix)
 	ld	(hl),#0x03
-	ld	a,-8 (ix)
+	ld	a,-55 (ix)
 	add	a, #0x09
-	ld	-31 (ix),a
-	ld	a,-7 (ix)
+	ld	-10 (ix),a
+	ld	a,-54 (ix)
 	adc	a, #0x00
-	ld	-30 (ix),a
-	ld	l,-31 (ix)
-	ld	h,-30 (ix)
+	ld	-9 (ix),a
+	ld	l,-10 (ix)
+	ld	h,-9 (ix)
 	ld	(hl),#0x02
-	ld	a,-8 (ix)
+	ld	a,-55 (ix)
 	add	a, #0x0A
 	ld	l,a
-	ld	a,-7 (ix)
+	ld	a,-54 (ix)
 	adc	a, #0x00
 	ld	h,a
 	ld	(hl),#0x03
-	ld	a,-8 (ix)
+	ld	a,-55 (ix)
 	add	a, #0x0B
-	ld	-54 (ix),a
-	ld	a,-7 (ix)
+	ld	-12 (ix),a
+	ld	a,-54 (ix)
 	adc	a, #0x00
-	ld	-53 (ix),a
-	ld	l,-54 (ix)
-	ld	h,-53 (ix)
+	ld	-11 (ix),a
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
 	ld	(hl),#0x03
-	ld	a,-8 (ix)
+	ld	a,-55 (ix)
 	add	a, #0x0C
 	ld	e,a
-	ld	a,-7 (ix)
+	ld	a,-54 (ix)
 	adc	a, #0x00
 	ld	d,a
 	xor	a, a
 	ld	(de),a
-	ld	a,-8 (ix)
+	ld	a,-55 (ix)
 	add	a, #0x0D
-	ld	-56 (ix),a
-	ld	a,-7 (ix)
+	ld	-47 (ix),a
+	ld	a,-54 (ix)
 	adc	a, #0x00
-	ld	-55 (ix),a
-	ld	l,-56 (ix)
-	ld	h,-55 (ix)
+	ld	-46 (ix),a
+	ld	l,-47 (ix)
+	ld	h,-46 (ix)
 	ld	(hl),#0x00
-	ld	a,-8 (ix)
+	ld	a,-55 (ix)
 	add	a, #0x0E
-	ld	-58 (ix),a
-	ld	a,-7 (ix)
+	ld	-49 (ix),a
+	ld	a,-54 (ix)
 	adc	a, #0x00
-	ld	-57 (ix),a
-	ld	l,-58 (ix)
-	ld	h,-57 (ix)
+	ld	-48 (ix),a
+	ld	l,-49 (ix)
+	ld	h,-48 (ix)
 	ld	(hl),#0x00
-;src/main.c:668: TNivel n = {0,0,0};
-	ld	hl,#0x0022
+;src/main.c:667: TNivel n = {0,0,0};
+	ld	hl,#0x0023
 	add	hl,sp
 	ld	(hl),#0x00
-	ld	hl,#0x0022
+	ld	hl,#0x0023
 	add	hl,sp
 	ld	c,l
 	ld	b,h
 	ld	hl,#0x0001
 	add	hl,bc
-	ld	-60 (ix),l
-	ld	-59 (ix),h
-	ld	l,-60 (ix)
-	ld	h,-59 (ix)
+	ld	-51 (ix),l
+	ld	-50 (ix),h
+	ld	l,-51 (ix)
+	ld	h,-50 (ix)
 	ld	(hl),#0x00
 	inc	bc
 	inc	bc
-	ld	-24 (ix),c
-	ld	-23 (ix),b
-	ld	l,-24 (ix)
-	ld	h,-23 (ix)
+	ld	-42 (ix),c
+	ld	-41 (ix),b
+	ld	l,-42 (ix)
+	ld	h,-41 (ix)
 	ld	(hl),#0x00
-;src/main.c:674: u8 finish = 0,i=1,arrow=0,following = 0;
+;src/main.c:673: u8 finish = 0,i=1,arrow=0,following = 0;
 	ld	iy,#0
 	add	iy,sp
 	ld	0 (iy),#0x00
-	ld	-117 (ix),#0x00
 	ld	-101 (ix),#0x00
-;src/main.c:676: u8 bound = 0;
-	ld	-25 (ix),#0x00
+	ld	-118 (ix),#0x00
+;src/main.c:675: u8 bound = 0;
+	ld	-43 (ix),#0x00
+;src/main.c:676: u8 fr = 0;
+	ld	-102 (ix),#0x00
 ;src/main.c:677: temp = 0;
 	ld	hl,#0x0000
 	ld	(_temp),hl
@@ -5318,69 +5309,69 @@ _game::
 	inc	sp
 	pop	de
 ;src/main.c:684: while (1){
-	ld	-27 (ix),e
-	ld	-26 (ix),d
-	ld	a,-62 (ix)
-	ld	-89 (ix),a
-	ld	a,-61 (ix)
-	ld	-88 (ix),a
-	ld	a,-8 (ix)
-	ld	-91 (ix),a
-	ld	a,-7 (ix)
-	ld	-90 (ix),a
+	ld	-45 (ix),e
+	ld	-44 (ix),d
+	ld	a,-57 (ix)
+	ld	-24 (ix),a
+	ld	a,-56 (ix)
+	ld	-23 (ix),a
+	ld	a,-55 (ix)
+	ld	-26 (ix),a
+	ld	a,-54 (ix)
+	ld	-25 (ix),a
+	ld	a,-53 (ix)
+	ld	-28 (ix),a
+	ld	a,-52 (ix)
+	ld	-27 (ix),a
+	ld	a,-4 (ix)
+	ld	-67 (ix),a
+	ld	a,-3 (ix)
+	ld	-66 (ix),a
+	ld	a,-89 (ix)
+	ld	-69 (ix),a
+	ld	a,-88 (ix)
+	ld	-68 (ix),a
 	ld	a,-6 (ix)
-	ld	-93 (ix),a
+	ld	-71 (ix),a
 	ld	a,-5 (ix)
-	ld	-92 (ix),a
-	ld	a,-68 (ix)
-	ld	-95 (ix),a
-	ld	a,-67 (ix)
-	ld	-94 (ix),a
+	ld	-70 (ix),a
+	ld	a,-75 (ix)
+	ld	-73 (ix),a
+	ld	a,-74 (ix)
+	ld	-72 (ix),a
+	ld	a,-42 (ix)
+	ld	-79 (ix),a
+	ld	a,-41 (ix)
+	ld	-78 (ix),a
+	ld	a,-51 (ix)
+	ld	-81 (ix),a
 	ld	a,-50 (ix)
-	ld	-97 (ix),a
-	ld	a,-49 (ix)
-	ld	-96 (ix),a
-	ld	a,-77 (ix)
-	ld	-42 (ix),a
-	ld	a,-76 (ix)
-	ld	-41 (ix),a
-	ld	a,-79 (ix)
-	ld	-44 (ix),a
-	ld	a,-78 (ix)
-	ld	-43 (ix),a
-	ld	a,-24 (ix)
-	ld	-46 (ix),a
-	ld	a,-23 (ix)
-	ld	-45 (ix),a
-	ld	a,-60 (ix)
-	ld	-48 (ix),a
+	ld	-80 (ix),a
+	ld	a,-53 (ix)
+	ld	-83 (ix),a
+	ld	a,-52 (ix)
+	ld	-82 (ix),a
 	ld	a,-59 (ix)
-	ld	-47 (ix),a
+	ld	-85 (ix),a
+	ld	a,-58 (ix)
+	ld	-84 (ix),a
 	ld	a,-6 (ix)
-	ld	-33 (ix),a
+	ld	-87 (ix),a
 	ld	a,-5 (ix)
-	ld	-32 (ix),a
-	ld	a,-72 (ix)
-	ld	-35 (ix),a
-	ld	a,-71 (ix)
-	ld	-34 (ix),a
-	ld	a,-77 (ix)
-	ld	-37 (ix),a
-	ld	a,-76 (ix)
-	ld	-36 (ix),a
-	ld	a,-79 (ix)
-	ld	-39 (ix),a
-	ld	a,-78 (ix)
-	ld	-38 (ix),a
-00144$:
+	ld	-86 (ix),a
+	ld	a,-75 (ix)
+	ld	-14 (ix),a
+	ld	a,-74 (ix)
+	ld	-13 (ix),a
+00148$:
 ;src/main.c:687: cpct_waitVSYNC();
 	call	_cpct_waitVSYNC
 ;src/main.c:690: erasePlayer(p.lx,p.ly,0);
-	ld	l,-4 (ix)
-	ld	h,-3 (ix)
+	ld	l,-30 (ix)
+	ld	h,-29 (ix)
 	ld	b,(hl)
-	ld	l,-2 (ix)
-	ld	h,-1 (ix)
+	ld	l,-77 (ix)
+	ld	h,-76 (ix)
 	ld	d,(hl)
 	xor	a, a
 	push	af
@@ -5391,11 +5382,11 @@ _game::
 	pop	af
 	inc	sp
 ;src/main.c:691: erasePlayer(e.lx,e.ly,0);
-	ld	l,-85 (ix)
-	ld	h,-84 (ix)
+	ld	l,-63 (ix)
+	ld	h,-62 (ix)
 	ld	b,(hl)
-	ld	l,-64 (ix)
-	ld	h,-63 (ix)
+	ld	l,-61 (ix)
+	ld	h,-60 (ix)
 	ld	d,(hl)
 	xor	a, a
 	push	af
@@ -5406,7 +5397,7 @@ _game::
 	pop	af
 	inc	sp
 ;src/main.c:692: if(arrow == 1){
-	ld	a,-117 (ix)
+	ld	a,-101 (ix)
 	dec	a
 	jr	NZ,00108$
 ;src/main.c:693: if(object.dir == 4 || object.dir == 6)
@@ -5446,46 +5437,64 @@ _game::
 	inc	sp
 00103$:
 ;src/main.c:697: if(bound == 1) arrow = 0;
-	ld	a,-25 (ix)
+	ld	a,-43 (ix)
 	dec	a
 	jr	NZ,00108$
-	ld	-117 (ix),#0x00
+	ld	-101 (ix),#0x00
 00108$:
-;src/main.c:701: drawPickUps(n.corazon,n.bullet);
-	ld	l,-24 (ix)
-	ld	h,-23 (ix)
+;src/main.c:701: if(fr == 4)
+	ld	a,-102 (ix)
+	sub	a, #0x04
+	jr	NZ,00239$
+	ld	a,#0x01
+	jr	00240$
+00239$:
+	xor	a,a
+00240$:
+	ld	c,a
+	or	a, a
+	jr	Z,00110$
+;src/main.c:702: drawPickUps(n.corazon,n.bullet);
+	ld	l,-42 (ix)
+	ld	h,-41 (ix)
 	ld	b,(hl)
-	ld	l,-60 (ix)
-	ld	h,-59 (ix)
-	ld	c, (hl)
+	ld	l,-51 (ix)
+	ld	h,-50 (ix)
+	ld	d,(hl)
+	push	bc
+	ld	c, d
 	push	bc
 	call	_drawPickUps
 	pop	af
-;src/main.c:704: drawPlayer(p.x,p.y,p.sprite,p.life,0);
-	ld	l,-72 (ix)
-	ld	h,-71 (ix)
+	pop	bc
+00110$:
+;src/main.c:705: drawPlayer(p.x,p.y,p.sprite,p.life,0);
+	ld	l,-59 (ix)
+	ld	h,-58 (ix)
 	ld	b,(hl)
-	ld	l,-70 (ix)
-	ld	h,-69 (ix)
-	ld	e,(hl)
-	inc	hl
-	ld	c,(hl)
-	ld	l,-77 (ix)
-	ld	h,-76 (ix)
+	ld	l,-93 (ix)
+	ld	h,-92 (ix)
 	ld	a,(hl)
-	ld	-40 (ix),a
-	ld	l,-79 (ix)
-	ld	h,-78 (ix)
+	ld	-16 (ix),a
+	inc	hl
+	ld	a,(hl)
+	ld	-15 (ix),a
+	ld	l,-6 (ix)
+	ld	h,-5 (ix)
+	ld	e,(hl)
+	ld	l,-75 (ix)
+	ld	h,-74 (ix)
 	ld	d,(hl)
+	push	bc
 	xor	a, a
 	push	af
 	inc	sp
 	push	bc
 	inc	sp
-	ld	l, e
-	ld	h, c
+	ld	l,-16 (ix)
+	ld	h,-15 (ix)
 	push	hl
-	ld	a,-40 (ix)
+	ld	a,e
 	push	af
 	inc	sp
 	push	de
@@ -5494,33 +5503,37 @@ _game::
 	ld	hl,#6
 	add	hl,sp
 	ld	sp,hl
-;src/main.c:705: if(e.life > 0) drawPlayer(e.x,e.y,e.sprite,e.life,0);
-	ld	l,-29 (ix)
-	ld	h,-28 (ix)
-	ld	c,(hl)
-	ld	a,c
-	or	a, a
-	jr	Z,00110$
-	ld	l,-87 (ix)
-	ld	h,-86 (ix)
-	ld	e,(hl)
-	inc	hl
-	ld	d,(hl)
-	ld	l,-62 (ix)
-	ld	h,-61 (ix)
-	ld	a,(hl)
-	ld	-40 (ix),a
+	pop	bc
+;src/main.c:706: if(e.life > 0) drawPlayer(e.x,e.y,e.sprite,e.life,0);
 	ld	l,-8 (ix)
 	ld	h,-7 (ix)
+	ld	d,(hl)
+	ld	a,d
+	or	a, a
+	jr	Z,00112$
+	ld	l,-65 (ix)
+	ld	h,-64 (ix)
+	ld	a,(hl)
+	ld	-16 (ix),a
+	inc	hl
+	ld	a,(hl)
+	ld	-15 (ix),a
+	ld	l,-57 (ix)
+	ld	h,-56 (ix)
+	ld	e,(hl)
+	ld	l,-55 (ix)
+	ld	h,-54 (ix)
 	ld	b,(hl)
+	push	bc
 	xor	a, a
 	push	af
 	inc	sp
-	ld	a,c
-	push	af
-	inc	sp
 	push	de
-	ld	a,-40 (ix)
+	inc	sp
+	ld	l,-16 (ix)
+	ld	h,-15 (ix)
+	push	hl
+	ld	a,e
 	push	af
 	inc	sp
 	push	bc
@@ -5529,36 +5542,44 @@ _game::
 	ld	hl,#6
 	add	hl,sp
 	ld	sp,hl
-00110$:
-;src/main.c:707: if(arrow == 1){
-	ld	a,-117 (ix)
+	pop	bc
+00112$:
+;src/main.c:708: if(arrow == 1){
+	ld	a,-101 (ix)
 	dec	a
-	jr	NZ,00119$
-;src/main.c:708: if(object.dir == 4 || object.dir == 6)
+	jp	NZ,00121$
+;src/main.c:709: if(object.dir == 4 || object.dir == 6)
 	ld	hl, #(_object + 0x0007) + 0
 	ld	h,(hl)
 	ld	a,h
 	cp	a,#0x04
-	jr	Z,00114$
+	jr	Z,00116$
 	sub	a, #0x06
-	jr	NZ,00115$
-00114$:
-;src/main.c:709: drawPlayer(object.x,object.y,object.sprite,object.vivo,2);
+	jr	NZ,00117$
+00116$:
+;src/main.c:710: drawPlayer(object.x,object.y,object.sprite,object.vivo,2);
 	ld	hl, #(_object + 0x0006) + 0
+	ld	b,(hl)
+	ld	hl, #(_object + 0x0004) + 0
+	ld	a,(hl)
+	ld	-16 (ix),a
+	inc	hl
+	ld	a,(hl)
+	ld	-15 (ix),a
+	ld	hl, #(_object + 0x0001) + 0
 	ld	e,(hl)
-	ld	bc, (#(_object + 0x0004) + 0)
-	ld	a,(#(_object + 0x0001) + 0)
-	ld	-40 (ix),a
 	ld	hl, #_object + 0
 	ld	d,(hl)
+	push	bc
 	ld	a,#0x02
 	push	af
 	inc	sp
-	ld	a,e
-	push	af
-	inc	sp
 	push	bc
-	ld	a,-40 (ix)
+	inc	sp
+	ld	l,-16 (ix)
+	ld	h,-15 (ix)
+	push	hl
+	ld	a,e
 	push	af
 	inc	sp
 	push	de
@@ -5567,31 +5588,39 @@ _game::
 	ld	hl,#6
 	add	hl,sp
 	ld	sp,hl
-	jr	00119$
-00115$:
-;src/main.c:710: else if(object.dir == 2 || object.dir == 8)
+	pop	bc
+	jr	00121$
+00117$:
+;src/main.c:711: else if(object.dir == 2 || object.dir == 8)
 	ld	a,h
 	cp	a,#0x02
-	jr	Z,00111$
+	jr	Z,00113$
 	sub	a, #0x08
-	jr	NZ,00119$
-00111$:
-;src/main.c:711: drawPlayer(object.x,object.y,object.sprite,object.vivo,1);
+	jr	NZ,00121$
+00113$:
+;src/main.c:712: drawPlayer(object.x,object.y,object.sprite,object.vivo,1);
 	ld	hl, #(_object + 0x0006) + 0
+	ld	b,(hl)
+	ld	hl, #(_object + 0x0004) + 0
+	ld	a,(hl)
+	ld	-16 (ix),a
+	inc	hl
+	ld	a,(hl)
+	ld	-15 (ix),a
+	ld	hl, #(_object + 0x0001) + 0
 	ld	e,(hl)
-	ld	bc, (#(_object + 0x0004) + 0)
-	ld	a,(#(_object + 0x0001) + 0)
-	ld	-40 (ix),a
 	ld	hl, #_object + 0
 	ld	d,(hl)
+	push	bc
 	ld	a,#0x01
 	push	af
 	inc	sp
-	ld	a,e
-	push	af
-	inc	sp
 	push	bc
-	ld	a,-40 (ix)
+	inc	sp
+	ld	l,-16 (ix)
+	ld	h,-15 (ix)
+	push	hl
+	ld	a,e
 	push	af
 	inc	sp
 	push	de
@@ -5600,30 +5629,35 @@ _game::
 	ld	hl,#6
 	add	hl,sp
 	ld	sp,hl
-00119$:
-;src/main.c:716: drawVida(p.life);
-	ld	l,-72 (ix)
-	ld	h,-71 (ix)
+	pop	bc
+00121$:
+;src/main.c:715: if(fr == 4){
+	ld	a,c
+	or	a, a
+	jr	Z,00129$
+;src/main.c:717: drawVida(p.life);
+	ld	l,-59 (ix)
+	ld	h,-58 (ix)
 	ld	h,(hl)
 	push	hl
 	inc	sp
 	call	_drawVida
 	inc	sp
-;src/main.c:717: drawBullets(p.bullets);
-	ld	l,-6 (ix)
-	ld	h,-5 (ix)
+;src/main.c:718: drawBullets(p.bullets);
+	ld	l,-53 (ix)
+	ld	h,-52 (ix)
 	ld	h,(hl)
 	push	hl
 	inc	sp
 	call	_drawBullets
 	inc	sp
-;src/main.c:720: if(p.atk < 20) drawFatiga(p.atk,2);
-	ld	l,-50 (ix)
-	ld	h,-49 (ix)
+;src/main.c:721: if(p.atk < 20) drawFatiga(p.atk,2);
+	ld	l,-89 (ix)
+	ld	h,-88 (ix)
 	ld	d,(hl)
 	ld	a,d
 	sub	a, #0x14
-	jr	NC,00124$
+	jr	NC,00126$
 	ld	a,#0x02
 	push	af
 	inc	sp
@@ -5631,12 +5665,12 @@ _game::
 	inc	sp
 	call	_drawFatiga
 	pop	af
-	jr	00125$
-00124$:
-;src/main.c:721: else if(p.atk > 20) drawFatiga(p.atk,1);
+	jr	00127$
+00126$:
+;src/main.c:722: else if(p.atk > 20) drawFatiga(p.atk,1);
 	ld	a,#0x14
 	sub	a, d
-	jr	NC,00121$
+	jr	NC,00123$
 	ld	a,#0x01
 	push	af
 	inc	sp
@@ -5644,9 +5678,9 @@ _game::
 	inc	sp
 	call	_drawFatiga
 	pop	af
-	jr	00125$
-00121$:
-;src/main.c:722: else drawFatiga(p.atk,0);
+	jr	00127$
+00123$:
+;src/main.c:723: else drawFatiga(p.atk,0);
 	xor	a, a
 	push	af
 	inc	sp
@@ -5654,107 +5688,109 @@ _game::
 	inc	sp
 	call	_drawFatiga
 	pop	af
-00125$:
-;src/main.c:725: p.lx = p.x;
-	ld	l,-79 (ix)
-	ld	h,-78 (ix)
+00127$:
+;src/main.c:724: fr = 0;
+	ld	-102 (ix),#0x00
+00129$:
+;src/main.c:728: p.lx = p.x;
+	ld	l,-75 (ix)
+	ld	h,-74 (ix)
 	ld	a,(hl)
-	ld	l,-2 (ix)
-	ld	h,-1 (ix)
-	ld	(hl),a
-;src/main.c:726: p.ly = p.y;
 	ld	l,-77 (ix)
 	ld	h,-76 (ix)
+	ld	(hl),a
+;src/main.c:729: p.ly = p.y;
+	ld	l,-6 (ix)
+	ld	h,-5 (ix)
 	ld	a,(hl)
+	ld	l,-30 (ix)
+	ld	h,-29 (ix)
+	ld	(hl),a
+;src/main.c:730: e.lx = e.x;
+	ld	l,-55 (ix)
+	ld	h,-54 (ix)
+	ld	a,(hl)
+	ld	l,-61 (ix)
+	ld	h,-60 (ix)
+	ld	(hl),a
+;src/main.c:731: e.ly = e.y;
+	ld	l,-57 (ix)
+	ld	h,-56 (ix)
+	ld	a,(hl)
+	ld	l,-63 (ix)
+	ld	h,-62 (ix)
+	ld	(hl),a
+;src/main.c:732: p.latk = p.atk;
+	ld	l,-89 (ix)
+	ld	h,-88 (ix)
+	ld	a,(hl)
+	ld	l,-91 (ix)
+	ld	h,-90 (ix)
+	ld	(hl),a
+;src/main.c:733: p.lsize = p.sizeX;
 	ld	l,-4 (ix)
 	ld	h,-3 (ix)
-	ld	(hl),a
-;src/main.c:727: e.lx = e.x;
-	ld	l,-8 (ix)
-	ld	h,-7 (ix)
 	ld	a,(hl)
-	ld	l,-64 (ix)
-	ld	h,-63 (ix)
+	ld	l,-97 (ix)
+	ld	h,-96 (ix)
 	ld	(hl),a
-;src/main.c:728: e.ly = e.y;
-	ld	l,-62 (ix)
-	ld	h,-61 (ix)
-	ld	a,(hl)
-	ld	l,-85 (ix)
-	ld	h,-84 (ix)
-	ld	(hl),a
-;src/main.c:729: p.latk = p.atk;
-	ld	l,-50 (ix)
-	ld	h,-49 (ix)
-	ld	a,(hl)
-	ld	l,-52 (ix)
-	ld	h,-51 (ix)
-	ld	(hl),a
-;src/main.c:730: p.lsize = p.sizeX;
-	ld	l,-68 (ix)
-	ld	h,-67 (ix)
-	ld	a,(hl)
-	ld	l,-83 (ix)
-	ld	h,-82 (ix)
-	ld	(hl),a
-;src/main.c:733: cpct_scanKeyboard_f();
+;src/main.c:736: cpct_scanKeyboard_f();
 	call	_cpct_scanKeyboard_f
-;src/main.c:734: p.sprite = checkKeyboard(&p.x,&p.y,&p.atk,&p.dir,p.sprite,&p.sizeX,&p.bullets,&finish,&arrow);
-	ld	hl,#0x0011
+;src/main.c:737: p.sprite = checkKeyboard(&p.x,&p.y,&p.atk,&p.dir,p.sprite,&p.sizeX,&p.bullets,&finish,&arrow);
+	ld	hl,#0x0022
 	add	hl,sp
-	ld	c, l
-	ld	b, h
+	ex	de,hl
 	ld	hl,#0x0000
 	add	hl,sp
-	ld	-10 (ix),l
-	ld	-9 (ix),h
-	ld	e,-93 (ix)
-	ld	d,-92 (ix)
-	ld	a,-95 (ix)
-	ld	-12 (ix),a
-	ld	a,-94 (ix)
-	ld	-11 (ix),a
-	ld	l,-70 (ix)
-	ld	h,-69 (ix)
+	ld	-16 (ix),l
+	ld	-15 (ix),h
+	ld	c,-28 (ix)
+	ld	b,-27 (ix)
+	ld	a,-67 (ix)
+	ld	-18 (ix),a
+	ld	a,-66 (ix)
+	ld	-17 (ix),a
+	ld	l,-93 (ix)
+	ld	h,-92 (ix)
 	ld	a,(hl)
-	ld	-14 (ix),a
+	ld	-20 (ix),a
 	inc	hl
 	ld	a,(hl)
-	ld	-13 (ix),a
-	ld	a,-66 (ix)
-	ld	-16 (ix),a
-	ld	a,-65 (ix)
-	ld	-15 (ix),a
-	ld	a,-97 (ix)
-	ld	-18 (ix),a
-	ld	a,-96 (ix)
-	ld	-17 (ix),a
-	ld	l,-42 (ix)
-	ld	h,-41 (ix)
-	ld	a,-44 (ix)
-	ld	-20 (ix),a
-	ld	a,-43 (ix)
 	ld	-19 (ix),a
-	push	bc
-	ld	c,-10 (ix)
-	ld	b,-9 (ix)
-	push	bc
+	ld	l,-2 (ix)
+	ld	h,-1 (ix)
+	ld	a,-69 (ix)
+	ld	-22 (ix),a
+	ld	a,-68 (ix)
+	ld	-21 (ix),a
+	ld	a,-71 (ix)
+	ld	-32 (ix),a
+	ld	a,-70 (ix)
+	ld	-31 (ix),a
+	ld	a,-73 (ix)
+	ld	-34 (ix),a
+	ld	a,-72 (ix)
+	ld	-33 (ix),a
 	push	de
-	ld	c,-12 (ix)
-	ld	b,-11 (ix)
-	push	bc
-	ld	c,-14 (ix)
-	ld	b,-13 (ix)
-	push	bc
-	ld	c,-16 (ix)
-	ld	b,-15 (ix)
+	ld	e,-16 (ix)
+	ld	d,-15 (ix)
+	push	de
 	push	bc
 	ld	c,-18 (ix)
 	ld	b,-17 (ix)
 	push	bc
+	ld	c,-20 (ix)
+	ld	b,-19 (ix)
+	push	bc
 	push	hl
-	ld	l,-20 (ix)
-	ld	h,-19 (ix)
+	ld	l,-22 (ix)
+	ld	h,-21 (ix)
+	push	hl
+	ld	l,-32 (ix)
+	ld	h,-31 (ix)
+	push	hl
+	ld	l,-34 (ix)
+	ld	h,-33 (ix)
 	push	hl
 	call	_checkKeyboard
 	ld	iy,#18
@@ -5762,181 +5798,183 @@ _game::
 	ld	sp,iy
 	ld	d,l
 	ld	e,h
-	ld	l,-70 (ix)
-	ld	h,-69 (ix)
+	ld	l,-93 (ix)
+	ld	h,-92 (ix)
 	ld	(hl),d
 	inc	hl
 	ld	(hl),e
-;src/main.c:735: checkBoundsCollisions(&p.x,&p.y,p.lx,p.ly,p.sizeX,p.sizeY,&p.life,&p.bullets,&n.corazon,&n.bullet);
-	ld	c,-46 (ix)
-	ld	b,-45 (ix)
-	ld	e,-48 (ix)
-	ld	d,-47 (ix)
-	ld	a,-33 (ix)
-	ld	-20 (ix),a
-	ld	a,-32 (ix)
-	ld	-19 (ix),a
-	ld	a,-35 (ix)
-	ld	-18 (ix),a
-	ld	a,-34 (ix)
-	ld	-17 (ix),a
-	ld	l,-81 (ix)
-	ld	h,-80 (ix)
-	ld	a,(hl)
-	ld	-16 (ix),a
-	ld	l,-68 (ix)
-	ld	h,-67 (ix)
-	ld	a,(hl)
-	ld	-14 (ix),a
+;src/main.c:738: checkBoundsCollisions(&p.x,&p.y,p.lx,p.ly,p.sizeX,p.sizeY,&p.life,&p.bullets,&n.corazon,&n.bullet);
+	ld	c,-79 (ix)
+	ld	b,-78 (ix)
+	push	bc
+	pop	iy
+	ld	a,-81 (ix)
+	ld	-34 (ix),a
+	ld	a,-80 (ix)
+	ld	-33 (ix),a
+	ld	a,-83 (ix)
+	ld	-32 (ix),a
+	ld	a,-82 (ix)
+	ld	-31 (ix),a
+	ld	a,-85 (ix)
+	ld	-22 (ix),a
+	ld	a,-84 (ix)
+	ld	-21 (ix),a
+	ld	l,-95 (ix)
+	ld	h,-94 (ix)
+	ld	d,(hl)
 	ld	l,-4 (ix)
 	ld	h,-3 (ix)
+	ld	e,(hl)
+	ld	l,-30 (ix)
+	ld	h,-29 (ix)
 	ld	a,(hl)
-	ld	-12 (ix),a
-	ld	l,-2 (ix)
-	ld	h,-1 (ix)
+	ld	-20 (ix),a
+	ld	l,-77 (ix)
+	ld	h,-76 (ix)
 	ld	a,(hl)
-	ld	-10 (ix),a
-	ld	a,-37 (ix)
-	ld	-22 (ix),a
-	ld	a,-36 (ix)
-	ld	-21 (ix),a
+	ld	-18 (ix),a
+	ld	c,-87 (ix)
+	ld	b,-86 (ix)
+	ld	a,-14 (ix)
+	ld	-16 (ix),a
+	ld	a,-13 (ix)
+	ld	-15 (ix),a
+	push	iy
+	ld	l,-34 (ix)
+	ld	h,-33 (ix)
 	push	hl
-	ld	l,-39 (ix)
-	ld	h,-38 (ix)
-	push	hl
-	pop	iy
-	pop	hl
-	push	bc
-	push	de
-	ld	l,-20 (ix)
-	ld	h,-19 (ix)
-	push	hl
-	ld	l,-18 (ix)
-	ld	h,-17 (ix)
-	push	hl
-	ld	h,-16 (ix)
-	ld	l,-14 (ix)
-	push	hl
-	ld	h,-12 (ix)
-	ld	l,-10 (ix)
+	ld	l,-32 (ix)
+	ld	h,-31 (ix)
 	push	hl
 	ld	l,-22 (ix)
 	ld	h,-21 (ix)
 	push	hl
-	push	iy
+	push	de
+	ld	h,-20 (ix)
+	ld	l,-18 (ix)
+	push	hl
+	push	bc
+	ld	l,-16 (ix)
+	ld	h,-15 (ix)
+	push	hl
 	call	_checkBoundsCollisions
 	ld	hl,#16
 	add	hl,sp
 	ld	sp,hl
-;src/main.c:736: if(e.life > 0)
-	ld	l,-29 (ix)
-	ld	h,-28 (ix)
-	ld	a,(hl)
+;src/main.c:739: if(e.life > 0)
+	ld	l,-8 (ix)
+	ld	h,-7 (ix)
+	ld	a, (hl)
 	or	a, a
-	jp	Z,00127$
-;src/main.c:737: move(&e.x,&e.y,p.lx,p.ly,&e.dir,e.sprite,&e.room,p.x,p.y,&e.seenX,&e.seenY,&following,&e.pursue);
-	ld	a,-58 (ix)
+	jp	Z,00131$
+;src/main.c:740: move(&e.x,&e.y,p.lx,p.ly,&e.dir,e.sprite,&e.room,p.x,p.y,&e.seenX,&e.seenY,&following,&e.pursue);
+	ld	c,-49 (ix)
+	ld	b,-48 (ix)
+	ld	hl,#0x0011
+	add	hl,sp
+	ld	-34 (ix),l
+	ld	-33 (ix),h
+	ld	e,-47 (ix)
+	ld	d,-46 (ix)
+	ld	a,-45 (ix)
+	ld	-32 (ix),a
+	ld	a,-44 (ix)
+	ld	-31 (ix),a
+	ld	l,-6 (ix)
+	ld	h,-5 (ix)
+	ld	a,(hl)
 	ld	-22 (ix),a
-	ld	a,-57 (ix)
-	ld	-21 (ix),a
-	ld	iy,#0x0021
-	add	iy,sp
-	ld	a,-56 (ix)
+	ld	l,-75 (ix)
+	ld	h,-74 (ix)
+	ld	a,(hl)
 	ld	-20 (ix),a
-	ld	a,-55 (ix)
-	ld	-19 (ix),a
-	ld	a,-27 (ix)
+	ld	a,-12 (ix)
 	ld	-18 (ix),a
-	ld	a,-26 (ix)
+	ld	a,-11 (ix)
 	ld	-17 (ix),a
+	ld	l,-65 (ix)
+	ld	h,-64 (ix)
+	ld	a,(hl)
+	ld	-16 (ix),a
+	inc	hl
+	ld	a,(hl)
+	ld	-15 (ix),a
+	ld	a,-10 (ix)
+	ld	-36 (ix),a
+	ld	a,-9 (ix)
+	ld	-35 (ix),a
+	ld	l,-30 (ix)
+	ld	h,-29 (ix)
+	ld	a,(hl)
+	ld	-37 (ix),a
 	ld	l,-77 (ix)
 	ld	h,-76 (ix)
 	ld	a,(hl)
-	ld	-16 (ix),a
-	ld	l,-79 (ix)
-	ld	h,-78 (ix)
-	ld	a,(hl)
-	ld	-14 (ix),a
-	ld	a,-54 (ix)
-	ld	-12 (ix),a
-	ld	a,-53 (ix)
-	ld	-11 (ix),a
-	ld	l,-87 (ix)
-	ld	h,-86 (ix)
-	ld	a,(hl)
-	ld	-10 (ix),a
-	inc	hl
-	ld	a,(hl)
-	ld	-9 (ix),a
-	ld	a,-31 (ix)
-	ld	-74 (ix),a
-	ld	a,-30 (ix)
-	ld	-73 (ix),a
-	ld	l,-4 (ix)
-	ld	h,-3 (ix)
-	ld	a,(hl)
+	ld	-38 (ix),a
+	ld	a,-24 (ix)
 	ld	-40 (ix),a
-	ld	l,-2 (ix)
-	ld	h,-1 (ix)
-	ld	a,(hl)
-	ld	-75 (ix),a
-	ld	e,-89 (ix)
-	ld	d,-88 (ix)
-	ld	c,-91 (ix)
-	ld	b,-90 (ix)
-	ld	l,-22 (ix)
-	ld	h,-21 (ix)
+	ld	a,-23 (ix)
+	ld	-39 (ix),a
 	push	hl
-	push	iy
+	ld	l,-26 (ix)
+	ld	h,-25 (ix)
+	push	hl
+	pop	iy
+	pop	hl
+	push	bc
+	ld	l,-34 (ix)
+	ld	h,-33 (ix)
+	push	hl
+	push	de
+	ld	l,-32 (ix)
+	ld	h,-31 (ix)
+	push	hl
+	ld	h,-22 (ix)
 	ld	l,-20 (ix)
-	ld	h,-19 (ix)
 	push	hl
 	ld	l,-18 (ix)
 	ld	h,-17 (ix)
 	push	hl
-	ld	h,-16 (ix)
-	ld	l,-14 (ix)
+	ld	l,-16 (ix)
+	ld	h,-15 (ix)
 	push	hl
-	ld	l,-12 (ix)
-	ld	h,-11 (ix)
+	ld	l,-36 (ix)
+	ld	h,-35 (ix)
 	push	hl
-	ld	l,-10 (ix)
-	ld	h,-9 (ix)
+	ld	h,-37 (ix)
+	ld	l,-38 (ix)
 	push	hl
-	ld	l,-74 (ix)
-	ld	h,-73 (ix)
+	ld	l,-40 (ix)
+	ld	h,-39 (ix)
 	push	hl
-	ld	h,-40 (ix)
-	ld	l,-75 (ix)
-	push	hl
-	push	de
-	push	bc
+	push	iy
 	call	_move
 	ld	hl,#22
 	add	hl,sp
 	ld	sp,hl
-00127$:
-;src/main.c:739: if(e.life > 0)
-	ld	l,-29 (ix)
-	ld	h,-28 (ix)
-	ld	a, (hl)
-	or	a, a
-	jp	Z,00136$
-;src/main.c:740: if(checkCollisions(p.x, p.y, e.x, e.y, p.atk) == 2){
-	ld	l,-50 (ix)
-	ld	h,-49 (ix)
-	ld	a,(hl)
-	ld	l,-62 (ix)
-	ld	h,-61 (ix)
-	ld	c,(hl)
+00131$:
+;src/main.c:742: if(e.life > 0)
 	ld	l,-8 (ix)
 	ld	h,-7 (ix)
+	ld	a, (hl)
+	or	a, a
+	jp	Z,00140$
+;src/main.c:743: if(checkCollisions(p.x, p.y, e.x, e.y, p.atk) == 2){
+	ld	l,-89 (ix)
+	ld	h,-88 (ix)
+	ld	a,(hl)
+	ld	l,-57 (ix)
+	ld	h,-56 (ix)
+	ld	c,(hl)
+	ld	l,-55 (ix)
+	ld	h,-54 (ix)
 	ld	b,(hl)
-	ld	l,-77 (ix)
-	ld	h,-76 (ix)
+	ld	l,-6 (ix)
+	ld	h,-5 (ix)
 	ld	e,(hl)
-	ld	l,-79 (ix)
-	ld	h,-78 (ix)
+	ld	l,-75 (ix)
+	ld	h,-74 (ix)
 	ld	d,(hl)
 	push	af
 	inc	sp
@@ -5956,46 +5994,46 @@ _game::
 	inc	sp
 	ld	a,l
 	sub	a, #0x02
-	jr	NZ,00133$
-;src/main.c:741: p.x = 0;
-	ld	l,-79 (ix)
-	ld	h,-78 (ix)
+	jr	NZ,00137$
+;src/main.c:744: p.x = 0;
+	ld	l,-75 (ix)
+	ld	h,-74 (ix)
 	ld	(hl),#0x00
-;src/main.c:742: p.y = 80;
-	ld	l,-77 (ix)
-	ld	h,-76 (ix)
+;src/main.c:745: p.y = 80;
+	ld	l,-6 (ix)
+	ld	h,-5 (ix)
 	ld	(hl),#0x50
-;src/main.c:743: p.life -= 1;
-	ld	l,-72 (ix)
-	ld	h,-71 (ix)
+;src/main.c:746: p.life -= 1;
+	ld	l,-59 (ix)
+	ld	h,-58 (ix)
 	ld	a,(hl)
 	add	a,#0xFF
-	ld	l,-72 (ix)
-	ld	h,-71 (ix)
+	ld	l,-59 (ix)
+	ld	h,-58 (ix)
 	ld	(hl),a
-;src/main.c:744: if(p.life == 0){
+;src/main.c:747: if(p.life == 0){
 	or	a, a
-	jr	NZ,00136$
-;src/main.c:745: gameOver();
+	jr	NZ,00140$
+;src/main.c:748: gameOver();
 	call	_gameOver
-;src/main.c:746: break;
-	jp	00146$
-00133$:
-;src/main.c:748: }else if(checkCollisions(p.x, p.y, e.x, e.y, p.atk) == 1){
-	ld	l,-50 (ix)
-	ld	h,-49 (ix)
+;src/main.c:749: break;
+	jp	00150$
+00137$:
+;src/main.c:751: }else if(checkCollisions(p.x, p.y, e.x, e.y, p.atk) == 1){
+	ld	l,-89 (ix)
+	ld	h,-88 (ix)
 	ld	a,(hl)
-	ld	l,-62 (ix)
-	ld	h,-61 (ix)
+	ld	l,-57 (ix)
+	ld	h,-56 (ix)
 	ld	c,(hl)
-	ld	l,-8 (ix)
-	ld	h,-7 (ix)
+	ld	l,-55 (ix)
+	ld	h,-54 (ix)
 	ld	b,(hl)
-	ld	l,-77 (ix)
-	ld	h,-76 (ix)
+	ld	l,-6 (ix)
+	ld	h,-5 (ix)
 	ld	e,(hl)
-	ld	l,-79 (ix)
-	ld	h,-78 (ix)
+	ld	l,-75 (ix)
+	ld	h,-74 (ix)
 	ld	d,(hl)
 	push	af
 	inc	sp
@@ -6014,25 +6052,25 @@ _game::
 	pop	af
 	inc	sp
 	dec	l
-	jr	NZ,00136$
-;src/main.c:749: e.life =0;
-	ld	l,-29 (ix)
-	ld	h,-28 (ix)
+	jr	NZ,00140$
+;src/main.c:752: e.life =0;
+	ld	l,-8 (ix)
+	ld	h,-7 (ix)
 	ld	(hl),#0x00
-00136$:
-;src/main.c:753: if(arrow == 1){
-	ld	a,-117 (ix)
+00140$:
+;src/main.c:756: if(arrow == 1){
+	ld	a,-101 (ix)
 	dec	a
-	jp	NZ,00140$
-;src/main.c:754: moveObject();
+	jp	NZ,00144$
+;src/main.c:757: moveObject();
 	call	_moveObject
-;src/main.c:755: bound = checkBoundsCollisions(&object.x,&object.y,object.lx,object.ly,object.sizeX,object.sizeY,0,0,0,0);
+;src/main.c:758: bound = checkBoundsCollisions(&object.x,&object.y,object.lx,object.ly,object.sizeX,object.sizeY,0,0,0,0);
 	ld	hl, #_object + 9
 	ld	e,(hl)
 	ld	hl, #_object + 8
 	ld	c,(hl)
 	ld	a,(#(_object + 0x0003) + 0)
-	ld	-75 (ix),a
+	ld	-40 (ix),a
 	ld	hl, #(_object + 0x0002) + 0
 	ld	d,(hl)
 	ld	hl,#0x0000
@@ -6049,7 +6087,7 @@ _game::
 	ld	a,c
 	push	af
 	inc	sp
-	ld	a,-75 (ix)
+	ld	a,-40 (ix)
 	push	af
 	inc	sp
 	push	de
@@ -6062,13 +6100,13 @@ _game::
 	ld	iy,#16
 	add	iy,sp
 	ld	sp,iy
-	ld	-25 (ix),l
-;src/main.c:756: if(checkCollisions(object.x, object.y, e.x, e.y, 21) == 1){
-	ld	l,-62 (ix)
-	ld	h,-61 (ix)
+	ld	-43 (ix),l
+;src/main.c:759: if(checkCollisions(object.x, object.y, e.x, e.y, 21) == 1){
+	ld	l,-57 (ix)
+	ld	h,-56 (ix)
 	ld	c,(hl)
-	ld	l,-8 (ix)
-	ld	h,-7 (ix)
+	ld	l,-55 (ix)
+	ld	h,-54 (ix)
 	ld	b,(hl)
 	ld	hl, #(_object + 0x0001) + 0
 	ld	e,(hl)
@@ -6092,31 +6130,33 @@ _game::
 	pop	af
 	inc	sp
 	dec	l
-	jr	NZ,00140$
-;src/main.c:757: e.life = 0;
-	ld	l,-29 (ix)
-	ld	h,-28 (ix)
+	jr	NZ,00144$
+;src/main.c:760: e.life = 0;
+	ld	l,-8 (ix)
+	ld	h,-7 (ix)
 	ld	(hl),#0x00
-;src/main.c:758: object.vivo = 0;
+;src/main.c:761: object.vivo = 0;
 	ld	hl,#(_object + 0x0006)
 	ld	(hl),#0x00
-00140$:
-;src/main.c:762: if(finish == 1) return;
+00144$:
+;src/main.c:764: fr++;
+	inc	-102 (ix)
+;src/main.c:765: if(finish == 1) return;
 	ld	hl, #0+0
 	add	hl, sp
 	ld	a, (hl)
 	dec	a
-	jp	NZ,00144$
-00146$:
+	jp	NZ,00148$
+00150$:
 	ld	sp, ix
 	pop	ix
 	ret
-;src/main.c:769: void credits(){
+;src/main.c:772: void credits(){
 ;	---------------------------------
 ; Function credits
 ; ---------------------------------
 _credits::
-;src/main.c:771: cpct_clearScreen(0);
+;src/main.c:774: cpct_clearScreen(0);
 	ld	hl,#0x4000
 	push	hl
 	xor	a, a
@@ -6125,13 +6165,13 @@ _credits::
 	ld	h, #0xC0
 	push	hl
 	call	_cpct_memset
-;src/main.c:772: memptr = cpct_getScreenPtr(VMEM,10,10);
+;src/main.c:775: memptr = cpct_getScreenPtr(VMEM,10,10);
 	ld	hl,#0x0A0A
 	push	hl
 	ld	hl,#0xC000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:773: cpct_drawStringM0("Lounge Gladiator",memptr,1,0);
+;src/main.c:776: cpct_drawStringM0("Lounge Gladiator",memptr,1,0);
 	ex	de,hl
 	ld	bc,#___str_5+0
 	ld	hl,#0x0001
@@ -6142,35 +6182,35 @@ _credits::
 	ld	hl,#6
 	add	hl,sp
 	ld	sp,hl
-;src/main.c:775: while (1){
+;src/main.c:778: while (1){
 00104$:
-;src/main.c:777: cpct_scanKeyboard_f();
+;src/main.c:780: cpct_scanKeyboard_f();
 	call	_cpct_scanKeyboard_f
-;src/main.c:781: if(cpct_isKeyPressed(Key_Esc)) {
+;src/main.c:784: if(cpct_isKeyPressed(Key_Esc)) {
 	ld	hl,#0x0408
 	call	_cpct_isKeyPressed
 	ld	a,l
 	or	a, a
 	jr	Z,00104$
-;src/main.c:783: return;
+;src/main.c:786: return;
 	ret
 ___str_5:
 	.ascii "Lounge Gladiator"
 	.db 0x00
-;src/main.c:793: void main(void) {
+;src/main.c:796: void main(void) {
 ;	---------------------------------
 ; Function main
 ; ---------------------------------
 _main::
-;src/main.c:797: init();
+;src/main.c:800: init();
 	call	_init
-;src/main.c:800: while(1){
+;src/main.c:803: while(1){
 00106$:
-;src/main.c:801: x=menu();
+;src/main.c:804: x=menu();
 	call	_menu
 	ld	e, l
 	ld	d, h
-;src/main.c:802: switch(x){
+;src/main.c:805: switch(x){
 	bit	7, d
 	jr	NZ,00106$
 	ld	a,#0x02
@@ -6185,8 +6225,8 @@ _main::
 	ld	hl,#00123$
 	add	hl,de
 	add	hl,de
-;src/main.c:803: case 0: return;break;
-;src/main.c:804: case 1: game(); break;
+;src/main.c:806: case 0: return;break;
+;src/main.c:807: case 1: game(); break;
 	jp	(hl)
 00123$:
 	jr	00108$
@@ -6196,10 +6236,10 @@ _main::
 00102$:
 	call	_game
 	jr	00106$
-;src/main.c:805: case 2: credits();break;
+;src/main.c:808: case 2: credits();break;
 00103$:
 	call	_credits
-;src/main.c:806: }
+;src/main.c:809: }
 	jr	00106$
 00108$:
 	ret
