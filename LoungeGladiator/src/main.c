@@ -28,7 +28,6 @@
 #include "mapa.h"
 #include "vida.h"
 #include "ia.h"
-#include "muro.h"
 #include "CalcColision.h"
 
 /*INICIALIZACION*/
@@ -140,7 +139,7 @@ void drawMap(u8 t){
       for(posX=0; posX<width;posX++){
          memptr = cpct_getScreenPtr(VMEM, posX*tilewidth, posY*tileheight);
          if(scene[posY][posX] == 1){
-            cpct_drawSprite(g_tile_muro, memptr,tilewidth,tileheight);
+            cpct_drawSolidBox(memptr, 3, tilewidth, tileheight);
          }
          if(scene[posY][posX] == 9){
             cpct_drawSolidBox(memptr, 9, tilewidth, tileheight);
@@ -513,39 +512,48 @@ void moveObject(){
 
 
 void followPlayer(u8 px,u8 py,u8 *x,u8 *y,u8 seenX,u8 seenY,u8 room){
+    u8 auxX, auxY;
+
+    if(detectPlayerRoom(px,py) != room){
+        auxX = seenX;
+        auxY = seenY;
+    }else{
+        auxX = px;
+        auxY = py;
+    }
     /*u8 *memptr;
     memptr = cpct_getScreenPtr(VMEM,5,50);*/
-    if(seenX < *x){
+    if(auxX < *x){
         //cpct_drawSolidBox(memptr, 1, 2, 8);
         if(scene[(y[0])/tileheight][(x[0]-1)/tilewidth] != 1){
             *x-=1;
-        }else if(seenY < *y){
-            if(scene[(y[0]+tileheight)/tileheight][(x[0])/tilewidth] != 1)
-                *y-=1;
-        }else{
-            if(scene[(y[0]+tileheight)/tileheight][(x[0]+tilewidth)/tilewidth] != 1)
-                *y+=1;
-        }
-    }else if(seenX > *x){
-        //cpct_drawSolidBox(memptr, 10, 2, 8);
-        if(scene[(y[0])/tileheight][(x[0]+tilewidth)/tilewidth] != 1){
-            *x+=1;
-        }else if(seenY < *y){
-            if(scene[(y[0]+tileheight)/tileheight][(x[0])/tilewidth] != 1)
-                *y-=1;
-        }else{
-            if(scene[(y[0]+tileheight)/tileheight][(x[0]+tilewidth)/tilewidth] != 1)
-            *y+=1;
-        }
-    }else{
-        //
-        if(seenY < *y){
+        }else if(auxY < *y){
             if(scene[(y[0]-1)/tileheight][(x[0])/tilewidth] != 1)
                 *y-=1;
         }else{
             if(scene[(y[0]+tileheight)/tileheight][(x[0])/tilewidth] != 1)
+                *y+=1;
+        }
+    }else if(auxX > *x){
+        //cpct_drawSolidBox(memptr, 10, 2, 8);
+        if(scene[(y[0])/tileheight][(x[0]+tilewidth)/tilewidth] != 1){
+            *x+=1;
+        }else if(auxY < *y){
+            if(scene[(y[0])/tileheight][(x[0]-1)/tilewidth] != 1)
+                *y-=1;
+        }else{
+            if(scene[(y[0]+tileheight)/tileheight][(x[0])/tilewidth] != 1)
             *y+=1;
         }
+    }else{
+        //
+        if(auxY < *y){
+            if(scene[(y[0]-1)/tileheight][(x[0])/tilewidth] != 1)
+                *y-=1;
+            }else{
+                if(scene[(y[0]+tileheight)/tileheight][(x[0])/tilewidth] != 1)
+                *y+=1;
+            }
     }
 }
 
@@ -600,20 +608,29 @@ u8 vissionSensor(u8 x,u8 y,u8 px,u8 py){
 
 
 void move(u8 *x,u8 *y,u8 lx, u8 ly,u8 *dir,u8 *s,u8 room,u8 px,u8 py,u8 *seenX,u8 *seenY,u8 *following,u8 *pursue){
-    if(temp > 20){
+    if(temp > 4){
         dir[0] = chooseDirection();
         following[0] = detectPlayerRoom(px,py);
-        if(following[0] == room){
-            *seenX = px;
-            *seenY = py;
+        if(following[0] == room || *pursue != 0){
+            if(pursue == 0)
+                *pursue = 1;
+            else
+                *pursue -=1;
         }
         temp = 0;
     }else{
         if(temp%2 == 0)
-        if(following[0] == room)
+        if(*pursue >= 1){
             followPlayer(px,py,x,y,*seenX,*seenY,room);
-        else
+            if(*seenX == *x && *seenY == *y)
+                *pursue = 0;
+        }else{
             patrol(dir[0],lx,ly,&x[0],&y[0],room);
+        }
+    }
+    if((detectPlayerRoom(lx,ly) != detectPlayerRoom(px,py)) && pursue != 0){
+        *seenX = px;
+        *seenY = py;
     }
     temp += 1;
 }
@@ -704,7 +721,7 @@ void game(){
       p.sprite = checkKeyboard(&p.x,&p.y,&p.atk,&p.dir,p.sprite,&p.sizeX,&p.bullets,&finish,&arrow);
       checkBoundsCollisions(&p.x,&p.y,p.lx,p.ly,p.sizeX,p.sizeY,&p.life,&p.bullets,&n.corazon,&n.bullet);
       if(e.life > 0)
-        move(&e.x,&e.y,e.lx,e.ly,&e.dir,e.sprite,e.room,p.x,p.y,&e.seenX,&e.seenY,&following,&e.pursue);
+        move(&e.x,&e.y,p.lx,p.ly,&e.dir,e.sprite,e.room,p.x,p.y,&e.seenX,&e.seenY,&following,&e.pursue);
 
       if(e.life > 0)
           if(checkCollisions(p.x, p.y, e.x, e.y, p.atk) == 2){
