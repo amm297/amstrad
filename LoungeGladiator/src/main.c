@@ -28,6 +28,7 @@
 #include "mapa.h"
 #include "vida.h"
 #include "ia.h"
+#include "muro.h"
 #include "CalcColision.h"
 
 /*INICIALIZACION*/
@@ -139,7 +140,7 @@ void drawMap(u8 t){
       for(posX=0; posX<width;posX++){
          memptr = cpct_getScreenPtr(VMEM, posX*tilewidth, posY*tileheight);
          if(scene[posY][posX] == 1){
-            cpct_drawSolidBox(memptr, 3, tilewidth, tileheight);
+            cpct_drawSprite(g_tile_muro, memptr,tilewidth,tileheight);
          }
          if(scene[posY][posX] == 9){
             cpct_drawSolidBox(memptr, 9, tilewidth, tileheight);
@@ -529,7 +530,7 @@ void followPlayer(u8 px,u8 py,u8 *x,u8 *y,u8 seenX,u8 seenY,u8 room){
         //cpct_drawSolidBox(memptr, 10, 2, 8);
         if(scene[(y[0])/tileheight][(x[0]+tilewidth)/tilewidth] != 1){
             *x+=1;
-        }else if(py < *y){
+        }else if(seenY < *y){
             if(scene[(y[0]+tileheight)/tileheight][(x[0])/tilewidth] != 1)
                 *y-=1;
         }else{
@@ -538,13 +539,12 @@ void followPlayer(u8 px,u8 py,u8 *x,u8 *y,u8 seenX,u8 seenY,u8 room){
         }
     }else{
         //
-        if(seenY > *y){
-            if(scene[(y[0]+tileheight)/tileheight][(x[0]+tilewidth)/tilewidth] != 1){
-                *y+=1;
-            }
-        }else{
-            if(scene[(y[0]+tileheight)/tileheight][(x[0])/tilewidth])
+        if(seenY < *y){
+            if(scene[(y[0]-1)/tileheight][(x[0])/tilewidth] != 1)
                 *y-=1;
+        }else{
+            if(scene[(y[0]+tileheight)/tileheight][(x[0])/tilewidth] != 1)
+            *y+=1;
         }
     }
 }

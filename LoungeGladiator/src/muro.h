@@ -4,7 +4,8 @@
 
 #include <types.h>
 
+extern u8* const g_tile_tileset[1];
 
-extern const u8 muro[256];
+extern const u8 g_tile_muro[64];
 
 #endif

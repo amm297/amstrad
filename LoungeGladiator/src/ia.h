@@ -48,7 +48,7 @@ void movement(u8 dir,u8 *x,u8 *y){
 
 
 
-u8 followPlayer(){
+/*u8 followPlayer(){
   u8 following = 1;
   enemy.dir = setDirection(player.x,player.y,enemy.x,enemy.y);
   movement(enemy.dir,&enemy.x,&enemy.y);
@@ -97,6 +97,6 @@ u8 vissionSensor(){
 
   return following;
 
-}
+}*/
 
 #endif
