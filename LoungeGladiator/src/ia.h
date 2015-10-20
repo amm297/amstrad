@@ -49,4 +49,56 @@ void movement(u8 dir,u8 *x,u8 *y){
 }
 
 
+
+u8 followPlayer(){
+  u8 following = 1;
+  enemy.dir = setDirection(player.x,player.y,enemy.x,enemy.y);
+  movement(enemy.dir,&enemy.x,&enemy.y);
+  if(scene[(enemy.y)/tileheight][(enemy.x)/tilewidth] == 1
+  || scene[(enemy.y)/tileheight][(enemy.x+tilewidth-1)/tilewidth] == 1
+  || scene[(enemy.y+tileheight-2)/tileheight][(enemy.x)/tilewidth] == 1
+  || scene[(enemy.y+tileheight-2)/tileheight][(enemy.x+tilewidth-1)/tilewidth] == 1
+  ){
+    enemy.x=enemy.lx;
+    enemy.y=enemy.ly;
+  }
+
+  return following;
+
+}
+
+void patrol(){
+  movement(enemy.dir,&enemy.x,&enemy.y);
+  if(scene[(enemy.y)/tileheight][(enemy.x)/tilewidth] != enemy.room
+  || scene[(enemy.y)/tileheight][(enemy.x+tilewidth-1)/tilewidth] != enemy.room
+  || scene[(enemy.y+tileheight-2)/tileheight][(enemy.x)/tilewidth] != enemy.room
+  || scene[(enemy.y+tileheight-2)/tileheight][(enemy.x+tilewidth-1)/tilewidth] != enemy.room
+  ){
+    enemy.x=enemy.lx;
+    enemy.y=enemy.ly;
+  }
+}
+
+u8 vissionSensor(){
+  u8 following = 0;
+  u8 cx = enemy.x/tilewidth;
+  u8 cy = enemy.y/tilewidth;
+  u8 pcx = player.x/tilewidth;
+  u8 pcy = player.y/tilewidth;
+  u8 lex,mex,ley,mey;
+  u8 i=0;
+  for(i=0;i<3;i++){
+    lex = cx - i;
+    ley = cy - i;
+    mex = cx + i;
+    mey = cy + i;
+    if(lex == pcx || ley == pcy || mex == pcx || mey == pcy){
+      following = 1;
+    }
+  }
+
+  return following;
+
+}
+
 #endif

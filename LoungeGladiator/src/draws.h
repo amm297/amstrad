@@ -44,6 +44,38 @@ void drawMap(u8 t){
    }
 }
 
+/*VIDA*/
+void drawVida(u8 life,u8 pos){
+
+  u8* memptr;
+     u8 p = pos;
+     u8 i =1;
+     for(i=1;i<=3;i++){
+      memptr = cpct_getScreenPtr(VMEM,p,192);
+      p+=5;
+      if(i<=life)  cpct_drawSpriteMasked(corazon_lleno, memptr, 4, 8);
+      else {
+        cpct_drawSolidBox(memptr,0,4,8);
+        cpct_drawSpriteMasked(corazon_roto, memptr, 4, 8);
+      }
+     }
+
+}
+/*PROYECTILES*/
+void drawBullets(u8 bullet,u8 pos){
+     u8* memptr;
+     int p = pos;
+     u8 i =1;
+     for(i=1;i<=3;i++){
+      memptr = cpct_getScreenPtr(VMEM,p,192);
+      p+=3;
+      if(i<=bullet) cpct_drawSpriteMasked(flecha_arriba, memptr, 2, 8);
+      else  cpct_drawSolidBox(memptr,0,2,8);
+     }
+
+}
+
+
 /*PERSONAJES*/
 
 void draw(u8 x,u8 y,u8 *sprite,u8 mode){
@@ -80,6 +112,14 @@ void erase(u8 x,u8 y,u8 mode){
     }
 }
 
+void drawStats(){
+    drawVida(player.life,1);
+    drawBullets(player.bullets,16);
+    drawBullets(enemy.bullets,56);
+    drawVida(enemy.life,65);
+    
+}
+
 
 void draws(){
  u8 i=0;
@@ -91,7 +131,7 @@ void draws(){
         else if(object.dir == 2 || object.dir == 8 && object.vivo == 1)
             draw(object.x,object.y,object.sprite,1);
     }
-
+    drawStats();
 }
 
 void erases(){
@@ -115,7 +155,7 @@ void drawFatiga(u8 atk, u8 col){
     if(atk < 20)
         col = 2;
     if(atk > 30 || atk <= 20){
-        memptr = cpct_getScreenPtr(VMEM,4,192);
+        memptr = cpct_getScreenPtr(VMEM,28,192);
         switch(col){
         case 0:
             cpct_drawSolidBox(memptr, col, 2, 8);
@@ -128,7 +168,7 @@ void drawFatiga(u8 atk, u8 col){
         }
     }
     if(atk > 40 || atk <= 20){
-        memptr = cpct_getScreenPtr(VMEM,7,192);
+        memptr = cpct_getScreenPtr(VMEM,31,192);
         switch(col){
         case 0:
             cpct_drawSolidBox(memptr, col, 2, 8);
@@ -141,7 +181,7 @@ void drawFatiga(u8 atk, u8 col){
         }
     }
     if(atk <= 20){
-        memptr = cpct_getScreenPtr(VMEM,10,192);
+        memptr = cpct_getScreenPtr(VMEM,34,192);
         switch(col){
         case 0:
             cpct_drawSolidBox(memptr, col, 2, 8);
@@ -170,36 +210,7 @@ void drawPickUps(u8 corazon, u8 bullet){
 
 }
 
-/*VIDA*/
-void drawVida(u8 life){
 
-  u8* memptr;
-     int p = 65;
-     u8 i =1;
-     for(i=1;i<=3;i++){
-      memptr = cpct_getScreenPtr(VMEM,p,192);
-      p+=5;
-      if(i<=life)  cpct_drawSpriteMasked(corazon_lleno, memptr, 4, 8);
-      else {
-        cpct_drawSolidBox(memptr,0,4,8);
-        cpct_drawSpriteMasked(corazon_roto, memptr, 4, 8);
-      }
-     }
-
-}
-/*PROYECTILES*/
-void drawBullets(u8 bullet){
-     u8* memptr;
-     int p = 50;
-     u8 i =1;
-     for(i=1;i<=3;i++){
-      memptr = cpct_getScreenPtr(VMEM,p,192);
-      p+=5;
-      if(i<=bullet) cpct_drawSpriteMasked(flecha_arriba, memptr, 2, 8);
-      else  cpct_drawSolidBox(memptr,0,2,8);
-     }
-
-}
 
 
 

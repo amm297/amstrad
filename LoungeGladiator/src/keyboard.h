@@ -48,7 +48,7 @@ u8* checkKeyboard(){
          player.y -= 2;
          player.dir = 8;
          s = gladis_arriba;
-      }else if(cpct_isKeyPressed(Key_X) && arrow == 0 && player.atk == 20){
+      }else if(cpct_isKeyPressed(Key_X) && arrow == 0 && player.atk == 20 && player.bullets >0){
         if(player.bullets> 0){
           u8 *spr = flecha_dcha,xs=2,ys=8;
           switch(player.dir){

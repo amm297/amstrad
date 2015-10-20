@@ -17,7 +17,7 @@
 #define tileheight 16
 #define playerwidth 4
 #define playerheight 16
-#define numplayers 2
+#define numenemies 1
 
 
 typedef struct
@@ -27,27 +27,21 @@ typedef struct
   u8 *sprite; //sprite persnaje
   u8 life; //vida personaje
   u8 dir; //direccion personaje
-  u8 sizeX; //size ancho personaje
-  u8 sizeY;
-  u8 lsize; //last size ancho anterior personaje
   u8 atk; //Ataque personaje
   u8 latk; //Ataque previo personaje
   u8 bullets; //Municion restante
-  u8 type; // tipoe de jugador 0->Jugaor 1->Enemigo
-  u8 room; //habitacion que ocupa el enemigo
 }TPlayer;
 
-typedef struct
+typedef struct 
 {
   u8 x,y; //posicion personaje
   u8 lx,ly; //posicion personaje
-  u8 ox, oy;
+  u8 ox,oy;
   u8 *sprite; //sprite persnaje
   u8 life; //vida personaje
   u8 dir; //direccion personaje
-  u8 bullets;
-  u8 room;
-  u8 seenX, seenY;
+  u8 bullets; //Municion restante
+  u8 room; //habitacion que ocupa el enemigo
 }TEnemy;
 
 typedef struct
@@ -71,9 +65,16 @@ typedef struct{
 const u8 g_palette[5] = { 0,26,6,13 };
 u8 scene[height][width];
 int temp;
+u8 map;
 u8 path;
+u8 finish;
+u8 arrow;
+u8 following;
+u8 bound;
+u8 archer;
 TObject object;
-TPlayer players[numplayers];
+TPlayer player;
+TEnemy enemy;
 
 
 //Definicion de mapa
@@ -86,18 +87,19 @@ TPlayer players[numplayers];
   //6 -> Corazon
   //9 -> Puerta
   //10 -> puertas a zonas
+const u8 origins[2][2] = {{0,80},{52,80}};
 
 const u8 mapa1[height][width] = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-                                 {1,7,5,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,1},
-                                 {1,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,1},
-                                 {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,7,7,1,1,1},
+                                 {1,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+                                 {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+                                 {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1},
                                  {1,0,0,0,0,0,0,0,0,0,0,1,3,3,3,3,3,3,3,1},
-                                 {0,0,1,1,4,4,1,1,6,6,6,1,3,3,3,3,3,3,3,1},
-                                 {1,0,1,4,4,4,4,1,6,6,6,1,3,3,3,3,3,3,3,1},
-                                 {1,0,1,4,4,4,4,1,6,6,6,1,3,3,3,3,3,3,3,1},
-                                 {1,0,1,4,4,4,4,1,6,6,6,1,3,3,3,3,3,3,3,1},
-                                 {1,0,1,4,4,4,4,1,6,6,6,1,3,3,3,3,3,3,3,1},
-                                 {1,2,1,4,4,4,4,1,6,6,6,3,3,3,3,3,3,3,3,1},
+                                 {0,0,1,1,0,1,1,1,0,0,0,1,3,3,3,3,3,3,3,1},
+                                 {1,0,1,0,0,0,0,1,0,0,0,1,3,3,3,3,3,3,3,1},
+                                 {1,0,1,0,0,0,0,1,0,0,0,1,3,3,3,3,3,3,3,1},
+                                 {1,0,1,0,0,0,0,1,0,0,0,1,3,3,3,3,3,3,3,1},
+                                 {1,0,1,0,0,0,0,1,0,0,0,1,3,3,3,3,3,3,3,1},
+                                 {1,2,1,0,0,0,0,1,0,0,0,10,3,3,3,3,3,3,3,1},
                                  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,9,9,1,1,1}};
 
 const u8 mapa2[height][width] = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
@@ -112,6 +114,7 @@ const u8 mapa2[height][width] = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
                                  {1,0,1,2,2,2,2,1,2,2,2,1,0,0,0,0,0,0,0,1},
                                  {1,5,1,2,2,2,2,1,0,0,0,0,0,0,0,0,0,0,0,1},
                                  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1}};
+
 
 
 #endif
