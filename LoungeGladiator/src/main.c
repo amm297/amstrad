@@ -22,6 +22,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <cpctelera.h>
+#include "muro.h"
 #include "gladis.h"
 #include "chacho-quieto.h"
 #include "flecha.h"
@@ -139,7 +140,7 @@ void drawMap(u8 t){
       for(posX=0; posX<width;posX++){
          memptr = cpct_getScreenPtr(VMEM, posX*tilewidth, posY*tileheight);
          if(scene[posY][posX] == 1){
-            cpct_drawSolidBox(memptr, 3, tilewidth, tileheight);
+            cpct_drawSprite(g_tile_muro,memptr, tilewidth, tileheight);
          }
          if(scene[posY][posX] == 9){
             cpct_drawSolidBox(memptr, 9, tilewidth, tileheight);

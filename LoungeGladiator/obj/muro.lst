@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 3.5.0 #9253 (Sep 26 2015) (CYGWIN)
-                              4 ; This file was generated Tue Oct 20 17:29:28 2015
+                              4 ; This file was generated Tue Oct 20 17:34:45 2015
                               5 ;--------------------------------------------------------
                               6 	.module muro
                               7 	.optsdcc -mz80
@@ -48,67 +48,67 @@
    0002                      48 _g_tile_muro:
    0002 CC                   49 	.db #0xCC	; 204
    0003 CC                   50 	.db #0xCC	; 204
-   0004 CC                   51 	.db #0xCC	; 204
+   0004 44                   51 	.db #0x44	; 68	'D'
    0005 CC                   52 	.db #0xCC	; 204
    0006 CC                   53 	.db #0xCC	; 204
    0007 CC                   54 	.db #0xCC	; 204
-   0008 CC                   55 	.db #0xCC	; 204
+   0008 44                   55 	.db #0x44	; 68	'D'
    0009 CC                   56 	.db #0xCC	; 204
    000A 00                   57 	.db #0x00	; 0
    000B 00                   58 	.db #0x00	; 0
    000C 00                   59 	.db #0x00	; 0
    000D 00                   60 	.db #0x00	; 0
    000E CC                   61 	.db #0xCC	; 204
-   000F CC                   62 	.db #0xCC	; 204
+   000F 44                   62 	.db #0x44	; 68	'D'
    0010 CC                   63 	.db #0xCC	; 204
-   0011 CC                   64 	.db #0xCC	; 204
+   0011 44                   64 	.db #0x44	; 68	'D'
    0012 CC                   65 	.db #0xCC	; 204
-   0013 CC                   66 	.db #0xCC	; 204
+   0013 44                   66 	.db #0x44	; 68	'D'
    0014 CC                   67 	.db #0xCC	; 204
-   0015 CC                   68 	.db #0xCC	; 204
+   0015 44                   68 	.db #0x44	; 68	'D'
    0016 CC                   69 	.db #0xCC	; 204
-   0017 CC                   70 	.db #0xCC	; 204
+   0017 44                   70 	.db #0x44	; 68	'D'
    0018 CC                   71 	.db #0xCC	; 204
-   0019 CC                   72 	.db #0xCC	; 204
+   0019 44                   72 	.db #0x44	; 68	'D'
    001A 00                   73 	.db #0x00	; 0
    001B 00                   74 	.db #0x00	; 0
    001C 00                   75 	.db #0x00	; 0
    001D 00                   76 	.db #0x00	; 0
    001E CC                   77 	.db #0xCC	; 204
    001F CC                   78 	.db #0xCC	; 204
-   0020 CC                   79 	.db #0xCC	; 204
+   0020 44                   79 	.db #0x44	; 68	'D'
    0021 CC                   80 	.db #0xCC	; 204
    0022 CC                   81 	.db #0xCC	; 204
    0023 CC                   82 	.db #0xCC	; 204
-   0024 CC                   83 	.db #0xCC	; 204
+   0024 44                   83 	.db #0x44	; 68	'D'
    0025 CC                   84 	.db #0xCC	; 204
    0026 CC                   85 	.db #0xCC	; 204
    0027 CC                   86 	.db #0xCC	; 204
-   0028 CC                   87 	.db #0xCC	; 204
+   0028 44                   87 	.db #0x44	; 68	'D'
    0029 CC                   88 	.db #0xCC	; 204
    002A 00                   89 	.db #0x00	; 0
    002B 00                   90 	.db #0x00	; 0
    002C 00                   91 	.db #0x00	; 0
    002D 00                   92 	.db #0x00	; 0
    002E CC                   93 	.db #0xCC	; 204
-   002F CC                   94 	.db #0xCC	; 204
+   002F 44                   94 	.db #0x44	; 68	'D'
    0030 CC                   95 	.db #0xCC	; 204
-   0031 CC                   96 	.db #0xCC	; 204
+   0031 44                   96 	.db #0x44	; 68	'D'
    0032 CC                   97 	.db #0xCC	; 204
-   0033 CC                   98 	.db #0xCC	; 204
+   0033 44                   98 	.db #0x44	; 68	'D'
    0034 CC                   99 	.db #0xCC	; 204
-   0035 CC                  100 	.db #0xCC	; 204
+   0035 44                  100 	.db #0x44	; 68	'D'
    0036 CC                  101 	.db #0xCC	; 204
-   0037 CC                  102 	.db #0xCC	; 204
+   0037 44                  102 	.db #0x44	; 68	'D'
    0038 CC                  103 	.db #0xCC	; 204
-   0039 CC                  104 	.db #0xCC	; 204
+   0039 44                  104 	.db #0x44	; 68	'D'
    003A 00                  105 	.db #0x00	; 0
    003B 00                  106 	.db #0x00	; 0
    003C 00                  107 	.db #0x00	; 0
    003D 00                  108 	.db #0x00	; 0
    003E CC                  109 	.db #0xCC	; 204
    003F CC                  110 	.db #0xCC	; 204
-   0040 CC                  111 	.db #0xCC	; 204
+   0040 44                  111 	.db #0x44	; 68	'D'
    0041 CC                  112 	.db #0xCC	; 204
                             113 	.area _INITIALIZER
                             114 	.area _CABS (ABS)
