@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.5.0 #9253 (Sep 26 2015) (CYGWIN)
-; This file was generated Tue Oct 20 17:34:45 2015
+; This file was generated Tue Oct 20 18:01:09 2015
 ;--------------------------------------------------------
 	.module muro
 	.optsdcc -mz80
@@ -9,8 +9,7 @@
 ;--------------------------------------------------------
 ; Public variables in this module
 ;--------------------------------------------------------
-	.globl _g_tile_muro
-	.globl _g_tile_tileset
+	.globl _muro
 ;--------------------------------------------------------
 ; special function registers
 ;--------------------------------------------------------
@@ -43,9 +42,7 @@
 ;--------------------------------------------------------
 	.area _CODE
 	.area _CODE
-_g_tile_tileset:
-	.dw _g_tile_muro
-_g_tile_muro:
+_muro:
 	.db #0xCC	; 204
 	.db #0xCC	; 204
 	.db #0x44	; 68	'D'

@@ -2,11 +2,8 @@
 
 #include <types.h>
 
-u8* const g_tile_tileset[1] = { 
-	g_tile_muro
-};
 // Tile g_tile_muro: 8x16 pixels, 4x16 bytes.
-const u8 g_tile_muro[64] = {
+const u8 muro[64] = {
 	0xcc, 0xcc, 0x44, 0xcc,
 	0xcc, 0xcc, 0x44, 0xcc,
 	0x00, 0x00, 0x00, 0x00,
