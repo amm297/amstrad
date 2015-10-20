@@ -17,7 +17,7 @@
 #define tileheight 16
 #define playerwidth 4
 #define playerheight 16
-#define numenemies 3
+#define numenemies 1
 
 
 typedef struct
@@ -27,16 +27,22 @@ typedef struct
   u8 *sprite; //sprite persnaje
   u8 life; //vida personaje
   u8 dir; //direccion personaje
-  u8 sizeX; //size ancho personaje
-  u8 sizeY;
-  u8 lsize; //last size ancho anterior personaje
   u8 atk; //Ataque personaje
   u8 latk; //Ataque previo personaje
   u8 bullets; //Municion restante
-  u8 type; // tipoe de jugador 0->Jugaor 1->Enemigo mele 2->Enemigo distanca
-  u8 room; //habitacion que ocupa el enemigo
 }TPlayer;
 
+typedef struct 
+{
+  u8 x,y; //posicion personaje
+  u8 lx,ly; //posicion personaje
+  u8 ox,oy;
+  u8 *sprite; //sprite persnaje
+  u8 life; //vida personaje
+  u8 dir; //direccion personaje
+  u8 bullets; //Municion restante
+  u8 room; //habitacion que ocupa el enemigo
+}TEnemy;
 
 typedef struct
 {
@@ -61,9 +67,14 @@ u8 scene[height][width];
 int temp;
 u8 map;
 u8 path;
+u8 finish;
+u8 arrow;
+u8 following;
+u8 bound;
+u8 archer;
 TObject object;
 TPlayer player;
-TPlayer enemies[numenemies];
+TEnemy enemy;
 
 
 //Definicion de mapa
@@ -76,6 +87,7 @@ TPlayer enemies[numenemies];
   //6 -> Corazon
   //9 -> Puerta
   //10 -> puertas a zonas
+const u8 origins[2][2] = {{0,80},{52,80}};
 
 const u8 mapa1[height][width] = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
                                  {1,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -102,6 +114,7 @@ const u8 mapa2[height][width] = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
                                  {1,0,1,2,2,2,2,1,2,2,2,1,0,0,0,0,0,0,0,1},
                                  {1,5,1,2,2,2,2,1,0,0,0,0,0,0,0,0,0,0,0,1},
                                  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1}};
+
 
 
 #endif

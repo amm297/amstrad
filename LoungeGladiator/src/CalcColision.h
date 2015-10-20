@@ -38,4 +38,6 @@ u8 checkCollisions(u8 pX, u8 pY, u8 eX, u8 eY, u8 atk){
 }
 
 
+
+
 #endif // CALCCOLISION_H
