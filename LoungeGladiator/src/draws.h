@@ -35,7 +35,7 @@ void drawMap(u8 t){
       for(posX=0; posX<width;posX++){
          memptr = cpct_getScreenPtr(VMEM, posX*tilewidth, posY*tileheight);
          if(scene[posY][posX] == 1){
-            cpct_drawSolidBox(memptr, 3, tilewidth, tileheight);
+            cpct_drawSprite(muro,memptr,tilewidth, tileheight);
          }
          if(scene[posY][posX] == 9){
             cpct_drawSolidBox(memptr, 9, tilewidth, tileheight);
