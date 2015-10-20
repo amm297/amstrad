@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 3.5.0 #9253 (Sep 22 2015) (CYGWIN)
-                              4 ; This file was generated Tue Oct 20 17:28:18 2015
+                              4 ; This file was generated Tue Oct 20 17:36:21 2015
                               5 ;--------------------------------------------------------
                               6 	.module main
                               7 	.optsdcc -mz80
@@ -65,16 +65,16 @@
                              65 ; ram data
                              66 ;--------------------------------------------------------
                              67 	.area _DATA
-   7518                      68 _scene::
-   7518                      69 	.ds 240
-   7608                      70 _temp::
-   7608                      71 	.ds 2
-   760A                      72 _path::
-   760A                      73 	.ds 1
-   760B                      74 _object::
-   760B                      75 	.ds 10
-   7615                      76 _players::
-   7615                      77 	.ds 32
+   757A                      68 _scene::
+   757A                      69 	.ds 240
+   766A                      70 _temp::
+   766A                      71 	.ds 2
+   766C                      72 _path::
+   766C                      73 	.ds 1
+   766D                      74 _object::
+   766D                      75 	.ds 10
+   7677                      76 _players::
+   7677                      77 	.ds 32
                              78 ;--------------------------------------------------------
                              79 ; ram data
                              80 ;--------------------------------------------------------
@@ -108,7 +108,7 @@
    46C2 DD 21 00 00   [14]  108 	ld	ix,#0
    46C6 DD 39         [15]  109 	add	ix,sp
                             110 ;src/ia.h:13: return scene[py/tileheight][px/tilewidth];
-   46C8 11 18 75      [10]  111 	ld	de,#_scene+0
+   46C8 11 7A 75      [10]  111 	ld	de,#_scene+0
    46CB DD 7E 05      [19]  112 	ld	a,5 (ix)
    46CE 07            [ 4]  113 	rlca
    46CF 07            [ 4]  114 	rlca
@@ -630,11 +630,11 @@
    48D2 16 00         [ 7]  630 	ld	d,#0x00
                             631 ;src/ia.h:19: u8 rnd = (rand()%4)+1;
    48D4 D5            [11]  632 	push	de
-   48D5 CD 6F 71      [17]  633 	call	_rand
+   48D5 CD D1 71      [17]  633 	call	_rand
    48D8 01 04 00      [10]  634 	ld	bc,#0x0004
    48DB C5            [11]  635 	push	bc
    48DC E5            [11]  636 	push	hl
-   48DD CD 16 74      [17]  637 	call	__modsint
+   48DD CD 78 74      [17]  637 	call	__modsint
    48E0 F1            [10]  638 	pop	af
    48E1 F1            [10]  639 	pop	af
    48E2 D1            [10]  640 	pop	de
@@ -947,12 +947,12 @@
                             947 ; ---------------------------------
    4A8F                     948 _init::
                             949 ;src/main.c:35: cpct_disableFirmware();
-   4A8F CD 40 73      [17]  950 	call	_cpct_disableFirmware
+   4A8F CD A2 73      [17]  950 	call	_cpct_disableFirmware
                             951 ;src/main.c:36: cpct_setVideoMode(0);
    4A92 AF            [ 4]  952 	xor	a, a
    4A93 F5            [11]  953 	push	af
    4A94 33            [ 6]  954 	inc	sp
-   4A95 CD 1D 73      [17]  955 	call	_cpct_setVideoMode
+   4A95 CD 7F 73      [17]  955 	call	_cpct_setVideoMode
    4A98 33            [ 6]  956 	inc	sp
                             957 ;src/main.c:37: cpct_fw2hw(g_palette,4);
    4A99 11 ED 46      [10]  958 	ld	de,#_g_palette
@@ -960,7 +960,7 @@
    4A9E F5            [11]  960 	push	af
    4A9F 33            [ 6]  961 	inc	sp
    4AA0 D5            [11]  962 	push	de
-   4AA1 CD A7 72      [17]  963 	call	_cpct_fw2hw
+   4AA1 CD 09 73      [17]  963 	call	_cpct_fw2hw
    4AA4 F1            [10]  964 	pop	af
    4AA5 33            [ 6]  965 	inc	sp
                             966 ;src/main.c:38: cpct_setPalette(g_palette,4);
@@ -969,7 +969,7 @@
    4AAB F5            [11]  969 	push	af
    4AAC 33            [ 6]  970 	inc	sp
    4AAD D5            [11]  971 	push	de
-   4AAE CD D5 70      [17]  972 	call	_cpct_setPalette
+   4AAE CD 37 71      [17]  972 	call	_cpct_setPalette
    4AB1 F1            [10]  973 	pop	af
    4AB2 33            [ 6]  974 	inc	sp
    4AB3 C9            [10]  975 	ret
@@ -986,13 +986,13 @@
    4ABA 33            [ 6]  986 	inc	sp
    4ABB 26 C0         [ 7]  987 	ld	h, #0xC0
    4ABD E5            [11]  988 	push	hl
-   4ABE CD 2F 73      [17]  989 	call	_cpct_memset
+   4ABE CD 91 73      [17]  989 	call	_cpct_memset
                             990 ;src/main.c:45: memptr = cpct_getScreenPtr(VMEM,10,10);
    4AC1 21 0A 0A      [10]  991 	ld	hl,#0x0A0A
    4AC4 E5            [11]  992 	push	hl
    4AC5 21 00 C0      [10]  993 	ld	hl,#0xC000
    4AC8 E5            [11]  994 	push	hl
-   4AC9 CD 22 74      [17]  995 	call	_cpct_getScreenPtr
+   4AC9 CD 84 74      [17]  995 	call	_cpct_getScreenPtr
                             996 ;src/main.c:46: cpct_drawStringM0("Lounge Gladiator",memptr,1,0);
    4ACC 4D            [ 4]  997 	ld	c, l
    4ACD 44            [ 4]  998 	ld	b, h
@@ -1001,7 +1001,7 @@
    4AD4 E5            [11] 1001 	push	hl
    4AD5 C5            [11] 1002 	push	bc
    4AD6 D5            [11] 1003 	push	de
-   4AD7 CD E6 71      [17] 1004 	call	_cpct_drawStringM0
+   4AD7 CD 48 72      [17] 1004 	call	_cpct_drawStringM0
    4ADA 21 06 00      [10] 1005 	ld	hl,#6
    4ADD 39            [11] 1006 	add	hl,sp
    4ADE F9            [ 6] 1007 	ld	sp,hl
@@ -1039,12 +1039,12 @@
    4B14 33            [ 6] 1037 	inc	sp
    4B15 26 C0         [ 7] 1038 	ld	h, #0xC0
    4B17 E5            [11] 1039 	push	hl
-   4B18 CD 2F 73      [17] 1040 	call	_cpct_memset
+   4B18 CD 91 73      [17] 1040 	call	_cpct_memset
    4B1B 21 0A 0A      [10] 1041 	ld	hl,#0x0A0A
    4B1E E5            [11] 1042 	push	hl
    4B1F 21 00 C0      [10] 1043 	ld	hl,#0xC000
    4B22 E5            [11] 1044 	push	hl
-   4B23 CD 22 74      [17] 1045 	call	_cpct_getScreenPtr
+   4B23 CD 84 74      [17] 1045 	call	_cpct_getScreenPtr
    4B26 D1            [10] 1046 	pop	de
                            1047 ;src/main.c:59: cpct_drawStringM0("Lounge Gladiator",memptr,1,0);
    4B27 4D            [ 4] 1048 	ld	c, l
@@ -1055,7 +1055,7 @@
    4B2E C5            [11] 1053 	push	bc
    4B2F 21 D1 4C      [10] 1054 	ld	hl,#___str_1
    4B32 E5            [11] 1055 	push	hl
-   4B33 CD E6 71      [17] 1056 	call	_cpct_drawStringM0
+   4B33 CD 48 72      [17] 1056 	call	_cpct_drawStringM0
    4B36 21 06 00      [10] 1057 	ld	hl,#6
    4B39 39            [11] 1058 	add	hl,sp
    4B3A F9            [ 6] 1059 	ld	sp,hl
@@ -1063,7 +1063,7 @@
    4B3E E5            [11] 1061 	push	hl
    4B3F 21 00 C0      [10] 1062 	ld	hl,#0xC000
    4B42 E5            [11] 1063 	push	hl
-   4B43 CD 22 74      [17] 1064 	call	_cpct_getScreenPtr
+   4B43 CD 84 74      [17] 1064 	call	_cpct_getScreenPtr
    4B46 D1            [10] 1065 	pop	de
                            1066 ;src/main.c:63: cpct_drawStringM0("Nueva Partida",memptr,1,0);
    4B47 4D            [ 4] 1067 	ld	c, l
@@ -1074,7 +1074,7 @@
    4B4E C5            [11] 1072 	push	bc
    4B4F 21 E2 4C      [10] 1073 	ld	hl,#___str_2
    4B52 E5            [11] 1074 	push	hl
-   4B53 CD E6 71      [17] 1075 	call	_cpct_drawStringM0
+   4B53 CD 48 72      [17] 1075 	call	_cpct_drawStringM0
    4B56 21 06 00      [10] 1076 	ld	hl,#6
    4B59 39            [11] 1077 	add	hl,sp
    4B5A F9            [ 6] 1078 	ld	sp,hl
@@ -1082,7 +1082,7 @@
    4B5E E5            [11] 1080 	push	hl
    4B5F 21 00 C0      [10] 1081 	ld	hl,#0xC000
    4B62 E5            [11] 1082 	push	hl
-   4B63 CD 22 74      [17] 1083 	call	_cpct_getScreenPtr
+   4B63 CD 84 74      [17] 1083 	call	_cpct_getScreenPtr
    4B66 D1            [10] 1084 	pop	de
                            1085 ;src/main.c:66: cpct_drawStringM0("Creditos",memptr,1,0);
    4B67 4D            [ 4] 1086 	ld	c, l
@@ -1093,7 +1093,7 @@
    4B6E C5            [11] 1091 	push	bc
    4B6F 21 F0 4C      [10] 1092 	ld	hl,#___str_3
    4B72 E5            [11] 1093 	push	hl
-   4B73 CD E6 71      [17] 1094 	call	_cpct_drawStringM0
+   4B73 CD 48 72      [17] 1094 	call	_cpct_drawStringM0
    4B76 21 06 00      [10] 1095 	ld	hl,#6
    4B79 39            [11] 1096 	add	hl,sp
    4B7A F9            [ 6] 1097 	ld	sp,hl
@@ -1101,7 +1101,7 @@
    4B7E E5            [11] 1099 	push	hl
    4B7F 21 00 C0      [10] 1100 	ld	hl,#0xC000
    4B82 E5            [11] 1101 	push	hl
-   4B83 CD 22 74      [17] 1102 	call	_cpct_getScreenPtr
+   4B83 CD 84 74      [17] 1102 	call	_cpct_getScreenPtr
    4B86 D1            [10] 1103 	pop	de
                            1104 ;src/main.c:59: cpct_drawStringM0("Lounge Gladiator",memptr,1,0);
    4B87 DD 75 FE      [19] 1105 	ld	-2 (ix),l
@@ -1115,7 +1115,7 @@
    4B98 DD 66 FF      [19] 1113 	ld	h,-1 (ix)
    4B9B E5            [11] 1114 	push	hl
    4B9C C5            [11] 1115 	push	bc
-   4B9D CD E6 71      [17] 1116 	call	_cpct_drawStringM0
+   4B9D CD 48 72      [17] 1116 	call	_cpct_drawStringM0
    4BA0 21 06 00      [10] 1117 	ld	hl,#6
    4BA3 39            [11] 1118 	add	hl,sp
    4BA4 F9            [ 6] 1119 	ld	sp,hl
@@ -1124,9 +1124,9 @@
    4BA6                    1122 00118$:
                            1123 ;src/main.c:77: cpct_scanKeyboard();
    4BA6 D5            [11] 1124 	push	de
-   4BA7 CD 42 74      [17] 1125 	call	_cpct_scanKeyboard
+   4BA7 CD A4 74      [17] 1125 	call	_cpct_scanKeyboard
    4BAA 21 00 04      [10] 1126 	ld	hl,#0x0400
-   4BAD CD F9 70      [17] 1127 	call	_cpct_isKeyPressed
+   4BAD CD 5B 71      [17] 1127 	call	_cpct_isKeyPressed
    4BB0 7D            [ 4] 1128 	ld	a,l
    4BB1 D1            [10] 1129 	pop	de
    4BB2 B7            [ 4] 1130 	or	a, a
@@ -1148,7 +1148,7 @@
    4BCA DD 6E FE      [19] 1146 	ld	l,-2 (ix)
    4BCD DD 66 FF      [19] 1147 	ld	h,-1 (ix)
    4BD0 E5            [11] 1148 	push	hl
-   4BD1 CD 51 73      [17] 1149 	call	_cpct_drawSolidBox
+   4BD1 CD B3 73      [17] 1149 	call	_cpct_drawSolidBox
    4BD4 F1            [10] 1150 	pop	af
    4BD5 F1            [10] 1151 	pop	af
    4BD6 33            [ 6] 1152 	inc	sp
@@ -1163,7 +1163,7 @@
                            1161 ;src/main.c:83: if(cpct_isKeyPressed(Key_CursorUp) && cont > 150){
    4BE2 D5            [11] 1162 	push	de
    4BE3 21 00 01      [10] 1163 	ld	hl,#0x0100
-   4BE6 CD F9 70      [17] 1164 	call	_cpct_isKeyPressed
+   4BE6 CD 5B 71      [17] 1164 	call	_cpct_isKeyPressed
    4BE9 7D            [ 4] 1165 	ld	a,l
    4BEA D1            [10] 1166 	pop	de
    4BEB B7            [ 4] 1167 	or	a, a
@@ -1185,7 +1185,7 @@
    4C03 DD 6E FE      [19] 1183 	ld	l,-2 (ix)
    4C06 DD 66 FF      [19] 1184 	ld	h,-1 (ix)
    4C09 E5            [11] 1185 	push	hl
-   4C0A CD 51 73      [17] 1186 	call	_cpct_drawSolidBox
+   4C0A CD B3 73      [17] 1186 	call	_cpct_drawSolidBox
    4C0D F1            [10] 1187 	pop	af
    4C0E F1            [10] 1188 	pop	af
    4C0F 33            [ 6] 1189 	inc	sp
@@ -1257,7 +1257,7 @@
    4C6E 33            [ 6] 1255 	inc	sp
    4C6F 21 00 C0      [10] 1256 	ld	hl,#0xC000
    4C72 E5            [11] 1257 	push	hl
-   4C73 CD 22 74      [17] 1258 	call	_cpct_getScreenPtr
+   4C73 CD 84 74      [17] 1258 	call	_cpct_getScreenPtr
    4C76 D1            [10] 1259 	pop	de
    4C77 C1            [10] 1260 	pop	bc
                            1261 ;src/main.c:59: cpct_drawStringM0("Lounge Gladiator",memptr,1,0);
@@ -1274,12 +1274,12 @@
    4C88 DD 6E FE      [19] 1272 	ld	l,-2 (ix)
    4C8B DD 66 FF      [19] 1273 	ld	h,-1 (ix)
    4C8E E5            [11] 1274 	push	hl
-   4C8F CD 51 73      [17] 1275 	call	_cpct_drawSolidBox
+   4C8F CD B3 73      [17] 1275 	call	_cpct_drawSolidBox
    4C92 F1            [10] 1276 	pop	af
    4C93 F1            [10] 1277 	pop	af
    4C94 33            [ 6] 1278 	inc	sp
    4C95 21 00 40      [10] 1279 	ld	hl,#0x4000
-   4C98 CD F9 70      [17] 1280 	call	_cpct_isKeyPressed
+   4C98 CD 5B 71      [17] 1280 	call	_cpct_isKeyPressed
    4C9B 7D            [ 4] 1281 	ld	a,l
    4C9C D1            [10] 1282 	pop	de
    4C9D C1            [10] 1283 	pop	bc
@@ -1361,7 +1361,7 @@
    4D1F DD 36 FD 00   [19] 1354 	ld	-3 (ix),#0x00
                            1355 ;src/main.c:124: for(x=0;x<width;x++){
    4D23                    1356 00130$:
-   4D23 3E 18         [ 7] 1357 	ld	a,#<(_scene)
+   4D23 3E 7A         [ 7] 1357 	ld	a,#<(_scene)
    4D25 DD 86 FC      [19] 1358 	add	a, -4 (ix)
    4D28 DD 77 F8      [19] 1359 	ld	-8 (ix),a
    4D2B 3E 75         [ 7] 1360 	ld	a,#>(_scene)
@@ -1438,7 +1438,7 @@
    4DCB 11 00 00      [10] 1431 	ld	de,#0x0000
                            1432 ;src/main.c:132: for(x=0;x<width;x++){
    4DCE                    1433 00134$:
-   4DCE 21 18 75      [10] 1434 	ld	hl,#_scene
+   4DCE 21 7A 75      [10] 1434 	ld	hl,#_scene
    4DD1 19            [11] 1435 	add	hl,de
    4DD2 DD 75 FE      [19] 1436 	ld	-2 (ix),l
    4DD5 DD 74 FF      [19] 1437 	ld	-1 (ix),h
@@ -1497,7 +1497,7 @@
    4E39 DD 36 FB 00   [19] 1490 	ld	-5 (ix),#0x00
                            1491 ;src/main.c:139: for(posX=0; posX<width;posX++){
    4E3D                    1492 00139$:
-   4E3D 3E 18         [ 7] 1493 	ld	a,#<(_scene)
+   4E3D 3E 7A         [ 7] 1493 	ld	a,#<(_scene)
    4E3F DD 86 FA      [19] 1494 	add	a, -6 (ix)
    4E42 DD 77 F6      [19] 1495 	ld	-10 (ix),a
    4E45 3E 75         [ 7] 1496 	ld	a,#>(_scene)
@@ -1523,7 +1523,7 @@
    4E63 33            [ 6] 1516 	inc	sp
    4E64 21 00 C0      [10] 1517 	ld	hl,#0xC000
    4E67 E5            [11] 1518 	push	hl
-   4E68 CD 22 74      [17] 1519 	call	_cpct_getScreenPtr
+   4E68 CD 84 74      [17] 1519 	call	_cpct_getScreenPtr
    4E6B EB            [ 4] 1520 	ex	de,hl
                            1521 ;src/main.c:141: if(scene[posY][posX] == 1){
    4E6C DD 7E F6      [19] 1522 	ld	a,-10 (ix)
@@ -1548,13 +1548,13 @@
    4E8C DD 6E F8      [19] 1541 	ld	l,-8 (ix)
    4E8F DD 66 F9      [19] 1542 	ld	h,-7 (ix)
    4E92 E5            [11] 1543 	push	hl
-   4E93 CD 51 73      [17] 1544 	call	_cpct_drawSolidBox
+   4E93 CD B3 73      [17] 1544 	call	_cpct_drawSolidBox
    4E96 F1            [10] 1545 	pop	af
    4E97 F1            [10] 1546 	pop	af
    4E98 33            [ 6] 1547 	inc	sp
    4E99                    1548 00110$:
                            1549 ;src/main.c:144: if(scene[posY][posX] == 9){
-   4E99 3E 18         [ 7] 1550 	ld	a,#<(_scene)
+   4E99 3E 7A         [ 7] 1550 	ld	a,#<(_scene)
    4E9B DD 86 FE      [19] 1551 	add	a, -2 (ix)
    4E9E 6F            [ 4] 1552 	ld	l,a
    4E9F 3E 75         [ 7] 1553 	ld	a,#>(_scene)
@@ -1575,7 +1575,7 @@
    4EB5 DD 6E F8      [19] 1568 	ld	l,-8 (ix)
    4EB8 DD 66 F9      [19] 1569 	ld	h,-7 (ix)
    4EBB E5            [11] 1570 	push	hl
-   4EBC CD 51 73      [17] 1571 	call	_cpct_drawSolidBox
+   4EBC CD B3 73      [17] 1571 	call	_cpct_drawSolidBox
    4EBF F1            [10] 1572 	pop	af
    4EC0 F1            [10] 1573 	pop	af
    4EC1 33            [ 6] 1574 	inc	sp
@@ -1639,7 +1639,7 @@
    4F2B E5            [11] 1632 	push	hl
    4F2C 21 00 C0      [10] 1633 	ld	hl,#0xC000
    4F2F E5            [11] 1634 	push	hl
-   4F30 CD 22 74      [17] 1635 	call	_cpct_getScreenPtr
+   4F30 CD 84 74      [17] 1635 	call	_cpct_getScreenPtr
                            1636 ;src/main.c:163: switch(mode){
    4F33 3E 02         [ 7] 1637 	ld	a,#0x02
    4F35 DD 96 09      [19] 1638 	sub	a, 9 (ix)
@@ -1669,7 +1669,7 @@
    4F58 E5            [11] 1662 	push	hl
    4F59 C5            [11] 1663 	push	bc
    4F5A D5            [11] 1664 	push	de
-   4F5B CD CB 72      [17] 1665 	call	_cpct_drawSpriteMasked
+   4F5B CD 2D 73      [17] 1665 	call	_cpct_drawSpriteMasked
                            1666 ;src/main.c:166: break;
    4F5E 18 14         [12] 1667 	jr	00107$
                            1668 ;src/main.c:167: case 1:
@@ -1679,7 +1679,7 @@
    4F63 E5            [11] 1672 	push	hl
    4F64 C5            [11] 1673 	push	bc
    4F65 D5            [11] 1674 	push	de
-   4F66 CD CB 72      [17] 1675 	call	_cpct_drawSpriteMasked
+   4F66 CD 2D 73      [17] 1675 	call	_cpct_drawSpriteMasked
                            1676 ;src/main.c:169: break;
    4F69 18 09         [12] 1677 	jr	00107$
                            1678 ;src/main.c:170: case 2:
@@ -1689,7 +1689,7 @@
    4F6E E5            [11] 1682 	push	hl
    4F6F C5            [11] 1683 	push	bc
    4F70 D5            [11] 1684 	push	de
-   4F71 CD CB 72      [17] 1685 	call	_cpct_drawSpriteMasked
+   4F71 CD 2D 73      [17] 1685 	call	_cpct_drawSpriteMasked
                            1686 ;src/main.c:173: }
    4F74                    1687 00107$:
    4F74 DD E1         [14] 1688 	pop	ix
@@ -1712,7 +1712,7 @@
    4F84 33            [ 6] 1705 	inc	sp
    4F85 21 00 C0      [10] 1706 	ld	hl,#0xC000
    4F88 E5            [11] 1707 	push	hl
-   4F89 CD 22 74      [17] 1708 	call	_cpct_getScreenPtr
+   4F89 CD 84 74      [17] 1708 	call	_cpct_getScreenPtr
    4F8C 4D            [ 4] 1709 	ld	c, l
    4F8D 44            [ 4] 1710 	ld	b, h
                            1711 ;src/main.c:181: switch(mode){
@@ -1742,7 +1742,7 @@
    4FB0 F5            [11] 1735 	push	af
    4FB1 33            [ 6] 1736 	inc	sp
    4FB2 C5            [11] 1737 	push	bc
-   4FB3 CD 51 73      [17] 1738 	call	_cpct_drawSolidBox
+   4FB3 CD B3 73      [17] 1738 	call	_cpct_drawSolidBox
    4FB6 F1            [10] 1739 	pop	af
    4FB7 F1            [10] 1740 	pop	af
    4FB8 33            [ 6] 1741 	inc	sp
@@ -1757,7 +1757,7 @@
    4FBF F5            [11] 1750 	push	af
    4FC0 33            [ 6] 1751 	inc	sp
    4FC1 C5            [11] 1752 	push	bc
-   4FC2 CD 51 73      [17] 1753 	call	_cpct_drawSolidBox
+   4FC2 CD B3 73      [17] 1753 	call	_cpct_drawSolidBox
    4FC5 F1            [10] 1754 	pop	af
    4FC6 F1            [10] 1755 	pop	af
    4FC7 33            [ 6] 1756 	inc	sp
@@ -1772,7 +1772,7 @@
    4FCE F5            [11] 1765 	push	af
    4FCF 33            [ 6] 1766 	inc	sp
    4FD0 C5            [11] 1767 	push	bc
-   4FD1 CD 51 73      [17] 1768 	call	_cpct_drawSolidBox
+   4FD1 CD B3 73      [17] 1768 	call	_cpct_drawSolidBox
    4FD4 F1            [10] 1769 	pop	af
    4FD5 F1            [10] 1770 	pop	af
    4FD6 33            [ 6] 1771 	inc	sp
@@ -1819,7 +1819,7 @@
    5012 E5            [11] 1812 	push	hl
    5013 2E 00         [ 7] 1813 	ld	l, #0x00
    5015 E5            [11] 1814 	push	hl
-   5016 CD 22 74      [17] 1815 	call	_cpct_getScreenPtr
+   5016 CD 84 74      [17] 1815 	call	_cpct_getScreenPtr
                            1816 ;src/main.c:204: switch(col){
    5019 DD 7E FE      [19] 1817 	ld	a,-2 (ix)
    501C B7            [ 4] 1818 	or	a, a
@@ -1847,7 +1847,7 @@
    5039 F5            [11] 1840 	push	af
    503A 33            [ 6] 1841 	inc	sp
    503B C5            [11] 1842 	push	bc
-   503C CD 51 73      [17] 1843 	call	_cpct_drawSolidBox
+   503C CD B3 73      [17] 1843 	call	_cpct_drawSolidBox
    503F F1            [10] 1844 	pop	af
    5040 F1            [10] 1845 	pop	af
    5041 33            [ 6] 1846 	inc	sp
@@ -1861,7 +1861,7 @@
    504A E5            [11] 1854 	push	hl
    504B C5            [11] 1855 	push	bc
    504C D5            [11] 1856 	push	de
-   504D CD CB 72      [17] 1857 	call	_cpct_drawSpriteMasked
+   504D CD 2D 73      [17] 1857 	call	_cpct_drawSpriteMasked
                            1858 ;src/main.c:210: break;
    5050 18 0C         [12] 1859 	jr	00108$
                            1860 ;src/main.c:211: case 2:
@@ -1872,7 +1872,7 @@
    5058 E5            [11] 1865 	push	hl
    5059 C5            [11] 1866 	push	bc
    505A D5            [11] 1867 	push	de
-   505B CD CB 72      [17] 1868 	call	_cpct_drawSpriteMasked
+   505B CD 2D 73      [17] 1868 	call	_cpct_drawSpriteMasked
                            1869 ;src/main.c:213: }
    505E                    1870 00108$:
                            1871 ;src/main.c:215: if(atk > 40 || atk <= 20){
@@ -1888,7 +1888,7 @@
    506E E5            [11] 1881 	push	hl
    506F 2E 00         [ 7] 1882 	ld	l, #0x00
    5071 E5            [11] 1883 	push	hl
-   5072 CD 22 74      [17] 1884 	call	_cpct_getScreenPtr
+   5072 CD 84 74      [17] 1884 	call	_cpct_getScreenPtr
                            1885 ;src/main.c:217: switch(col){
    5075 DD 7E FE      [19] 1886 	ld	a,-2 (ix)
    5078 B7            [ 4] 1887 	or	a, a
@@ -1916,7 +1916,7 @@
    5095 F5            [11] 1909 	push	af
    5096 33            [ 6] 1910 	inc	sp
    5097 C5            [11] 1911 	push	bc
-   5098 CD 51 73      [17] 1912 	call	_cpct_drawSolidBox
+   5098 CD B3 73      [17] 1912 	call	_cpct_drawSolidBox
    509B F1            [10] 1913 	pop	af
    509C F1            [10] 1914 	pop	af
    509D 33            [ 6] 1915 	inc	sp
@@ -1930,7 +1930,7 @@
    50A6 E5            [11] 1923 	push	hl
    50A7 C5            [11] 1924 	push	bc
    50A8 D5            [11] 1925 	push	de
-   50A9 CD CB 72      [17] 1926 	call	_cpct_drawSpriteMasked
+   50A9 CD 2D 73      [17] 1926 	call	_cpct_drawSpriteMasked
                            1927 ;src/main.c:223: break;
    50AC 18 0C         [12] 1928 	jr	00115$
                            1929 ;src/main.c:224: case 2:
@@ -1941,7 +1941,7 @@
    50B4 E5            [11] 1934 	push	hl
    50B5 C5            [11] 1935 	push	bc
    50B6 D5            [11] 1936 	push	de
-   50B7 CD CB 72      [17] 1937 	call	_cpct_drawSpriteMasked
+   50B7 CD 2D 73      [17] 1937 	call	_cpct_drawSpriteMasked
                            1938 ;src/main.c:226: }
    50BA                    1939 00115$:
                            1940 ;src/main.c:228: if(atk <= 20){
@@ -1953,7 +1953,7 @@
    50C3 E5            [11] 1946 	push	hl
    50C4 2E 00         [ 7] 1947 	ld	l, #0x00
    50C6 E5            [11] 1948 	push	hl
-   50C7 CD 22 74      [17] 1949 	call	_cpct_getScreenPtr
+   50C7 CD 84 74      [17] 1949 	call	_cpct_getScreenPtr
                            1950 ;src/main.c:206: cpct_drawSolidBox(memptr, col, 2, 8);
    50CA 4D            [ 4] 1951 	ld	c, l
    50CB 44            [ 4] 1952 	ld	b, h
@@ -1974,7 +1974,7 @@
    50E2 F5            [11] 1967 	push	af
    50E3 33            [ 6] 1968 	inc	sp
    50E4 C5            [11] 1969 	push	bc
-   50E5 CD 51 73      [17] 1970 	call	_cpct_drawSolidBox
+   50E5 CD B3 73      [17] 1970 	call	_cpct_drawSolidBox
    50E8 F1            [10] 1971 	pop	af
    50E9 F1            [10] 1972 	pop	af
    50EA 33            [ 6] 1973 	inc	sp
@@ -1988,7 +1988,7 @@
    50F3 E5            [11] 1981 	push	hl
    50F4 C5            [11] 1982 	push	bc
    50F5 D5            [11] 1983 	push	de
-   50F6 CD CB 72      [17] 1984 	call	_cpct_drawSpriteMasked
+   50F6 CD 2D 73      [17] 1984 	call	_cpct_drawSpriteMasked
                            1985 ;src/main.c:236: }
    50F9                    1986 00122$:
    50F9 DD F9         [10] 1987 	ld	sp, ix
@@ -2007,7 +2007,7 @@
    5109 E5            [11] 2000 	push	hl
    510A 21 00 C0      [10] 2001 	ld	hl,#0xC000
    510D E5            [11] 2002 	push	hl
-   510E CD 22 74      [17] 2003 	call	_cpct_getScreenPtr
+   510E CD 84 74      [17] 2003 	call	_cpct_getScreenPtr
                            2004 ;src/main.c:246: cpct_drawSpriteMasked(corazon_lleno,memptr,4,8);
    5111 4D            [ 4] 2005 	ld	c, l
    5112 44            [ 4] 2006 	ld	b, h
@@ -2021,7 +2021,7 @@
    511F E5            [11] 2014 	push	hl
    5120 C5            [11] 2015 	push	bc
    5121 D5            [11] 2016 	push	de
-   5122 CD CB 72      [17] 2017 	call	_cpct_drawSpriteMasked
+   5122 CD 2D 73      [17] 2017 	call	_cpct_drawSpriteMasked
    5125 18 0E         [12] 2018 	jr	00103$
    5127                    2019 00102$:
                            2020 ;src/main.c:248: cpct_drawSolidBox(memptr, 0, 4, 8);
@@ -2031,7 +2031,7 @@
    512C F5            [11] 2024 	push	af
    512D 33            [ 6] 2025 	inc	sp
    512E C5            [11] 2026 	push	bc
-   512F CD 51 73      [17] 2027 	call	_cpct_drawSolidBox
+   512F CD B3 73      [17] 2027 	call	_cpct_drawSolidBox
    5132 F1            [10] 2028 	pop	af
    5133 F1            [10] 2029 	pop	af
    5134 33            [ 6] 2030 	inc	sp
@@ -2041,7 +2041,7 @@
    5138 E5            [11] 2034 	push	hl
    5139 21 00 C0      [10] 2035 	ld	hl,#0xC000
    513C E5            [11] 2036 	push	hl
-   513D CD 22 74      [17] 2037 	call	_cpct_getScreenPtr
+   513D CD 84 74      [17] 2037 	call	_cpct_getScreenPtr
                            2038 ;src/main.c:246: cpct_drawSpriteMasked(corazon_lleno,memptr,4,8);
    5140 EB            [ 4] 2039 	ex	de,hl
                            2040 ;src/main.c:251: if(bullet == 0)
@@ -2049,12 +2049,12 @@
    5144 B7            [ 4] 2042 	or	a, a
    5145 20 0E         [12] 2043 	jr	NZ,00105$
                            2044 ;src/main.c:252: cpct_drawSpriteMasked(flecha_arriba,memptr,2,8);
-   5147 01 55 70      [10] 2045 	ld	bc,#_flecha_arriba
+   5147 01 B7 70      [10] 2045 	ld	bc,#_flecha_arriba
    514A 21 02 08      [10] 2046 	ld	hl,#0x0802
    514D E5            [11] 2047 	push	hl
    514E D5            [11] 2048 	push	de
    514F C5            [11] 2049 	push	bc
-   5150 CD CB 72      [17] 2050 	call	_cpct_drawSpriteMasked
+   5150 CD 2D 73      [17] 2050 	call	_cpct_drawSpriteMasked
    5153 18 0E         [12] 2051 	jr	00107$
    5155                    2052 00105$:
                            2053 ;src/main.c:254: cpct_drawSolidBox(memptr, 0, 2, 8);
@@ -2064,7 +2064,7 @@
    515A F5            [11] 2057 	push	af
    515B 33            [ 6] 2058 	inc	sp
    515C D5            [11] 2059 	push	de
-   515D CD 51 73      [17] 2060 	call	_cpct_drawSolidBox
+   515D CD B3 73      [17] 2060 	call	_cpct_drawSolidBox
    5160 F1            [10] 2061 	pop	af
    5161 F1            [10] 2062 	pop	af
    5162 33            [ 6] 2063 	inc	sp
@@ -2094,7 +2094,7 @@
    517D 33            [ 6] 2087 	inc	sp
    517E 21 00 C0      [10] 2088 	ld	hl,#0xC000
    5181 E5            [11] 2089 	push	hl
-   5182 CD 22 74      [17] 2090 	call	_cpct_getScreenPtr
+   5182 CD 84 74      [17] 2090 	call	_cpct_getScreenPtr
    5185 C1            [10] 2091 	pop	bc
                            2092 ;src/main.c:266: p+=5;
    5186 03            [ 6] 2093 	inc	bc
@@ -2113,7 +2113,7 @@
    5199 D5            [11] 2106 	push	de
    519A 21 00 46      [10] 2107 	ld	hl,#_corazon_lleno
    519D E5            [11] 2108 	push	hl
-   519E CD CB 72      [17] 2109 	call	_cpct_drawSpriteMasked
+   519E CD 2D 73      [17] 2109 	call	_cpct_drawSpriteMasked
    51A1 C1            [10] 2110 	pop	bc
    51A2 18 1E         [12] 2111 	jr	00106$
    51A4                    2112 00102$:
@@ -2126,7 +2126,7 @@
    51AB F5            [11] 2119 	push	af
    51AC 33            [ 6] 2120 	inc	sp
    51AD D5            [11] 2121 	push	de
-   51AE CD 51 73      [17] 2122 	call	_cpct_drawSolidBox
+   51AE CD B3 73      [17] 2122 	call	_cpct_drawSolidBox
    51B1 F1            [10] 2123 	pop	af
    51B2 F1            [10] 2124 	pop	af
    51B3 33            [ 6] 2125 	inc	sp
@@ -2136,7 +2136,7 @@
    51B9 D5            [11] 2129 	push	de
    51BA 21 40 46      [10] 2130 	ld	hl,#_corazon_roto
    51BD E5            [11] 2131 	push	hl
-   51BE CD CB 72      [17] 2132 	call	_cpct_drawSpriteMasked
+   51BE CD 2D 73      [17] 2132 	call	_cpct_drawSpriteMasked
    51C1 C1            [10] 2133 	pop	bc
    51C2                    2134 00106$:
                            2135 ;src/main.c:264: for(i=1;i<=3;i++){
@@ -2170,7 +2170,7 @@
    51E7 33            [ 6] 2163 	inc	sp
    51E8 21 00 C0      [10] 2164 	ld	hl,#0xC000
    51EB E5            [11] 2165 	push	hl
-   51EC CD 22 74      [17] 2166 	call	_cpct_getScreenPtr
+   51EC CD 84 74      [17] 2166 	call	_cpct_getScreenPtr
    51EF C1            [10] 2167 	pop	bc
                            2168 ;src/main.c:297: p+=5;
    51F0 03            [ 6] 2169 	inc	bc
@@ -2187,9 +2187,9 @@
    51FF 21 02 08      [10] 2180 	ld	hl,#0x0802
    5202 E5            [11] 2181 	push	hl
    5203 D5            [11] 2182 	push	de
-   5204 21 55 70      [10] 2183 	ld	hl,#_flecha_arriba
+   5204 21 B7 70      [10] 2183 	ld	hl,#_flecha_arriba
    5207 E5            [11] 2184 	push	hl
-   5208 CD CB 72      [17] 2185 	call	_cpct_drawSpriteMasked
+   5208 CD 2D 73      [17] 2185 	call	_cpct_drawSpriteMasked
    520B C1            [10] 2186 	pop	bc
    520C 18 10         [12] 2187 	jr	00106$
    520E                    2188 00102$:
@@ -2201,7 +2201,7 @@
    5214 F5            [11] 2194 	push	af
    5215 33            [ 6] 2195 	inc	sp
    5216 D5            [11] 2196 	push	de
-   5217 CD 51 73      [17] 2197 	call	_cpct_drawSolidBox
+   5217 CD B3 73      [17] 2197 	call	_cpct_drawSolidBox
    521A F1            [10] 2198 	pop	af
    521B F1            [10] 2199 	pop	af
    521C 33            [ 6] 2200 	inc	sp
@@ -2255,7 +2255,7 @@
    5264 09            [11] 2248 	add	hl, bc
    5265 29            [11] 2249 	add	hl, hl
    5266 29            [11] 2250 	add	hl, hl
-   5267 3E 18         [ 7] 2251 	ld	a,#<(_scene)
+   5267 3E 7A         [ 7] 2251 	ld	a,#<(_scene)
    5269 85            [ 4] 2252 	add	a, l
    526A DD 77 F9      [19] 2253 	ld	-7 (ix),a
    526D 3E 75         [ 7] 2254 	ld	a,#>(_scene)
@@ -2365,7 +2365,7 @@
    533A 19            [11] 2358 	add	hl, de
    533B 29            [11] 2359 	add	hl, hl
    533C 29            [11] 2360 	add	hl, hl
-   533D 11 18 75      [10] 2361 	ld	de,#_scene
+   533D 11 7A 75      [10] 2361 	ld	de,#_scene
    5340 19            [11] 2362 	add	hl,de
    5341 DD 5E FF      [19] 2363 	ld	e,-1 (ix)
    5344 16 00         [ 7] 2364 	ld	d,#0x00
@@ -2397,7 +2397,7 @@
    536D 19            [11] 2390 	add	hl, de
    536E 29            [11] 2391 	add	hl, hl
    536F 29            [11] 2392 	add	hl, hl
-   5370 3E 18         [ 7] 2393 	ld	a,#<(_scene)
+   5370 3E 7A         [ 7] 2393 	ld	a,#<(_scene)
    5372 85            [ 4] 2394 	add	a, l
    5373 DD 77 F4      [19] 2395 	ld	-12 (ix),a
    5376 3E 75         [ 7] 2396 	ld	a,#>(_scene)
@@ -2481,7 +2481,7 @@
    5405 19            [11] 2474 	add	hl, de
    5406 29            [11] 2475 	add	hl, hl
    5407 29            [11] 2476 	add	hl, hl
-   5408 11 18 75      [10] 2477 	ld	de,#_scene
+   5408 11 7A 75      [10] 2477 	ld	de,#_scene
    540B 19            [11] 2478 	add	hl,de
    540C DD 5E FF      [19] 2479 	ld	e,-1 (ix)
    540F 16 00         [ 7] 2480 	ld	d,#0x00
@@ -2511,7 +2511,7 @@
    5437 09            [11] 2504 	add	hl, bc
    5438 29            [11] 2505 	add	hl, hl
    5439 29            [11] 2506 	add	hl, hl
-   543A 3E 18         [ 7] 2507 	ld	a,#<(_scene)
+   543A 3E 7A         [ 7] 2507 	ld	a,#<(_scene)
    543C 85            [ 4] 2508 	add	a, l
    543D DD 77 F4      [19] 2509 	ld	-12 (ix),a
    5440 3E 75         [ 7] 2510 	ld	a,#>(_scene)
@@ -2562,10 +2562,10 @@
    548C 39            [11] 2555 	add	hl,sp
    548D F9            [ 6] 2556 	ld	sp,hl
                            2557 ;src/main.c:346: u8 posX = object.x;
-   548E 3A 0B 76      [13] 2558 	ld	a,(#_object+0)
+   548E 3A 6D 76      [13] 2558 	ld	a,(#_object+0)
    5491 DD 77 F4      [19] 2559 	ld	-12 (ix),a
                            2560 ;src/main.c:347: u8 posY = object.y;
-   5494 3A 0C 76      [13] 2561 	ld	a,(#_object + 1)
+   5494 3A 6E 76      [13] 2561 	ld	a,(#_object + 1)
                            2562 ;src/main.c:348: if(    scene[(posY)/tileheight][(posX)/tilewidth] == 1
    5497 DD 77 F5      [19] 2563 	ld	-11 (ix), a
    549A 07            [ 4] 2564 	rlca
@@ -2582,7 +2582,7 @@
    54A7 09            [11] 2575 	add	hl, bc
    54A8 29            [11] 2576 	add	hl, hl
    54A9 29            [11] 2577 	add	hl, hl
-   54AA 3E 18         [ 7] 2578 	ld	a,#<(_scene)
+   54AA 3E 7A         [ 7] 2578 	ld	a,#<(_scene)
    54AC 85            [ 4] 2579 	add	a, l
    54AD DD 77 F7      [19] 2580 	ld	-9 (ix),a
    54B0 3E 75         [ 7] 2581 	ld	a,#>(_scene)
@@ -2604,7 +2604,7 @@
                            2597 ;src/main.c:349: || scene[(posY)/tileheight][(posX+object.sizeX-1)/tilewidth] == 1
    54CF DD 5E F4      [19] 2598 	ld	e,-12 (ix)
    54D2 16 00         [ 7] 2599 	ld	d,#0x00
-   54D4 3A 13 76      [13] 2600 	ld	a, (#_object + 8)
+   54D4 3A 75 76      [13] 2600 	ld	a, (#_object + 8)
    54D7 6F            [ 4] 2601 	ld	l,a
    54D8 26 00         [ 7] 2602 	ld	h,#0x00
    54DA 19            [11] 2603 	add	hl,de
@@ -2649,7 +2649,7 @@
                            2642 ;src/main.c:350: || scene[(posY+object.sizeY-2)/tileheight][(posX)/tilewidth] == 1
    5530 DD 5E F5      [19] 2643 	ld	e,-11 (ix)
    5533 16 00         [ 7] 2644 	ld	d,#0x00
-   5535 3A 14 76      [13] 2645 	ld	a, (#_object + 9)
+   5535 3A 76 76      [13] 2645 	ld	a, (#_object + 9)
    5538 6F            [ 4] 2646 	ld	l,a
    5539 26 00         [ 7] 2647 	ld	h,#0x00
    553B 19            [11] 2648 	add	hl,de
@@ -2690,7 +2690,7 @@
    5575 19            [11] 2683 	add	hl, de
    5576 29            [11] 2684 	add	hl, hl
    5577 29            [11] 2685 	add	hl, hl
-   5578 11 18 75      [10] 2686 	ld	de,#_scene
+   5578 11 7A 75      [10] 2686 	ld	de,#_scene
    557B 19            [11] 2687 	add	hl,de
    557C DD 5E FF      [19] 2688 	ld	e,-1 (ix)
    557F 16 00         [ 7] 2689 	ld	d,#0x00
@@ -2720,7 +2720,7 @@
    55A6 09            [11] 2713 	add	hl, bc
    55A7 29            [11] 2714 	add	hl, hl
    55A8 29            [11] 2715 	add	hl, hl
-   55A9 3E 18         [ 7] 2716 	ld	a,#<(_scene)
+   55A9 3E 7A         [ 7] 2716 	ld	a,#<(_scene)
    55AB 85            [ 4] 2717 	add	a, l
    55AC DD 77 FB      [19] 2718 	ld	-5 (ix),a
    55AF 3E 75         [ 7] 2719 	ld	a,#>(_scene)
@@ -2795,7 +2795,7 @@
    5627 09            [11] 2788 	add	hl, bc
    5628 29            [11] 2789 	add	hl, hl
    5629 29            [11] 2790 	add	hl, hl
-   562A 3E 18         [ 7] 2791 	ld	a,#<(_scene)
+   562A 3E 7A         [ 7] 2791 	ld	a,#<(_scene)
    562C 85            [ 4] 2792 	add	a, l
    562D DD 77 FC      [19] 2793 	ld	-4 (ix),a
    5630 3E 75         [ 7] 2794 	ld	a,#>(_scene)
@@ -2906,7 +2906,7 @@
    56FC 19            [11] 2899 	add	hl, de
    56FD 29            [11] 2900 	add	hl, hl
    56FE 29            [11] 2901 	add	hl, hl
-   56FF 11 18 75      [10] 2902 	ld	de,#_scene
+   56FF 11 7A 75      [10] 2902 	ld	de,#_scene
    5702 19            [11] 2903 	add	hl,de
    5703 DD 5E F6      [19] 2904 	ld	e,-10 (ix)
    5706 16 00         [ 7] 2905 	ld	d,#0x00
@@ -2938,7 +2938,7 @@
    572F 19            [11] 2931 	add	hl, de
    5730 29            [11] 2932 	add	hl, hl
    5731 29            [11] 2933 	add	hl, hl
-   5732 3E 18         [ 7] 2934 	ld	a,#<(_scene)
+   5732 3E 7A         [ 7] 2934 	ld	a,#<(_scene)
    5734 85            [ 4] 2935 	add	a, l
    5735 DD 77 FA      [19] 2936 	ld	-6 (ix),a
    5738 3E 75         [ 7] 2937 	ld	a,#>(_scene)
@@ -3024,7 +3024,7 @@
    57CB 19            [11] 3017 	add	hl, de
    57CC 29            [11] 3018 	add	hl, hl
    57CD 29            [11] 3019 	add	hl, hl
-   57CE 11 18 75      [10] 3020 	ld	de,#_scene
+   57CE 11 7A 75      [10] 3020 	ld	de,#_scene
    57D1 19            [11] 3021 	add	hl,de
    57D2 DD 5E F6      [19] 3022 	ld	e,-10 (ix)
    57D5 16 00         [ 7] 3023 	ld	d,#0x00
@@ -3056,7 +3056,7 @@
    57FF 19            [11] 3049 	add	hl, de
    5800 29            [11] 3050 	add	hl, hl
    5801 29            [11] 3051 	add	hl, hl
-   5802 3E 18         [ 7] 3052 	ld	a,#<(_scene)
+   5802 3E 7A         [ 7] 3052 	ld	a,#<(_scene)
    5804 85            [ 4] 3053 	add	a, l
    5805 5F            [ 4] 3054 	ld	e,a
    5806 3E 75         [ 7] 3055 	ld	a,#>(_scene)
@@ -3147,7 +3147,7 @@
    58A1 19            [11] 3140 	add	hl, de
    58A2 29            [11] 3141 	add	hl, hl
    58A3 29            [11] 3142 	add	hl, hl
-   58A4 11 18 75      [10] 3143 	ld	de,#_scene
+   58A4 11 7A 75      [10] 3143 	ld	de,#_scene
    58A7 19            [11] 3144 	add	hl,de
    58A8 DD 5E F6      [19] 3145 	ld	e,-10 (ix)
    58AB 16 00         [ 7] 3146 	ld	d,#0x00
@@ -3179,7 +3179,7 @@
    58D5 19            [11] 3172 	add	hl, de
    58D6 29            [11] 3173 	add	hl, hl
    58D7 29            [11] 3174 	add	hl, hl
-   58D8 3E 18         [ 7] 3175 	ld	a,#<(_scene)
+   58D8 3E 7A         [ 7] 3175 	ld	a,#<(_scene)
    58DA 85            [ 4] 3176 	add	a, l
    58DB 5F            [ 4] 3177 	ld	e,a
    58DC 3E 75         [ 7] 3178 	ld	a,#>(_scene)
@@ -3270,7 +3270,7 @@
    5977 19            [11] 3263 	add	hl, de
    5978 29            [11] 3264 	add	hl, hl
    5979 29            [11] 3265 	add	hl, hl
-   597A 11 18 75      [10] 3266 	ld	de,#_scene
+   597A 11 7A 75      [10] 3266 	ld	de,#_scene
    597D 19            [11] 3267 	add	hl,de
    597E DD 5E F6      [19] 3268 	ld	e,-10 (ix)
    5981 16 00         [ 7] 3269 	ld	d,#0x00
@@ -3300,7 +3300,7 @@
    59A9 09            [11] 3293 	add	hl, bc
    59AA 29            [11] 3294 	add	hl, hl
    59AB 29            [11] 3295 	add	hl, hl
-   59AC 3E 18         [ 7] 3296 	ld	a,#<(_scene)
+   59AC 3E 7A         [ 7] 3296 	ld	a,#<(_scene)
    59AE 85            [ 4] 3297 	add	a, l
    59AF DD 77 FA      [19] 3298 	ld	-6 (ix),a
    59B2 3E 75         [ 7] 3299 	ld	a,#>(_scene)
@@ -3333,7 +3333,7 @@
    59E4 33            [ 6] 3326 	inc	sp
    59E5 26 C0         [ 7] 3327 	ld	h, #0xC0
    59E7 E5            [11] 3328 	push	hl
-   59E8 CD 2F 73      [17] 3329 	call	_cpct_memset
+   59E8 CD 91 73      [17] 3329 	call	_cpct_memset
                            3330 ;src/main.c:396: drawMap(2);
    59EB 3E 02         [ 7] 3331 	ld	a,#0x02
    59ED F5            [11] 3332 	push	af
@@ -3359,7 +3359,7 @@
    5A07 F9            [ 6] 3352 	ld	sp,hl
                            3353 ;src/main.c:405: if(cpct_isKeyPressed(Key_Space) && atk[0]>=20){
    5A08 21 05 80      [10] 3354 	ld	hl,#0x8005
-   5A0B CD F9 70      [17] 3355 	call	_cpct_isKeyPressed
+   5A0B CD 5B 71      [17] 3355 	call	_cpct_isKeyPressed
    5A0E DD 75 FD      [19] 3356 	ld	-3 (ix),l
    5A11 DD 7E 08      [19] 3357 	ld	a,8 (ix)
    5A14 DD 77 F0      [19] 3358 	ld	-16 (ix),a
@@ -3493,7 +3493,7 @@
    5B0A                    3486 00111$:
                            3487 ;src/main.c:428: if(cpct_isKeyPressed(Key_CursorRight) && x[0] < 76){
    5B0A 21 00 02      [10] 3488 	ld	hl,#0x0200
-   5B0D CD F9 70      [17] 3489 	call	_cpct_isKeyPressed
+   5B0D CD 5B 71      [17] 3489 	call	_cpct_isKeyPressed
    5B10 DD 75 ED      [19] 3490 	ld	-19 (ix),l
    5B13 DD 7E 04      [19] 3491 	ld	a,4 (ix)
    5B16 DD 77 F9      [19] 3492 	ld	-7 (ix),a
@@ -3529,7 +3529,7 @@
    5B59                    3522 00142$:
                            3523 ;src/main.c:433: }else if(cpct_isKeyPressed(Key_CursorLeft) && x[0] > 0){
    5B59 21 01 01      [10] 3524 	ld	hl,#0x0101
-   5B5C CD F9 70      [17] 3525 	call	_cpct_isKeyPressed
+   5B5C CD 5B 71      [17] 3525 	call	_cpct_isKeyPressed
    5B5F 7D            [ 4] 3526 	ld	a,l
    5B60 B7            [ 4] 3527 	or	a, a
    5B61 28 2E         [12] 3528 	jr	Z,00138$
@@ -3558,7 +3558,7 @@
    5B91                    3551 00138$:
                            3552 ;src/main.c:438: }else  if(cpct_isKeyPressed(Key_CursorDown) && y[0] < 180){
    5B91 21 00 04      [10] 3553 	ld	hl,#0x0400
-   5B94 CD F9 70      [17] 3554 	call	_cpct_isKeyPressed
+   5B94 CD 5B 71      [17] 3554 	call	_cpct_isKeyPressed
    5B97 DD 75 ED      [19] 3555 	ld	-19 (ix),l
    5B9A DD 7E 06      [19] 3556 	ld	a,6 (ix)
    5B9D DD 77 FE      [19] 3557 	ld	-2 (ix),a
@@ -3594,7 +3594,7 @@
    5BDC                    3587 00134$:
                            3588 ;src/main.c:443: }else if(cpct_isKeyPressed(Key_CursorUp) && y[0] > 0 ){
    5BDC 21 00 01      [10] 3589 	ld	hl,#0x0100
-   5BDF CD F9 70      [17] 3590 	call	_cpct_isKeyPressed
+   5BDF CD 5B 71      [17] 3590 	call	_cpct_isKeyPressed
    5BE2 7D            [ 4] 3591 	ld	a,l
    5BE3 B7            [ 4] 3592 	or	a, a
    5BE4 28 2E         [12] 3593 	jr	Z,00130$
@@ -3623,7 +3623,7 @@
    5C14                    3616 00130$:
                            3617 ;src/main.c:448: }else if(cpct_isKeyPressed(Key_X) && arrow[0] == 0 && atk[0] == 20){
    5C14 21 07 80      [10] 3618 	ld	hl,#0x8007
-   5C17 CD F9 70      [17] 3619 	call	_cpct_isKeyPressed
+   5C17 CD 5B 71      [17] 3619 	call	_cpct_isKeyPressed
    5C1A 7D            [ 4] 3620 	ld	a,l
    5C1B B7            [ 4] 3621 	or	a, a
    5C1C CA 56 5D      [10] 3622 	jp	Z,00125$
@@ -3649,7 +3649,7 @@
    5C4C B7            [ 4] 3642 	or	a, a
    5C4D CA 4C 5D      [10] 3643 	jp	Z,00118$
                            3644 ;src/main.c:450: u8 *spr = flecha_dcha,xs=2,ys=8,ox=x[0]+4;
-   5C50 DD 36 EE 95   [19] 3645 	ld	-18 (ix),#<(_flecha_dcha)
+   5C50 DD 36 EE F7   [19] 3645 	ld	-18 (ix),#<(_flecha_dcha)
    5C54 DD 36 EF 70   [19] 3646 	ld	-17 (ix),#>(_flecha_dcha)
    5C58 DD 36 EC 02   [19] 3647 	ld	-20 (ix),#0x02
    5C5C DD 36 EB 08   [19] 3648 	ld	-21 (ix),#0x08
@@ -3678,7 +3678,7 @@
    5C8A 18 5E         [12] 3671 	jr	00116$
                            3672 ;src/main.c:452: case 6: spr = flecha_dcha; xs=4;ys=4;ox=x[0]; break;
    5C8C                    3673 00112$:
-   5C8C DD 36 EE 95   [19] 3674 	ld	-18 (ix),#<(_flecha_dcha)
+   5C8C DD 36 EE F7   [19] 3674 	ld	-18 (ix),#<(_flecha_dcha)
    5C90 DD 36 EF 70   [19] 3675 	ld	-17 (ix),#>(_flecha_dcha)
    5C94 DD 36 EC 04   [19] 3676 	ld	-20 (ix),#0x04
    5C98 DD 36 EB 04   [19] 3677 	ld	-21 (ix),#0x04
@@ -3687,8 +3687,8 @@
    5CA2 18 46         [12] 3680 	jr	00116$
                            3681 ;src/main.c:453: case 4: spr = flecha_izda; xs=4;ys=4;ox=x[0]; break;
    5CA4                    3682 00113$:
-   5CA4 DD 36 EE B5   [19] 3683 	ld	-18 (ix),#<(_flecha_izda)
-   5CA8 DD 36 EF 70   [19] 3684 	ld	-17 (ix),#>(_flecha_izda)
+   5CA4 DD 36 EE 17   [19] 3683 	ld	-18 (ix),#<(_flecha_izda)
+   5CA8 DD 36 EF 71   [19] 3684 	ld	-17 (ix),#>(_flecha_izda)
    5CAC DD 36 EC 04   [19] 3685 	ld	-20 (ix),#0x04
    5CB0 DD 36 EB 04   [19] 3686 	ld	-21 (ix),#0x04
    5CB4 DD 7E F9      [19] 3687 	ld	a,-7 (ix)
@@ -3696,7 +3696,7 @@
    5CBA 18 2E         [12] 3689 	jr	00116$
                            3690 ;src/main.c:454: case 2: spr = flecha_abajo; xs=2;ys=8;ox=x[0]; break;
    5CBC                    3691 00114$:
-   5CBC DD 36 EE 75   [19] 3692 	ld	-18 (ix),#<(_flecha_abajo)
+   5CBC DD 36 EE D7   [19] 3692 	ld	-18 (ix),#<(_flecha_abajo)
    5CC0 DD 36 EF 70   [19] 3693 	ld	-17 (ix),#>(_flecha_abajo)
    5CC4 DD 36 EC 02   [19] 3694 	ld	-20 (ix),#0x02
    5CC8 DD 36 EB 08   [19] 3695 	ld	-21 (ix),#0x08
@@ -3705,7 +3705,7 @@
    5CD2 18 16         [12] 3698 	jr	00116$
                            3699 ;src/main.c:455: case 8: spr = flecha_arriba; xs=2;ys=8;ox=x[0]; break;
    5CD4                    3700 00115$:
-   5CD4 DD 36 EE 55   [19] 3701 	ld	-18 (ix),#<(_flecha_arriba)
+   5CD4 DD 36 EE B7   [19] 3701 	ld	-18 (ix),#<(_flecha_arriba)
    5CD8 DD 36 EF 70   [19] 3702 	ld	-17 (ix),#>(_flecha_arriba)
    5CDC DD 36 EC 02   [19] 3703 	ld	-20 (ix),#0x02
    5CE0 DD 36 EB 08   [19] 3704 	ld	-21 (ix),#0x08
@@ -3718,7 +3718,7 @@
    5CED DD 66 F1      [19] 3711 	ld	h,-15 (ix)
    5CF0 36 00         [10] 3712 	ld	(hl),#0x00
                            3713 ;src/main.c:458: object.x = ox;
-   5CF2 21 0B 76      [10] 3714 	ld	hl,#_object+0
+   5CF2 21 6D 76      [10] 3714 	ld	hl,#_object+0
    5CF5 DD 7E ED      [19] 3715 	ld	a,-19 (ix)
    5CF8 77            [ 7] 3716 	ld	(hl),a
                            3717 ;src/main.c:459: object.y = y[0]+8;
@@ -3726,35 +3726,35 @@
    5CFC DD 66 FF      [19] 3719 	ld	h,-1 (ix)
    5CFF 7E            [ 7] 3720 	ld	a,(hl)
    5D00 C6 08         [ 7] 3721 	add	a, #0x08
-   5D02 32 0C 76      [13] 3722 	ld	(#(_object + 0x0001)),a
+   5D02 32 6E 76      [13] 3722 	ld	(#(_object + 0x0001)),a
                            3723 ;src/main.c:460: object.x = object.x;
-   5D05 21 0B 76      [10] 3724 	ld	hl, #_object + 0
+   5D05 21 6D 76      [10] 3724 	ld	hl, #_object + 0
    5D08 56            [ 7] 3725 	ld	d,(hl)
-   5D09 21 0B 76      [10] 3726 	ld	hl,#_object
+   5D09 21 6D 76      [10] 3726 	ld	hl,#_object
    5D0C 72            [ 7] 3727 	ld	(hl),d
                            3728 ;src/main.c:461: object.y = object.y;
-   5D0D 32 0C 76      [13] 3729 	ld	(#(_object + 0x0001)),a
+   5D0D 32 6E 76      [13] 3729 	ld	(#(_object + 0x0001)),a
                            3730 ;src/main.c:462: object.sprite = spr;
-   5D10 21 0F 76      [10] 3731 	ld	hl,#(_object + 0x0004)
+   5D10 21 71 76      [10] 3731 	ld	hl,#(_object + 0x0004)
    5D13 DD 7E EE      [19] 3732 	ld	a,-18 (ix)
    5D16 77            [ 7] 3733 	ld	(hl),a
    5D17 23            [ 6] 3734 	inc	hl
    5D18 DD 7E EF      [19] 3735 	ld	a,-17 (ix)
    5D1B 77            [ 7] 3736 	ld	(hl),a
                            3737 ;src/main.c:463: object.vivo = 1;
-   5D1C 21 11 76      [10] 3738 	ld	hl,#(_object + 0x0006)
+   5D1C 21 73 76      [10] 3738 	ld	hl,#(_object + 0x0006)
    5D1F 36 01         [10] 3739 	ld	(hl),#0x01
                            3740 ;src/main.c:464: object.dir = dir[0];
    5D21 DD 6E F2      [19] 3741 	ld	l,-14 (ix)
    5D24 DD 66 F3      [19] 3742 	ld	h,-13 (ix)
    5D27 7E            [ 7] 3743 	ld	a,(hl)
-   5D28 32 12 76      [13] 3744 	ld	(#(_object + 0x0007)),a
+   5D28 32 74 76      [13] 3744 	ld	(#(_object + 0x0007)),a
                            3745 ;src/main.c:465: object.sizeX = xs;
-   5D2B 21 13 76      [10] 3746 	ld	hl,#(_object + 0x0008)
+   5D2B 21 75 76      [10] 3746 	ld	hl,#(_object + 0x0008)
    5D2E DD 7E EC      [19] 3747 	ld	a,-20 (ix)
    5D31 77            [ 7] 3748 	ld	(hl),a
                            3749 ;src/main.c:466: object.sizeY = ys;
-   5D32 21 14 76      [10] 3750 	ld	hl,#(_object + 0x0009)
+   5D32 21 76 76      [10] 3750 	ld	hl,#(_object + 0x0009)
    5D35 DD 7E EB      [19] 3751 	ld	a,-21 (ix)
    5D38 77            [ 7] 3752 	ld	(hl),a
                            3753 ;src/main.c:467: bullets[0]--;
@@ -3826,7 +3826,7 @@
    5DA9                    3819 00147$:
                            3820 ;src/main.c:490: if(cpct_isKeyPressed(Key_L)){
    5DA9 21 04 10      [10] 3821 	ld	hl,#0x1004
-   5DAC CD F9 70      [17] 3822 	call	_cpct_isKeyPressed
+   5DAC CD 5B 71      [17] 3822 	call	_cpct_isKeyPressed
    5DAF 7D            [ 4] 3823 	ld	a,l
    5DB0 B7            [ 4] 3824 	or	a, a
    5DB1 28 08         [12] 3825 	jr	Z,00150$
@@ -3837,7 +3837,7 @@
    5DBB                    3830 00150$:
                            3831 ;src/main.c:493: if(cpct_isKeyPressed(Key_Esc)){
    5DBB 21 08 04      [10] 3832 	ld	hl,#0x0408
-   5DBE CD F9 70      [17] 3833 	call	_cpct_isKeyPressed
+   5DBE CD 5B 71      [17] 3833 	call	_cpct_isKeyPressed
    5DC1 7D            [ 4] 3834 	ld	a,l
    5DC2 B7            [ 4] 3835 	or	a, a
    5DC3 28 08         [12] 3836 	jr	Z,00152$
@@ -3858,17 +3858,17 @@
                            3851 ; ---------------------------------
    5DD8                    3852 _moveObject::
                            3853 ;src/main.c:501: object.lx = object.x;
-   5DD8 01 0B 76      [10] 3854 	ld	bc,#_object+0
+   5DD8 01 6D 76      [10] 3854 	ld	bc,#_object+0
    5DDB 0A            [ 7] 3855 	ld	a,(bc)
-   5DDC 32 0D 76      [13] 3856 	ld	(#(_object + 0x0002)),a
+   5DDC 32 6F 76      [13] 3856 	ld	(#(_object + 0x0002)),a
                            3857 ;src/main.c:502: object.ly = object.y;
    5DDF 59            [ 4] 3858 	ld	e, c
    5DE0 50            [ 4] 3859 	ld	d, b
    5DE1 13            [ 6] 3860 	inc	de
    5DE2 1A            [ 7] 3861 	ld	a,(de)
-   5DE3 32 0E 76      [13] 3862 	ld	(#(_object + 0x0003)),a
+   5DE3 32 70 76      [13] 3862 	ld	(#(_object + 0x0003)),a
                            3863 ;src/main.c:503: switch(object.dir){
-   5DE6 3A 12 76      [13] 3864 	ld	a,(#_object + 7)
+   5DE6 3A 74 76      [13] 3864 	ld	a,(#_object + 7)
    5DE9 FE 02         [ 7] 3865 	cp	a,#0x02
    5DEB 28 16         [12] 3866 	jr	Z,00103$
    5DED FE 04         [ 7] 3867 	cp	a,#0x04
@@ -4051,7 +4051,7 @@
    5F15 D2 E1 5F      [10] 4044 	jp	NC,00135$
                            4045 ;src/main.c:528: if(scene[(y[0])/tileheight][(x[0]-1)/tilewidth] != 1){
    5F18 DD 7E F8      [19] 4046 	ld	a,-8 (ix)
-   5F1B C6 18         [ 7] 4047 	add	a, #<(_scene)
+   5F1B C6 7A         [ 7] 4047 	add	a, #<(_scene)
    5F1D 6F            [ 4] 4048 	ld	l,a
    5F1E DD 7E F9      [19] 4049 	ld	a,-7 (ix)
    5F21 CE 75         [ 7] 4050 	adc	a, #>(_scene)
@@ -4108,7 +4108,7 @@
    5F7D 09            [11] 4101 	add	hl, bc
    5F7E 29            [11] 4102 	add	hl, hl
    5F7F 29            [11] 4103 	add	hl, hl
-   5F80 11 18 75      [10] 4104 	ld	de,#_scene
+   5F80 11 7A 75      [10] 4104 	ld	de,#_scene
    5F83 19            [11] 4105 	add	hl,de
    5F84 DD 5E F2      [19] 4106 	ld	e,-14 (ix)
    5F87 16 00         [ 7] 4107 	ld	d,#0x00
@@ -4147,7 +4147,7 @@
    5FC2 09            [11] 4140 	add	hl, bc
    5FC3 29            [11] 4141 	add	hl, hl
    5FC4 29            [11] 4142 	add	hl, hl
-   5FC5 11 18 75      [10] 4143 	ld	de,#_scene
+   5FC5 11 7A 75      [10] 4143 	ld	de,#_scene
    5FC8 19            [11] 4144 	add	hl,de
    5FC9 DD 5E F2      [19] 4145 	ld	e,-14 (ix)
    5FCC 16 00         [ 7] 4146 	ld	d,#0x00
@@ -4167,7 +4167,7 @@
    5FE4 DD 96 E1      [19] 4160 	sub	a, -31 (ix)
    5FE7 D2 C5 60      [10] 4161 	jp	NC,00132$
                            4162 ;src/main.c:539: if(scene[(y[0])/tileheight][(x[0]+tilewidth)/tilewidth] != 1){
-   5FEA 3E 18         [ 7] 4163 	ld	a,#<(_scene)
+   5FEA 3E 7A         [ 7] 4163 	ld	a,#<(_scene)
    5FEC DD 86 F8      [19] 4164 	add	a, -8 (ix)
    5FEF DD 77 F8      [19] 4165 	ld	-8 (ix),a
    5FF2 3E 75         [ 7] 4166 	ld	a,#>(_scene)
@@ -4264,7 +4264,7 @@
    60A6 09            [11] 4257 	add	hl, bc
    60A7 29            [11] 4258 	add	hl, hl
    60A8 29            [11] 4259 	add	hl, hl
-   60A9 11 18 75      [10] 4260 	ld	de,#_scene
+   60A9 11 7A 75      [10] 4260 	ld	de,#_scene
    60AC 19            [11] 4261 	add	hl,de
    60AD DD 5E F2      [19] 4262 	ld	e,-14 (ix)
    60B0 16 00         [ 7] 4263 	ld	d,#0x00
@@ -4307,7 +4307,7 @@
    60F1 09            [11] 4300 	add	hl, bc
    60F2 29            [11] 4301 	add	hl, hl
    60F3 29            [11] 4302 	add	hl, hl
-   60F4 11 18 75      [10] 4303 	ld	de,#_scene
+   60F4 11 7A 75      [10] 4303 	ld	de,#_scene
    60F7 19            [11] 4304 	add	hl,de
    60F8 DD 5E F2      [19] 4305 	ld	e,-14 (ix)
    60FB 16 00         [ 7] 4306 	ld	d,#0x00
@@ -4346,7 +4346,7 @@
    6134 09            [11] 4339 	add	hl, bc
    6135 29            [11] 4340 	add	hl, hl
    6136 29            [11] 4341 	add	hl, hl
-   6137 11 18 75      [10] 4342 	ld	de,#_scene
+   6137 11 7A 75      [10] 4342 	ld	de,#_scene
    613A 19            [11] 4343 	add	hl,de
    613B DD 5E F2      [19] 4344 	ld	e,-14 (ix)
    613E 16 00         [ 7] 4345 	ld	d,#0x00
@@ -4380,1724 +4380,1797 @@
    6167 DD 7E 0A      [19] 4373 	ld	a,10 (ix)
    616A DD 77 FA      [19] 4374 	ld	-6 (ix),a
    616D DD 7E 07      [19] 4375 	ld	a,7 (ix)
-   6170 DD 77 F5      [19] 4376 	ld	-11 (ix),a
+   6170 DD 77 F1      [19] 4376 	ld	-15 (ix),a
    6173 DD 7E 08      [19] 4377 	ld	a,8 (ix)
-   6176 DD 77 F6      [19] 4378 	ld	-10 (ix),a
-   6179 DD 6E F9      [19] 4379 	ld	l,-7 (ix)
-   617C DD 66 FA      [19] 4380 	ld	h,-6 (ix)
-   617F E5            [11] 4381 	push	hl
-   6180 DD 6E F5      [19] 4382 	ld	l,-11 (ix)
-   6183 DD 66 F6      [19] 4383 	ld	h,-10 (ix)
-   6186 E5            [11] 4384 	push	hl
-   6187 DD 7E 04      [19] 4385 	ld	a,4 (ix)
-   618A F5            [11] 4386 	push	af
-   618B 33            [ 6] 4387 	inc	sp
-   618C CD 41 49      [17] 4388 	call	_movement
-   618F F1            [10] 4389 	pop	af
-   6190 F1            [10] 4390 	pop	af
-   6191 33            [ 6] 4391 	inc	sp
+   6176 DD 77 F2      [19] 4378 	ld	-14 (ix),a
+   6179 DD 4E F9      [19] 4379 	ld	c, -7 (ix)
+   617C DD 46 FA      [19] 4380 	ld	b, -6 (ix)
+   617F E1            [10] 4381 	pop	hl
+   6180 E5            [11] 4382 	push	hl
+   6181 C5            [11] 4383 	push	bc
+   6182 E5            [11] 4384 	push	hl
+   6183 DD 7E 04      [19] 4385 	ld	a,4 (ix)
+   6186 F5            [11] 4386 	push	af
+   6187 33            [ 6] 4387 	inc	sp
+   6188 CD 41 49      [17] 4388 	call	_movement
+   618B F1            [10] 4389 	pop	af
+   618C F1            [10] 4390 	pop	af
+   618D 33            [ 6] 4391 	inc	sp
                            4392 ;src/main.c:576: if(scene[(y[0])/tileheight][(x[0])/tilewidth] != room
-   6192 DD 6E F9      [19] 4393 	ld	l,-7 (ix)
-   6195 DD 66 FA      [19] 4394 	ld	h,-6 (ix)
-   6198 7E            [ 7] 4395 	ld	a,(hl)
-   6199 DD 77 FB      [19] 4396 	ld	-5 (ix), a
-   619C 07            [ 4] 4397 	rlca
-   619D 07            [ 4] 4398 	rlca
-   619E 07            [ 4] 4399 	rlca
-   619F 07            [ 4] 4400 	rlca
-   61A0 E6 0F         [ 7] 4401 	and	a,#0x0F
-   61A2 4F            [ 4] 4402 	ld	c,a
-   61A3 06 00         [ 7] 4403 	ld	b,#0x00
-   61A5 69            [ 4] 4404 	ld	l, c
-   61A6 60            [ 4] 4405 	ld	h, b
-   61A7 29            [11] 4406 	add	hl, hl
-   61A8 29            [11] 4407 	add	hl, hl
-   61A9 09            [11] 4408 	add	hl, bc
-   61AA 29            [11] 4409 	add	hl, hl
-   61AB 29            [11] 4410 	add	hl, hl
-   61AC 3E 18         [ 7] 4411 	ld	a,#<(_scene)
-   61AE 85            [ 4] 4412 	add	a, l
-   61AF DD 77 F7      [19] 4413 	ld	-9 (ix),a
-   61B2 3E 75         [ 7] 4414 	ld	a,#>(_scene)
-   61B4 8C            [ 4] 4415 	adc	a, h
-   61B5 DD 77 F8      [19] 4416 	ld	-8 (ix),a
-   61B8 DD 6E F5      [19] 4417 	ld	l,-11 (ix)
-   61BB DD 66 F6      [19] 4418 	ld	h,-10 (ix)
-   61BE 4E            [ 7] 4419 	ld	c,(hl)
-   61BF 79            [ 4] 4420 	ld	a,c
-   61C0 0F            [ 4] 4421 	rrca
-   61C1 0F            [ 4] 4422 	rrca
-   61C2 E6 3F         [ 7] 4423 	and	a,#0x3F
-   61C4 DD 77 FF      [19] 4424 	ld	-1 (ix), a
-   61C7 DD 86 F7      [19] 4425 	add	a, -9 (ix)
-   61CA 6F            [ 4] 4426 	ld	l,a
-   61CB 3E 00         [ 7] 4427 	ld	a,#0x00
-   61CD DD 8E F8      [19] 4428 	adc	a, -8 (ix)
-   61D0 67            [ 4] 4429 	ld	h,a
-   61D1 56            [ 7] 4430 	ld	d,(hl)
-   61D2 DD 7E 0B      [19] 4431 	ld	a,11 (ix)
-                           4432 ;src/main.c:577: || scene[(y[0])/tileheight][(x[0]+tilewidth-1)/tilewidth] != room
-   61D5 92            [ 4] 4433 	sub	a,d
-   61D6 C2 CF 62      [10] 4434 	jp	NZ,00101$
-   61D9 47            [ 4] 4435 	ld	b,a
-   61DA 21 03 00      [10] 4436 	ld	hl,#0x0003
-   61DD 09            [11] 4437 	add	hl,bc
-   61DE DD 75 F3      [19] 4438 	ld	-13 (ix),l
-   61E1 DD 74 F4      [19] 4439 	ld	-12 (ix),h
-   61E4 DD 7E F3      [19] 4440 	ld	a,-13 (ix)
-   61E7 DD 77 FD      [19] 4441 	ld	-3 (ix),a
-   61EA DD 7E F4      [19] 4442 	ld	a,-12 (ix)
-   61ED DD 77 FE      [19] 4443 	ld	-2 (ix),a
-   61F0 DD 7E F4      [19] 4444 	ld	a,-12 (ix)
-   61F3 07            [ 4] 4445 	rlca
-   61F4 E6 01         [ 7] 4446 	and	a,#0x01
-   61F6 DD 77 FC      [19] 4447 	ld	-4 (ix),a
-   61F9 21 06 00      [10] 4448 	ld	hl,#0x0006
-   61FC 09            [11] 4449 	add	hl,bc
-   61FD E3            [19] 4450 	ex	(sp), hl
-   61FE DD 7E FC      [19] 4451 	ld	a,-4 (ix)
-   6201 B7            [ 4] 4452 	or	a, a
-   6202 28 0C         [12] 4453 	jr	Z,00108$
-   6204 DD 7E F1      [19] 4454 	ld	a,-15 (ix)
-   6207 DD 77 FD      [19] 4455 	ld	-3 (ix),a
-   620A DD 7E F2      [19] 4456 	ld	a,-14 (ix)
-   620D DD 77 FE      [19] 4457 	ld	-2 (ix),a
-   6210                    4458 00108$:
-   6210 DD 6E FD      [19] 4459 	ld	l,-3 (ix)
-   6213 DD 66 FE      [19] 4460 	ld	h,-2 (ix)
-   6216 CB 2C         [ 8] 4461 	sra	h
-   6218 CB 1D         [ 8] 4462 	rr	l
-   621A CB 2C         [ 8] 4463 	sra	h
-   621C CB 1D         [ 8] 4464 	rr	l
-   621E DD 5E F7      [19] 4465 	ld	e,-9 (ix)
-   6221 DD 56 F8      [19] 4466 	ld	d,-8 (ix)
-   6224 19            [11] 4467 	add	hl,de
-   6225 DD 7E 0B      [19] 4468 	ld	a,11 (ix)
-   6228 96            [ 7] 4469 	sub	a,(hl)
-   6229 C2 CF 62      [10] 4470 	jp	NZ,00101$
+   618E DD 6E F9      [19] 4393 	ld	l,-7 (ix)
+   6191 DD 66 FA      [19] 4394 	ld	h,-6 (ix)
+   6194 7E            [ 7] 4395 	ld	a,(hl)
+   6195 DD 77 FF      [19] 4396 	ld	-1 (ix), a
+   6198 07            [ 4] 4397 	rlca
+   6199 07            [ 4] 4398 	rlca
+   619A 07            [ 4] 4399 	rlca
+   619B 07            [ 4] 4400 	rlca
+   619C E6 0F         [ 7] 4401 	and	a,#0x0F
+   619E 4F            [ 4] 4402 	ld	c,a
+   619F 06 00         [ 7] 4403 	ld	b,#0x00
+   61A1 69            [ 4] 4404 	ld	l, c
+   61A2 60            [ 4] 4405 	ld	h, b
+   61A3 29            [11] 4406 	add	hl, hl
+   61A4 29            [11] 4407 	add	hl, hl
+   61A5 09            [11] 4408 	add	hl, bc
+   61A6 29            [11] 4409 	add	hl, hl
+   61A7 29            [11] 4410 	add	hl, hl
+   61A8 3E 7A         [ 7] 4411 	ld	a,#<(_scene)
+   61AA 85            [ 4] 4412 	add	a, l
+   61AB DD 77 F7      [19] 4413 	ld	-9 (ix),a
+   61AE 3E 75         [ 7] 4414 	ld	a,#>(_scene)
+   61B0 8C            [ 4] 4415 	adc	a, h
+   61B1 DD 77 F8      [19] 4416 	ld	-8 (ix),a
+   61B4 E1            [10] 4417 	pop	hl
+   61B5 E5            [11] 4418 	push	hl
+   61B6 4E            [ 7] 4419 	ld	c,(hl)
+   61B7 79            [ 4] 4420 	ld	a,c
+   61B8 0F            [ 4] 4421 	rrca
+   61B9 0F            [ 4] 4422 	rrca
+   61BA E6 3F         [ 7] 4423 	and	a,#0x3F
+   61BC DD 77 F6      [19] 4424 	ld	-10 (ix), a
+   61BF DD 86 F7      [19] 4425 	add	a, -9 (ix)
+   61C2 6F            [ 4] 4426 	ld	l,a
+   61C3 3E 00         [ 7] 4427 	ld	a,#0x00
+   61C5 DD 8E F8      [19] 4428 	adc	a, -8 (ix)
+   61C8 67            [ 4] 4429 	ld	h,a
+   61C9 DD 7E 0B      [19] 4430 	ld	a,11 (ix)
+                           4431 ;src/main.c:577: || scene[(y[0])/tileheight][(x[0]+tilewidth-1)/tilewidth] != room
+   61CC 96            [ 7] 4432 	sub	a,(hl)
+   61CD C2 D1 62      [10] 4433 	jp	NZ,00106$
+   61D0 47            [ 4] 4434 	ld	b,a
+   61D1 21 03 00      [10] 4435 	ld	hl,#0x0003
+   61D4 09            [11] 4436 	add	hl,bc
+   61D5 DD 75 F4      [19] 4437 	ld	-12 (ix),l
+   61D8 DD 74 F5      [19] 4438 	ld	-11 (ix),h
+   61DB DD 7E F4      [19] 4439 	ld	a,-12 (ix)
+   61DE DD 77 FB      [19] 4440 	ld	-5 (ix),a
+   61E1 DD 7E F5      [19] 4441 	ld	a,-11 (ix)
+   61E4 DD 77 FC      [19] 4442 	ld	-4 (ix),a
+   61E7 DD 7E F5      [19] 4443 	ld	a,-11 (ix)
+   61EA 07            [ 4] 4444 	rlca
+   61EB E6 01         [ 7] 4445 	and	a,#0x01
+   61ED DD 77 F3      [19] 4446 	ld	-13 (ix),a
+   61F0 21 06 00      [10] 4447 	ld	hl,#0x0006
+   61F3 09            [11] 4448 	add	hl,bc
+   61F4 DD 75 FD      [19] 4449 	ld	-3 (ix),l
+   61F7 DD 74 FE      [19] 4450 	ld	-2 (ix),h
+   61FA DD 7E F3      [19] 4451 	ld	a,-13 (ix)
+   61FD B7            [ 4] 4452 	or	a, a
+   61FE 28 0C         [12] 4453 	jr	Z,00113$
+   6200 DD 7E FD      [19] 4454 	ld	a,-3 (ix)
+   6203 DD 77 FB      [19] 4455 	ld	-5 (ix),a
+   6206 DD 7E FE      [19] 4456 	ld	a,-2 (ix)
+   6209 DD 77 FC      [19] 4457 	ld	-4 (ix),a
+   620C                    4458 00113$:
+   620C DD 6E FB      [19] 4459 	ld	l,-5 (ix)
+   620F DD 66 FC      [19] 4460 	ld	h,-4 (ix)
+   6212 CB 2C         [ 8] 4461 	sra	h
+   6214 CB 1D         [ 8] 4462 	rr	l
+   6216 CB 2C         [ 8] 4463 	sra	h
+   6218 CB 1D         [ 8] 4464 	rr	l
+   621A DD 5E F7      [19] 4465 	ld	e,-9 (ix)
+   621D DD 56 F8      [19] 4466 	ld	d,-8 (ix)
+   6220 19            [11] 4467 	add	hl,de
+   6221 DD 7E 0B      [19] 4468 	ld	a,11 (ix)
+   6224 96            [ 7] 4469 	sub	a,(hl)
+   6225 C2 D1 62      [10] 4470 	jp	NZ,00106$
                            4471 ;src/main.c:578: || scene[(y[0]+tileheight-2)/tileheight][(x[0])/tilewidth] != room
-   622C DD 5E FB      [19] 4472 	ld	e,-5 (ix)
-   622F 16 00         [ 7] 4473 	ld	d,#0x00
-   6231 21 0E 00      [10] 4474 	ld	hl,#0x000E
-   6234 19            [11] 4475 	add	hl,de
-   6235 4D            [ 4] 4476 	ld	c,l
-   6236 44            [ 4] 4477 	ld	b,h
-   6237 69            [ 4] 4478 	ld	l, c
-   6238 78            [ 4] 4479 	ld	a,b
-   6239 67            [ 4] 4480 	ld	h,a
-   623A 07            [ 4] 4481 	rlca
-   623B E6 01         [ 7] 4482 	and	a,#0x01
-   623D DD 77 FD      [19] 4483 	ld	-3 (ix),a
-   6240 7B            [ 4] 4484 	ld	a,e
-   6241 C6 1D         [ 7] 4485 	add	a, #0x1D
-   6243 DD 77 F7      [19] 4486 	ld	-9 (ix),a
-   6246 7A            [ 4] 4487 	ld	a,d
-   6247 CE 00         [ 7] 4488 	adc	a, #0x00
-   6249 DD 77 F8      [19] 4489 	ld	-8 (ix),a
-   624C DD 7E FD      [19] 4490 	ld	a,-3 (ix)
-   624F B7            [ 4] 4491 	or	a, a
-   6250 28 06         [12] 4492 	jr	Z,00109$
-   6252 DD 6E F7      [19] 4493 	ld	l,-9 (ix)
-   6255 DD 66 F8      [19] 4494 	ld	h,-8 (ix)
-   6258                    4495 00109$:
-   6258 CB 2C         [ 8] 4496 	sra	h
-   625A CB 1D         [ 8] 4497 	rr	l
-   625C CB 2C         [ 8] 4498 	sra	h
-   625E CB 1D         [ 8] 4499 	rr	l
-   6260 CB 2C         [ 8] 4500 	sra	h
-   6262 CB 1D         [ 8] 4501 	rr	l
-   6264 CB 2C         [ 8] 4502 	sra	h
-   6266 CB 1D         [ 8] 4503 	rr	l
-   6268 5D            [ 4] 4504 	ld	e, l
-   6269 54            [ 4] 4505 	ld	d, h
-   626A 29            [11] 4506 	add	hl, hl
-   626B 29            [11] 4507 	add	hl, hl
-   626C 19            [11] 4508 	add	hl, de
-   626D 29            [11] 4509 	add	hl, hl
-   626E 29            [11] 4510 	add	hl, hl
-   626F 11 18 75      [10] 4511 	ld	de,#_scene
-   6272 19            [11] 4512 	add	hl,de
-   6273 DD 5E FF      [19] 4513 	ld	e,-1 (ix)
-   6276 16 00         [ 7] 4514 	ld	d,#0x00
-   6278 19            [11] 4515 	add	hl,de
-   6279 DD 7E 0B      [19] 4516 	ld	a,11 (ix)
-   627C 96            [ 7] 4517 	sub	a,(hl)
-   627D 20 50         [12] 4518 	jr	NZ,00101$
+   6228 DD 5E FF      [19] 4472 	ld	e,-1 (ix)
+   622B 16 00         [ 7] 4473 	ld	d,#0x00
+   622D 21 0E 00      [10] 4474 	ld	hl,#0x000E
+   6230 19            [11] 4475 	add	hl,de
+   6231 4D            [ 4] 4476 	ld	c,l
+   6232 44            [ 4] 4477 	ld	b,h
+   6233 69            [ 4] 4478 	ld	l, c
+   6234 78            [ 4] 4479 	ld	a,b
+   6235 67            [ 4] 4480 	ld	h,a
+   6236 07            [ 4] 4481 	rlca
+   6237 E6 01         [ 7] 4482 	and	a,#0x01
+   6239 DD 77 FB      [19] 4483 	ld	-5 (ix),a
+   623C 7B            [ 4] 4484 	ld	a,e
+   623D C6 1D         [ 7] 4485 	add	a, #0x1D
+   623F DD 77 F7      [19] 4486 	ld	-9 (ix),a
+   6242 7A            [ 4] 4487 	ld	a,d
+   6243 CE 00         [ 7] 4488 	adc	a, #0x00
+   6245 DD 77 F8      [19] 4489 	ld	-8 (ix),a
+   6248 DD 7E FB      [19] 4490 	ld	a,-5 (ix)
+   624B B7            [ 4] 4491 	or	a, a
+   624C 28 06         [12] 4492 	jr	Z,00114$
+   624E DD 6E F7      [19] 4493 	ld	l,-9 (ix)
+   6251 DD 66 F8      [19] 4494 	ld	h,-8 (ix)
+   6254                    4495 00114$:
+   6254 CB 2C         [ 8] 4496 	sra	h
+   6256 CB 1D         [ 8] 4497 	rr	l
+   6258 CB 2C         [ 8] 4498 	sra	h
+   625A CB 1D         [ 8] 4499 	rr	l
+   625C CB 2C         [ 8] 4500 	sra	h
+   625E CB 1D         [ 8] 4501 	rr	l
+   6260 CB 2C         [ 8] 4502 	sra	h
+   6262 CB 1D         [ 8] 4503 	rr	l
+   6264 5D            [ 4] 4504 	ld	e, l
+   6265 54            [ 4] 4505 	ld	d, h
+   6266 29            [11] 4506 	add	hl, hl
+   6267 29            [11] 4507 	add	hl, hl
+   6268 19            [11] 4508 	add	hl, de
+   6269 29            [11] 4509 	add	hl, hl
+   626A 29            [11] 4510 	add	hl, hl
+   626B 11 7A 75      [10] 4511 	ld	de,#_scene
+   626E 19            [11] 4512 	add	hl,de
+   626F DD 5E F6      [19] 4513 	ld	e,-10 (ix)
+   6272 16 00         [ 7] 4514 	ld	d,#0x00
+   6274 19            [11] 4515 	add	hl,de
+   6275 DD 7E 0B      [19] 4516 	ld	a,11 (ix)
+   6278 96            [ 7] 4517 	sub	a,(hl)
+   6279 20 56         [12] 4518 	jr	NZ,00106$
                            4519 ;src/main.c:579: || scene[(y[0]+tileheight-2)/tileheight][(x[0]+tilewidth-1)/tilewidth] != room
-   627F DD 7E FD      [19] 4520 	ld	a,-3 (ix)
-   6282 B7            [ 4] 4521 	or	a, a
-   6283 28 06         [12] 4522 	jr	Z,00110$
-   6285 DD 4E F7      [19] 4523 	ld	c,-9 (ix)
-   6288 DD 46 F8      [19] 4524 	ld	b,-8 (ix)
-   628B                    4525 00110$:
-   628B CB 28         [ 8] 4526 	sra	b
-   628D CB 19         [ 8] 4527 	rr	c
-   628F CB 28         [ 8] 4528 	sra	b
-   6291 CB 19         [ 8] 4529 	rr	c
-   6293 CB 28         [ 8] 4530 	sra	b
-   6295 CB 19         [ 8] 4531 	rr	c
-   6297 CB 28         [ 8] 4532 	sra	b
-   6299 CB 19         [ 8] 4533 	rr	c
-   629B 69            [ 4] 4534 	ld	l, c
-   629C 60            [ 4] 4535 	ld	h, b
-   629D 29            [11] 4536 	add	hl, hl
-   629E 29            [11] 4537 	add	hl, hl
-   629F 09            [11] 4538 	add	hl, bc
-   62A0 29            [11] 4539 	add	hl, hl
-   62A1 29            [11] 4540 	add	hl, hl
-   62A2 3E 18         [ 7] 4541 	ld	a,#<(_scene)
-   62A4 85            [ 4] 4542 	add	a, l
-   62A5 DD 77 FD      [19] 4543 	ld	-3 (ix),a
-   62A8 3E 75         [ 7] 4544 	ld	a,#>(_scene)
-   62AA 8C            [ 4] 4545 	adc	a, h
-   62AB DD 77 FE      [19] 4546 	ld	-2 (ix),a
-   62AE C1            [10] 4547 	pop	bc
-   62AF D1            [10] 4548 	pop	de
-   62B0 D5            [11] 4549 	push	de
-   62B1 C5            [11] 4550 	push	bc
-   62B2 DD 7E FC      [19] 4551 	ld	a,-4 (ix)
-   62B5 B7            [ 4] 4552 	or	a, a
-   62B6 28 02         [12] 4553 	jr	Z,00111$
-   62B8 D1            [10] 4554 	pop	de
-   62B9 D5            [11] 4555 	push	de
-   62BA                    4556 00111$:
-   62BA CB 2A         [ 8] 4557 	sra	d
-   62BC CB 1B         [ 8] 4558 	rr	e
-   62BE CB 2A         [ 8] 4559 	sra	d
-   62C0 CB 1B         [ 8] 4560 	rr	e
-   62C2 DD 6E FD      [19] 4561 	ld	l,-3 (ix)
-   62C5 DD 66 FE      [19] 4562 	ld	h,-2 (ix)
-   62C8 19            [11] 4563 	add	hl,de
-   62C9 DD 7E 0B      [19] 4564 	ld	a,11 (ix)
-   62CC 96            [ 7] 4565 	sub	a,(hl)
-   62CD 28 14         [12] 4566 	jr	Z,00106$
-   62CF                    4567 00101$:
-                           4568 ;src/main.c:581: *x=lx;
-   62CF DD 6E F5      [19] 4569 	ld	l,-11 (ix)
-   62D2 DD 66 F6      [19] 4570 	ld	h,-10 (ix)
-   62D5 DD 7E 05      [19] 4571 	ld	a,5 (ix)
-   62D8 77            [ 7] 4572 	ld	(hl),a
-                           4573 ;src/main.c:582: *y=ly;
-   62D9 DD 6E F9      [19] 4574 	ld	l,-7 (ix)
-   62DC DD 66 FA      [19] 4575 	ld	h,-6 (ix)
-   62DF DD 7E 06      [19] 4576 	ld	a,6 (ix)
-   62E2 77            [ 7] 4577 	ld	(hl),a
-   62E3                    4578 00106$:
-   62E3 DD F9         [10] 4579 	ld	sp, ix
-   62E5 DD E1         [14] 4580 	pop	ix
-   62E7 C9            [10] 4581 	ret
-                           4582 ;src/main.c:587: u8 vissionSensor(u8 x,u8 y,u8 px,u8 py){
-                           4583 ;	---------------------------------
-                           4584 ; Function vissionSensor
-                           4585 ; ---------------------------------
-   62E8                    4586 _vissionSensor::
-   62E8 DD E5         [15] 4587 	push	ix
-   62EA DD 21 00 00   [14] 4588 	ld	ix,#0
-   62EE DD 39         [15] 4589 	add	ix,sp
-   62F0 21 F6 FF      [10] 4590 	ld	hl,#-10
-   62F3 39            [11] 4591 	add	hl,sp
-   62F4 F9            [ 6] 4592 	ld	sp,hl
-                           4593 ;src/main.c:588: u8 following = 0;
-   62F5 DD 36 FC 00   [19] 4594 	ld	-4 (ix),#0x00
-                           4595 ;src/main.c:589: u8 cx = x/tilewidth;
-   62F9 DD 7E 04      [19] 4596 	ld	a,4 (ix)
-   62FC 0F            [ 4] 4597 	rrca
-   62FD 0F            [ 4] 4598 	rrca
-   62FE E6 3F         [ 7] 4599 	and	a,#0x3F
-   6300 DD 77 FB      [19] 4600 	ld	-5 (ix),a
-                           4601 ;src/main.c:590: u8 cy = y/tilewidth;
-   6303 DD 7E 05      [19] 4602 	ld	a,5 (ix)
-   6306 0F            [ 4] 4603 	rrca
-   6307 0F            [ 4] 4604 	rrca
-   6308 E6 3F         [ 7] 4605 	and	a,#0x3F
-   630A DD 77 FA      [19] 4606 	ld	-6 (ix),a
-                           4607 ;src/main.c:591: u8 pcx = px/tilewidth;
-   630D DD 7E 06      [19] 4608 	ld	a,6 (ix)
-   6310 0F            [ 4] 4609 	rrca
-   6311 0F            [ 4] 4610 	rrca
-   6312 E6 3F         [ 7] 4611 	and	a,#0x3F
-   6314 DD 77 F9      [19] 4612 	ld	-7 (ix),a
-                           4613 ;src/main.c:592: u8 pcy = py/tilewidth;
-   6317 DD 7E 07      [19] 4614 	ld	a,7 (ix)
-   631A 0F            [ 4] 4615 	rrca
-   631B 0F            [ 4] 4616 	rrca
-   631C E6 3F         [ 7] 4617 	and	a,#0x3F
-   631E DD 77 FF      [19] 4618 	ld	-1 (ix),a
-                           4619 ;src/main.c:595: for(i=0;i<3;i++){
-   6321 DD 36 F6 00   [19] 4620 	ld	-10 (ix),#0x00
-   6325                    4621 00107$:
-                           4622 ;src/main.c:596: lex = cx - i;
-   6325 DD 7E FB      [19] 4623 	ld	a,-5 (ix)
-   6328 DD 96 F6      [19] 4624 	sub	a, -10 (ix)
-   632B DD 77 FE      [19] 4625 	ld	-2 (ix),a
-                           4626 ;src/main.c:597: ley = cy - i;
-   632E DD 7E FA      [19] 4627 	ld	a,-6 (ix)
-   6331 DD 96 F6      [19] 4628 	sub	a, -10 (ix)
-   6334 DD 77 F8      [19] 4629 	ld	-8 (ix),a
-                           4630 ;src/main.c:598: mex = cx + i;
-   6337 DD 7E FB      [19] 4631 	ld	a,-5 (ix)
-   633A DD 86 F6      [19] 4632 	add	a, -10 (ix)
-   633D DD 77 FD      [19] 4633 	ld	-3 (ix),a
-                           4634 ;src/main.c:599: mey = cy + i;
-   6340 DD 7E FA      [19] 4635 	ld	a,-6 (ix)
-   6343 DD 86 F6      [19] 4636 	add	a, -10 (ix)
-   6346 DD 77 F7      [19] 4637 	ld	-9 (ix), a
-   6349 57            [ 4] 4638 	ld	d, a
-                           4639 ;src/main.c:600: if(lex == pcx || ley == pcy || mex == pcx || mey == pcy){
-   634A DD 7E FE      [19] 4640 	ld	a,-2 (ix)
-   634D DD 96 F9      [19] 4641 	sub	a, -7 (ix)
-   6350 28 16         [12] 4642 	jr	Z,00101$
-   6352 DD 7E F8      [19] 4643 	ld	a,-8 (ix)
-   6355 DD 96 FF      [19] 4644 	sub	a, -1 (ix)
-   6358 28 0E         [12] 4645 	jr	Z,00101$
-   635A DD 7E FD      [19] 4646 	ld	a,-3 (ix)
-   635D DD 96 F9      [19] 4647 	sub	a, -7 (ix)
-   6360 28 06         [12] 4648 	jr	Z,00101$
-   6362 DD 7E FF      [19] 4649 	ld	a,-1 (ix)
-   6365 92            [ 4] 4650 	sub	a, d
-   6366 20 04         [12] 4651 	jr	NZ,00108$
-   6368                    4652 00101$:
-                           4653 ;src/main.c:601: following = 1;
-   6368 DD 36 FC 01   [19] 4654 	ld	-4 (ix),#0x01
-   636C                    4655 00108$:
-                           4656 ;src/main.c:595: for(i=0;i<3;i++){
-   636C DD 34 F6      [23] 4657 	inc	-10 (ix)
-   636F DD 7E F6      [19] 4658 	ld	a,-10 (ix)
-   6372 D6 03         [ 7] 4659 	sub	a, #0x03
-   6374 38 AF         [12] 4660 	jr	C,00107$
-                           4661 ;src/main.c:605: return following;
-   6376 DD 6E FC      [19] 4662 	ld	l,-4 (ix)
-   6379 DD F9         [10] 4663 	ld	sp, ix
-   637B DD E1         [14] 4664 	pop	ix
-   637D C9            [10] 4665 	ret
-                           4666 ;src/main.c:610: void move(u8 *x,u8 *y,u8 lx, u8 ly,u8 *dir,u8 *s,u8 room,u8 px,u8 py,u8 *seenX,u8 *seenY,u8 *following,u8 *pursue){
-                           4667 ;	---------------------------------
-                           4668 ; Function move
-                           4669 ; ---------------------------------
-   637E                    4670 _move::
-   637E DD E5         [15] 4671 	push	ix
-   6380 DD 21 00 00   [14] 4672 	ld	ix,#0
-   6384 DD 39         [15] 4673 	add	ix,sp
-   6386 21 F7 FF      [10] 4674 	ld	hl,#-9
-   6389 39            [11] 4675 	add	hl,sp
-   638A F9            [ 6] 4676 	ld	sp,hl
-                           4677 ;src/main.c:612: dir[0] = chooseDirection();
-   638B DD 5E 0A      [19] 4678 	ld	e,10 (ix)
-   638E DD 56 0B      [19] 4679 	ld	d,11 (ix)
-                           4680 ;src/main.c:614: if(following[0] == room || *pursue != 0){
-   6391 DD 4E 17      [19] 4681 	ld	c,23 (ix)
-   6394 DD 46 18      [19] 4682 	ld	b,24 (ix)
-                           4683 ;src/main.c:624: followPlayer(px,py,x,y,*seenX,*seenY,room);
-   6397 DD 7E 13      [19] 4684 	ld	a,19 (ix)
-   639A DD 77 FA      [19] 4685 	ld	-6 (ix),a
-   639D DD 7E 14      [19] 4686 	ld	a,20 (ix)
-   63A0 DD 77 FB      [19] 4687 	ld	-5 (ix),a
-   63A3 DD 7E 11      [19] 4688 	ld	a,17 (ix)
-   63A6 DD 77 FE      [19] 4689 	ld	-2 (ix),a
-   63A9 DD 7E 12      [19] 4690 	ld	a,18 (ix)
-   63AC DD 77 FF      [19] 4691 	ld	-1 (ix),a
-                           4692 ;src/main.c:611: if(temp > 4){
-   63AF 3E 04         [ 7] 4693 	ld	a,#0x04
-   63B1 FD 21 08 76   [14] 4694 	ld	iy,#_temp
-   63B5 FD BE 00      [19] 4695 	cp	a, 0 (iy)
-   63B8 3E 00         [ 7] 4696 	ld	a,#0x00
-   63BA FD 21 08 76   [14] 4697 	ld	iy,#_temp
-   63BE FD 9E 01      [19] 4698 	sbc	a, 1 (iy)
-   63C1 E2 C6 63      [10] 4699 	jp	PO, 00159$
-   63C4 EE 80         [ 7] 4700 	xor	a, #0x80
-   63C6                    4701 00159$:
-   63C6 F2 14 64      [10] 4702 	jp	P,00116$
-                           4703 ;src/main.c:612: dir[0] = chooseDirection();
-   63C9 C5            [11] 4704 	push	bc
-   63CA D5            [11] 4705 	push	de
-   63CB CD D2 48      [17] 4706 	call	_chooseDirection
-   63CE 7D            [ 4] 4707 	ld	a,l
-   63CF D1            [10] 4708 	pop	de
-   63D0 C1            [10] 4709 	pop	bc
-   63D1 12            [ 7] 4710 	ld	(de),a
-                           4711 ;src/main.c:613: following[0] = detectPlayerRoom(px,py);
-   63D2 DD 5E 15      [19] 4712 	ld	e,21 (ix)
-   63D5 DD 56 16      [19] 4713 	ld	d,22 (ix)
-   63D8 C5            [11] 4714 	push	bc
-   63D9 D5            [11] 4715 	push	de
-   63DA DD 66 10      [19] 4716 	ld	h,16 (ix)
-   63DD DD 6E 0F      [19] 4717 	ld	l,15 (ix)
-   63E0 E5            [11] 4718 	push	hl
-   63E1 CD C0 46      [17] 4719 	call	_detectPlayerRoom
-   63E4 F1            [10] 4720 	pop	af
-   63E5 DD 75 F7      [19] 4721 	ld	-9 (ix),l
-   63E8 D1            [10] 4722 	pop	de
-   63E9 C1            [10] 4723 	pop	bc
-   63EA DD 7E F7      [19] 4724 	ld	a,-9 (ix)
-   63ED 12            [ 7] 4725 	ld	(de),a
-                           4726 ;src/main.c:614: if(following[0] == room || *pursue != 0){
-   63EE DD 7E 0E      [19] 4727 	ld	a,14 (ix)
-   63F1 DD 96 F7      [19] 4728 	sub	a, -9 (ix)
-   63F4 28 04         [12] 4729 	jr	Z,00104$
-   63F6 0A            [ 7] 4730 	ld	a,(bc)
-   63F7 B7            [ 4] 4731 	or	a, a
-   63F8 28 11         [12] 4732 	jr	Z,00105$
-   63FA                    4733 00104$:
-                           4734 ;src/main.c:615: if(pursue == 0)
-   63FA DD 7E 18      [19] 4735 	ld	a,24 (ix)
-   63FD DD B6 17      [19] 4736 	or	a,23 (ix)
-   6400 20 05         [12] 4737 	jr	NZ,00102$
-                           4738 ;src/main.c:616: *pursue = 1;
-   6402 3E 01         [ 7] 4739 	ld	a,#0x01
-   6404 02            [ 7] 4740 	ld	(bc),a
-   6405 18 04         [12] 4741 	jr	00105$
-   6407                    4742 00102$:
-                           4743 ;src/main.c:618: *pursue -=1;
-   6407 0A            [ 7] 4744 	ld	a,(bc)
-   6408 C6 FF         [ 7] 4745 	add	a,#0xFF
-   640A 02            [ 7] 4746 	ld	(bc),a
-   640B                    4747 00105$:
-                           4748 ;src/main.c:620: temp = 0;
-   640B 21 00 00      [10] 4749 	ld	hl,#0x0000
-   640E 22 08 76      [16] 4750 	ld	(_temp),hl
-   6411 C3 CA 64      [10] 4751 	jp	00117$
-   6414                    4752 00116$:
-                           4753 ;src/main.c:622: if(temp%2 == 0)
-   6414 C5            [11] 4754 	push	bc
-   6415 D5            [11] 4755 	push	de
-   6416 21 02 00      [10] 4756 	ld	hl,#0x0002
-   6419 E5            [11] 4757 	push	hl
-   641A 2A 08 76      [16] 4758 	ld	hl,(_temp)
-   641D E5            [11] 4759 	push	hl
-   641E CD 16 74      [17] 4760 	call	__modsint
-   6421 F1            [10] 4761 	pop	af
-   6422 F1            [10] 4762 	pop	af
-   6423 D1            [10] 4763 	pop	de
-   6424 C1            [10] 4764 	pop	bc
-   6425 7C            [ 4] 4765 	ld	a,h
-   6426 B5            [ 4] 4766 	or	a,l
-   6427 C2 CA 64      [10] 4767 	jp	NZ,00117$
-                           4768 ;src/main.c:623: if(*pursue >= 1){
-   642A 0A            [ 7] 4769 	ld	a,(bc)
-   642B 67            [ 4] 4770 	ld	h,a
-                           4771 ;src/main.c:625: if(*seenX == *x && *seenY == *y)
-   642C DD 7E 04      [19] 4772 	ld	a,4 (ix)
-   642F DD 77 F8      [19] 4773 	ld	-8 (ix),a
-   6432 DD 7E 05      [19] 4774 	ld	a,5 (ix)
-   6435 DD 77 F9      [19] 4775 	ld	-7 (ix),a
-   6438 DD 7E 06      [19] 4776 	ld	a,6 (ix)
-   643B DD 77 FC      [19] 4777 	ld	-4 (ix),a
-   643E DD 7E 07      [19] 4778 	ld	a,7 (ix)
-   6441 DD 77 FD      [19] 4779 	ld	-3 (ix),a
-                           4780 ;src/main.c:623: if(*pursue >= 1){
-   6444 7C            [ 4] 4781 	ld	a,h
-   6445 D6 01         [ 7] 4782 	sub	a, #0x01
-   6447 38 5B         [12] 4783 	jr	C,00111$
-                           4784 ;src/main.c:624: followPlayer(px,py,x,y,*seenX,*seenY,room);
-   6449 DD 6E FA      [19] 4785 	ld	l,-6 (ix)
-   644C DD 66 FB      [19] 4786 	ld	h,-5 (ix)
-   644F 56            [ 7] 4787 	ld	d,(hl)
-   6450 DD 6E FE      [19] 4788 	ld	l,-2 (ix)
-   6453 DD 66 FF      [19] 4789 	ld	h,-1 (ix)
-   6456 5E            [ 7] 4790 	ld	e,(hl)
-   6457 C5            [11] 4791 	push	bc
-   6458 DD 7E 0E      [19] 4792 	ld	a,14 (ix)
-   645B F5            [11] 4793 	push	af
-   645C 33            [ 6] 4794 	inc	sp
-   645D D5            [11] 4795 	push	de
-   645E DD 6E 06      [19] 4796 	ld	l,6 (ix)
-   6461 DD 66 07      [19] 4797 	ld	h,7 (ix)
-   6464 E5            [11] 4798 	push	hl
-   6465 DD 6E 04      [19] 4799 	ld	l,4 (ix)
-   6468 DD 66 05      [19] 4800 	ld	h,5 (ix)
-   646B E5            [11] 4801 	push	hl
-   646C DD 66 10      [19] 4802 	ld	h,16 (ix)
-   646F DD 6E 0F      [19] 4803 	ld	l,15 (ix)
-   6472 E5            [11] 4804 	push	hl
-   6473 CD 0D 5E      [17] 4805 	call	_followPlayer
-   6476 21 09 00      [10] 4806 	ld	hl,#9
-   6479 39            [11] 4807 	add	hl,sp
-   647A F9            [ 6] 4808 	ld	sp,hl
-   647B C1            [10] 4809 	pop	bc
-                           4810 ;src/main.c:625: if(*seenX == *x && *seenY == *y)
-   647C DD 6E FE      [19] 4811 	ld	l,-2 (ix)
-   647F DD 66 FF      [19] 4812 	ld	h,-1 (ix)
-   6482 56            [ 7] 4813 	ld	d,(hl)
-   6483 DD 6E F8      [19] 4814 	ld	l,-8 (ix)
-   6486 DD 66 F9      [19] 4815 	ld	h,-7 (ix)
-   6489 5E            [ 7] 4816 	ld	e,(hl)
-   648A 7A            [ 4] 4817 	ld	a,d
-   648B 93            [ 4] 4818 	sub	a, e
-   648C 20 3C         [12] 4819 	jr	NZ,00117$
-   648E DD 6E FA      [19] 4820 	ld	l,-6 (ix)
-   6491 DD 66 FB      [19] 4821 	ld	h,-5 (ix)
-   6494 56            [ 7] 4822 	ld	d,(hl)
-   6495 DD 6E FC      [19] 4823 	ld	l,-4 (ix)
-   6498 DD 66 FD      [19] 4824 	ld	h,-3 (ix)
-   649B 5E            [ 7] 4825 	ld	e,(hl)
-   649C 7A            [ 4] 4826 	ld	a,d
-   649D 93            [ 4] 4827 	sub	a, e
-   649E 20 2A         [12] 4828 	jr	NZ,00117$
-                           4829 ;src/main.c:626: *pursue = 0;
-   64A0 AF            [ 4] 4830 	xor	a, a
-   64A1 02            [ 7] 4831 	ld	(bc),a
-   64A2 18 26         [12] 4832 	jr	00117$
-   64A4                    4833 00111$:
-                           4834 ;src/main.c:628: patrol(dir[0],lx,ly,&x[0],&y[0],room);
-   64A4 1A            [ 7] 4835 	ld	a,(de)
-   64A5 57            [ 4] 4836 	ld	d,a
-   64A6 DD 7E 0E      [19] 4837 	ld	a,14 (ix)
-   64A9 F5            [11] 4838 	push	af
-   64AA 33            [ 6] 4839 	inc	sp
-   64AB DD 6E FC      [19] 4840 	ld	l,-4 (ix)
-   64AE DD 66 FD      [19] 4841 	ld	h,-3 (ix)
-   64B1 E5            [11] 4842 	push	hl
-   64B2 DD 6E F8      [19] 4843 	ld	l,-8 (ix)
-   64B5 DD 66 F9      [19] 4844 	ld	h,-7 (ix)
-   64B8 E5            [11] 4845 	push	hl
-   64B9 DD 66 09      [19] 4846 	ld	h,9 (ix)
-   64BC DD 6E 08      [19] 4847 	ld	l,8 (ix)
-   64BF E5            [11] 4848 	push	hl
-   64C0 D5            [11] 4849 	push	de
-   64C1 33            [ 6] 4850 	inc	sp
-   64C2 CD 54 61      [17] 4851 	call	_patrol
-   64C5 21 08 00      [10] 4852 	ld	hl,#8
-   64C8 39            [11] 4853 	add	hl,sp
-   64C9 F9            [ 6] 4854 	ld	sp,hl
-   64CA                    4855 00117$:
-                           4856 ;src/main.c:631: if((detectPlayerRoom(lx,ly) != detectPlayerRoom(px,py)) && pursue != 0){
-   64CA DD 66 09      [19] 4857 	ld	h,9 (ix)
-   64CD DD 6E 08      [19] 4858 	ld	l,8 (ix)
-   64D0 E5            [11] 4859 	push	hl
-   64D1 CD C0 46      [17] 4860 	call	_detectPlayerRoom
-   64D4 F1            [10] 4861 	pop	af
-   64D5 55            [ 4] 4862 	ld	d,l
-   64D6 D5            [11] 4863 	push	de
-   64D7 DD 66 10      [19] 4864 	ld	h,16 (ix)
-   64DA DD 6E 0F      [19] 4865 	ld	l,15 (ix)
-   64DD E5            [11] 4866 	push	hl
-   64DE CD C0 46      [17] 4867 	call	_detectPlayerRoom
-   64E1 F1            [10] 4868 	pop	af
-   64E2 45            [ 4] 4869 	ld	b,l
-   64E3 D1            [10] 4870 	pop	de
-   64E4 7A            [ 4] 4871 	ld	a,d
-   64E5 90            [ 4] 4872 	sub	a, b
-   64E6 28 1C         [12] 4873 	jr	Z,00119$
-   64E8 DD 7E 18      [19] 4874 	ld	a,24 (ix)
-   64EB DD B6 17      [19] 4875 	or	a,23 (ix)
-   64EE 28 14         [12] 4876 	jr	Z,00119$
-                           4877 ;src/main.c:632: *seenX = px;
-   64F0 DD 6E FE      [19] 4878 	ld	l,-2 (ix)
-   64F3 DD 66 FF      [19] 4879 	ld	h,-1 (ix)
-   64F6 DD 7E 0F      [19] 4880 	ld	a,15 (ix)
-   64F9 77            [ 7] 4881 	ld	(hl),a
-                           4882 ;src/main.c:633: *seenY = py;
-   64FA DD 6E FA      [19] 4883 	ld	l,-6 (ix)
-   64FD DD 66 FB      [19] 4884 	ld	h,-5 (ix)
-   6500 DD 7E 10      [19] 4885 	ld	a,16 (ix)
-   6503 77            [ 7] 4886 	ld	(hl),a
-   6504                    4887 00119$:
-                           4888 ;src/main.c:635: temp += 1;
-   6504 21 08 76      [10] 4889 	ld	hl, #_temp+0
-   6507 34            [11] 4890 	inc	(hl)
-   6508 20 04         [12] 4891 	jr	NZ,00166$
-   650A 21 09 76      [10] 4892 	ld	hl, #_temp+1
-   650D 34            [11] 4893 	inc	(hl)
-   650E                    4894 00166$:
-   650E DD F9         [10] 4895 	ld	sp, ix
-   6510 DD E1         [14] 4896 	pop	ix
-   6512 C9            [10] 4897 	ret
-                           4898 ;src/main.c:652: void game(){
-                           4899 ;	---------------------------------
-                           4900 ; Function game
-                           4901 ; ---------------------------------
-   6513                    4902 _game::
-   6513 DD E5         [15] 4903 	push	ix
-   6515 DD 21 00 00   [14] 4904 	ld	ix,#0
-   6519 DD 39         [15] 4905 	add	ix,sp
-   651B 21 7A FF      [10] 4906 	ld	hl,#-134
-   651E 39            [11] 4907 	add	hl,sp
-   651F F9            [ 6] 4908 	ld	sp,hl
-                           4909 ;src/main.c:653: TPlayer p = {0,80,0,80,gladis_quieto_dcha,3,6,4,16,4,20,20,3};
-   6520 21 10 00      [10] 4910 	ld	hl,#0x0010
-   6523 39            [11] 4911 	add	hl,sp
-   6524 36 00         [10] 4912 	ld	(hl),#0x00
-   6526 21 10 00      [10] 4913 	ld	hl,#0x0010
-   6529 39            [11] 4914 	add	hl,sp
-   652A DD 75 EE      [19] 4915 	ld	-18 (ix),l
-   652D DD 74 EF      [19] 4916 	ld	-17 (ix),h
-   6530 DD 7E EE      [19] 4917 	ld	a,-18 (ix)
-   6533 C6 01         [ 7] 4918 	add	a, #0x01
-   6535 DD 77 BC      [19] 4919 	ld	-68 (ix),a
-   6538 DD 7E EF      [19] 4920 	ld	a,-17 (ix)
-   653B CE 00         [ 7] 4921 	adc	a, #0x00
-   653D DD 77 BD      [19] 4922 	ld	-67 (ix),a
-   6540 DD 6E BC      [19] 4923 	ld	l,-68 (ix)
-   6543 DD 66 BD      [19] 4924 	ld	h,-67 (ix)
-   6546 36 50         [10] 4925 	ld	(hl),#0x50
-   6548 DD 7E EE      [19] 4926 	ld	a,-18 (ix)
-   654B C6 02         [ 7] 4927 	add	a, #0x02
-   654D DD 77 AD      [19] 4928 	ld	-83 (ix),a
-   6550 DD 7E EF      [19] 4929 	ld	a,-17 (ix)
-   6553 CE 00         [ 7] 4930 	adc	a, #0x00
-   6555 DD 77 AE      [19] 4931 	ld	-82 (ix),a
-   6558 DD 6E AD      [19] 4932 	ld	l,-83 (ix)
-   655B DD 66 AE      [19] 4933 	ld	h,-82 (ix)
-   655E 36 00         [10] 4934 	ld	(hl),#0x00
-   6560 DD 7E EE      [19] 4935 	ld	a,-18 (ix)
-   6563 C6 03         [ 7] 4936 	add	a, #0x03
-   6565 DD 77 BE      [19] 4937 	ld	-66 (ix),a
-   6568 DD 7E EF      [19] 4938 	ld	a,-17 (ix)
-   656B CE 00         [ 7] 4939 	adc	a, #0x00
-   656D DD 77 BF      [19] 4940 	ld	-65 (ix),a
-   6570 DD 6E BE      [19] 4941 	ld	l,-66 (ix)
-   6573 DD 66 BF      [19] 4942 	ld	h,-65 (ix)
-   6576 36 50         [10] 4943 	ld	(hl),#0x50
-   6578 DD 7E EE      [19] 4944 	ld	a,-18 (ix)
-   657B C6 04         [ 7] 4945 	add	a, #0x04
-   657D DD 77 B6      [19] 4946 	ld	-74 (ix),a
-   6580 DD 7E EF      [19] 4947 	ld	a,-17 (ix)
-   6583 CE 00         [ 7] 4948 	adc	a, #0x00
-   6585 DD 77 B7      [19] 4949 	ld	-73 (ix),a
-   6588 DD 6E B6      [19] 4950 	ld	l,-74 (ix)
-   658B DD 66 B7      [19] 4951 	ld	h,-73 (ix)
-   658E 36 00         [10] 4952 	ld	(hl),#<(_gladis_quieto_dcha)
-   6590 23            [ 6] 4953 	inc	hl
-   6591 36 40         [10] 4954 	ld	(hl),#>(_gladis_quieto_dcha)
-   6593 DD 7E EE      [19] 4955 	ld	a,-18 (ix)
-   6596 C6 06         [ 7] 4956 	add	a, #0x06
-   6598 DD 77 AB      [19] 4957 	ld	-85 (ix),a
-   659B DD 7E EF      [19] 4958 	ld	a,-17 (ix)
-   659E CE 00         [ 7] 4959 	adc	a, #0x00
-   65A0 DD 77 AC      [19] 4960 	ld	-84 (ix),a
-   65A3 DD 6E AB      [19] 4961 	ld	l,-85 (ix)
-   65A6 DD 66 AC      [19] 4962 	ld	h,-84 (ix)
-   65A9 36 03         [10] 4963 	ld	(hl),#0x03
-   65AB DD 7E EE      [19] 4964 	ld	a,-18 (ix)
-   65AE C6 07         [ 7] 4965 	add	a, #0x07
-   65B0 DD 77 D1      [19] 4966 	ld	-47 (ix),a
-   65B3 DD 7E EF      [19] 4967 	ld	a,-17 (ix)
-   65B6 CE 00         [ 7] 4968 	adc	a, #0x00
-   65B8 DD 77 D2      [19] 4969 	ld	-46 (ix),a
-   65BB DD 6E D1      [19] 4970 	ld	l,-47 (ix)
-   65BE DD 66 D2      [19] 4971 	ld	h,-46 (ix)
-   65C1 36 06         [10] 4972 	ld	(hl),#0x06
-   65C3 DD 7E EE      [19] 4973 	ld	a,-18 (ix)
-   65C6 C6 08         [ 7] 4974 	add	a, #0x08
-   65C8 DD 77 CF      [19] 4975 	ld	-49 (ix),a
-   65CB DD 7E EF      [19] 4976 	ld	a,-17 (ix)
-   65CE CE 00         [ 7] 4977 	adc	a, #0x00
-   65D0 DD 77 D0      [19] 4978 	ld	-48 (ix),a
-   65D3 DD 6E CF      [19] 4979 	ld	l,-49 (ix)
-   65D6 DD 66 D0      [19] 4980 	ld	h,-48 (ix)
-   65D9 36 04         [10] 4981 	ld	(hl),#0x04
-   65DB DD 7E EE      [19] 4982 	ld	a,-18 (ix)
-   65DE C6 09         [ 7] 4983 	add	a, #0x09
-   65E0 DD 77 A9      [19] 4984 	ld	-87 (ix),a
-   65E3 DD 7E EF      [19] 4985 	ld	a,-17 (ix)
-   65E6 CE 00         [ 7] 4986 	adc	a, #0x00
-   65E8 DD 77 AA      [19] 4987 	ld	-86 (ix),a
-   65EB DD 6E A9      [19] 4988 	ld	l,-87 (ix)
-   65EE DD 66 AA      [19] 4989 	ld	h,-86 (ix)
-   65F1 36 10         [10] 4990 	ld	(hl),#0x10
-   65F3 DD 7E EE      [19] 4991 	ld	a,-18 (ix)
-   65F6 C6 0A         [ 7] 4992 	add	a, #0x0A
-   65F8 DD 77 BA      [19] 4993 	ld	-70 (ix),a
-   65FB DD 7E EF      [19] 4994 	ld	a,-17 (ix)
-   65FE CE 00         [ 7] 4995 	adc	a, #0x00
-   6600 DD 77 BB      [19] 4996 	ld	-69 (ix),a
-   6603 DD 6E BA      [19] 4997 	ld	l,-70 (ix)
-   6606 DD 66 BB      [19] 4998 	ld	h,-69 (ix)
-   6609 36 04         [10] 4999 	ld	(hl),#0x04
-   660B DD 7E EE      [19] 5000 	ld	a,-18 (ix)
-   660E C6 0B         [ 7] 5001 	add	a, #0x0B
-   6610 DD 77 B8      [19] 5002 	ld	-72 (ix),a
-   6613 DD 7E EF      [19] 5003 	ld	a,-17 (ix)
-   6616 CE 00         [ 7] 5004 	adc	a, #0x00
-   6618 DD 77 B9      [19] 5005 	ld	-71 (ix),a
-   661B DD 6E B8      [19] 5006 	ld	l,-72 (ix)
-   661E DD 66 B9      [19] 5007 	ld	h,-71 (ix)
-   6621 36 14         [10] 5008 	ld	(hl),#0x14
-   6623 DD 7E EE      [19] 5009 	ld	a,-18 (ix)
-   6626 C6 0C         [ 7] 5010 	add	a, #0x0C
-   6628 DD 77 FA      [19] 5011 	ld	-6 (ix),a
-   662B DD 7E EF      [19] 5012 	ld	a,-17 (ix)
-   662E CE 00         [ 7] 5013 	adc	a, #0x00
-   6630 DD 77 FB      [19] 5014 	ld	-5 (ix),a
-   6633 DD 6E FA      [19] 5015 	ld	l,-6 (ix)
-   6636 DD 66 FB      [19] 5016 	ld	h,-5 (ix)
-   6639 36 14         [10] 5017 	ld	(hl),#0x14
-   663B DD 7E EE      [19] 5018 	ld	a,-18 (ix)
-   663E C6 0D         [ 7] 5019 	add	a, #0x0D
-   6640 DD 77 F8      [19] 5020 	ld	-8 (ix),a
-   6643 DD 7E EF      [19] 5021 	ld	a,-17 (ix)
-   6646 CE 00         [ 7] 5022 	adc	a, #0x00
-   6648 DD 77 F9      [19] 5023 	ld	-7 (ix),a
-   664B DD 6E F8      [19] 5024 	ld	l,-8 (ix)
-   664E DD 66 F9      [19] 5025 	ld	h,-7 (ix)
-   6651 36 03         [10] 5026 	ld	(hl),#0x03
-   6653 DD 7E EE      [19] 5027 	ld	a,-18 (ix)
-   6656 C6 0E         [ 7] 5028 	add	a, #0x0E
-   6658 6F            [ 4] 5029 	ld	l,a
-   6659 DD 7E EF      [19] 5030 	ld	a,-17 (ix)
-   665C CE 00         [ 7] 5031 	adc	a, #0x00
-   665E 67            [ 4] 5032 	ld	h,a
-   665F 36 00         [10] 5033 	ld	(hl),#0x00
-   6661 DD 7E EE      [19] 5034 	ld	a,-18 (ix)
-   6664 C6 0F         [ 7] 5035 	add	a, #0x0F
-   6666 6F            [ 4] 5036 	ld	l,a
-   6667 DD 7E EF      [19] 5037 	ld	a,-17 (ix)
-   666A CE 00         [ 7] 5038 	adc	a, #0x00
-   666C 67            [ 4] 5039 	ld	h,a
-   666D 36 00         [10] 5040 	ld	(hl),#0x00
-                           5041 ;src/main.c:654: TEnemy e = {52,80,52,80,52,80,chacho_dcha,3,2,3,3,0,0,0};
-   666F 21 00 00      [10] 5042 	ld	hl,#0x0000
-   6672 39            [11] 5043 	add	hl,sp
-   6673 36 34         [10] 5044 	ld	(hl),#0x34
-   6675 21 00 00      [10] 5045 	ld	hl,#0x0000
-   6678 39            [11] 5046 	add	hl,sp
-   6679 DD 75 C2      [19] 5047 	ld	-62 (ix),l
-   667C DD 74 C3      [19] 5048 	ld	-61 (ix),h
-   667F DD 7E C2      [19] 5049 	ld	a,-62 (ix)
-   6682 C6 01         [ 7] 5050 	add	a, #0x01
-   6684 DD 77 C0      [19] 5051 	ld	-64 (ix),a
-   6687 DD 7E C3      [19] 5052 	ld	a,-61 (ix)
-   668A CE 00         [ 7] 5053 	adc	a, #0x00
-   668C DD 77 C1      [19] 5054 	ld	-63 (ix),a
-   668F DD 6E C0      [19] 5055 	ld	l,-64 (ix)
-   6692 DD 66 C1      [19] 5056 	ld	h,-63 (ix)
-   6695 36 50         [10] 5057 	ld	(hl),#0x50
-   6697 DD 7E C2      [19] 5058 	ld	a,-62 (ix)
-   669A C6 02         [ 7] 5059 	add	a, #0x02
-   669C DD 77 DC      [19] 5060 	ld	-36 (ix),a
-   669F DD 7E C3      [19] 5061 	ld	a,-61 (ix)
-   66A2 CE 00         [ 7] 5062 	adc	a, #0x00
-   66A4 DD 77 DD      [19] 5063 	ld	-35 (ix),a
-   66A7 DD 6E DC      [19] 5064 	ld	l,-36 (ix)
-   66AA DD 66 DD      [19] 5065 	ld	h,-35 (ix)
-   66AD 36 34         [10] 5066 	ld	(hl),#0x34
-   66AF DD 7E C2      [19] 5067 	ld	a,-62 (ix)
-   66B2 C6 03         [ 7] 5068 	add	a, #0x03
-   66B4 DD 77 DA      [19] 5069 	ld	-38 (ix),a
-   66B7 DD 7E C3      [19] 5070 	ld	a,-61 (ix)
-   66BA CE 00         [ 7] 5071 	adc	a, #0x00
-   66BC DD 77 DB      [19] 5072 	ld	-37 (ix),a
-   66BF DD 6E DA      [19] 5073 	ld	l,-38 (ix)
-   66C2 DD 66 DB      [19] 5074 	ld	h,-37 (ix)
-   66C5 36 50         [10] 5075 	ld	(hl),#0x50
-   66C7 DD 7E C2      [19] 5076 	ld	a,-62 (ix)
-   66CA C6 04         [ 7] 5077 	add	a, #0x04
-   66CC 6F            [ 4] 5078 	ld	l,a
-   66CD DD 7E C3      [19] 5079 	ld	a,-61 (ix)
-   66D0 CE 00         [ 7] 5080 	adc	a, #0x00
-   66D2 67            [ 4] 5081 	ld	h,a
-   66D3 36 34         [10] 5082 	ld	(hl),#0x34
-   66D5 DD 7E C2      [19] 5083 	ld	a,-62 (ix)
-   66D8 C6 05         [ 7] 5084 	add	a, #0x05
-   66DA 6F            [ 4] 5085 	ld	l,a
-   66DB DD 7E C3      [19] 5086 	ld	a,-61 (ix)
-   66DE CE 00         [ 7] 5087 	adc	a, #0x00
-   66E0 67            [ 4] 5088 	ld	h,a
-   66E1 36 50         [10] 5089 	ld	(hl),#0x50
-   66E3 DD 7E C2      [19] 5090 	ld	a,-62 (ix)
-   66E6 C6 06         [ 7] 5091 	add	a, #0x06
-   66E8 DD 77 FE      [19] 5092 	ld	-2 (ix),a
-   66EB DD 7E C3      [19] 5093 	ld	a,-61 (ix)
-   66EE CE 00         [ 7] 5094 	adc	a, #0x00
-   66F0 DD 77 FF      [19] 5095 	ld	-1 (ix),a
-   66F3 DD 6E FE      [19] 5096 	ld	l,-2 (ix)
-   66F6 DD 66 FF      [19] 5097 	ld	h,-1 (ix)
-   66F9 36 00         [10] 5098 	ld	(hl),#<(_chacho_dcha)
-   66FB 23            [ 6] 5099 	inc	hl
-   66FC 36 44         [10] 5100 	ld	(hl),#>(_chacho_dcha)
-   66FE DD 7E C2      [19] 5101 	ld	a,-62 (ix)
-   6701 C6 08         [ 7] 5102 	add	a, #0x08
-   6703 DD 77 FC      [19] 5103 	ld	-4 (ix),a
-   6706 DD 7E C3      [19] 5104 	ld	a,-61 (ix)
-   6709 CE 00         [ 7] 5105 	adc	a, #0x00
-   670B DD 77 FD      [19] 5106 	ld	-3 (ix),a
-   670E DD 6E FC      [19] 5107 	ld	l,-4 (ix)
-   6711 DD 66 FD      [19] 5108 	ld	h,-3 (ix)
-   6714 36 03         [10] 5109 	ld	(hl),#0x03
-   6716 DD 7E C2      [19] 5110 	ld	a,-62 (ix)
-   6719 C6 09         [ 7] 5111 	add	a, #0x09
-   671B DD 77 E4      [19] 5112 	ld	-28 (ix),a
-   671E DD 7E C3      [19] 5113 	ld	a,-61 (ix)
-   6721 CE 00         [ 7] 5114 	adc	a, #0x00
-   6723 DD 77 E5      [19] 5115 	ld	-27 (ix),a
-   6726 DD 6E E4      [19] 5116 	ld	l,-28 (ix)
-   6729 DD 66 E5      [19] 5117 	ld	h,-27 (ix)
-   672C 36 02         [10] 5118 	ld	(hl),#0x02
-   672E DD 7E C2      [19] 5119 	ld	a,-62 (ix)
-   6731 C6 0A         [ 7] 5120 	add	a, #0x0A
-   6733 6F            [ 4] 5121 	ld	l,a
-   6734 DD 7E C3      [19] 5122 	ld	a,-61 (ix)
-   6737 CE 00         [ 7] 5123 	adc	a, #0x00
-   6739 67            [ 4] 5124 	ld	h,a
-   673A 36 03         [10] 5125 	ld	(hl),#0x03
-   673C DD 7E C2      [19] 5126 	ld	a,-62 (ix)
-   673F C6 0B         [ 7] 5127 	add	a, #0x0B
-   6741 DD 77 E2      [19] 5128 	ld	-30 (ix),a
-   6744 DD 7E C3      [19] 5129 	ld	a,-61 (ix)
-   6747 CE 00         [ 7] 5130 	adc	a, #0x00
-   6749 DD 77 E3      [19] 5131 	ld	-29 (ix),a
-   674C DD 6E E2      [19] 5132 	ld	l,-30 (ix)
-   674F DD 66 E3      [19] 5133 	ld	h,-29 (ix)
-   6752 36 03         [10] 5134 	ld	(hl),#0x03
-   6754 DD 7E C2      [19] 5135 	ld	a,-62 (ix)
-   6757 C6 0C         [ 7] 5136 	add	a, #0x0C
-   6759 5F            [ 4] 5137 	ld	e,a
-   675A DD 7E C3      [19] 5138 	ld	a,-61 (ix)
-   675D CE 00         [ 7] 5139 	adc	a, #0x00
-   675F 57            [ 4] 5140 	ld	d,a
-   6760 AF            [ 4] 5141 	xor	a, a
-   6761 12            [ 7] 5142 	ld	(de),a
-   6762 DD 7E C2      [19] 5143 	ld	a,-62 (ix)
-   6765 C6 0D         [ 7] 5144 	add	a, #0x0D
-   6767 DD 77 E0      [19] 5145 	ld	-32 (ix),a
-   676A DD 7E C3      [19] 5146 	ld	a,-61 (ix)
-   676D CE 00         [ 7] 5147 	adc	a, #0x00
-   676F DD 77 E1      [19] 5148 	ld	-31 (ix),a
-   6772 DD 6E E0      [19] 5149 	ld	l,-32 (ix)
-   6775 DD 66 E1      [19] 5150 	ld	h,-31 (ix)
-   6778 36 00         [10] 5151 	ld	(hl),#0x00
-   677A DD 7E C2      [19] 5152 	ld	a,-62 (ix)
-   677D C6 0E         [ 7] 5153 	add	a, #0x0E
-   677F DD 77 DE      [19] 5154 	ld	-34 (ix),a
-   6782 DD 7E C3      [19] 5155 	ld	a,-61 (ix)
-   6785 CE 00         [ 7] 5156 	adc	a, #0x00
-   6787 DD 77 DF      [19] 5157 	ld	-33 (ix),a
-   678A DD 6E DE      [19] 5158 	ld	l,-34 (ix)
-   678D DD 66 DF      [19] 5159 	ld	h,-33 (ix)
-   6790 36 00         [10] 5160 	ld	(hl),#0x00
-                           5161 ;src/main.c:655: TNivel n = {0,0,0};
-   6792 21 22 00      [10] 5162 	ld	hl,#0x0022
-   6795 39            [11] 5163 	add	hl,sp
-   6796 36 00         [10] 5164 	ld	(hl),#0x00
-   6798 21 22 00      [10] 5165 	ld	hl,#0x0022
-   679B 39            [11] 5166 	add	hl,sp
-   679C 4D            [ 4] 5167 	ld	c,l
-   679D 44            [ 4] 5168 	ld	b,h
-   679E 21 01 00      [10] 5169 	ld	hl,#0x0001
-   67A1 09            [11] 5170 	add	hl,bc
-   67A2 DD 75 D8      [19] 5171 	ld	-40 (ix),l
-   67A5 DD 74 D9      [19] 5172 	ld	-39 (ix),h
-   67A8 DD 6E D8      [19] 5173 	ld	l,-40 (ix)
-   67AB DD 66 D9      [19] 5174 	ld	h,-39 (ix)
-   67AE 36 00         [10] 5175 	ld	(hl),#0x00
-   67B0 03            [ 6] 5176 	inc	bc
-   67B1 03            [ 6] 5177 	inc	bc
-   67B2 DD 71 D6      [19] 5178 	ld	-42 (ix),c
-   67B5 DD 70 D7      [19] 5179 	ld	-41 (ix),b
-   67B8 DD 6E D6      [19] 5180 	ld	l,-42 (ix)
-   67BB DD 66 D7      [19] 5181 	ld	h,-41 (ix)
-   67BE 36 00         [10] 5182 	ld	(hl),#0x00
-                           5183 ;src/main.c:661: u8 finish = 0,i=1,arrow=0,following = 0;
-   67C0 DD 36 9A 00   [19] 5184 	ld	-102 (ix),#0x00
-   67C4 DD 36 89 00   [19] 5185 	ld	-119 (ix),#0x00
-   67C8 DD 36 9B 00   [19] 5186 	ld	-101 (ix),#0x00
-                           5187 ;src/main.c:663: u8 bound = 0;
-   67CC DD 36 D5 00   [19] 5188 	ld	-43 (ix),#0x00
-                           5189 ;src/main.c:664: temp = 0;
-   67D0 21 00 00      [10] 5190 	ld	hl,#0x0000
-   67D3 22 08 76      [16] 5191 	ld	(_temp),hl
-                           5192 ;src/main.c:666: cpct_clearScreen(0);
-   67D6 D5            [11] 5193 	push	de
-   67D7 26 40         [ 7] 5194 	ld	h, #0x40
-   67D9 E5            [11] 5195 	push	hl
-   67DA AF            [ 4] 5196 	xor	a, a
-   67DB F5            [11] 5197 	push	af
-   67DC 33            [ 6] 5198 	inc	sp
-   67DD 26 C0         [ 7] 5199 	ld	h, #0xC0
-   67DF E5            [11] 5200 	push	hl
-   67E0 CD 2F 73      [17] 5201 	call	_cpct_memset
-   67E3 3E 01         [ 7] 5202 	ld	a,#0x01
-   67E5 F5            [11] 5203 	push	af
-   67E6 33            [ 6] 5204 	inc	sp
-   67E7 CD FF 4C      [17] 5205 	call	_drawMap
-   67EA 33            [ 6] 5206 	inc	sp
-   67EB D1            [10] 5207 	pop	de
-                           5208 ;src/main.c:671: while (1){
-   67EC DD 73 D3      [19] 5209 	ld	-45 (ix),e
-   67EF DD 72 D4      [19] 5210 	ld	-44 (ix),d
-   67F2 DD 7E C0      [19] 5211 	ld	a,-64 (ix)
-   67F5 DD 77 F6      [19] 5212 	ld	-10 (ix),a
-   67F8 DD 7E C1      [19] 5213 	ld	a,-63 (ix)
-   67FB DD 77 F7      [19] 5214 	ld	-9 (ix),a
-   67FE DD 7E C2      [19] 5215 	ld	a,-62 (ix)
-   6801 DD 77 F4      [19] 5216 	ld	-12 (ix),a
-   6804 DD 7E C3      [19] 5217 	ld	a,-61 (ix)
-   6807 DD 77 F5      [19] 5218 	ld	-11 (ix),a
-   680A DD 7E F8      [19] 5219 	ld	a,-8 (ix)
-   680D DD 77 F2      [19] 5220 	ld	-14 (ix),a
-   6810 DD 7E F9      [19] 5221 	ld	a,-7 (ix)
-   6813 DD 77 F3      [19] 5222 	ld	-13 (ix),a
-   6816 DD 7E CF      [19] 5223 	ld	a,-49 (ix)
-   6819 DD 77 F0      [19] 5224 	ld	-16 (ix),a
-   681C DD 7E D0      [19] 5225 	ld	a,-48 (ix)
-   681F DD 77 F1      [19] 5226 	ld	-15 (ix),a
-   6822 DD 7E B8      [19] 5227 	ld	a,-72 (ix)
-   6825 DD 77 EC      [19] 5228 	ld	-20 (ix),a
-   6828 DD 7E B9      [19] 5229 	ld	a,-71 (ix)
-   682B DD 77 ED      [19] 5230 	ld	-19 (ix),a
-   682E DD 7E BC      [19] 5231 	ld	a,-68 (ix)
-   6831 DD 77 EA      [19] 5232 	ld	-22 (ix),a
-   6834 DD 7E BD      [19] 5233 	ld	a,-67 (ix)
-   6837 DD 77 EB      [19] 5234 	ld	-21 (ix),a
-   683A DD 7E EE      [19] 5235 	ld	a,-18 (ix)
-   683D DD 77 E8      [19] 5236 	ld	-24 (ix),a
-   6840 DD 7E EF      [19] 5237 	ld	a,-17 (ix)
-   6843 DD 77 E9      [19] 5238 	ld	-23 (ix),a
-   6846 DD 7E D6      [19] 5239 	ld	a,-42 (ix)
-   6849 DD 77 E6      [19] 5240 	ld	-26 (ix),a
-   684C DD 7E D7      [19] 5241 	ld	a,-41 (ix)
-   684F DD 77 E7      [19] 5242 	ld	-25 (ix),a
-   6852 DD 7E D8      [19] 5243 	ld	a,-40 (ix)
-   6855 DD 77 A7      [19] 5244 	ld	-89 (ix),a
-   6858 DD 7E D9      [19] 5245 	ld	a,-39 (ix)
-   685B DD 77 A8      [19] 5246 	ld	-88 (ix),a
-   685E DD 7E F8      [19] 5247 	ld	a,-8 (ix)
-   6861 DD 77 A5      [19] 5248 	ld	-91 (ix),a
-   6864 DD 7E F9      [19] 5249 	ld	a,-7 (ix)
-   6867 DD 77 A6      [19] 5250 	ld	-90 (ix),a
-   686A DD 7E AB      [19] 5251 	ld	a,-85 (ix)
-   686D DD 77 A3      [19] 5252 	ld	-93 (ix),a
-   6870 DD 7E AC      [19] 5253 	ld	a,-84 (ix)
-   6873 DD 77 A4      [19] 5254 	ld	-92 (ix),a
-   6876 DD 7E BC      [19] 5255 	ld	a,-68 (ix)
-   6879 DD 77 A1      [19] 5256 	ld	-95 (ix),a
-   687C DD 7E BD      [19] 5257 	ld	a,-67 (ix)
-   687F DD 77 A2      [19] 5258 	ld	-94 (ix),a
-   6882 DD 7E EE      [19] 5259 	ld	a,-18 (ix)
-   6885 DD 77 9F      [19] 5260 	ld	-97 (ix),a
-   6888 DD 7E EF      [19] 5261 	ld	a,-17 (ix)
-   688B DD 77 A0      [19] 5262 	ld	-96 (ix),a
-   688E                    5263 00144$:
-                           5264 ;src/main.c:674: cpct_waitVSYNC();
-   688E CD 15 73      [17] 5265 	call	_cpct_waitVSYNC
-                           5266 ;src/main.c:677: erasePlayer(p.lx,p.ly,0);
-   6891 DD 6E BE      [19] 5267 	ld	l,-66 (ix)
-   6894 DD 66 BF      [19] 5268 	ld	h,-65 (ix)
-   6897 46            [ 7] 5269 	ld	b,(hl)
-   6898 DD 6E AD      [19] 5270 	ld	l,-83 (ix)
-   689B DD 66 AE      [19] 5271 	ld	h,-82 (ix)
-   689E 56            [ 7] 5272 	ld	d,(hl)
-   689F AF            [ 4] 5273 	xor	a, a
-   68A0 F5            [11] 5274 	push	af
-   68A1 33            [ 6] 5275 	inc	sp
-   68A2 4A            [ 4] 5276 	ld	c, d
-   68A3 C5            [11] 5277 	push	bc
-   68A4 CD 77 4F      [17] 5278 	call	_erasePlayer
-   68A7 F1            [10] 5279 	pop	af
-   68A8 33            [ 6] 5280 	inc	sp
-                           5281 ;src/main.c:678: erasePlayer(e.lx,e.ly,0);
-   68A9 DD 6E DA      [19] 5282 	ld	l,-38 (ix)
-   68AC DD 66 DB      [19] 5283 	ld	h,-37 (ix)
-   68AF 46            [ 7] 5284 	ld	b,(hl)
-   68B0 DD 6E DC      [19] 5285 	ld	l,-36 (ix)
-   68B3 DD 66 DD      [19] 5286 	ld	h,-35 (ix)
-   68B6 56            [ 7] 5287 	ld	d,(hl)
-   68B7 AF            [ 4] 5288 	xor	a, a
-   68B8 F5            [11] 5289 	push	af
-   68B9 33            [ 6] 5290 	inc	sp
-   68BA 4A            [ 4] 5291 	ld	c, d
-   68BB C5            [11] 5292 	push	bc
-   68BC CD 77 4F      [17] 5293 	call	_erasePlayer
-   68BF F1            [10] 5294 	pop	af
-   68C0 33            [ 6] 5295 	inc	sp
-                           5296 ;src/main.c:679: if(arrow == 1){
-   68C1 DD 7E 89      [19] 5297 	ld	a,-119 (ix)
-   68C4 3D            [ 4] 5298 	dec	a
-   68C5 20 37         [12] 5299 	jr	NZ,00108$
-                           5300 ;src/main.c:680: if(object.dir == 4 || object.dir == 6)
-   68C7 21 12 76      [10] 5301 	ld	hl, #(_object + 0x0007) + 0
-   68CA 5E            [ 7] 5302 	ld	e,(hl)
-                           5303 ;src/main.c:681: erasePlayer(object.lx,object.ly,2);
-   68CB 21 0E 76      [10] 5304 	ld	hl, #(_object + 0x0003) + 0
-   68CE 46            [ 7] 5305 	ld	b,(hl)
-   68CF 21 0D 76      [10] 5306 	ld	hl, #(_object + 0x0002) + 0
-   68D2 56            [ 7] 5307 	ld	d,(hl)
-                           5308 ;src/main.c:680: if(object.dir == 4 || object.dir == 6)
-   68D3 7B            [ 4] 5309 	ld	a,e
-   68D4 FE 04         [ 7] 5310 	cp	a,#0x04
-   68D6 28 04         [12] 5311 	jr	Z,00101$
-   68D8 D6 06         [ 7] 5312 	sub	a, #0x06
-   68DA 20 0D         [12] 5313 	jr	NZ,00102$
-   68DC                    5314 00101$:
-                           5315 ;src/main.c:681: erasePlayer(object.lx,object.ly,2);
-   68DC 3E 02         [ 7] 5316 	ld	a,#0x02
-   68DE F5            [11] 5317 	push	af
-   68DF 33            [ 6] 5318 	inc	sp
-   68E0 4A            [ 4] 5319 	ld	c, d
-   68E1 C5            [11] 5320 	push	bc
-   68E2 CD 77 4F      [17] 5321 	call	_erasePlayer
-   68E5 F1            [10] 5322 	pop	af
-   68E6 33            [ 6] 5323 	inc	sp
-   68E7 18 0B         [12] 5324 	jr	00103$
-   68E9                    5325 00102$:
-                           5326 ;src/main.c:683: erasePlayer(object.lx,object.ly,1);
-   68E9 3E 01         [ 7] 5327 	ld	a,#0x01
-   68EB F5            [11] 5328 	push	af
-   68EC 33            [ 6] 5329 	inc	sp
-   68ED 4A            [ 4] 5330 	ld	c, d
-   68EE C5            [11] 5331 	push	bc
-   68EF CD 77 4F      [17] 5332 	call	_erasePlayer
-   68F2 F1            [10] 5333 	pop	af
-   68F3 33            [ 6] 5334 	inc	sp
-   68F4                    5335 00103$:
-                           5336 ;src/main.c:684: if(bound == 1) arrow = 0;
-   68F4 DD 7E D5      [19] 5337 	ld	a,-43 (ix)
-   68F7 3D            [ 4] 5338 	dec	a
-   68F8 20 04         [12] 5339 	jr	NZ,00108$
-   68FA DD 36 89 00   [19] 5340 	ld	-119 (ix),#0x00
-   68FE                    5341 00108$:
-                           5342 ;src/main.c:688: drawPickUps(n.corazon,n.bullet);
-   68FE DD 6E D6      [19] 5343 	ld	l,-42 (ix)
-   6901 DD 66 D7      [19] 5344 	ld	h,-41 (ix)
-   6904 46            [ 7] 5345 	ld	b,(hl)
-   6905 DD 6E D8      [19] 5346 	ld	l,-40 (ix)
-   6908 DD 66 D9      [19] 5347 	ld	h,-39 (ix)
-   690B 4E            [ 7] 5348 	ld	c, (hl)
-   690C C5            [11] 5349 	push	bc
-   690D CD FE 50      [17] 5350 	call	_drawPickUps
-   6910 F1            [10] 5351 	pop	af
-                           5352 ;src/main.c:691: drawPlayer(p.x,p.y,p.sprite,p.life,0);
-   6911 DD 6E AB      [19] 5353 	ld	l,-85 (ix)
-   6914 DD 66 AC      [19] 5354 	ld	h,-84 (ix)
-   6917 46            [ 7] 5355 	ld	b,(hl)
-   6918 DD 6E B6      [19] 5356 	ld	l,-74 (ix)
-   691B DD 66 B7      [19] 5357 	ld	h,-73 (ix)
-   691E 5E            [ 7] 5358 	ld	e,(hl)
-   691F 23            [ 6] 5359 	inc	hl
-   6920 4E            [ 7] 5360 	ld	c,(hl)
-   6921 DD 6E BC      [19] 5361 	ld	l,-68 (ix)
-   6924 DD 66 BD      [19] 5362 	ld	h,-67 (ix)
-   6927 7E            [ 7] 5363 	ld	a,(hl)
-   6928 DD 77 CE      [19] 5364 	ld	-50 (ix),a
-   692B DD 6E EE      [19] 5365 	ld	l,-18 (ix)
-   692E DD 66 EF      [19] 5366 	ld	h,-17 (ix)
-   6931 56            [ 7] 5367 	ld	d,(hl)
-   6932 AF            [ 4] 5368 	xor	a, a
-   6933 F5            [11] 5369 	push	af
-   6934 33            [ 6] 5370 	inc	sp
-   6935 C5            [11] 5371 	push	bc
-   6936 33            [ 6] 5372 	inc	sp
-   6937 6B            [ 4] 5373 	ld	l, e
-   6938 61            [ 4] 5374 	ld	h, c
-   6939 E5            [11] 5375 	push	hl
-   693A DD 7E CE      [19] 5376 	ld	a,-50 (ix)
-   693D F5            [11] 5377 	push	af
-   693E 33            [ 6] 5378 	inc	sp
-   693F D5            [11] 5379 	push	de
-   6940 33            [ 6] 5380 	inc	sp
-   6941 CD 17 4F      [17] 5381 	call	_drawPlayer
-   6944 21 06 00      [10] 5382 	ld	hl,#6
-   6947 39            [11] 5383 	add	hl,sp
-   6948 F9            [ 6] 5384 	ld	sp,hl
-                           5385 ;src/main.c:692: if(e.life > 0) drawPlayer(e.x,e.y,e.sprite,e.life,0);
-   6949 DD 6E FC      [19] 5386 	ld	l,-4 (ix)
-   694C DD 66 FD      [19] 5387 	ld	h,-3 (ix)
-   694F 4E            [ 7] 5388 	ld	c,(hl)
-   6950 79            [ 4] 5389 	ld	a,c
-   6951 B7            [ 4] 5390 	or	a, a
-   6952 28 30         [12] 5391 	jr	Z,00110$
-   6954 DD 6E FE      [19] 5392 	ld	l,-2 (ix)
-   6957 DD 66 FF      [19] 5393 	ld	h,-1 (ix)
-   695A 5E            [ 7] 5394 	ld	e,(hl)
-   695B 23            [ 6] 5395 	inc	hl
-   695C 56            [ 7] 5396 	ld	d,(hl)
-   695D DD 6E C0      [19] 5397 	ld	l,-64 (ix)
-   6960 DD 66 C1      [19] 5398 	ld	h,-63 (ix)
-   6963 7E            [ 7] 5399 	ld	a,(hl)
-   6964 DD 77 CE      [19] 5400 	ld	-50 (ix),a
-   6967 DD 6E C2      [19] 5401 	ld	l,-62 (ix)
-   696A DD 66 C3      [19] 5402 	ld	h,-61 (ix)
-   696D 46            [ 7] 5403 	ld	b,(hl)
-   696E AF            [ 4] 5404 	xor	a, a
-   696F F5            [11] 5405 	push	af
-   6970 33            [ 6] 5406 	inc	sp
-   6971 79            [ 4] 5407 	ld	a,c
-   6972 F5            [11] 5408 	push	af
-   6973 33            [ 6] 5409 	inc	sp
-   6974 D5            [11] 5410 	push	de
-   6975 DD 7E CE      [19] 5411 	ld	a,-50 (ix)
-   6978 F5            [11] 5412 	push	af
-   6979 33            [ 6] 5413 	inc	sp
-   697A C5            [11] 5414 	push	bc
-   697B 33            [ 6] 5415 	inc	sp
-   697C CD 17 4F      [17] 5416 	call	_drawPlayer
-   697F 21 06 00      [10] 5417 	ld	hl,#6
-   6982 39            [11] 5418 	add	hl,sp
-   6983 F9            [ 6] 5419 	ld	sp,hl
-   6984                    5420 00110$:
-                           5421 ;src/main.c:694: if(arrow == 1){
-   6984 DD 7E 89      [19] 5422 	ld	a,-119 (ix)
-   6987 3D            [ 4] 5423 	dec	a
-   6988 20 6A         [12] 5424 	jr	NZ,00119$
-                           5425 ;src/main.c:695: if(object.dir == 4 || object.dir == 6)
-   698A 21 12 76      [10] 5426 	ld	hl, #(_object + 0x0007) + 0
-   698D 66            [ 7] 5427 	ld	h,(hl)
-   698E 7C            [ 4] 5428 	ld	a,h
-   698F FE 04         [ 7] 5429 	cp	a,#0x04
-   6991 28 04         [12] 5430 	jr	Z,00114$
-   6993 D6 06         [ 7] 5431 	sub	a, #0x06
-   6995 20 2B         [12] 5432 	jr	NZ,00115$
-   6997                    5433 00114$:
-                           5434 ;src/main.c:696: drawPlayer(object.x,object.y,object.sprite,object.vivo,2);
-   6997 21 11 76      [10] 5435 	ld	hl, #(_object + 0x0006) + 0
-   699A 5E            [ 7] 5436 	ld	e,(hl)
-   699B ED 4B 0F 76   [20] 5437 	ld	bc, (#(_object + 0x0004) + 0)
-   699F 3A 0C 76      [13] 5438 	ld	a,(#(_object + 0x0001) + 0)
-   69A2 DD 77 CE      [19] 5439 	ld	-50 (ix),a
-   69A5 21 0B 76      [10] 5440 	ld	hl, #_object + 0
-   69A8 56            [ 7] 5441 	ld	d,(hl)
-   69A9 3E 02         [ 7] 5442 	ld	a,#0x02
-   69AB F5            [11] 5443 	push	af
-   69AC 33            [ 6] 5444 	inc	sp
-   69AD 7B            [ 4] 5445 	ld	a,e
-   69AE F5            [11] 5446 	push	af
-   69AF 33            [ 6] 5447 	inc	sp
-   69B0 C5            [11] 5448 	push	bc
-   69B1 DD 7E CE      [19] 5449 	ld	a,-50 (ix)
-   69B4 F5            [11] 5450 	push	af
-   69B5 33            [ 6] 5451 	inc	sp
-   69B6 D5            [11] 5452 	push	de
-   69B7 33            [ 6] 5453 	inc	sp
-   69B8 CD 17 4F      [17] 5454 	call	_drawPlayer
-   69BB 21 06 00      [10] 5455 	ld	hl,#6
-   69BE 39            [11] 5456 	add	hl,sp
-   69BF F9            [ 6] 5457 	ld	sp,hl
-   69C0 18 32         [12] 5458 	jr	00119$
-   69C2                    5459 00115$:
-                           5460 ;src/main.c:697: else if(object.dir == 2 || object.dir == 8)
-   69C2 7C            [ 4] 5461 	ld	a,h
-   69C3 FE 02         [ 7] 5462 	cp	a,#0x02
-   69C5 28 04         [12] 5463 	jr	Z,00111$
-   69C7 D6 08         [ 7] 5464 	sub	a, #0x08
-   69C9 20 29         [12] 5465 	jr	NZ,00119$
-   69CB                    5466 00111$:
-                           5467 ;src/main.c:698: drawPlayer(object.x,object.y,object.sprite,object.vivo,1);
-   69CB 21 11 76      [10] 5468 	ld	hl, #(_object + 0x0006) + 0
-   69CE 5E            [ 7] 5469 	ld	e,(hl)
-   69CF ED 4B 0F 76   [20] 5470 	ld	bc, (#(_object + 0x0004) + 0)
-   69D3 3A 0C 76      [13] 5471 	ld	a,(#(_object + 0x0001) + 0)
-   69D6 DD 77 CE      [19] 5472 	ld	-50 (ix),a
-   69D9 21 0B 76      [10] 5473 	ld	hl, #_object + 0
-   69DC 56            [ 7] 5474 	ld	d,(hl)
-   69DD 3E 01         [ 7] 5475 	ld	a,#0x01
-   69DF F5            [11] 5476 	push	af
-   69E0 33            [ 6] 5477 	inc	sp
-   69E1 7B            [ 4] 5478 	ld	a,e
-   69E2 F5            [11] 5479 	push	af
-   69E3 33            [ 6] 5480 	inc	sp
-   69E4 C5            [11] 5481 	push	bc
-   69E5 DD 7E CE      [19] 5482 	ld	a,-50 (ix)
-   69E8 F5            [11] 5483 	push	af
-   69E9 33            [ 6] 5484 	inc	sp
-   69EA D5            [11] 5485 	push	de
-   69EB 33            [ 6] 5486 	inc	sp
-   69EC CD 17 4F      [17] 5487 	call	_drawPlayer
-   69EF 21 06 00      [10] 5488 	ld	hl,#6
-   69F2 39            [11] 5489 	add	hl,sp
-   69F3 F9            [ 6] 5490 	ld	sp,hl
-   69F4                    5491 00119$:
-                           5492 ;src/main.c:703: drawVida(p.life);
-   69F4 DD 6E AB      [19] 5493 	ld	l,-85 (ix)
-   69F7 DD 66 AC      [19] 5494 	ld	h,-84 (ix)
-   69FA 66            [ 7] 5495 	ld	h,(hl)
-   69FB E5            [11] 5496 	push	hl
-   69FC 33            [ 6] 5497 	inc	sp
-   69FD CD 66 51      [17] 5498 	call	_drawVida
-   6A00 33            [ 6] 5499 	inc	sp
-                           5500 ;src/main.c:704: drawBullets(p.bullets);
-   6A01 DD 6E F8      [19] 5501 	ld	l,-8 (ix)
-   6A04 DD 66 F9      [19] 5502 	ld	h,-7 (ix)
-   6A07 66            [ 7] 5503 	ld	h,(hl)
-   6A08 E5            [11] 5504 	push	hl
-   6A09 33            [ 6] 5505 	inc	sp
-   6A0A CD D0 51      [17] 5506 	call	_drawBullets
-   6A0D 33            [ 6] 5507 	inc	sp
-                           5508 ;src/main.c:707: if(p.atk < 20) drawFatiga(p.atk,2);
-   6A0E DD 6E B8      [19] 5509 	ld	l,-72 (ix)
-   6A11 DD 66 B9      [19] 5510 	ld	h,-71 (ix)
-   6A14 56            [ 7] 5511 	ld	d,(hl)
-   6A15 7A            [ 4] 5512 	ld	a,d
-   6A16 D6 14         [ 7] 5513 	sub	a, #0x14
-   6A18 30 0C         [12] 5514 	jr	NC,00124$
-   6A1A 3E 02         [ 7] 5515 	ld	a,#0x02
-   6A1C F5            [11] 5516 	push	af
-   6A1D 33            [ 6] 5517 	inc	sp
-   6A1E D5            [11] 5518 	push	de
-   6A1F 33            [ 6] 5519 	inc	sp
-   6A20 CD D8 4F      [17] 5520 	call	_drawFatiga
-   6A23 F1            [10] 5521 	pop	af
-   6A24 18 1A         [12] 5522 	jr	00125$
-   6A26                    5523 00124$:
-                           5524 ;src/main.c:708: else if(p.atk > 20) drawFatiga(p.atk,1);
-   6A26 3E 14         [ 7] 5525 	ld	a,#0x14
-   6A28 92            [ 4] 5526 	sub	a, d
-   6A29 30 0C         [12] 5527 	jr	NC,00121$
-   6A2B 3E 01         [ 7] 5528 	ld	a,#0x01
-   6A2D F5            [11] 5529 	push	af
-   6A2E 33            [ 6] 5530 	inc	sp
-   6A2F D5            [11] 5531 	push	de
-   6A30 33            [ 6] 5532 	inc	sp
-   6A31 CD D8 4F      [17] 5533 	call	_drawFatiga
-   6A34 F1            [10] 5534 	pop	af
-   6A35 18 09         [12] 5535 	jr	00125$
-   6A37                    5536 00121$:
-                           5537 ;src/main.c:709: else drawFatiga(p.atk,0);
-   6A37 AF            [ 4] 5538 	xor	a, a
-   6A38 F5            [11] 5539 	push	af
-   6A39 33            [ 6] 5540 	inc	sp
-   6A3A D5            [11] 5541 	push	de
-   6A3B 33            [ 6] 5542 	inc	sp
-   6A3C CD D8 4F      [17] 5543 	call	_drawFatiga
-   6A3F F1            [10] 5544 	pop	af
-   6A40                    5545 00125$:
-                           5546 ;src/main.c:712: p.lx = p.x;
-   6A40 DD 6E EE      [19] 5547 	ld	l,-18 (ix)
-   6A43 DD 66 EF      [19] 5548 	ld	h,-17 (ix)
-   6A46 7E            [ 7] 5549 	ld	a,(hl)
-   6A47 DD 6E AD      [19] 5550 	ld	l,-83 (ix)
-   6A4A DD 66 AE      [19] 5551 	ld	h,-82 (ix)
-   6A4D 77            [ 7] 5552 	ld	(hl),a
-                           5553 ;src/main.c:713: p.ly = p.y;
-   6A4E DD 6E BC      [19] 5554 	ld	l,-68 (ix)
-   6A51 DD 66 BD      [19] 5555 	ld	h,-67 (ix)
-   6A54 7E            [ 7] 5556 	ld	a,(hl)
-   6A55 DD 6E BE      [19] 5557 	ld	l,-66 (ix)
-   6A58 DD 66 BF      [19] 5558 	ld	h,-65 (ix)
-   6A5B 77            [ 7] 5559 	ld	(hl),a
-                           5560 ;src/main.c:714: e.lx = e.x;
-   6A5C DD 6E C2      [19] 5561 	ld	l,-62 (ix)
-   6A5F DD 66 C3      [19] 5562 	ld	h,-61 (ix)
-   6A62 7E            [ 7] 5563 	ld	a,(hl)
-   6A63 DD 6E DC      [19] 5564 	ld	l,-36 (ix)
-   6A66 DD 66 DD      [19] 5565 	ld	h,-35 (ix)
-   6A69 77            [ 7] 5566 	ld	(hl),a
-                           5567 ;src/main.c:715: e.ly = e.y;
-   6A6A DD 6E C0      [19] 5568 	ld	l,-64 (ix)
-   6A6D DD 66 C1      [19] 5569 	ld	h,-63 (ix)
-   6A70 7E            [ 7] 5570 	ld	a,(hl)
-   6A71 DD 6E DA      [19] 5571 	ld	l,-38 (ix)
-   6A74 DD 66 DB      [19] 5572 	ld	h,-37 (ix)
-   6A77 77            [ 7] 5573 	ld	(hl),a
-                           5574 ;src/main.c:716: p.latk = p.atk;
-   6A78 DD 6E B8      [19] 5575 	ld	l,-72 (ix)
-   6A7B DD 66 B9      [19] 5576 	ld	h,-71 (ix)
-   6A7E 7E            [ 7] 5577 	ld	a,(hl)
-   6A7F DD 6E FA      [19] 5578 	ld	l,-6 (ix)
-   6A82 DD 66 FB      [19] 5579 	ld	h,-5 (ix)
-   6A85 77            [ 7] 5580 	ld	(hl),a
-                           5581 ;src/main.c:717: p.lsize = p.sizeX;
-   6A86 DD 6E CF      [19] 5582 	ld	l,-49 (ix)
-   6A89 DD 66 D0      [19] 5583 	ld	h,-48 (ix)
-   6A8C 7E            [ 7] 5584 	ld	a,(hl)
-   6A8D DD 6E BA      [19] 5585 	ld	l,-70 (ix)
-   6A90 DD 66 BB      [19] 5586 	ld	h,-69 (ix)
-   6A93 77            [ 7] 5587 	ld	(hl),a
-                           5588 ;src/main.c:720: cpct_scanKeyboard_f();
-   6A94 CD 05 71      [17] 5589 	call	_cpct_scanKeyboard_f
-                           5590 ;src/main.c:721: p.sprite = checkKeyboard(&p.x,&p.y,&p.atk,&p.dir,p.sprite,&p.sizeX,&p.bullets,&finish,&arrow);
-   6A97 21 0F 00      [10] 5591 	ld	hl,#0x000F
-   6A9A 39            [11] 5592 	add	hl,sp
-   6A9B 4D            [ 4] 5593 	ld	c, l
-   6A9C 44            [ 4] 5594 	ld	b, h
-   6A9D 21 20 00      [10] 5595 	ld	hl,#0x0020
-   6AA0 39            [11] 5596 	add	hl,sp
-   6AA1 DD 75 CC      [19] 5597 	ld	-52 (ix),l
-   6AA4 DD 74 CD      [19] 5598 	ld	-51 (ix),h
-   6AA7 DD 5E F2      [19] 5599 	ld	e,-14 (ix)
-   6AAA DD 56 F3      [19] 5600 	ld	d,-13 (ix)
-   6AAD DD 7E F0      [19] 5601 	ld	a,-16 (ix)
-   6AB0 DD 77 CA      [19] 5602 	ld	-54 (ix),a
-   6AB3 DD 7E F1      [19] 5603 	ld	a,-15 (ix)
-   6AB6 DD 77 CB      [19] 5604 	ld	-53 (ix),a
-   6AB9 DD 6E B6      [19] 5605 	ld	l,-74 (ix)
-   6ABC DD 66 B7      [19] 5606 	ld	h,-73 (ix)
-   6ABF 7E            [ 7] 5607 	ld	a,(hl)
-   6AC0 DD 77 C8      [19] 5608 	ld	-56 (ix),a
-   6AC3 23            [ 6] 5609 	inc	hl
-   6AC4 7E            [ 7] 5610 	ld	a,(hl)
-   6AC5 DD 77 C9      [19] 5611 	ld	-55 (ix),a
-   6AC8 DD 7E D1      [19] 5612 	ld	a,-47 (ix)
-   6ACB DD 77 C6      [19] 5613 	ld	-58 (ix),a
-   6ACE DD 7E D2      [19] 5614 	ld	a,-46 (ix)
-   6AD1 DD 77 C7      [19] 5615 	ld	-57 (ix),a
-   6AD4 DD 7E EC      [19] 5616 	ld	a,-20 (ix)
-   6AD7 DD 77 C4      [19] 5617 	ld	-60 (ix),a
-   6ADA DD 7E ED      [19] 5618 	ld	a,-19 (ix)
-   6ADD DD 77 C5      [19] 5619 	ld	-59 (ix),a
-   6AE0 DD 6E EA      [19] 5620 	ld	l,-22 (ix)
-   6AE3 DD 66 EB      [19] 5621 	ld	h,-21 (ix)
-   6AE6 DD 7E E8      [19] 5622 	ld	a,-24 (ix)
-   6AE9 DD 77 B4      [19] 5623 	ld	-76 (ix),a
-   6AEC DD 7E E9      [19] 5624 	ld	a,-23 (ix)
-   6AEF DD 77 B5      [19] 5625 	ld	-75 (ix),a
-   6AF2 C5            [11] 5626 	push	bc
-   6AF3 DD 4E CC      [19] 5627 	ld	c,-52 (ix)
-   6AF6 DD 46 CD      [19] 5628 	ld	b,-51 (ix)
-   6AF9 C5            [11] 5629 	push	bc
-   6AFA D5            [11] 5630 	push	de
-   6AFB DD 4E CA      [19] 5631 	ld	c,-54 (ix)
-   6AFE DD 46 CB      [19] 5632 	ld	b,-53 (ix)
-   6B01 C5            [11] 5633 	push	bc
-   6B02 DD 4E C8      [19] 5634 	ld	c,-56 (ix)
-   6B05 DD 46 C9      [19] 5635 	ld	b,-55 (ix)
-   6B08 C5            [11] 5636 	push	bc
-   6B09 DD 4E C6      [19] 5637 	ld	c,-58 (ix)
-   6B0C DD 46 C7      [19] 5638 	ld	b,-57 (ix)
-   6B0F C5            [11] 5639 	push	bc
-   6B10 DD 4E C4      [19] 5640 	ld	c,-60 (ix)
-   6B13 DD 46 C5      [19] 5641 	ld	b,-59 (ix)
-   6B16 C5            [11] 5642 	push	bc
-   6B17 E5            [11] 5643 	push	hl
-   6B18 DD 6E B4      [19] 5644 	ld	l,-76 (ix)
-   6B1B DD 66 B5      [19] 5645 	ld	h,-75 (ix)
-   6B1E E5            [11] 5646 	push	hl
-   6B1F CD FB 59      [17] 5647 	call	_checkKeyboard
-   6B22 FD 21 12 00   [14] 5648 	ld	iy,#18
-   6B26 FD 39         [15] 5649 	add	iy,sp
-   6B28 FD F9         [10] 5650 	ld	sp,iy
-   6B2A 55            [ 4] 5651 	ld	d,l
-   6B2B 5C            [ 4] 5652 	ld	e,h
-   6B2C DD 6E B6      [19] 5653 	ld	l,-74 (ix)
-   6B2F DD 66 B7      [19] 5654 	ld	h,-73 (ix)
-   6B32 72            [ 7] 5655 	ld	(hl),d
-   6B33 23            [ 6] 5656 	inc	hl
-   6B34 73            [ 7] 5657 	ld	(hl),e
-                           5658 ;src/main.c:722: checkBoundsCollisions(&p.x,&p.y,p.lx,p.ly,p.sizeX,p.sizeY,&p.life,&p.bullets,&n.corazon,&n.bullet);
-   6B35 DD 4E E6      [19] 5659 	ld	c,-26 (ix)
-   6B38 DD 46 E7      [19] 5660 	ld	b,-25 (ix)
-   6B3B DD 5E A7      [19] 5661 	ld	e,-89 (ix)
-   6B3E DD 56 A8      [19] 5662 	ld	d,-88 (ix)
-   6B41 DD 7E A5      [19] 5663 	ld	a,-91 (ix)
-   6B44 DD 77 B4      [19] 5664 	ld	-76 (ix),a
-   6B47 DD 7E A6      [19] 5665 	ld	a,-90 (ix)
-   6B4A DD 77 B5      [19] 5666 	ld	-75 (ix),a
-   6B4D DD 7E A3      [19] 5667 	ld	a,-93 (ix)
-   6B50 DD 77 C4      [19] 5668 	ld	-60 (ix),a
-   6B53 DD 7E A4      [19] 5669 	ld	a,-92 (ix)
-   6B56 DD 77 C5      [19] 5670 	ld	-59 (ix),a
-   6B59 DD 6E A9      [19] 5671 	ld	l,-87 (ix)
-   6B5C DD 66 AA      [19] 5672 	ld	h,-86 (ix)
-   6B5F 7E            [ 7] 5673 	ld	a,(hl)
-   6B60 DD 77 C6      [19] 5674 	ld	-58 (ix),a
-   6B63 DD 6E CF      [19] 5675 	ld	l,-49 (ix)
-   6B66 DD 66 D0      [19] 5676 	ld	h,-48 (ix)
-   6B69 7E            [ 7] 5677 	ld	a,(hl)
-   6B6A DD 77 C8      [19] 5678 	ld	-56 (ix),a
-   6B6D DD 6E BE      [19] 5679 	ld	l,-66 (ix)
-   6B70 DD 66 BF      [19] 5680 	ld	h,-65 (ix)
-   6B73 7E            [ 7] 5681 	ld	a,(hl)
-   6B74 DD 77 CA      [19] 5682 	ld	-54 (ix),a
-   6B77 DD 6E AD      [19] 5683 	ld	l,-83 (ix)
-   6B7A DD 66 AE      [19] 5684 	ld	h,-82 (ix)
-   6B7D 7E            [ 7] 5685 	ld	a,(hl)
-   6B7E DD 77 CC      [19] 5686 	ld	-52 (ix),a
-   6B81 DD 7E A1      [19] 5687 	ld	a,-95 (ix)
-   6B84 DD 77 B2      [19] 5688 	ld	-78 (ix),a
-   6B87 DD 7E A2      [19] 5689 	ld	a,-94 (ix)
-   6B8A DD 77 B3      [19] 5690 	ld	-77 (ix),a
-   6B8D E5            [11] 5691 	push	hl
-   6B8E DD 6E 9F      [19] 5692 	ld	l,-97 (ix)
-   6B91 DD 66 A0      [19] 5693 	ld	h,-96 (ix)
-   6B94 E5            [11] 5694 	push	hl
-   6B95 FD E1         [14] 5695 	pop	iy
-   6B97 E1            [10] 5696 	pop	hl
-   6B98 C5            [11] 5697 	push	bc
-   6B99 D5            [11] 5698 	push	de
-   6B9A DD 6E B4      [19] 5699 	ld	l,-76 (ix)
-   6B9D DD 66 B5      [19] 5700 	ld	h,-75 (ix)
-   6BA0 E5            [11] 5701 	push	hl
-   6BA1 DD 6E C4      [19] 5702 	ld	l,-60 (ix)
-   6BA4 DD 66 C5      [19] 5703 	ld	h,-59 (ix)
-   6BA7 E5            [11] 5704 	push	hl
-   6BA8 DD 66 C6      [19] 5705 	ld	h,-58 (ix)
-   6BAB DD 6E C8      [19] 5706 	ld	l,-56 (ix)
-   6BAE E5            [11] 5707 	push	hl
-   6BAF DD 66 CA      [19] 5708 	ld	h,-54 (ix)
-   6BB2 DD 6E CC      [19] 5709 	ld	l,-52 (ix)
-   6BB5 E5            [11] 5710 	push	hl
-   6BB6 DD 6E B2      [19] 5711 	ld	l,-78 (ix)
-   6BB9 DD 66 B3      [19] 5712 	ld	h,-77 (ix)
-   6BBC E5            [11] 5713 	push	hl
-   6BBD FD E5         [15] 5714 	push	iy
-   6BBF CD E7 55      [17] 5715 	call	_checkBoundsCollisions
-   6BC2 21 10 00      [10] 5716 	ld	hl,#16
-   6BC5 39            [11] 5717 	add	hl,sp
-   6BC6 F9            [ 6] 5718 	ld	sp,hl
-                           5719 ;src/main.c:723: if(e.life > 0)
-   6BC7 DD 6E FC      [19] 5720 	ld	l,-4 (ix)
-   6BCA DD 66 FD      [19] 5721 	ld	h,-3 (ix)
-   6BCD 7E            [ 7] 5722 	ld	a,(hl)
-   6BCE B7            [ 4] 5723 	or	a, a
-   6BCF CA 97 6C      [10] 5724 	jp	Z,00127$
-                           5725 ;src/main.c:724: move(&e.x,&e.y,p.lx,p.ly,&e.dir,e.sprite,e.room,p.x,p.y,&e.seenX,&e.seenY,&following,&e.pursue);
-   6BD2 DD 7E DE      [19] 5726 	ld	a,-34 (ix)
-   6BD5 DD 77 B2      [19] 5727 	ld	-78 (ix),a
-   6BD8 DD 7E DF      [19] 5728 	ld	a,-33 (ix)
-   6BDB DD 77 B3      [19] 5729 	ld	-77 (ix),a
-   6BDE FD 21 21 00   [14] 5730 	ld	iy,#0x0021
-   6BE2 FD 39         [15] 5731 	add	iy,sp
-   6BE4 DD 7E E0      [19] 5732 	ld	a,-32 (ix)
-   6BE7 DD 77 B4      [19] 5733 	ld	-76 (ix),a
-   6BEA DD 7E E1      [19] 5734 	ld	a,-31 (ix)
-   6BED DD 77 B5      [19] 5735 	ld	-75 (ix),a
-   6BF0 DD 7E D3      [19] 5736 	ld	a,-45 (ix)
-   6BF3 DD 77 C4      [19] 5737 	ld	-60 (ix),a
-   6BF6 DD 7E D4      [19] 5738 	ld	a,-44 (ix)
-   6BF9 DD 77 C5      [19] 5739 	ld	-59 (ix),a
-   6BFC DD 6E BC      [19] 5740 	ld	l,-68 (ix)
-   6BFF DD 66 BD      [19] 5741 	ld	h,-67 (ix)
-   6C02 7E            [ 7] 5742 	ld	a,(hl)
-   6C03 DD 77 C6      [19] 5743 	ld	-58 (ix),a
-   6C06 DD 6E EE      [19] 5744 	ld	l,-18 (ix)
-   6C09 DD 66 EF      [19] 5745 	ld	h,-17 (ix)
-   6C0C 7E            [ 7] 5746 	ld	a,(hl)
-   6C0D DD 77 C8      [19] 5747 	ld	-56 (ix),a
-   6C10 DD 6E E2      [19] 5748 	ld	l,-30 (ix)
-   6C13 DD 66 E3      [19] 5749 	ld	h,-29 (ix)
-   6C16 7E            [ 7] 5750 	ld	a,(hl)
-   6C17 DD 77 CA      [19] 5751 	ld	-54 (ix),a
-   6C1A DD 6E FE      [19] 5752 	ld	l,-2 (ix)
-   6C1D DD 66 FF      [19] 5753 	ld	h,-1 (ix)
-   6C20 7E            [ 7] 5754 	ld	a,(hl)
-   6C21 DD 77 CC      [19] 5755 	ld	-52 (ix),a
-   6C24 23            [ 6] 5756 	inc	hl
-   6C25 7E            [ 7] 5757 	ld	a,(hl)
-   6C26 DD 77 CD      [19] 5758 	ld	-51 (ix),a
-   6C29 DD 7E E4      [19] 5759 	ld	a,-28 (ix)
-   6C2C DD 77 B0      [19] 5760 	ld	-80 (ix),a
-   6C2F DD 7E E5      [19] 5761 	ld	a,-27 (ix)
-   6C32 DD 77 B1      [19] 5762 	ld	-79 (ix),a
-   6C35 DD 6E BE      [19] 5763 	ld	l,-66 (ix)
-   6C38 DD 66 BF      [19] 5764 	ld	h,-65 (ix)
-   6C3B 7E            [ 7] 5765 	ld	a,(hl)
-   6C3C DD 77 CE      [19] 5766 	ld	-50 (ix),a
-   6C3F DD 6E AD      [19] 5767 	ld	l,-83 (ix)
-   6C42 DD 66 AE      [19] 5768 	ld	h,-82 (ix)
-   6C45 7E            [ 7] 5769 	ld	a,(hl)
-   6C46 DD 77 AF      [19] 5770 	ld	-81 (ix),a
-   6C49 DD 5E F6      [19] 5771 	ld	e,-10 (ix)
-   6C4C DD 56 F7      [19] 5772 	ld	d,-9 (ix)
-   6C4F DD 4E F4      [19] 5773 	ld	c,-12 (ix)
-   6C52 DD 46 F5      [19] 5774 	ld	b,-11 (ix)
-   6C55 DD 6E B2      [19] 5775 	ld	l,-78 (ix)
-   6C58 DD 66 B3      [19] 5776 	ld	h,-77 (ix)
-   6C5B E5            [11] 5777 	push	hl
-   6C5C FD E5         [15] 5778 	push	iy
-   6C5E DD 6E B4      [19] 5779 	ld	l,-76 (ix)
-   6C61 DD 66 B5      [19] 5780 	ld	h,-75 (ix)
-   6C64 E5            [11] 5781 	push	hl
-   6C65 DD 6E C4      [19] 5782 	ld	l,-60 (ix)
-   6C68 DD 66 C5      [19] 5783 	ld	h,-59 (ix)
-   6C6B E5            [11] 5784 	push	hl
-   6C6C DD 66 C6      [19] 5785 	ld	h,-58 (ix)
-   6C6F DD 6E C8      [19] 5786 	ld	l,-56 (ix)
-   6C72 E5            [11] 5787 	push	hl
-   6C73 DD 7E CA      [19] 5788 	ld	a,-54 (ix)
-   6C76 F5            [11] 5789 	push	af
-   6C77 33            [ 6] 5790 	inc	sp
-   6C78 DD 6E CC      [19] 5791 	ld	l,-52 (ix)
-   6C7B DD 66 CD      [19] 5792 	ld	h,-51 (ix)
-   6C7E E5            [11] 5793 	push	hl
-   6C7F DD 6E B0      [19] 5794 	ld	l,-80 (ix)
-   6C82 DD 66 B1      [19] 5795 	ld	h,-79 (ix)
-   6C85 E5            [11] 5796 	push	hl
-   6C86 DD 66 CE      [19] 5797 	ld	h,-50 (ix)
-   6C89 DD 6E AF      [19] 5798 	ld	l,-81 (ix)
-   6C8C E5            [11] 5799 	push	hl
-   6C8D D5            [11] 5800 	push	de
-   6C8E C5            [11] 5801 	push	bc
-   6C8F CD 7E 63      [17] 5802 	call	_move
-   6C92 21 15 00      [10] 5803 	ld	hl,#21
-   6C95 39            [11] 5804 	add	hl,sp
-   6C96 F9            [ 6] 5805 	ld	sp,hl
-   6C97                    5806 00127$:
-                           5807 ;src/main.c:726: if(e.life > 0)
-   6C97 DD 6E FC      [19] 5808 	ld	l,-4 (ix)
-   6C9A DD 66 FD      [19] 5809 	ld	h,-3 (ix)
-   6C9D 7E            [ 7] 5810 	ld	a, (hl)
-   6C9E B7            [ 4] 5811 	or	a, a
-   6C9F CA 45 6D      [10] 5812 	jp	Z,00136$
-                           5813 ;src/main.c:727: if(checkCollisions(p.x, p.y, e.x, e.y, p.atk) == 2){
-   6CA2 DD 6E B8      [19] 5814 	ld	l,-72 (ix)
-   6CA5 DD 66 B9      [19] 5815 	ld	h,-71 (ix)
-   6CA8 7E            [ 7] 5816 	ld	a,(hl)
-   6CA9 DD 6E C0      [19] 5817 	ld	l,-64 (ix)
-   6CAC DD 66 C1      [19] 5818 	ld	h,-63 (ix)
-   6CAF 4E            [ 7] 5819 	ld	c,(hl)
-   6CB0 DD 6E C2      [19] 5820 	ld	l,-62 (ix)
-   6CB3 DD 66 C3      [19] 5821 	ld	h,-61 (ix)
-   6CB6 46            [ 7] 5822 	ld	b,(hl)
-   6CB7 DD 6E BC      [19] 5823 	ld	l,-68 (ix)
-   6CBA DD 66 BD      [19] 5824 	ld	h,-67 (ix)
-   6CBD 5E            [ 7] 5825 	ld	e,(hl)
-   6CBE DD 6E EE      [19] 5826 	ld	l,-18 (ix)
-   6CC1 DD 66 EF      [19] 5827 	ld	h,-17 (ix)
-   6CC4 56            [ 7] 5828 	ld	d,(hl)
-   6CC5 F5            [11] 5829 	push	af
-   6CC6 33            [ 6] 5830 	inc	sp
-   6CC7 79            [ 4] 5831 	ld	a,c
-   6CC8 F5            [11] 5832 	push	af
-   6CC9 33            [ 6] 5833 	inc	sp
-   6CCA C5            [11] 5834 	push	bc
-   6CCB 33            [ 6] 5835 	inc	sp
-   6CCC 7B            [ 4] 5836 	ld	a,e
-   6CCD F5            [11] 5837 	push	af
-   6CCE 33            [ 6] 5838 	inc	sp
-   6CCF D5            [11] 5839 	push	de
-   6CD0 33            [ 6] 5840 	inc	sp
-   6CD1 CD 88 49      [17] 5841 	call	_checkCollisions
-   6CD4 F1            [10] 5842 	pop	af
-   6CD5 F1            [10] 5843 	pop	af
-   6CD6 33            [ 6] 5844 	inc	sp
-   6CD7 7D            [ 4] 5845 	ld	a,l
-   6CD8 D6 02         [ 7] 5846 	sub	a, #0x02
-   6CDA 20 29         [12] 5847 	jr	NZ,00133$
-                           5848 ;src/main.c:728: p.x = 0;
-   6CDC DD 6E EE      [19] 5849 	ld	l,-18 (ix)
-   6CDF DD 66 EF      [19] 5850 	ld	h,-17 (ix)
-   6CE2 36 00         [10] 5851 	ld	(hl),#0x00
-                           5852 ;src/main.c:729: p.y = 80;
-   6CE4 DD 6E BC      [19] 5853 	ld	l,-68 (ix)
-   6CE7 DD 66 BD      [19] 5854 	ld	h,-67 (ix)
-   6CEA 36 50         [10] 5855 	ld	(hl),#0x50
-                           5856 ;src/main.c:730: p.life -= 1;
-   6CEC DD 6E AB      [19] 5857 	ld	l,-85 (ix)
-   6CEF DD 66 AC      [19] 5858 	ld	h,-84 (ix)
-   6CF2 7E            [ 7] 5859 	ld	a,(hl)
-   6CF3 C6 FF         [ 7] 5860 	add	a,#0xFF
-   6CF5 DD 6E AB      [19] 5861 	ld	l,-85 (ix)
-   6CF8 DD 66 AC      [19] 5862 	ld	h,-84 (ix)
-   6CFB 77            [ 7] 5863 	ld	(hl),a
-                           5864 ;src/main.c:731: if(p.life == 0){
-   6CFC B7            [ 4] 5865 	or	a, a
-   6CFD 20 46         [12] 5866 	jr	NZ,00136$
-                           5867 ;src/main.c:732: gameOver();
-   6CFF CD B4 4A      [17] 5868 	call	_gameOver
-                           5869 ;src/main.c:733: break;
-   6D02 C3 D2 6D      [10] 5870 	jp	00146$
-   6D05                    5871 00133$:
-                           5872 ;src/main.c:735: }else if(checkCollisions(p.x, p.y, e.x, e.y, p.atk) == 1){
-   6D05 DD 6E B8      [19] 5873 	ld	l,-72 (ix)
-   6D08 DD 66 B9      [19] 5874 	ld	h,-71 (ix)
-   6D0B 7E            [ 7] 5875 	ld	a,(hl)
-   6D0C DD 6E C0      [19] 5876 	ld	l,-64 (ix)
-   6D0F DD 66 C1      [19] 5877 	ld	h,-63 (ix)
-   6D12 4E            [ 7] 5878 	ld	c,(hl)
-   6D13 DD 6E C2      [19] 5879 	ld	l,-62 (ix)
-   6D16 DD 66 C3      [19] 5880 	ld	h,-61 (ix)
-   6D19 46            [ 7] 5881 	ld	b,(hl)
-   6D1A DD 6E BC      [19] 5882 	ld	l,-68 (ix)
-   6D1D DD 66 BD      [19] 5883 	ld	h,-67 (ix)
-   6D20 5E            [ 7] 5884 	ld	e,(hl)
-   6D21 DD 6E EE      [19] 5885 	ld	l,-18 (ix)
-   6D24 DD 66 EF      [19] 5886 	ld	h,-17 (ix)
-   6D27 56            [ 7] 5887 	ld	d,(hl)
-   6D28 F5            [11] 5888 	push	af
-   6D29 33            [ 6] 5889 	inc	sp
-   6D2A 79            [ 4] 5890 	ld	a,c
-   6D2B F5            [11] 5891 	push	af
-   6D2C 33            [ 6] 5892 	inc	sp
-   6D2D C5            [11] 5893 	push	bc
-   6D2E 33            [ 6] 5894 	inc	sp
-   6D2F 7B            [ 4] 5895 	ld	a,e
-   6D30 F5            [11] 5896 	push	af
-   6D31 33            [ 6] 5897 	inc	sp
-   6D32 D5            [11] 5898 	push	de
-   6D33 33            [ 6] 5899 	inc	sp
-   6D34 CD 88 49      [17] 5900 	call	_checkCollisions
-   6D37 F1            [10] 5901 	pop	af
-   6D38 F1            [10] 5902 	pop	af
-   6D39 33            [ 6] 5903 	inc	sp
-   6D3A 2D            [ 4] 5904 	dec	l
-   6D3B 20 08         [12] 5905 	jr	NZ,00136$
-                           5906 ;src/main.c:736: e.life =0;
-   6D3D DD 6E FC      [19] 5907 	ld	l,-4 (ix)
-   6D40 DD 66 FD      [19] 5908 	ld	h,-3 (ix)
-   6D43 36 00         [10] 5909 	ld	(hl),#0x00
-   6D45                    5910 00136$:
-                           5911 ;src/main.c:740: if(arrow == 1){
-   6D45 DD 7E 89      [19] 5912 	ld	a,-119 (ix)
-   6D48 3D            [ 4] 5913 	dec	a
-   6D49 C2 CB 6D      [10] 5914 	jp	NZ,00140$
-                           5915 ;src/main.c:741: moveObject();
-   6D4C CD D8 5D      [17] 5916 	call	_moveObject
-                           5917 ;src/main.c:742: bound = checkBoundsCollisions(&object.x,&object.y,object.lx,object.ly,object.sizeX,object.sizeY,0,0,0,0);
-   6D4F 21 14 76      [10] 5918 	ld	hl, #_object + 9
-   6D52 5E            [ 7] 5919 	ld	e,(hl)
-   6D53 21 13 76      [10] 5920 	ld	hl, #_object + 8
-   6D56 4E            [ 7] 5921 	ld	c,(hl)
-   6D57 3A 0E 76      [13] 5922 	ld	a,(#(_object + 0x0003) + 0)
-   6D5A DD 77 AF      [19] 5923 	ld	-81 (ix),a
-   6D5D 21 0D 76      [10] 5924 	ld	hl, #(_object + 0x0002) + 0
-   6D60 56            [ 7] 5925 	ld	d,(hl)
-   6D61 21 00 00      [10] 5926 	ld	hl,#0x0000
-   6D64 E5            [11] 5927 	push	hl
-   6D65 2E 00         [ 7] 5928 	ld	l, #0x00
-   6D67 E5            [11] 5929 	push	hl
-   6D68 2E 00         [ 7] 5930 	ld	l, #0x00
-   6D6A E5            [11] 5931 	push	hl
-   6D6B 2E 00         [ 7] 5932 	ld	l, #0x00
-   6D6D E5            [11] 5933 	push	hl
-   6D6E 7B            [ 4] 5934 	ld	a,e
-   6D6F F5            [11] 5935 	push	af
-   6D70 33            [ 6] 5936 	inc	sp
-   6D71 79            [ 4] 5937 	ld	a,c
-   6D72 F5            [11] 5938 	push	af
-   6D73 33            [ 6] 5939 	inc	sp
-   6D74 DD 7E AF      [19] 5940 	ld	a,-81 (ix)
-   6D77 F5            [11] 5941 	push	af
-   6D78 33            [ 6] 5942 	inc	sp
-   6D79 D5            [11] 5943 	push	de
-   6D7A 33            [ 6] 5944 	inc	sp
-   6D7B 21 0C 76      [10] 5945 	ld	hl,#(_object + 0x0001)
-   6D7E E5            [11] 5946 	push	hl
-   6D7F 21 0B 76      [10] 5947 	ld	hl,#_object
-   6D82 E5            [11] 5948 	push	hl
-   6D83 CD E7 55      [17] 5949 	call	_checkBoundsCollisions
-   6D86 FD 21 10 00   [14] 5950 	ld	iy,#16
-   6D8A FD 39         [15] 5951 	add	iy,sp
-   6D8C FD F9         [10] 5952 	ld	sp,iy
-   6D8E DD 75 D5      [19] 5953 	ld	-43 (ix),l
-                           5954 ;src/main.c:743: if(checkCollisions(object.x, object.y, e.x, e.y, 21) == 1){
-   6D91 DD 6E C0      [19] 5955 	ld	l,-64 (ix)
-   6D94 DD 66 C1      [19] 5956 	ld	h,-63 (ix)
-   6D97 4E            [ 7] 5957 	ld	c,(hl)
-   6D98 DD 6E C2      [19] 5958 	ld	l,-62 (ix)
-   6D9B DD 66 C3      [19] 5959 	ld	h,-61 (ix)
-   6D9E 46            [ 7] 5960 	ld	b,(hl)
-   6D9F 21 0C 76      [10] 5961 	ld	hl, #(_object + 0x0001) + 0
-   6DA2 5E            [ 7] 5962 	ld	e,(hl)
-   6DA3 21 0B 76      [10] 5963 	ld	hl, #_object + 0
-   6DA6 56            [ 7] 5964 	ld	d,(hl)
-   6DA7 3E 15         [ 7] 5965 	ld	a,#0x15
-   6DA9 F5            [11] 5966 	push	af
-   6DAA 33            [ 6] 5967 	inc	sp
-   6DAB 79            [ 4] 5968 	ld	a,c
-   6DAC F5            [11] 5969 	push	af
-   6DAD 33            [ 6] 5970 	inc	sp
-   6DAE C5            [11] 5971 	push	bc
-   6DAF 33            [ 6] 5972 	inc	sp
-   6DB0 7B            [ 4] 5973 	ld	a,e
-   6DB1 F5            [11] 5974 	push	af
-   6DB2 33            [ 6] 5975 	inc	sp
-   6DB3 D5            [11] 5976 	push	de
-   6DB4 33            [ 6] 5977 	inc	sp
-   6DB5 CD 88 49      [17] 5978 	call	_checkCollisions
-   6DB8 F1            [10] 5979 	pop	af
-   6DB9 F1            [10] 5980 	pop	af
-   6DBA 33            [ 6] 5981 	inc	sp
-   6DBB 2D            [ 4] 5982 	dec	l
-   6DBC 20 0D         [12] 5983 	jr	NZ,00140$
-                           5984 ;src/main.c:744: e.life = 0;
-   6DBE DD 6E FC      [19] 5985 	ld	l,-4 (ix)
-   6DC1 DD 66 FD      [19] 5986 	ld	h,-3 (ix)
-   6DC4 36 00         [10] 5987 	ld	(hl),#0x00
-                           5988 ;src/main.c:745: object.vivo = 0;
-   6DC6 21 11 76      [10] 5989 	ld	hl,#(_object + 0x0006)
-   6DC9 36 00         [10] 5990 	ld	(hl),#0x00
-   6DCB                    5991 00140$:
-                           5992 ;src/main.c:749: if(finish == 1) return;
-   6DCB DD 7E 9A      [19] 5993 	ld	a,-102 (ix)
-   6DCE 3D            [ 4] 5994 	dec	a
-   6DCF C2 8E 68      [10] 5995 	jp	NZ,00144$
-   6DD2                    5996 00146$:
-   6DD2 DD F9         [10] 5997 	ld	sp, ix
-   6DD4 DD E1         [14] 5998 	pop	ix
-   6DD6 C9            [10] 5999 	ret
-                           6000 ;src/main.c:756: void credits(){
-                           6001 ;	---------------------------------
-                           6002 ; Function credits
-                           6003 ; ---------------------------------
-   6DD7                    6004 _credits::
-                           6005 ;src/main.c:758: cpct_clearScreen(0);
-   6DD7 21 00 40      [10] 6006 	ld	hl,#0x4000
-   6DDA E5            [11] 6007 	push	hl
-   6DDB AF            [ 4] 6008 	xor	a, a
-   6DDC F5            [11] 6009 	push	af
-   6DDD 33            [ 6] 6010 	inc	sp
-   6DDE 26 C0         [ 7] 6011 	ld	h, #0xC0
-   6DE0 E5            [11] 6012 	push	hl
-   6DE1 CD 2F 73      [17] 6013 	call	_cpct_memset
-                           6014 ;src/main.c:759: memptr = cpct_getScreenPtr(VMEM,10,10);
-   6DE4 21 0A 0A      [10] 6015 	ld	hl,#0x0A0A
-   6DE7 E5            [11] 6016 	push	hl
-   6DE8 21 00 C0      [10] 6017 	ld	hl,#0xC000
-   6DEB E5            [11] 6018 	push	hl
-   6DEC CD 22 74      [17] 6019 	call	_cpct_getScreenPtr
-                           6020 ;src/main.c:760: cpct_drawStringM0("Lounge Gladiator",memptr,1,0);
-   6DEF EB            [ 4] 6021 	ex	de,hl
-   6DF0 01 0F 6E      [10] 6022 	ld	bc,#___str_5+0
-   6DF3 21 01 00      [10] 6023 	ld	hl,#0x0001
-   6DF6 E5            [11] 6024 	push	hl
-   6DF7 D5            [11] 6025 	push	de
-   6DF8 C5            [11] 6026 	push	bc
-   6DF9 CD E6 71      [17] 6027 	call	_cpct_drawStringM0
-   6DFC 21 06 00      [10] 6028 	ld	hl,#6
-   6DFF 39            [11] 6029 	add	hl,sp
-   6E00 F9            [ 6] 6030 	ld	sp,hl
-                           6031 ;src/main.c:762: while (1){
-   6E01                    6032 00104$:
-                           6033 ;src/main.c:764: cpct_scanKeyboard_f();
-   6E01 CD 05 71      [17] 6034 	call	_cpct_scanKeyboard_f
-                           6035 ;src/main.c:768: if(cpct_isKeyPressed(Key_Esc)) {
-   6E04 21 08 04      [10] 6036 	ld	hl,#0x0408
-   6E07 CD F9 70      [17] 6037 	call	_cpct_isKeyPressed
-   6E0A 7D            [ 4] 6038 	ld	a,l
-   6E0B B7            [ 4] 6039 	or	a, a
-   6E0C 28 F3         [12] 6040 	jr	Z,00104$
-                           6041 ;src/main.c:770: return;
-   6E0E C9            [10] 6042 	ret
-   6E0F                    6043 ___str_5:
-   6E0F 4C 6F 75 6E 67 65  6044 	.ascii "Lounge Gladiator"
+   627B DD 7E FB      [19] 4520 	ld	a,-5 (ix)
+   627E B7            [ 4] 4521 	or	a, a
+   627F 28 06         [12] 4522 	jr	Z,00115$
+   6281 DD 4E F7      [19] 4523 	ld	c,-9 (ix)
+   6284 DD 46 F8      [19] 4524 	ld	b,-8 (ix)
+   6287                    4525 00115$:
+   6287 CB 28         [ 8] 4526 	sra	b
+   6289 CB 19         [ 8] 4527 	rr	c
+   628B CB 28         [ 8] 4528 	sra	b
+   628D CB 19         [ 8] 4529 	rr	c
+   628F CB 28         [ 8] 4530 	sra	b
+   6291 CB 19         [ 8] 4531 	rr	c
+   6293 CB 28         [ 8] 4532 	sra	b
+   6295 CB 19         [ 8] 4533 	rr	c
+   6297 69            [ 4] 4534 	ld	l, c
+   6298 60            [ 4] 4535 	ld	h, b
+   6299 29            [11] 4536 	add	hl, hl
+   629A 29            [11] 4537 	add	hl, hl
+   629B 09            [11] 4538 	add	hl, bc
+   629C 29            [11] 4539 	add	hl, hl
+   629D 29            [11] 4540 	add	hl, hl
+   629E 3E 7A         [ 7] 4541 	ld	a,#<(_scene)
+   62A0 85            [ 4] 4542 	add	a, l
+   62A1 DD 77 FB      [19] 4543 	ld	-5 (ix),a
+   62A4 3E 75         [ 7] 4544 	ld	a,#>(_scene)
+   62A6 8C            [ 4] 4545 	adc	a, h
+   62A7 DD 77 FC      [19] 4546 	ld	-4 (ix),a
+   62AA DD 5E F4      [19] 4547 	ld	e,-12 (ix)
+   62AD DD 56 F5      [19] 4548 	ld	d,-11 (ix)
+   62B0 DD 7E F3      [19] 4549 	ld	a,-13 (ix)
+   62B3 B7            [ 4] 4550 	or	a, a
+   62B4 28 06         [12] 4551 	jr	Z,00116$
+   62B6 DD 5E FD      [19] 4552 	ld	e,-3 (ix)
+   62B9 DD 56 FE      [19] 4553 	ld	d,-2 (ix)
+   62BC                    4554 00116$:
+   62BC CB 2A         [ 8] 4555 	sra	d
+   62BE CB 1B         [ 8] 4556 	rr	e
+   62C0 CB 2A         [ 8] 4557 	sra	d
+   62C2 CB 1B         [ 8] 4558 	rr	e
+   62C4 DD 6E FB      [19] 4559 	ld	l,-5 (ix)
+   62C7 DD 66 FC      [19] 4560 	ld	h,-4 (ix)
+   62CA 19            [11] 4561 	add	hl,de
+   62CB DD 7E 0B      [19] 4562 	ld	a,11 (ix)
+   62CE 96            [ 7] 4563 	sub	a,(hl)
+   62CF 28 74         [12] 4564 	jr	Z,00111$
+   62D1                    4565 00106$:
+                           4566 ;src/main.c:581: switch(dir){
+   62D1 DD 7E 04      [19] 4567 	ld	a,4 (ix)
+   62D4 D6 02         [ 7] 4568 	sub	a, #0x02
+   62D6 28 43         [12] 4569 	jr	Z,00103$
+   62D8 DD 7E 04      [19] 4570 	ld	a,4 (ix)
+   62DB D6 04         [ 7] 4571 	sub	a, #0x04
+   62DD 28 10         [12] 4572 	jr	Z,00101$
+   62DF DD 7E 04      [19] 4573 	ld	a,4 (ix)
+   62E2 D6 06         [ 7] 4574 	sub	a, #0x06
+   62E4 28 1F         [12] 4575 	jr	Z,00102$
+   62E6 DD 7E 04      [19] 4576 	ld	a,4 (ix)
+   62E9 D6 08         [ 7] 4577 	sub	a, #0x08
+   62EB 28 44         [12] 4578 	jr	Z,00104$
+   62ED 18 56         [12] 4579 	jr	00111$
+                           4580 ;src/main.c:582: case 4:
+   62EF                    4581 00101$:
+                           4582 ;src/main.c:583: movement(6,&x[0],&y[0]);
+   62EF DD 4E F9      [19] 4583 	ld	c, -7 (ix)
+   62F2 DD 46 FA      [19] 4584 	ld	b, -6 (ix)
+   62F5 E1            [10] 4585 	pop	hl
+   62F6 E5            [11] 4586 	push	hl
+   62F7 C5            [11] 4587 	push	bc
+   62F8 E5            [11] 4588 	push	hl
+   62F9 3E 06         [ 7] 4589 	ld	a,#0x06
+   62FB F5            [11] 4590 	push	af
+   62FC 33            [ 6] 4591 	inc	sp
+   62FD CD 41 49      [17] 4592 	call	_movement
+   6300 F1            [10] 4593 	pop	af
+   6301 F1            [10] 4594 	pop	af
+   6302 33            [ 6] 4595 	inc	sp
+                           4596 ;src/main.c:584: break;
+   6303 18 40         [12] 4597 	jr	00111$
+                           4598 ;src/main.c:585: case 6:
+   6305                    4599 00102$:
+                           4600 ;src/main.c:586: movement(4,&x[0],&y[0]);
+   6305 DD 4E F9      [19] 4601 	ld	c, -7 (ix)
+   6308 DD 46 FA      [19] 4602 	ld	b, -6 (ix)
+   630B E1            [10] 4603 	pop	hl
+   630C E5            [11] 4604 	push	hl
+   630D C5            [11] 4605 	push	bc
+   630E E5            [11] 4606 	push	hl
+   630F 3E 04         [ 7] 4607 	ld	a,#0x04
+   6311 F5            [11] 4608 	push	af
+   6312 33            [ 6] 4609 	inc	sp
+   6313 CD 41 49      [17] 4610 	call	_movement
+   6316 F1            [10] 4611 	pop	af
+   6317 F1            [10] 4612 	pop	af
+   6318 33            [ 6] 4613 	inc	sp
+                           4614 ;src/main.c:587: break;
+   6319 18 2A         [12] 4615 	jr	00111$
+                           4616 ;src/main.c:588: case 2:
+   631B                    4617 00103$:
+                           4618 ;src/main.c:589: movement(8,&x[0],&y[0]);
+   631B DD 4E F9      [19] 4619 	ld	c, -7 (ix)
+   631E DD 46 FA      [19] 4620 	ld	b, -6 (ix)
+   6321 E1            [10] 4621 	pop	hl
+   6322 E5            [11] 4622 	push	hl
+   6323 C5            [11] 4623 	push	bc
+   6324 E5            [11] 4624 	push	hl
+   6325 3E 08         [ 7] 4625 	ld	a,#0x08
+   6327 F5            [11] 4626 	push	af
+   6328 33            [ 6] 4627 	inc	sp
+   6329 CD 41 49      [17] 4628 	call	_movement
+   632C F1            [10] 4629 	pop	af
+   632D F1            [10] 4630 	pop	af
+   632E 33            [ 6] 4631 	inc	sp
+                           4632 ;src/main.c:590: break;
+   632F 18 14         [12] 4633 	jr	00111$
+                           4634 ;src/main.c:591: case 8:
+   6331                    4635 00104$:
+                           4636 ;src/main.c:592: movement(2,&x[0],&y[0]);
+   6331 DD 4E F9      [19] 4637 	ld	c, -7 (ix)
+   6334 DD 46 FA      [19] 4638 	ld	b, -6 (ix)
+   6337 E1            [10] 4639 	pop	hl
+   6338 E5            [11] 4640 	push	hl
+   6339 C5            [11] 4641 	push	bc
+   633A E5            [11] 4642 	push	hl
+   633B 3E 02         [ 7] 4643 	ld	a,#0x02
+   633D F5            [11] 4644 	push	af
+   633E 33            [ 6] 4645 	inc	sp
+   633F CD 41 49      [17] 4646 	call	_movement
+   6342 F1            [10] 4647 	pop	af
+   6343 F1            [10] 4648 	pop	af
+   6344 33            [ 6] 4649 	inc	sp
+                           4650 ;src/main.c:594: }
+   6345                    4651 00111$:
+   6345 DD F9         [10] 4652 	ld	sp, ix
+   6347 DD E1         [14] 4653 	pop	ix
+   6349 C9            [10] 4654 	ret
+                           4655 ;src/main.c:599: u8 vissionSensor(u8 x,u8 y,u8 px,u8 py){
+                           4656 ;	---------------------------------
+                           4657 ; Function vissionSensor
+                           4658 ; ---------------------------------
+   634A                    4659 _vissionSensor::
+   634A DD E5         [15] 4660 	push	ix
+   634C DD 21 00 00   [14] 4661 	ld	ix,#0
+   6350 DD 39         [15] 4662 	add	ix,sp
+   6352 21 F6 FF      [10] 4663 	ld	hl,#-10
+   6355 39            [11] 4664 	add	hl,sp
+   6356 F9            [ 6] 4665 	ld	sp,hl
+                           4666 ;src/main.c:600: u8 following = 0;
+   6357 DD 36 FD 00   [19] 4667 	ld	-3 (ix),#0x00
+                           4668 ;src/main.c:601: u8 cx = x/tilewidth;
+   635B DD 7E 04      [19] 4669 	ld	a,4 (ix)
+   635E 0F            [ 4] 4670 	rrca
+   635F 0F            [ 4] 4671 	rrca
+   6360 E6 3F         [ 7] 4672 	and	a,#0x3F
+   6362 DD 77 FE      [19] 4673 	ld	-2 (ix),a
+                           4674 ;src/main.c:602: u8 cy = y/tilewidth;
+   6365 DD 7E 05      [19] 4675 	ld	a,5 (ix)
+   6368 0F            [ 4] 4676 	rrca
+   6369 0F            [ 4] 4677 	rrca
+   636A E6 3F         [ 7] 4678 	and	a,#0x3F
+   636C DD 77 FA      [19] 4679 	ld	-6 (ix),a
+                           4680 ;src/main.c:603: u8 pcx = px/tilewidth;
+   636F DD 7E 06      [19] 4681 	ld	a,6 (ix)
+   6372 0F            [ 4] 4682 	rrca
+   6373 0F            [ 4] 4683 	rrca
+   6374 E6 3F         [ 7] 4684 	and	a,#0x3F
+   6376 DD 77 FF      [19] 4685 	ld	-1 (ix),a
+                           4686 ;src/main.c:604: u8 pcy = py/tilewidth;
+   6379 DD 7E 07      [19] 4687 	ld	a,7 (ix)
+   637C 0F            [ 4] 4688 	rrca
+   637D 0F            [ 4] 4689 	rrca
+   637E E6 3F         [ 7] 4690 	and	a,#0x3F
+   6380 DD 77 F8      [19] 4691 	ld	-8 (ix),a
+                           4692 ;src/main.c:607: for(i=0;i<3;i++){
+   6383 DD 36 FB 00   [19] 4693 	ld	-5 (ix),#0x00
+   6387                    4694 00107$:
+                           4695 ;src/main.c:608: lex = cx - i;
+   6387 DD 7E FE      [19] 4696 	ld	a,-2 (ix)
+   638A DD 96 FB      [19] 4697 	sub	a, -5 (ix)
+   638D DD 77 F9      [19] 4698 	ld	-7 (ix),a
+                           4699 ;src/main.c:609: ley = cy - i;
+   6390 DD 7E FA      [19] 4700 	ld	a,-6 (ix)
+   6393 DD 96 FB      [19] 4701 	sub	a, -5 (ix)
+   6396 DD 77 F7      [19] 4702 	ld	-9 (ix),a
+                           4703 ;src/main.c:610: mex = cx + i;
+   6399 DD 7E FE      [19] 4704 	ld	a,-2 (ix)
+   639C DD 86 FB      [19] 4705 	add	a, -5 (ix)
+   639F DD 77 F6      [19] 4706 	ld	-10 (ix),a
+                           4707 ;src/main.c:611: mey = cy + i;
+   63A2 DD 7E FA      [19] 4708 	ld	a,-6 (ix)
+   63A5 DD 86 FB      [19] 4709 	add	a, -5 (ix)
+   63A8 DD 77 FC      [19] 4710 	ld	-4 (ix), a
+   63AB 57            [ 4] 4711 	ld	d, a
+                           4712 ;src/main.c:612: if(lex == pcx || ley == pcy || mex == pcx || mey == pcy){
+   63AC DD 7E F9      [19] 4713 	ld	a,-7 (ix)
+   63AF DD 96 FF      [19] 4714 	sub	a, -1 (ix)
+   63B2 28 16         [12] 4715 	jr	Z,00101$
+   63B4 DD 7E F7      [19] 4716 	ld	a,-9 (ix)
+   63B7 DD 96 F8      [19] 4717 	sub	a, -8 (ix)
+   63BA 28 0E         [12] 4718 	jr	Z,00101$
+   63BC DD 7E F6      [19] 4719 	ld	a,-10 (ix)
+   63BF DD 96 FF      [19] 4720 	sub	a, -1 (ix)
+   63C2 28 06         [12] 4721 	jr	Z,00101$
+   63C4 DD 7E F8      [19] 4722 	ld	a,-8 (ix)
+   63C7 92            [ 4] 4723 	sub	a, d
+   63C8 20 04         [12] 4724 	jr	NZ,00108$
+   63CA                    4725 00101$:
+                           4726 ;src/main.c:613: following = 1;
+   63CA DD 36 FD 01   [19] 4727 	ld	-3 (ix),#0x01
+   63CE                    4728 00108$:
+                           4729 ;src/main.c:607: for(i=0;i<3;i++){
+   63CE DD 34 FB      [23] 4730 	inc	-5 (ix)
+   63D1 DD 7E FB      [19] 4731 	ld	a,-5 (ix)
+   63D4 D6 03         [ 7] 4732 	sub	a, #0x03
+   63D6 38 AF         [12] 4733 	jr	C,00107$
+                           4734 ;src/main.c:617: return following;
+   63D8 DD 6E FD      [19] 4735 	ld	l,-3 (ix)
+   63DB DD F9         [10] 4736 	ld	sp, ix
+   63DD DD E1         [14] 4737 	pop	ix
+   63DF C9            [10] 4738 	ret
+                           4739 ;src/main.c:622: void move(u8 *x,u8 *y,u8 lx, u8 ly,u8 *dir,u8 *s,u8 room,u8 px,u8 py,u8 *seenX,u8 *seenY,u8 *following,u8 *pursue){
+                           4740 ;	---------------------------------
+                           4741 ; Function move
+                           4742 ; ---------------------------------
+   63E0                    4743 _move::
+   63E0 DD E5         [15] 4744 	push	ix
+   63E2 DD 21 00 00   [14] 4745 	ld	ix,#0
+   63E6 DD 39         [15] 4746 	add	ix,sp
+   63E8 21 F7 FF      [10] 4747 	ld	hl,#-9
+   63EB 39            [11] 4748 	add	hl,sp
+   63EC F9            [ 6] 4749 	ld	sp,hl
+                           4750 ;src/main.c:624: dir[0] = chooseDirection();
+   63ED DD 5E 0A      [19] 4751 	ld	e,10 (ix)
+   63F0 DD 56 0B      [19] 4752 	ld	d,11 (ix)
+                           4753 ;src/main.c:626: if(following[0] == room || *pursue != 0){
+   63F3 DD 4E 17      [19] 4754 	ld	c,23 (ix)
+   63F6 DD 46 18      [19] 4755 	ld	b,24 (ix)
+                           4756 ;src/main.c:636: followPlayer(px,py,x,y,*seenX,*seenY,room);
+   63F9 DD 7E 13      [19] 4757 	ld	a,19 (ix)
+   63FC DD 77 FA      [19] 4758 	ld	-6 (ix),a
+   63FF DD 7E 14      [19] 4759 	ld	a,20 (ix)
+   6402 DD 77 FB      [19] 4760 	ld	-5 (ix),a
+   6405 DD 7E 11      [19] 4761 	ld	a,17 (ix)
+   6408 DD 77 FE      [19] 4762 	ld	-2 (ix),a
+   640B DD 7E 12      [19] 4763 	ld	a,18 (ix)
+   640E DD 77 FF      [19] 4764 	ld	-1 (ix),a
+                           4765 ;src/main.c:623: if(temp > 4){
+   6411 3E 04         [ 7] 4766 	ld	a,#0x04
+   6413 FD 21 6A 76   [14] 4767 	ld	iy,#_temp
+   6417 FD BE 00      [19] 4768 	cp	a, 0 (iy)
+   641A 3E 00         [ 7] 4769 	ld	a,#0x00
+   641C FD 21 6A 76   [14] 4770 	ld	iy,#_temp
+   6420 FD 9E 01      [19] 4771 	sbc	a, 1 (iy)
+   6423 E2 28 64      [10] 4772 	jp	PO, 00159$
+   6426 EE 80         [ 7] 4773 	xor	a, #0x80
+   6428                    4774 00159$:
+   6428 F2 76 64      [10] 4775 	jp	P,00116$
+                           4776 ;src/main.c:624: dir[0] = chooseDirection();
+   642B C5            [11] 4777 	push	bc
+   642C D5            [11] 4778 	push	de
+   642D CD D2 48      [17] 4779 	call	_chooseDirection
+   6430 7D            [ 4] 4780 	ld	a,l
+   6431 D1            [10] 4781 	pop	de
+   6432 C1            [10] 4782 	pop	bc
+   6433 12            [ 7] 4783 	ld	(de),a
+                           4784 ;src/main.c:625: following[0] = detectPlayerRoom(px,py);
+   6434 DD 5E 15      [19] 4785 	ld	e,21 (ix)
+   6437 DD 56 16      [19] 4786 	ld	d,22 (ix)
+   643A C5            [11] 4787 	push	bc
+   643B D5            [11] 4788 	push	de
+   643C DD 66 10      [19] 4789 	ld	h,16 (ix)
+   643F DD 6E 0F      [19] 4790 	ld	l,15 (ix)
+   6442 E5            [11] 4791 	push	hl
+   6443 CD C0 46      [17] 4792 	call	_detectPlayerRoom
+   6446 F1            [10] 4793 	pop	af
+   6447 DD 75 F7      [19] 4794 	ld	-9 (ix),l
+   644A D1            [10] 4795 	pop	de
+   644B C1            [10] 4796 	pop	bc
+   644C DD 7E F7      [19] 4797 	ld	a,-9 (ix)
+   644F 12            [ 7] 4798 	ld	(de),a
+                           4799 ;src/main.c:626: if(following[0] == room || *pursue != 0){
+   6450 DD 7E 0E      [19] 4800 	ld	a,14 (ix)
+   6453 DD 96 F7      [19] 4801 	sub	a, -9 (ix)
+   6456 28 04         [12] 4802 	jr	Z,00104$
+   6458 0A            [ 7] 4803 	ld	a,(bc)
+   6459 B7            [ 4] 4804 	or	a, a
+   645A 28 11         [12] 4805 	jr	Z,00105$
+   645C                    4806 00104$:
+                           4807 ;src/main.c:627: if(pursue == 0)
+   645C DD 7E 18      [19] 4808 	ld	a,24 (ix)
+   645F DD B6 17      [19] 4809 	or	a,23 (ix)
+   6462 20 05         [12] 4810 	jr	NZ,00102$
+                           4811 ;src/main.c:628: *pursue = 1;
+   6464 3E 01         [ 7] 4812 	ld	a,#0x01
+   6466 02            [ 7] 4813 	ld	(bc),a
+   6467 18 04         [12] 4814 	jr	00105$
+   6469                    4815 00102$:
+                           4816 ;src/main.c:630: *pursue -=1;
+   6469 0A            [ 7] 4817 	ld	a,(bc)
+   646A C6 FF         [ 7] 4818 	add	a,#0xFF
+   646C 02            [ 7] 4819 	ld	(bc),a
+   646D                    4820 00105$:
+                           4821 ;src/main.c:632: temp = 0;
+   646D 21 00 00      [10] 4822 	ld	hl,#0x0000
+   6470 22 6A 76      [16] 4823 	ld	(_temp),hl
+   6473 C3 2C 65      [10] 4824 	jp	00117$
+   6476                    4825 00116$:
+                           4826 ;src/main.c:634: if(temp%2 == 0)
+   6476 C5            [11] 4827 	push	bc
+   6477 D5            [11] 4828 	push	de
+   6478 21 02 00      [10] 4829 	ld	hl,#0x0002
+   647B E5            [11] 4830 	push	hl
+   647C 2A 6A 76      [16] 4831 	ld	hl,(_temp)
+   647F E5            [11] 4832 	push	hl
+   6480 CD 78 74      [17] 4833 	call	__modsint
+   6483 F1            [10] 4834 	pop	af
+   6484 F1            [10] 4835 	pop	af
+   6485 D1            [10] 4836 	pop	de
+   6486 C1            [10] 4837 	pop	bc
+   6487 7C            [ 4] 4838 	ld	a,h
+   6488 B5            [ 4] 4839 	or	a,l
+   6489 C2 2C 65      [10] 4840 	jp	NZ,00117$
+                           4841 ;src/main.c:635: if(*pursue >= 1){
+   648C 0A            [ 7] 4842 	ld	a,(bc)
+   648D 67            [ 4] 4843 	ld	h,a
+                           4844 ;src/main.c:637: if(*seenX == *x && *seenY == *y)
+   648E DD 7E 04      [19] 4845 	ld	a,4 (ix)
+   6491 DD 77 F8      [19] 4846 	ld	-8 (ix),a
+   6494 DD 7E 05      [19] 4847 	ld	a,5 (ix)
+   6497 DD 77 F9      [19] 4848 	ld	-7 (ix),a
+   649A DD 7E 06      [19] 4849 	ld	a,6 (ix)
+   649D DD 77 FC      [19] 4850 	ld	-4 (ix),a
+   64A0 DD 7E 07      [19] 4851 	ld	a,7 (ix)
+   64A3 DD 77 FD      [19] 4852 	ld	-3 (ix),a
+                           4853 ;src/main.c:635: if(*pursue >= 1){
+   64A6 7C            [ 4] 4854 	ld	a,h
+   64A7 D6 01         [ 7] 4855 	sub	a, #0x01
+   64A9 38 5B         [12] 4856 	jr	C,00111$
+                           4857 ;src/main.c:636: followPlayer(px,py,x,y,*seenX,*seenY,room);
+   64AB DD 6E FA      [19] 4858 	ld	l,-6 (ix)
+   64AE DD 66 FB      [19] 4859 	ld	h,-5 (ix)
+   64B1 56            [ 7] 4860 	ld	d,(hl)
+   64B2 DD 6E FE      [19] 4861 	ld	l,-2 (ix)
+   64B5 DD 66 FF      [19] 4862 	ld	h,-1 (ix)
+   64B8 5E            [ 7] 4863 	ld	e,(hl)
+   64B9 C5            [11] 4864 	push	bc
+   64BA DD 7E 0E      [19] 4865 	ld	a,14 (ix)
+   64BD F5            [11] 4866 	push	af
+   64BE 33            [ 6] 4867 	inc	sp
+   64BF D5            [11] 4868 	push	de
+   64C0 DD 6E 06      [19] 4869 	ld	l,6 (ix)
+   64C3 DD 66 07      [19] 4870 	ld	h,7 (ix)
+   64C6 E5            [11] 4871 	push	hl
+   64C7 DD 6E 04      [19] 4872 	ld	l,4 (ix)
+   64CA DD 66 05      [19] 4873 	ld	h,5 (ix)
+   64CD E5            [11] 4874 	push	hl
+   64CE DD 66 10      [19] 4875 	ld	h,16 (ix)
+   64D1 DD 6E 0F      [19] 4876 	ld	l,15 (ix)
+   64D4 E5            [11] 4877 	push	hl
+   64D5 CD 0D 5E      [17] 4878 	call	_followPlayer
+   64D8 21 09 00      [10] 4879 	ld	hl,#9
+   64DB 39            [11] 4880 	add	hl,sp
+   64DC F9            [ 6] 4881 	ld	sp,hl
+   64DD C1            [10] 4882 	pop	bc
+                           4883 ;src/main.c:637: if(*seenX == *x && *seenY == *y)
+   64DE DD 6E FE      [19] 4884 	ld	l,-2 (ix)
+   64E1 DD 66 FF      [19] 4885 	ld	h,-1 (ix)
+   64E4 56            [ 7] 4886 	ld	d,(hl)
+   64E5 DD 6E F8      [19] 4887 	ld	l,-8 (ix)
+   64E8 DD 66 F9      [19] 4888 	ld	h,-7 (ix)
+   64EB 5E            [ 7] 4889 	ld	e,(hl)
+   64EC 7A            [ 4] 4890 	ld	a,d
+   64ED 93            [ 4] 4891 	sub	a, e
+   64EE 20 3C         [12] 4892 	jr	NZ,00117$
+   64F0 DD 6E FA      [19] 4893 	ld	l,-6 (ix)
+   64F3 DD 66 FB      [19] 4894 	ld	h,-5 (ix)
+   64F6 56            [ 7] 4895 	ld	d,(hl)
+   64F7 DD 6E FC      [19] 4896 	ld	l,-4 (ix)
+   64FA DD 66 FD      [19] 4897 	ld	h,-3 (ix)
+   64FD 5E            [ 7] 4898 	ld	e,(hl)
+   64FE 7A            [ 4] 4899 	ld	a,d
+   64FF 93            [ 4] 4900 	sub	a, e
+   6500 20 2A         [12] 4901 	jr	NZ,00117$
+                           4902 ;src/main.c:638: *pursue = 0;
+   6502 AF            [ 4] 4903 	xor	a, a
+   6503 02            [ 7] 4904 	ld	(bc),a
+   6504 18 26         [12] 4905 	jr	00117$
+   6506                    4906 00111$:
+                           4907 ;src/main.c:640: patrol(dir[0],lx,ly,&x[0],&y[0],room);
+   6506 1A            [ 7] 4908 	ld	a,(de)
+   6507 57            [ 4] 4909 	ld	d,a
+   6508 DD 7E 0E      [19] 4910 	ld	a,14 (ix)
+   650B F5            [11] 4911 	push	af
+   650C 33            [ 6] 4912 	inc	sp
+   650D DD 6E FC      [19] 4913 	ld	l,-4 (ix)
+   6510 DD 66 FD      [19] 4914 	ld	h,-3 (ix)
+   6513 E5            [11] 4915 	push	hl
+   6514 DD 6E F8      [19] 4916 	ld	l,-8 (ix)
+   6517 DD 66 F9      [19] 4917 	ld	h,-7 (ix)
+   651A E5            [11] 4918 	push	hl
+   651B DD 66 09      [19] 4919 	ld	h,9 (ix)
+   651E DD 6E 08      [19] 4920 	ld	l,8 (ix)
+   6521 E5            [11] 4921 	push	hl
+   6522 D5            [11] 4922 	push	de
+   6523 33            [ 6] 4923 	inc	sp
+   6524 CD 54 61      [17] 4924 	call	_patrol
+   6527 21 08 00      [10] 4925 	ld	hl,#8
+   652A 39            [11] 4926 	add	hl,sp
+   652B F9            [ 6] 4927 	ld	sp,hl
+   652C                    4928 00117$:
+                           4929 ;src/main.c:643: if((detectPlayerRoom(lx,ly) != detectPlayerRoom(px,py)) && pursue != 0){
+   652C DD 66 09      [19] 4930 	ld	h,9 (ix)
+   652F DD 6E 08      [19] 4931 	ld	l,8 (ix)
+   6532 E5            [11] 4932 	push	hl
+   6533 CD C0 46      [17] 4933 	call	_detectPlayerRoom
+   6536 F1            [10] 4934 	pop	af
+   6537 55            [ 4] 4935 	ld	d,l
+   6538 D5            [11] 4936 	push	de
+   6539 DD 66 10      [19] 4937 	ld	h,16 (ix)
+   653C DD 6E 0F      [19] 4938 	ld	l,15 (ix)
+   653F E5            [11] 4939 	push	hl
+   6540 CD C0 46      [17] 4940 	call	_detectPlayerRoom
+   6543 F1            [10] 4941 	pop	af
+   6544 45            [ 4] 4942 	ld	b,l
+   6545 D1            [10] 4943 	pop	de
+   6546 7A            [ 4] 4944 	ld	a,d
+   6547 90            [ 4] 4945 	sub	a, b
+   6548 28 1C         [12] 4946 	jr	Z,00119$
+   654A DD 7E 18      [19] 4947 	ld	a,24 (ix)
+   654D DD B6 17      [19] 4948 	or	a,23 (ix)
+   6550 28 14         [12] 4949 	jr	Z,00119$
+                           4950 ;src/main.c:644: *seenX = px;
+   6552 DD 6E FE      [19] 4951 	ld	l,-2 (ix)
+   6555 DD 66 FF      [19] 4952 	ld	h,-1 (ix)
+   6558 DD 7E 0F      [19] 4953 	ld	a,15 (ix)
+   655B 77            [ 7] 4954 	ld	(hl),a
+                           4955 ;src/main.c:645: *seenY = py;
+   655C DD 6E FA      [19] 4956 	ld	l,-6 (ix)
+   655F DD 66 FB      [19] 4957 	ld	h,-5 (ix)
+   6562 DD 7E 10      [19] 4958 	ld	a,16 (ix)
+   6565 77            [ 7] 4959 	ld	(hl),a
+   6566                    4960 00119$:
+                           4961 ;src/main.c:647: temp += 1;
+   6566 21 6A 76      [10] 4962 	ld	hl, #_temp+0
+   6569 34            [11] 4963 	inc	(hl)
+   656A 20 04         [12] 4964 	jr	NZ,00166$
+   656C 21 6B 76      [10] 4965 	ld	hl, #_temp+1
+   656F 34            [11] 4966 	inc	(hl)
+   6570                    4967 00166$:
+   6570 DD F9         [10] 4968 	ld	sp, ix
+   6572 DD E1         [14] 4969 	pop	ix
+   6574 C9            [10] 4970 	ret
+                           4971 ;src/main.c:664: void game(){
+                           4972 ;	---------------------------------
+                           4973 ; Function game
+                           4974 ; ---------------------------------
+   6575                    4975 _game::
+   6575 DD E5         [15] 4976 	push	ix
+   6577 DD 21 00 00   [14] 4977 	ld	ix,#0
+   657B DD 39         [15] 4978 	add	ix,sp
+   657D 21 7A FF      [10] 4979 	ld	hl,#-134
+   6580 39            [11] 4980 	add	hl,sp
+   6581 F9            [ 6] 4981 	ld	sp,hl
+                           4982 ;src/main.c:665: TPlayer p = {0,80,0,80,gladis_quieto_dcha,3,6,4,16,4,20,20,3};
+   6582 21 10 00      [10] 4983 	ld	hl,#0x0010
+   6585 39            [11] 4984 	add	hl,sp
+   6586 36 00         [10] 4985 	ld	(hl),#0x00
+   6588 21 10 00      [10] 4986 	ld	hl,#0x0010
+   658B 39            [11] 4987 	add	hl,sp
+   658C DD 75 EE      [19] 4988 	ld	-18 (ix),l
+   658F DD 74 EF      [19] 4989 	ld	-17 (ix),h
+   6592 DD 7E EE      [19] 4990 	ld	a,-18 (ix)
+   6595 C6 01         [ 7] 4991 	add	a, #0x01
+   6597 DD 77 BC      [19] 4992 	ld	-68 (ix),a
+   659A DD 7E EF      [19] 4993 	ld	a,-17 (ix)
+   659D CE 00         [ 7] 4994 	adc	a, #0x00
+   659F DD 77 BD      [19] 4995 	ld	-67 (ix),a
+   65A2 DD 6E BC      [19] 4996 	ld	l,-68 (ix)
+   65A5 DD 66 BD      [19] 4997 	ld	h,-67 (ix)
+   65A8 36 50         [10] 4998 	ld	(hl),#0x50
+   65AA DD 7E EE      [19] 4999 	ld	a,-18 (ix)
+   65AD C6 02         [ 7] 5000 	add	a, #0x02
+   65AF DD 77 AD      [19] 5001 	ld	-83 (ix),a
+   65B2 DD 7E EF      [19] 5002 	ld	a,-17 (ix)
+   65B5 CE 00         [ 7] 5003 	adc	a, #0x00
+   65B7 DD 77 AE      [19] 5004 	ld	-82 (ix),a
+   65BA DD 6E AD      [19] 5005 	ld	l,-83 (ix)
+   65BD DD 66 AE      [19] 5006 	ld	h,-82 (ix)
+   65C0 36 00         [10] 5007 	ld	(hl),#0x00
+   65C2 DD 7E EE      [19] 5008 	ld	a,-18 (ix)
+   65C5 C6 03         [ 7] 5009 	add	a, #0x03
+   65C7 DD 77 BE      [19] 5010 	ld	-66 (ix),a
+   65CA DD 7E EF      [19] 5011 	ld	a,-17 (ix)
+   65CD CE 00         [ 7] 5012 	adc	a, #0x00
+   65CF DD 77 BF      [19] 5013 	ld	-65 (ix),a
+   65D2 DD 6E BE      [19] 5014 	ld	l,-66 (ix)
+   65D5 DD 66 BF      [19] 5015 	ld	h,-65 (ix)
+   65D8 36 50         [10] 5016 	ld	(hl),#0x50
+   65DA DD 7E EE      [19] 5017 	ld	a,-18 (ix)
+   65DD C6 04         [ 7] 5018 	add	a, #0x04
+   65DF DD 77 B6      [19] 5019 	ld	-74 (ix),a
+   65E2 DD 7E EF      [19] 5020 	ld	a,-17 (ix)
+   65E5 CE 00         [ 7] 5021 	adc	a, #0x00
+   65E7 DD 77 B7      [19] 5022 	ld	-73 (ix),a
+   65EA DD 6E B6      [19] 5023 	ld	l,-74 (ix)
+   65ED DD 66 B7      [19] 5024 	ld	h,-73 (ix)
+   65F0 36 00         [10] 5025 	ld	(hl),#<(_gladis_quieto_dcha)
+   65F2 23            [ 6] 5026 	inc	hl
+   65F3 36 40         [10] 5027 	ld	(hl),#>(_gladis_quieto_dcha)
+   65F5 DD 7E EE      [19] 5028 	ld	a,-18 (ix)
+   65F8 C6 06         [ 7] 5029 	add	a, #0x06
+   65FA DD 77 AB      [19] 5030 	ld	-85 (ix),a
+   65FD DD 7E EF      [19] 5031 	ld	a,-17 (ix)
+   6600 CE 00         [ 7] 5032 	adc	a, #0x00
+   6602 DD 77 AC      [19] 5033 	ld	-84 (ix),a
+   6605 DD 6E AB      [19] 5034 	ld	l,-85 (ix)
+   6608 DD 66 AC      [19] 5035 	ld	h,-84 (ix)
+   660B 36 03         [10] 5036 	ld	(hl),#0x03
+   660D DD 7E EE      [19] 5037 	ld	a,-18 (ix)
+   6610 C6 07         [ 7] 5038 	add	a, #0x07
+   6612 DD 77 D1      [19] 5039 	ld	-47 (ix),a
+   6615 DD 7E EF      [19] 5040 	ld	a,-17 (ix)
+   6618 CE 00         [ 7] 5041 	adc	a, #0x00
+   661A DD 77 D2      [19] 5042 	ld	-46 (ix),a
+   661D DD 6E D1      [19] 5043 	ld	l,-47 (ix)
+   6620 DD 66 D2      [19] 5044 	ld	h,-46 (ix)
+   6623 36 06         [10] 5045 	ld	(hl),#0x06
+   6625 DD 7E EE      [19] 5046 	ld	a,-18 (ix)
+   6628 C6 08         [ 7] 5047 	add	a, #0x08
+   662A DD 77 CF      [19] 5048 	ld	-49 (ix),a
+   662D DD 7E EF      [19] 5049 	ld	a,-17 (ix)
+   6630 CE 00         [ 7] 5050 	adc	a, #0x00
+   6632 DD 77 D0      [19] 5051 	ld	-48 (ix),a
+   6635 DD 6E CF      [19] 5052 	ld	l,-49 (ix)
+   6638 DD 66 D0      [19] 5053 	ld	h,-48 (ix)
+   663B 36 04         [10] 5054 	ld	(hl),#0x04
+   663D DD 7E EE      [19] 5055 	ld	a,-18 (ix)
+   6640 C6 09         [ 7] 5056 	add	a, #0x09
+   6642 DD 77 A9      [19] 5057 	ld	-87 (ix),a
+   6645 DD 7E EF      [19] 5058 	ld	a,-17 (ix)
+   6648 CE 00         [ 7] 5059 	adc	a, #0x00
+   664A DD 77 AA      [19] 5060 	ld	-86 (ix),a
+   664D DD 6E A9      [19] 5061 	ld	l,-87 (ix)
+   6650 DD 66 AA      [19] 5062 	ld	h,-86 (ix)
+   6653 36 10         [10] 5063 	ld	(hl),#0x10
+   6655 DD 7E EE      [19] 5064 	ld	a,-18 (ix)
+   6658 C6 0A         [ 7] 5065 	add	a, #0x0A
+   665A DD 77 BA      [19] 5066 	ld	-70 (ix),a
+   665D DD 7E EF      [19] 5067 	ld	a,-17 (ix)
+   6660 CE 00         [ 7] 5068 	adc	a, #0x00
+   6662 DD 77 BB      [19] 5069 	ld	-69 (ix),a
+   6665 DD 6E BA      [19] 5070 	ld	l,-70 (ix)
+   6668 DD 66 BB      [19] 5071 	ld	h,-69 (ix)
+   666B 36 04         [10] 5072 	ld	(hl),#0x04
+   666D DD 7E EE      [19] 5073 	ld	a,-18 (ix)
+   6670 C6 0B         [ 7] 5074 	add	a, #0x0B
+   6672 DD 77 B8      [19] 5075 	ld	-72 (ix),a
+   6675 DD 7E EF      [19] 5076 	ld	a,-17 (ix)
+   6678 CE 00         [ 7] 5077 	adc	a, #0x00
+   667A DD 77 B9      [19] 5078 	ld	-71 (ix),a
+   667D DD 6E B8      [19] 5079 	ld	l,-72 (ix)
+   6680 DD 66 B9      [19] 5080 	ld	h,-71 (ix)
+   6683 36 14         [10] 5081 	ld	(hl),#0x14
+   6685 DD 7E EE      [19] 5082 	ld	a,-18 (ix)
+   6688 C6 0C         [ 7] 5083 	add	a, #0x0C
+   668A DD 77 FA      [19] 5084 	ld	-6 (ix),a
+   668D DD 7E EF      [19] 5085 	ld	a,-17 (ix)
+   6690 CE 00         [ 7] 5086 	adc	a, #0x00
+   6692 DD 77 FB      [19] 5087 	ld	-5 (ix),a
+   6695 DD 6E FA      [19] 5088 	ld	l,-6 (ix)
+   6698 DD 66 FB      [19] 5089 	ld	h,-5 (ix)
+   669B 36 14         [10] 5090 	ld	(hl),#0x14
+   669D DD 7E EE      [19] 5091 	ld	a,-18 (ix)
+   66A0 C6 0D         [ 7] 5092 	add	a, #0x0D
+   66A2 DD 77 F8      [19] 5093 	ld	-8 (ix),a
+   66A5 DD 7E EF      [19] 5094 	ld	a,-17 (ix)
+   66A8 CE 00         [ 7] 5095 	adc	a, #0x00
+   66AA DD 77 F9      [19] 5096 	ld	-7 (ix),a
+   66AD DD 6E F8      [19] 5097 	ld	l,-8 (ix)
+   66B0 DD 66 F9      [19] 5098 	ld	h,-7 (ix)
+   66B3 36 03         [10] 5099 	ld	(hl),#0x03
+   66B5 DD 7E EE      [19] 5100 	ld	a,-18 (ix)
+   66B8 C6 0E         [ 7] 5101 	add	a, #0x0E
+   66BA 6F            [ 4] 5102 	ld	l,a
+   66BB DD 7E EF      [19] 5103 	ld	a,-17 (ix)
+   66BE CE 00         [ 7] 5104 	adc	a, #0x00
+   66C0 67            [ 4] 5105 	ld	h,a
+   66C1 36 00         [10] 5106 	ld	(hl),#0x00
+   66C3 DD 7E EE      [19] 5107 	ld	a,-18 (ix)
+   66C6 C6 0F         [ 7] 5108 	add	a, #0x0F
+   66C8 6F            [ 4] 5109 	ld	l,a
+   66C9 DD 7E EF      [19] 5110 	ld	a,-17 (ix)
+   66CC CE 00         [ 7] 5111 	adc	a, #0x00
+   66CE 67            [ 4] 5112 	ld	h,a
+   66CF 36 00         [10] 5113 	ld	(hl),#0x00
+                           5114 ;src/main.c:666: TEnemy e = {52,80,52,80,52,80,chacho_dcha,3,2,3,3,0,0,0};
+   66D1 21 00 00      [10] 5115 	ld	hl,#0x0000
+   66D4 39            [11] 5116 	add	hl,sp
+   66D5 36 34         [10] 5117 	ld	(hl),#0x34
+   66D7 21 00 00      [10] 5118 	ld	hl,#0x0000
+   66DA 39            [11] 5119 	add	hl,sp
+   66DB DD 75 C2      [19] 5120 	ld	-62 (ix),l
+   66DE DD 74 C3      [19] 5121 	ld	-61 (ix),h
+   66E1 DD 7E C2      [19] 5122 	ld	a,-62 (ix)
+   66E4 C6 01         [ 7] 5123 	add	a, #0x01
+   66E6 DD 77 C0      [19] 5124 	ld	-64 (ix),a
+   66E9 DD 7E C3      [19] 5125 	ld	a,-61 (ix)
+   66EC CE 00         [ 7] 5126 	adc	a, #0x00
+   66EE DD 77 C1      [19] 5127 	ld	-63 (ix),a
+   66F1 DD 6E C0      [19] 5128 	ld	l,-64 (ix)
+   66F4 DD 66 C1      [19] 5129 	ld	h,-63 (ix)
+   66F7 36 50         [10] 5130 	ld	(hl),#0x50
+   66F9 DD 7E C2      [19] 5131 	ld	a,-62 (ix)
+   66FC C6 02         [ 7] 5132 	add	a, #0x02
+   66FE DD 77 DC      [19] 5133 	ld	-36 (ix),a
+   6701 DD 7E C3      [19] 5134 	ld	a,-61 (ix)
+   6704 CE 00         [ 7] 5135 	adc	a, #0x00
+   6706 DD 77 DD      [19] 5136 	ld	-35 (ix),a
+   6709 DD 6E DC      [19] 5137 	ld	l,-36 (ix)
+   670C DD 66 DD      [19] 5138 	ld	h,-35 (ix)
+   670F 36 34         [10] 5139 	ld	(hl),#0x34
+   6711 DD 7E C2      [19] 5140 	ld	a,-62 (ix)
+   6714 C6 03         [ 7] 5141 	add	a, #0x03
+   6716 DD 77 DA      [19] 5142 	ld	-38 (ix),a
+   6719 DD 7E C3      [19] 5143 	ld	a,-61 (ix)
+   671C CE 00         [ 7] 5144 	adc	a, #0x00
+   671E DD 77 DB      [19] 5145 	ld	-37 (ix),a
+   6721 DD 6E DA      [19] 5146 	ld	l,-38 (ix)
+   6724 DD 66 DB      [19] 5147 	ld	h,-37 (ix)
+   6727 36 50         [10] 5148 	ld	(hl),#0x50
+   6729 DD 7E C2      [19] 5149 	ld	a,-62 (ix)
+   672C C6 04         [ 7] 5150 	add	a, #0x04
+   672E 6F            [ 4] 5151 	ld	l,a
+   672F DD 7E C3      [19] 5152 	ld	a,-61 (ix)
+   6732 CE 00         [ 7] 5153 	adc	a, #0x00
+   6734 67            [ 4] 5154 	ld	h,a
+   6735 36 34         [10] 5155 	ld	(hl),#0x34
+   6737 DD 7E C2      [19] 5156 	ld	a,-62 (ix)
+   673A C6 05         [ 7] 5157 	add	a, #0x05
+   673C 6F            [ 4] 5158 	ld	l,a
+   673D DD 7E C3      [19] 5159 	ld	a,-61 (ix)
+   6740 CE 00         [ 7] 5160 	adc	a, #0x00
+   6742 67            [ 4] 5161 	ld	h,a
+   6743 36 50         [10] 5162 	ld	(hl),#0x50
+   6745 DD 7E C2      [19] 5163 	ld	a,-62 (ix)
+   6748 C6 06         [ 7] 5164 	add	a, #0x06
+   674A DD 77 FE      [19] 5165 	ld	-2 (ix),a
+   674D DD 7E C3      [19] 5166 	ld	a,-61 (ix)
+   6750 CE 00         [ 7] 5167 	adc	a, #0x00
+   6752 DD 77 FF      [19] 5168 	ld	-1 (ix),a
+   6755 DD 6E FE      [19] 5169 	ld	l,-2 (ix)
+   6758 DD 66 FF      [19] 5170 	ld	h,-1 (ix)
+   675B 36 00         [10] 5171 	ld	(hl),#<(_chacho_dcha)
+   675D 23            [ 6] 5172 	inc	hl
+   675E 36 44         [10] 5173 	ld	(hl),#>(_chacho_dcha)
+   6760 DD 7E C2      [19] 5174 	ld	a,-62 (ix)
+   6763 C6 08         [ 7] 5175 	add	a, #0x08
+   6765 DD 77 FC      [19] 5176 	ld	-4 (ix),a
+   6768 DD 7E C3      [19] 5177 	ld	a,-61 (ix)
+   676B CE 00         [ 7] 5178 	adc	a, #0x00
+   676D DD 77 FD      [19] 5179 	ld	-3 (ix),a
+   6770 DD 6E FC      [19] 5180 	ld	l,-4 (ix)
+   6773 DD 66 FD      [19] 5181 	ld	h,-3 (ix)
+   6776 36 03         [10] 5182 	ld	(hl),#0x03
+   6778 DD 7E C2      [19] 5183 	ld	a,-62 (ix)
+   677B C6 09         [ 7] 5184 	add	a, #0x09
+   677D DD 77 E4      [19] 5185 	ld	-28 (ix),a
+   6780 DD 7E C3      [19] 5186 	ld	a,-61 (ix)
+   6783 CE 00         [ 7] 5187 	adc	a, #0x00
+   6785 DD 77 E5      [19] 5188 	ld	-27 (ix),a
+   6788 DD 6E E4      [19] 5189 	ld	l,-28 (ix)
+   678B DD 66 E5      [19] 5190 	ld	h,-27 (ix)
+   678E 36 02         [10] 5191 	ld	(hl),#0x02
+   6790 DD 7E C2      [19] 5192 	ld	a,-62 (ix)
+   6793 C6 0A         [ 7] 5193 	add	a, #0x0A
+   6795 6F            [ 4] 5194 	ld	l,a
+   6796 DD 7E C3      [19] 5195 	ld	a,-61 (ix)
+   6799 CE 00         [ 7] 5196 	adc	a, #0x00
+   679B 67            [ 4] 5197 	ld	h,a
+   679C 36 03         [10] 5198 	ld	(hl),#0x03
+   679E DD 7E C2      [19] 5199 	ld	a,-62 (ix)
+   67A1 C6 0B         [ 7] 5200 	add	a, #0x0B
+   67A3 DD 77 E2      [19] 5201 	ld	-30 (ix),a
+   67A6 DD 7E C3      [19] 5202 	ld	a,-61 (ix)
+   67A9 CE 00         [ 7] 5203 	adc	a, #0x00
+   67AB DD 77 E3      [19] 5204 	ld	-29 (ix),a
+   67AE DD 6E E2      [19] 5205 	ld	l,-30 (ix)
+   67B1 DD 66 E3      [19] 5206 	ld	h,-29 (ix)
+   67B4 36 03         [10] 5207 	ld	(hl),#0x03
+   67B6 DD 7E C2      [19] 5208 	ld	a,-62 (ix)
+   67B9 C6 0C         [ 7] 5209 	add	a, #0x0C
+   67BB 5F            [ 4] 5210 	ld	e,a
+   67BC DD 7E C3      [19] 5211 	ld	a,-61 (ix)
+   67BF CE 00         [ 7] 5212 	adc	a, #0x00
+   67C1 57            [ 4] 5213 	ld	d,a
+   67C2 AF            [ 4] 5214 	xor	a, a
+   67C3 12            [ 7] 5215 	ld	(de),a
+   67C4 DD 7E C2      [19] 5216 	ld	a,-62 (ix)
+   67C7 C6 0D         [ 7] 5217 	add	a, #0x0D
+   67C9 DD 77 E0      [19] 5218 	ld	-32 (ix),a
+   67CC DD 7E C3      [19] 5219 	ld	a,-61 (ix)
+   67CF CE 00         [ 7] 5220 	adc	a, #0x00
+   67D1 DD 77 E1      [19] 5221 	ld	-31 (ix),a
+   67D4 DD 6E E0      [19] 5222 	ld	l,-32 (ix)
+   67D7 DD 66 E1      [19] 5223 	ld	h,-31 (ix)
+   67DA 36 00         [10] 5224 	ld	(hl),#0x00
+   67DC DD 7E C2      [19] 5225 	ld	a,-62 (ix)
+   67DF C6 0E         [ 7] 5226 	add	a, #0x0E
+   67E1 DD 77 DE      [19] 5227 	ld	-34 (ix),a
+   67E4 DD 7E C3      [19] 5228 	ld	a,-61 (ix)
+   67E7 CE 00         [ 7] 5229 	adc	a, #0x00
+   67E9 DD 77 DF      [19] 5230 	ld	-33 (ix),a
+   67EC DD 6E DE      [19] 5231 	ld	l,-34 (ix)
+   67EF DD 66 DF      [19] 5232 	ld	h,-33 (ix)
+   67F2 36 00         [10] 5233 	ld	(hl),#0x00
+                           5234 ;src/main.c:667: TNivel n = {0,0,0};
+   67F4 21 22 00      [10] 5235 	ld	hl,#0x0022
+   67F7 39            [11] 5236 	add	hl,sp
+   67F8 36 00         [10] 5237 	ld	(hl),#0x00
+   67FA 21 22 00      [10] 5238 	ld	hl,#0x0022
+   67FD 39            [11] 5239 	add	hl,sp
+   67FE 4D            [ 4] 5240 	ld	c,l
+   67FF 44            [ 4] 5241 	ld	b,h
+   6800 21 01 00      [10] 5242 	ld	hl,#0x0001
+   6803 09            [11] 5243 	add	hl,bc
+   6804 DD 75 D8      [19] 5244 	ld	-40 (ix),l
+   6807 DD 74 D9      [19] 5245 	ld	-39 (ix),h
+   680A DD 6E D8      [19] 5246 	ld	l,-40 (ix)
+   680D DD 66 D9      [19] 5247 	ld	h,-39 (ix)
+   6810 36 00         [10] 5248 	ld	(hl),#0x00
+   6812 03            [ 6] 5249 	inc	bc
+   6813 03            [ 6] 5250 	inc	bc
+   6814 DD 71 D6      [19] 5251 	ld	-42 (ix),c
+   6817 DD 70 D7      [19] 5252 	ld	-41 (ix),b
+   681A DD 6E D6      [19] 5253 	ld	l,-42 (ix)
+   681D DD 66 D7      [19] 5254 	ld	h,-41 (ix)
+   6820 36 00         [10] 5255 	ld	(hl),#0x00
+                           5256 ;src/main.c:673: u8 finish = 0,i=1,arrow=0,following = 0;
+   6822 DD 36 9A 00   [19] 5257 	ld	-102 (ix),#0x00
+   6826 DD 36 89 00   [19] 5258 	ld	-119 (ix),#0x00
+   682A DD 36 9B 00   [19] 5259 	ld	-101 (ix),#0x00
+                           5260 ;src/main.c:675: u8 bound = 0;
+   682E DD 36 D5 00   [19] 5261 	ld	-43 (ix),#0x00
+                           5262 ;src/main.c:676: temp = 0;
+   6832 21 00 00      [10] 5263 	ld	hl,#0x0000
+   6835 22 6A 76      [16] 5264 	ld	(_temp),hl
+                           5265 ;src/main.c:678: cpct_clearScreen(0);
+   6838 D5            [11] 5266 	push	de
+   6839 26 40         [ 7] 5267 	ld	h, #0x40
+   683B E5            [11] 5268 	push	hl
+   683C AF            [ 4] 5269 	xor	a, a
+   683D F5            [11] 5270 	push	af
+   683E 33            [ 6] 5271 	inc	sp
+   683F 26 C0         [ 7] 5272 	ld	h, #0xC0
+   6841 E5            [11] 5273 	push	hl
+   6842 CD 91 73      [17] 5274 	call	_cpct_memset
+   6845 3E 01         [ 7] 5275 	ld	a,#0x01
+   6847 F5            [11] 5276 	push	af
+   6848 33            [ 6] 5277 	inc	sp
+   6849 CD FF 4C      [17] 5278 	call	_drawMap
+   684C 33            [ 6] 5279 	inc	sp
+   684D D1            [10] 5280 	pop	de
+                           5281 ;src/main.c:683: while (1){
+   684E DD 73 D3      [19] 5282 	ld	-45 (ix),e
+   6851 DD 72 D4      [19] 5283 	ld	-44 (ix),d
+   6854 DD 7E C0      [19] 5284 	ld	a,-64 (ix)
+   6857 DD 77 F6      [19] 5285 	ld	-10 (ix),a
+   685A DD 7E C1      [19] 5286 	ld	a,-63 (ix)
+   685D DD 77 F7      [19] 5287 	ld	-9 (ix),a
+   6860 DD 7E C2      [19] 5288 	ld	a,-62 (ix)
+   6863 DD 77 F4      [19] 5289 	ld	-12 (ix),a
+   6866 DD 7E C3      [19] 5290 	ld	a,-61 (ix)
+   6869 DD 77 F5      [19] 5291 	ld	-11 (ix),a
+   686C DD 7E F8      [19] 5292 	ld	a,-8 (ix)
+   686F DD 77 F2      [19] 5293 	ld	-14 (ix),a
+   6872 DD 7E F9      [19] 5294 	ld	a,-7 (ix)
+   6875 DD 77 F3      [19] 5295 	ld	-13 (ix),a
+   6878 DD 7E CF      [19] 5296 	ld	a,-49 (ix)
+   687B DD 77 F0      [19] 5297 	ld	-16 (ix),a
+   687E DD 7E D0      [19] 5298 	ld	a,-48 (ix)
+   6881 DD 77 F1      [19] 5299 	ld	-15 (ix),a
+   6884 DD 7E B8      [19] 5300 	ld	a,-72 (ix)
+   6887 DD 77 EC      [19] 5301 	ld	-20 (ix),a
+   688A DD 7E B9      [19] 5302 	ld	a,-71 (ix)
+   688D DD 77 ED      [19] 5303 	ld	-19 (ix),a
+   6890 DD 7E BC      [19] 5304 	ld	a,-68 (ix)
+   6893 DD 77 EA      [19] 5305 	ld	-22 (ix),a
+   6896 DD 7E BD      [19] 5306 	ld	a,-67 (ix)
+   6899 DD 77 EB      [19] 5307 	ld	-21 (ix),a
+   689C DD 7E EE      [19] 5308 	ld	a,-18 (ix)
+   689F DD 77 E8      [19] 5309 	ld	-24 (ix),a
+   68A2 DD 7E EF      [19] 5310 	ld	a,-17 (ix)
+   68A5 DD 77 E9      [19] 5311 	ld	-23 (ix),a
+   68A8 DD 7E D6      [19] 5312 	ld	a,-42 (ix)
+   68AB DD 77 E6      [19] 5313 	ld	-26 (ix),a
+   68AE DD 7E D7      [19] 5314 	ld	a,-41 (ix)
+   68B1 DD 77 E7      [19] 5315 	ld	-25 (ix),a
+   68B4 DD 7E D8      [19] 5316 	ld	a,-40 (ix)
+   68B7 DD 77 A7      [19] 5317 	ld	-89 (ix),a
+   68BA DD 7E D9      [19] 5318 	ld	a,-39 (ix)
+   68BD DD 77 A8      [19] 5319 	ld	-88 (ix),a
+   68C0 DD 7E F8      [19] 5320 	ld	a,-8 (ix)
+   68C3 DD 77 A5      [19] 5321 	ld	-91 (ix),a
+   68C6 DD 7E F9      [19] 5322 	ld	a,-7 (ix)
+   68C9 DD 77 A6      [19] 5323 	ld	-90 (ix),a
+   68CC DD 7E AB      [19] 5324 	ld	a,-85 (ix)
+   68CF DD 77 A3      [19] 5325 	ld	-93 (ix),a
+   68D2 DD 7E AC      [19] 5326 	ld	a,-84 (ix)
+   68D5 DD 77 A4      [19] 5327 	ld	-92 (ix),a
+   68D8 DD 7E BC      [19] 5328 	ld	a,-68 (ix)
+   68DB DD 77 A1      [19] 5329 	ld	-95 (ix),a
+   68DE DD 7E BD      [19] 5330 	ld	a,-67 (ix)
+   68E1 DD 77 A2      [19] 5331 	ld	-94 (ix),a
+   68E4 DD 7E EE      [19] 5332 	ld	a,-18 (ix)
+   68E7 DD 77 9F      [19] 5333 	ld	-97 (ix),a
+   68EA DD 7E EF      [19] 5334 	ld	a,-17 (ix)
+   68ED DD 77 A0      [19] 5335 	ld	-96 (ix),a
+   68F0                    5336 00144$:
+                           5337 ;src/main.c:686: cpct_waitVSYNC();
+   68F0 CD 77 73      [17] 5338 	call	_cpct_waitVSYNC
+                           5339 ;src/main.c:689: erasePlayer(p.lx,p.ly,0);
+   68F3 DD 6E BE      [19] 5340 	ld	l,-66 (ix)
+   68F6 DD 66 BF      [19] 5341 	ld	h,-65 (ix)
+   68F9 46            [ 7] 5342 	ld	b,(hl)
+   68FA DD 6E AD      [19] 5343 	ld	l,-83 (ix)
+   68FD DD 66 AE      [19] 5344 	ld	h,-82 (ix)
+   6900 56            [ 7] 5345 	ld	d,(hl)
+   6901 AF            [ 4] 5346 	xor	a, a
+   6902 F5            [11] 5347 	push	af
+   6903 33            [ 6] 5348 	inc	sp
+   6904 4A            [ 4] 5349 	ld	c, d
+   6905 C5            [11] 5350 	push	bc
+   6906 CD 77 4F      [17] 5351 	call	_erasePlayer
+   6909 F1            [10] 5352 	pop	af
+   690A 33            [ 6] 5353 	inc	sp
+                           5354 ;src/main.c:690: erasePlayer(e.lx,e.ly,0);
+   690B DD 6E DA      [19] 5355 	ld	l,-38 (ix)
+   690E DD 66 DB      [19] 5356 	ld	h,-37 (ix)
+   6911 46            [ 7] 5357 	ld	b,(hl)
+   6912 DD 6E DC      [19] 5358 	ld	l,-36 (ix)
+   6915 DD 66 DD      [19] 5359 	ld	h,-35 (ix)
+   6918 56            [ 7] 5360 	ld	d,(hl)
+   6919 AF            [ 4] 5361 	xor	a, a
+   691A F5            [11] 5362 	push	af
+   691B 33            [ 6] 5363 	inc	sp
+   691C 4A            [ 4] 5364 	ld	c, d
+   691D C5            [11] 5365 	push	bc
+   691E CD 77 4F      [17] 5366 	call	_erasePlayer
+   6921 F1            [10] 5367 	pop	af
+   6922 33            [ 6] 5368 	inc	sp
+                           5369 ;src/main.c:691: if(arrow == 1){
+   6923 DD 7E 89      [19] 5370 	ld	a,-119 (ix)
+   6926 3D            [ 4] 5371 	dec	a
+   6927 20 37         [12] 5372 	jr	NZ,00108$
+                           5373 ;src/main.c:692: if(object.dir == 4 || object.dir == 6)
+   6929 21 74 76      [10] 5374 	ld	hl, #(_object + 0x0007) + 0
+   692C 5E            [ 7] 5375 	ld	e,(hl)
+                           5376 ;src/main.c:693: erasePlayer(object.lx,object.ly,2);
+   692D 21 70 76      [10] 5377 	ld	hl, #(_object + 0x0003) + 0
+   6930 46            [ 7] 5378 	ld	b,(hl)
+   6931 21 6F 76      [10] 5379 	ld	hl, #(_object + 0x0002) + 0
+   6934 56            [ 7] 5380 	ld	d,(hl)
+                           5381 ;src/main.c:692: if(object.dir == 4 || object.dir == 6)
+   6935 7B            [ 4] 5382 	ld	a,e
+   6936 FE 04         [ 7] 5383 	cp	a,#0x04
+   6938 28 04         [12] 5384 	jr	Z,00101$
+   693A D6 06         [ 7] 5385 	sub	a, #0x06
+   693C 20 0D         [12] 5386 	jr	NZ,00102$
+   693E                    5387 00101$:
+                           5388 ;src/main.c:693: erasePlayer(object.lx,object.ly,2);
+   693E 3E 02         [ 7] 5389 	ld	a,#0x02
+   6940 F5            [11] 5390 	push	af
+   6941 33            [ 6] 5391 	inc	sp
+   6942 4A            [ 4] 5392 	ld	c, d
+   6943 C5            [11] 5393 	push	bc
+   6944 CD 77 4F      [17] 5394 	call	_erasePlayer
+   6947 F1            [10] 5395 	pop	af
+   6948 33            [ 6] 5396 	inc	sp
+   6949 18 0B         [12] 5397 	jr	00103$
+   694B                    5398 00102$:
+                           5399 ;src/main.c:695: erasePlayer(object.lx,object.ly,1);
+   694B 3E 01         [ 7] 5400 	ld	a,#0x01
+   694D F5            [11] 5401 	push	af
+   694E 33            [ 6] 5402 	inc	sp
+   694F 4A            [ 4] 5403 	ld	c, d
+   6950 C5            [11] 5404 	push	bc
+   6951 CD 77 4F      [17] 5405 	call	_erasePlayer
+   6954 F1            [10] 5406 	pop	af
+   6955 33            [ 6] 5407 	inc	sp
+   6956                    5408 00103$:
+                           5409 ;src/main.c:696: if(bound == 1) arrow = 0;
+   6956 DD 7E D5      [19] 5410 	ld	a,-43 (ix)
+   6959 3D            [ 4] 5411 	dec	a
+   695A 20 04         [12] 5412 	jr	NZ,00108$
+   695C DD 36 89 00   [19] 5413 	ld	-119 (ix),#0x00
+   6960                    5414 00108$:
+                           5415 ;src/main.c:700: drawPickUps(n.corazon,n.bullet);
+   6960 DD 6E D6      [19] 5416 	ld	l,-42 (ix)
+   6963 DD 66 D7      [19] 5417 	ld	h,-41 (ix)
+   6966 46            [ 7] 5418 	ld	b,(hl)
+   6967 DD 6E D8      [19] 5419 	ld	l,-40 (ix)
+   696A DD 66 D9      [19] 5420 	ld	h,-39 (ix)
+   696D 4E            [ 7] 5421 	ld	c, (hl)
+   696E C5            [11] 5422 	push	bc
+   696F CD FE 50      [17] 5423 	call	_drawPickUps
+   6972 F1            [10] 5424 	pop	af
+                           5425 ;src/main.c:703: drawPlayer(p.x,p.y,p.sprite,p.life,0);
+   6973 DD 6E AB      [19] 5426 	ld	l,-85 (ix)
+   6976 DD 66 AC      [19] 5427 	ld	h,-84 (ix)
+   6979 46            [ 7] 5428 	ld	b,(hl)
+   697A DD 6E B6      [19] 5429 	ld	l,-74 (ix)
+   697D DD 66 B7      [19] 5430 	ld	h,-73 (ix)
+   6980 5E            [ 7] 5431 	ld	e,(hl)
+   6981 23            [ 6] 5432 	inc	hl
+   6982 4E            [ 7] 5433 	ld	c,(hl)
+   6983 DD 6E BC      [19] 5434 	ld	l,-68 (ix)
+   6986 DD 66 BD      [19] 5435 	ld	h,-67 (ix)
+   6989 7E            [ 7] 5436 	ld	a,(hl)
+   698A DD 77 CE      [19] 5437 	ld	-50 (ix),a
+   698D DD 6E EE      [19] 5438 	ld	l,-18 (ix)
+   6990 DD 66 EF      [19] 5439 	ld	h,-17 (ix)
+   6993 56            [ 7] 5440 	ld	d,(hl)
+   6994 AF            [ 4] 5441 	xor	a, a
+   6995 F5            [11] 5442 	push	af
+   6996 33            [ 6] 5443 	inc	sp
+   6997 C5            [11] 5444 	push	bc
+   6998 33            [ 6] 5445 	inc	sp
+   6999 6B            [ 4] 5446 	ld	l, e
+   699A 61            [ 4] 5447 	ld	h, c
+   699B E5            [11] 5448 	push	hl
+   699C DD 7E CE      [19] 5449 	ld	a,-50 (ix)
+   699F F5            [11] 5450 	push	af
+   69A0 33            [ 6] 5451 	inc	sp
+   69A1 D5            [11] 5452 	push	de
+   69A2 33            [ 6] 5453 	inc	sp
+   69A3 CD 17 4F      [17] 5454 	call	_drawPlayer
+   69A6 21 06 00      [10] 5455 	ld	hl,#6
+   69A9 39            [11] 5456 	add	hl,sp
+   69AA F9            [ 6] 5457 	ld	sp,hl
+                           5458 ;src/main.c:704: if(e.life > 0) drawPlayer(e.x,e.y,e.sprite,e.life,0);
+   69AB DD 6E FC      [19] 5459 	ld	l,-4 (ix)
+   69AE DD 66 FD      [19] 5460 	ld	h,-3 (ix)
+   69B1 4E            [ 7] 5461 	ld	c,(hl)
+   69B2 79            [ 4] 5462 	ld	a,c
+   69B3 B7            [ 4] 5463 	or	a, a
+   69B4 28 30         [12] 5464 	jr	Z,00110$
+   69B6 DD 6E FE      [19] 5465 	ld	l,-2 (ix)
+   69B9 DD 66 FF      [19] 5466 	ld	h,-1 (ix)
+   69BC 5E            [ 7] 5467 	ld	e,(hl)
+   69BD 23            [ 6] 5468 	inc	hl
+   69BE 56            [ 7] 5469 	ld	d,(hl)
+   69BF DD 6E C0      [19] 5470 	ld	l,-64 (ix)
+   69C2 DD 66 C1      [19] 5471 	ld	h,-63 (ix)
+   69C5 7E            [ 7] 5472 	ld	a,(hl)
+   69C6 DD 77 CE      [19] 5473 	ld	-50 (ix),a
+   69C9 DD 6E C2      [19] 5474 	ld	l,-62 (ix)
+   69CC DD 66 C3      [19] 5475 	ld	h,-61 (ix)
+   69CF 46            [ 7] 5476 	ld	b,(hl)
+   69D0 AF            [ 4] 5477 	xor	a, a
+   69D1 F5            [11] 5478 	push	af
+   69D2 33            [ 6] 5479 	inc	sp
+   69D3 79            [ 4] 5480 	ld	a,c
+   69D4 F5            [11] 5481 	push	af
+   69D5 33            [ 6] 5482 	inc	sp
+   69D6 D5            [11] 5483 	push	de
+   69D7 DD 7E CE      [19] 5484 	ld	a,-50 (ix)
+   69DA F5            [11] 5485 	push	af
+   69DB 33            [ 6] 5486 	inc	sp
+   69DC C5            [11] 5487 	push	bc
+   69DD 33            [ 6] 5488 	inc	sp
+   69DE CD 17 4F      [17] 5489 	call	_drawPlayer
+   69E1 21 06 00      [10] 5490 	ld	hl,#6
+   69E4 39            [11] 5491 	add	hl,sp
+   69E5 F9            [ 6] 5492 	ld	sp,hl
+   69E6                    5493 00110$:
+                           5494 ;src/main.c:706: if(arrow == 1){
+   69E6 DD 7E 89      [19] 5495 	ld	a,-119 (ix)
+   69E9 3D            [ 4] 5496 	dec	a
+   69EA 20 6A         [12] 5497 	jr	NZ,00119$
+                           5498 ;src/main.c:707: if(object.dir == 4 || object.dir == 6)
+   69EC 21 74 76      [10] 5499 	ld	hl, #(_object + 0x0007) + 0
+   69EF 66            [ 7] 5500 	ld	h,(hl)
+   69F0 7C            [ 4] 5501 	ld	a,h
+   69F1 FE 04         [ 7] 5502 	cp	a,#0x04
+   69F3 28 04         [12] 5503 	jr	Z,00114$
+   69F5 D6 06         [ 7] 5504 	sub	a, #0x06
+   69F7 20 2B         [12] 5505 	jr	NZ,00115$
+   69F9                    5506 00114$:
+                           5507 ;src/main.c:708: drawPlayer(object.x,object.y,object.sprite,object.vivo,2);
+   69F9 21 73 76      [10] 5508 	ld	hl, #(_object + 0x0006) + 0
+   69FC 5E            [ 7] 5509 	ld	e,(hl)
+   69FD ED 4B 71 76   [20] 5510 	ld	bc, (#(_object + 0x0004) + 0)
+   6A01 3A 6E 76      [13] 5511 	ld	a,(#(_object + 0x0001) + 0)
+   6A04 DD 77 CE      [19] 5512 	ld	-50 (ix),a
+   6A07 21 6D 76      [10] 5513 	ld	hl, #_object + 0
+   6A0A 56            [ 7] 5514 	ld	d,(hl)
+   6A0B 3E 02         [ 7] 5515 	ld	a,#0x02
+   6A0D F5            [11] 5516 	push	af
+   6A0E 33            [ 6] 5517 	inc	sp
+   6A0F 7B            [ 4] 5518 	ld	a,e
+   6A10 F5            [11] 5519 	push	af
+   6A11 33            [ 6] 5520 	inc	sp
+   6A12 C5            [11] 5521 	push	bc
+   6A13 DD 7E CE      [19] 5522 	ld	a,-50 (ix)
+   6A16 F5            [11] 5523 	push	af
+   6A17 33            [ 6] 5524 	inc	sp
+   6A18 D5            [11] 5525 	push	de
+   6A19 33            [ 6] 5526 	inc	sp
+   6A1A CD 17 4F      [17] 5527 	call	_drawPlayer
+   6A1D 21 06 00      [10] 5528 	ld	hl,#6
+   6A20 39            [11] 5529 	add	hl,sp
+   6A21 F9            [ 6] 5530 	ld	sp,hl
+   6A22 18 32         [12] 5531 	jr	00119$
+   6A24                    5532 00115$:
+                           5533 ;src/main.c:709: else if(object.dir == 2 || object.dir == 8)
+   6A24 7C            [ 4] 5534 	ld	a,h
+   6A25 FE 02         [ 7] 5535 	cp	a,#0x02
+   6A27 28 04         [12] 5536 	jr	Z,00111$
+   6A29 D6 08         [ 7] 5537 	sub	a, #0x08
+   6A2B 20 29         [12] 5538 	jr	NZ,00119$
+   6A2D                    5539 00111$:
+                           5540 ;src/main.c:710: drawPlayer(object.x,object.y,object.sprite,object.vivo,1);
+   6A2D 21 73 76      [10] 5541 	ld	hl, #(_object + 0x0006) + 0
+   6A30 5E            [ 7] 5542 	ld	e,(hl)
+   6A31 ED 4B 71 76   [20] 5543 	ld	bc, (#(_object + 0x0004) + 0)
+   6A35 3A 6E 76      [13] 5544 	ld	a,(#(_object + 0x0001) + 0)
+   6A38 DD 77 CE      [19] 5545 	ld	-50 (ix),a
+   6A3B 21 6D 76      [10] 5546 	ld	hl, #_object + 0
+   6A3E 56            [ 7] 5547 	ld	d,(hl)
+   6A3F 3E 01         [ 7] 5548 	ld	a,#0x01
+   6A41 F5            [11] 5549 	push	af
+   6A42 33            [ 6] 5550 	inc	sp
+   6A43 7B            [ 4] 5551 	ld	a,e
+   6A44 F5            [11] 5552 	push	af
+   6A45 33            [ 6] 5553 	inc	sp
+   6A46 C5            [11] 5554 	push	bc
+   6A47 DD 7E CE      [19] 5555 	ld	a,-50 (ix)
+   6A4A F5            [11] 5556 	push	af
+   6A4B 33            [ 6] 5557 	inc	sp
+   6A4C D5            [11] 5558 	push	de
+   6A4D 33            [ 6] 5559 	inc	sp
+   6A4E CD 17 4F      [17] 5560 	call	_drawPlayer
+   6A51 21 06 00      [10] 5561 	ld	hl,#6
+   6A54 39            [11] 5562 	add	hl,sp
+   6A55 F9            [ 6] 5563 	ld	sp,hl
+   6A56                    5564 00119$:
+                           5565 ;src/main.c:715: drawVida(p.life);
+   6A56 DD 6E AB      [19] 5566 	ld	l,-85 (ix)
+   6A59 DD 66 AC      [19] 5567 	ld	h,-84 (ix)
+   6A5C 66            [ 7] 5568 	ld	h,(hl)
+   6A5D E5            [11] 5569 	push	hl
+   6A5E 33            [ 6] 5570 	inc	sp
+   6A5F CD 66 51      [17] 5571 	call	_drawVida
+   6A62 33            [ 6] 5572 	inc	sp
+                           5573 ;src/main.c:716: drawBullets(p.bullets);
+   6A63 DD 6E F8      [19] 5574 	ld	l,-8 (ix)
+   6A66 DD 66 F9      [19] 5575 	ld	h,-7 (ix)
+   6A69 66            [ 7] 5576 	ld	h,(hl)
+   6A6A E5            [11] 5577 	push	hl
+   6A6B 33            [ 6] 5578 	inc	sp
+   6A6C CD D0 51      [17] 5579 	call	_drawBullets
+   6A6F 33            [ 6] 5580 	inc	sp
+                           5581 ;src/main.c:719: if(p.atk < 20) drawFatiga(p.atk,2);
+   6A70 DD 6E B8      [19] 5582 	ld	l,-72 (ix)
+   6A73 DD 66 B9      [19] 5583 	ld	h,-71 (ix)
+   6A76 56            [ 7] 5584 	ld	d,(hl)
+   6A77 7A            [ 4] 5585 	ld	a,d
+   6A78 D6 14         [ 7] 5586 	sub	a, #0x14
+   6A7A 30 0C         [12] 5587 	jr	NC,00124$
+   6A7C 3E 02         [ 7] 5588 	ld	a,#0x02
+   6A7E F5            [11] 5589 	push	af
+   6A7F 33            [ 6] 5590 	inc	sp
+   6A80 D5            [11] 5591 	push	de
+   6A81 33            [ 6] 5592 	inc	sp
+   6A82 CD D8 4F      [17] 5593 	call	_drawFatiga
+   6A85 F1            [10] 5594 	pop	af
+   6A86 18 1A         [12] 5595 	jr	00125$
+   6A88                    5596 00124$:
+                           5597 ;src/main.c:720: else if(p.atk > 20) drawFatiga(p.atk,1);
+   6A88 3E 14         [ 7] 5598 	ld	a,#0x14
+   6A8A 92            [ 4] 5599 	sub	a, d
+   6A8B 30 0C         [12] 5600 	jr	NC,00121$
+   6A8D 3E 01         [ 7] 5601 	ld	a,#0x01
+   6A8F F5            [11] 5602 	push	af
+   6A90 33            [ 6] 5603 	inc	sp
+   6A91 D5            [11] 5604 	push	de
+   6A92 33            [ 6] 5605 	inc	sp
+   6A93 CD D8 4F      [17] 5606 	call	_drawFatiga
+   6A96 F1            [10] 5607 	pop	af
+   6A97 18 09         [12] 5608 	jr	00125$
+   6A99                    5609 00121$:
+                           5610 ;src/main.c:721: else drawFatiga(p.atk,0);
+   6A99 AF            [ 4] 5611 	xor	a, a
+   6A9A F5            [11] 5612 	push	af
+   6A9B 33            [ 6] 5613 	inc	sp
+   6A9C D5            [11] 5614 	push	de
+   6A9D 33            [ 6] 5615 	inc	sp
+   6A9E CD D8 4F      [17] 5616 	call	_drawFatiga
+   6AA1 F1            [10] 5617 	pop	af
+   6AA2                    5618 00125$:
+                           5619 ;src/main.c:724: p.lx = p.x;
+   6AA2 DD 6E EE      [19] 5620 	ld	l,-18 (ix)
+   6AA5 DD 66 EF      [19] 5621 	ld	h,-17 (ix)
+   6AA8 7E            [ 7] 5622 	ld	a,(hl)
+   6AA9 DD 6E AD      [19] 5623 	ld	l,-83 (ix)
+   6AAC DD 66 AE      [19] 5624 	ld	h,-82 (ix)
+   6AAF 77            [ 7] 5625 	ld	(hl),a
+                           5626 ;src/main.c:725: p.ly = p.y;
+   6AB0 DD 6E BC      [19] 5627 	ld	l,-68 (ix)
+   6AB3 DD 66 BD      [19] 5628 	ld	h,-67 (ix)
+   6AB6 7E            [ 7] 5629 	ld	a,(hl)
+   6AB7 DD 6E BE      [19] 5630 	ld	l,-66 (ix)
+   6ABA DD 66 BF      [19] 5631 	ld	h,-65 (ix)
+   6ABD 77            [ 7] 5632 	ld	(hl),a
+                           5633 ;src/main.c:726: e.lx = e.x;
+   6ABE DD 6E C2      [19] 5634 	ld	l,-62 (ix)
+   6AC1 DD 66 C3      [19] 5635 	ld	h,-61 (ix)
+   6AC4 7E            [ 7] 5636 	ld	a,(hl)
+   6AC5 DD 6E DC      [19] 5637 	ld	l,-36 (ix)
+   6AC8 DD 66 DD      [19] 5638 	ld	h,-35 (ix)
+   6ACB 77            [ 7] 5639 	ld	(hl),a
+                           5640 ;src/main.c:727: e.ly = e.y;
+   6ACC DD 6E C0      [19] 5641 	ld	l,-64 (ix)
+   6ACF DD 66 C1      [19] 5642 	ld	h,-63 (ix)
+   6AD2 7E            [ 7] 5643 	ld	a,(hl)
+   6AD3 DD 6E DA      [19] 5644 	ld	l,-38 (ix)
+   6AD6 DD 66 DB      [19] 5645 	ld	h,-37 (ix)
+   6AD9 77            [ 7] 5646 	ld	(hl),a
+                           5647 ;src/main.c:728: p.latk = p.atk;
+   6ADA DD 6E B8      [19] 5648 	ld	l,-72 (ix)
+   6ADD DD 66 B9      [19] 5649 	ld	h,-71 (ix)
+   6AE0 7E            [ 7] 5650 	ld	a,(hl)
+   6AE1 DD 6E FA      [19] 5651 	ld	l,-6 (ix)
+   6AE4 DD 66 FB      [19] 5652 	ld	h,-5 (ix)
+   6AE7 77            [ 7] 5653 	ld	(hl),a
+                           5654 ;src/main.c:729: p.lsize = p.sizeX;
+   6AE8 DD 6E CF      [19] 5655 	ld	l,-49 (ix)
+   6AEB DD 66 D0      [19] 5656 	ld	h,-48 (ix)
+   6AEE 7E            [ 7] 5657 	ld	a,(hl)
+   6AEF DD 6E BA      [19] 5658 	ld	l,-70 (ix)
+   6AF2 DD 66 BB      [19] 5659 	ld	h,-69 (ix)
+   6AF5 77            [ 7] 5660 	ld	(hl),a
+                           5661 ;src/main.c:732: cpct_scanKeyboard_f();
+   6AF6 CD 67 71      [17] 5662 	call	_cpct_scanKeyboard_f
+                           5663 ;src/main.c:733: p.sprite = checkKeyboard(&p.x,&p.y,&p.atk,&p.dir,p.sprite,&p.sizeX,&p.bullets,&finish,&arrow);
+   6AF9 21 0F 00      [10] 5664 	ld	hl,#0x000F
+   6AFC 39            [11] 5665 	add	hl,sp
+   6AFD 4D            [ 4] 5666 	ld	c, l
+   6AFE 44            [ 4] 5667 	ld	b, h
+   6AFF 21 20 00      [10] 5668 	ld	hl,#0x0020
+   6B02 39            [11] 5669 	add	hl,sp
+   6B03 DD 75 CC      [19] 5670 	ld	-52 (ix),l
+   6B06 DD 74 CD      [19] 5671 	ld	-51 (ix),h
+   6B09 DD 5E F2      [19] 5672 	ld	e,-14 (ix)
+   6B0C DD 56 F3      [19] 5673 	ld	d,-13 (ix)
+   6B0F DD 7E F0      [19] 5674 	ld	a,-16 (ix)
+   6B12 DD 77 CA      [19] 5675 	ld	-54 (ix),a
+   6B15 DD 7E F1      [19] 5676 	ld	a,-15 (ix)
+   6B18 DD 77 CB      [19] 5677 	ld	-53 (ix),a
+   6B1B DD 6E B6      [19] 5678 	ld	l,-74 (ix)
+   6B1E DD 66 B7      [19] 5679 	ld	h,-73 (ix)
+   6B21 7E            [ 7] 5680 	ld	a,(hl)
+   6B22 DD 77 C8      [19] 5681 	ld	-56 (ix),a
+   6B25 23            [ 6] 5682 	inc	hl
+   6B26 7E            [ 7] 5683 	ld	a,(hl)
+   6B27 DD 77 C9      [19] 5684 	ld	-55 (ix),a
+   6B2A DD 7E D1      [19] 5685 	ld	a,-47 (ix)
+   6B2D DD 77 C6      [19] 5686 	ld	-58 (ix),a
+   6B30 DD 7E D2      [19] 5687 	ld	a,-46 (ix)
+   6B33 DD 77 C7      [19] 5688 	ld	-57 (ix),a
+   6B36 DD 7E EC      [19] 5689 	ld	a,-20 (ix)
+   6B39 DD 77 C4      [19] 5690 	ld	-60 (ix),a
+   6B3C DD 7E ED      [19] 5691 	ld	a,-19 (ix)
+   6B3F DD 77 C5      [19] 5692 	ld	-59 (ix),a
+   6B42 DD 6E EA      [19] 5693 	ld	l,-22 (ix)
+   6B45 DD 66 EB      [19] 5694 	ld	h,-21 (ix)
+   6B48 DD 7E E8      [19] 5695 	ld	a,-24 (ix)
+   6B4B DD 77 B4      [19] 5696 	ld	-76 (ix),a
+   6B4E DD 7E E9      [19] 5697 	ld	a,-23 (ix)
+   6B51 DD 77 B5      [19] 5698 	ld	-75 (ix),a
+   6B54 C5            [11] 5699 	push	bc
+   6B55 DD 4E CC      [19] 5700 	ld	c,-52 (ix)
+   6B58 DD 46 CD      [19] 5701 	ld	b,-51 (ix)
+   6B5B C5            [11] 5702 	push	bc
+   6B5C D5            [11] 5703 	push	de
+   6B5D DD 4E CA      [19] 5704 	ld	c,-54 (ix)
+   6B60 DD 46 CB      [19] 5705 	ld	b,-53 (ix)
+   6B63 C5            [11] 5706 	push	bc
+   6B64 DD 4E C8      [19] 5707 	ld	c,-56 (ix)
+   6B67 DD 46 C9      [19] 5708 	ld	b,-55 (ix)
+   6B6A C5            [11] 5709 	push	bc
+   6B6B DD 4E C6      [19] 5710 	ld	c,-58 (ix)
+   6B6E DD 46 C7      [19] 5711 	ld	b,-57 (ix)
+   6B71 C5            [11] 5712 	push	bc
+   6B72 DD 4E C4      [19] 5713 	ld	c,-60 (ix)
+   6B75 DD 46 C5      [19] 5714 	ld	b,-59 (ix)
+   6B78 C5            [11] 5715 	push	bc
+   6B79 E5            [11] 5716 	push	hl
+   6B7A DD 6E B4      [19] 5717 	ld	l,-76 (ix)
+   6B7D DD 66 B5      [19] 5718 	ld	h,-75 (ix)
+   6B80 E5            [11] 5719 	push	hl
+   6B81 CD FB 59      [17] 5720 	call	_checkKeyboard
+   6B84 FD 21 12 00   [14] 5721 	ld	iy,#18
+   6B88 FD 39         [15] 5722 	add	iy,sp
+   6B8A FD F9         [10] 5723 	ld	sp,iy
+   6B8C 55            [ 4] 5724 	ld	d,l
+   6B8D 5C            [ 4] 5725 	ld	e,h
+   6B8E DD 6E B6      [19] 5726 	ld	l,-74 (ix)
+   6B91 DD 66 B7      [19] 5727 	ld	h,-73 (ix)
+   6B94 72            [ 7] 5728 	ld	(hl),d
+   6B95 23            [ 6] 5729 	inc	hl
+   6B96 73            [ 7] 5730 	ld	(hl),e
+                           5731 ;src/main.c:734: checkBoundsCollisions(&p.x,&p.y,p.lx,p.ly,p.sizeX,p.sizeY,&p.life,&p.bullets,&n.corazon,&n.bullet);
+   6B97 DD 4E E6      [19] 5732 	ld	c,-26 (ix)
+   6B9A DD 46 E7      [19] 5733 	ld	b,-25 (ix)
+   6B9D DD 5E A7      [19] 5734 	ld	e,-89 (ix)
+   6BA0 DD 56 A8      [19] 5735 	ld	d,-88 (ix)
+   6BA3 DD 7E A5      [19] 5736 	ld	a,-91 (ix)
+   6BA6 DD 77 B4      [19] 5737 	ld	-76 (ix),a
+   6BA9 DD 7E A6      [19] 5738 	ld	a,-90 (ix)
+   6BAC DD 77 B5      [19] 5739 	ld	-75 (ix),a
+   6BAF DD 7E A3      [19] 5740 	ld	a,-93 (ix)
+   6BB2 DD 77 C4      [19] 5741 	ld	-60 (ix),a
+   6BB5 DD 7E A4      [19] 5742 	ld	a,-92 (ix)
+   6BB8 DD 77 C5      [19] 5743 	ld	-59 (ix),a
+   6BBB DD 6E A9      [19] 5744 	ld	l,-87 (ix)
+   6BBE DD 66 AA      [19] 5745 	ld	h,-86 (ix)
+   6BC1 7E            [ 7] 5746 	ld	a,(hl)
+   6BC2 DD 77 C6      [19] 5747 	ld	-58 (ix),a
+   6BC5 DD 6E CF      [19] 5748 	ld	l,-49 (ix)
+   6BC8 DD 66 D0      [19] 5749 	ld	h,-48 (ix)
+   6BCB 7E            [ 7] 5750 	ld	a,(hl)
+   6BCC DD 77 C8      [19] 5751 	ld	-56 (ix),a
+   6BCF DD 6E BE      [19] 5752 	ld	l,-66 (ix)
+   6BD2 DD 66 BF      [19] 5753 	ld	h,-65 (ix)
+   6BD5 7E            [ 7] 5754 	ld	a,(hl)
+   6BD6 DD 77 CA      [19] 5755 	ld	-54 (ix),a
+   6BD9 DD 6E AD      [19] 5756 	ld	l,-83 (ix)
+   6BDC DD 66 AE      [19] 5757 	ld	h,-82 (ix)
+   6BDF 7E            [ 7] 5758 	ld	a,(hl)
+   6BE0 DD 77 CC      [19] 5759 	ld	-52 (ix),a
+   6BE3 DD 7E A1      [19] 5760 	ld	a,-95 (ix)
+   6BE6 DD 77 B2      [19] 5761 	ld	-78 (ix),a
+   6BE9 DD 7E A2      [19] 5762 	ld	a,-94 (ix)
+   6BEC DD 77 B3      [19] 5763 	ld	-77 (ix),a
+   6BEF E5            [11] 5764 	push	hl
+   6BF0 DD 6E 9F      [19] 5765 	ld	l,-97 (ix)
+   6BF3 DD 66 A0      [19] 5766 	ld	h,-96 (ix)
+   6BF6 E5            [11] 5767 	push	hl
+   6BF7 FD E1         [14] 5768 	pop	iy
+   6BF9 E1            [10] 5769 	pop	hl
+   6BFA C5            [11] 5770 	push	bc
+   6BFB D5            [11] 5771 	push	de
+   6BFC DD 6E B4      [19] 5772 	ld	l,-76 (ix)
+   6BFF DD 66 B5      [19] 5773 	ld	h,-75 (ix)
+   6C02 E5            [11] 5774 	push	hl
+   6C03 DD 6E C4      [19] 5775 	ld	l,-60 (ix)
+   6C06 DD 66 C5      [19] 5776 	ld	h,-59 (ix)
+   6C09 E5            [11] 5777 	push	hl
+   6C0A DD 66 C6      [19] 5778 	ld	h,-58 (ix)
+   6C0D DD 6E C8      [19] 5779 	ld	l,-56 (ix)
+   6C10 E5            [11] 5780 	push	hl
+   6C11 DD 66 CA      [19] 5781 	ld	h,-54 (ix)
+   6C14 DD 6E CC      [19] 5782 	ld	l,-52 (ix)
+   6C17 E5            [11] 5783 	push	hl
+   6C18 DD 6E B2      [19] 5784 	ld	l,-78 (ix)
+   6C1B DD 66 B3      [19] 5785 	ld	h,-77 (ix)
+   6C1E E5            [11] 5786 	push	hl
+   6C1F FD E5         [15] 5787 	push	iy
+   6C21 CD E7 55      [17] 5788 	call	_checkBoundsCollisions
+   6C24 21 10 00      [10] 5789 	ld	hl,#16
+   6C27 39            [11] 5790 	add	hl,sp
+   6C28 F9            [ 6] 5791 	ld	sp,hl
+                           5792 ;src/main.c:735: if(e.life > 0)
+   6C29 DD 6E FC      [19] 5793 	ld	l,-4 (ix)
+   6C2C DD 66 FD      [19] 5794 	ld	h,-3 (ix)
+   6C2F 7E            [ 7] 5795 	ld	a,(hl)
+   6C30 B7            [ 4] 5796 	or	a, a
+   6C31 CA F9 6C      [10] 5797 	jp	Z,00127$
+                           5798 ;src/main.c:736: move(&e.x,&e.y,p.lx,p.ly,&e.dir,e.sprite,e.room,p.x,p.y,&e.seenX,&e.seenY,&following,&e.pursue);
+   6C34 DD 7E DE      [19] 5799 	ld	a,-34 (ix)
+   6C37 DD 77 B2      [19] 5800 	ld	-78 (ix),a
+   6C3A DD 7E DF      [19] 5801 	ld	a,-33 (ix)
+   6C3D DD 77 B3      [19] 5802 	ld	-77 (ix),a
+   6C40 FD 21 21 00   [14] 5803 	ld	iy,#0x0021
+   6C44 FD 39         [15] 5804 	add	iy,sp
+   6C46 DD 7E E0      [19] 5805 	ld	a,-32 (ix)
+   6C49 DD 77 B4      [19] 5806 	ld	-76 (ix),a
+   6C4C DD 7E E1      [19] 5807 	ld	a,-31 (ix)
+   6C4F DD 77 B5      [19] 5808 	ld	-75 (ix),a
+   6C52 DD 7E D3      [19] 5809 	ld	a,-45 (ix)
+   6C55 DD 77 C4      [19] 5810 	ld	-60 (ix),a
+   6C58 DD 7E D4      [19] 5811 	ld	a,-44 (ix)
+   6C5B DD 77 C5      [19] 5812 	ld	-59 (ix),a
+   6C5E DD 6E BC      [19] 5813 	ld	l,-68 (ix)
+   6C61 DD 66 BD      [19] 5814 	ld	h,-67 (ix)
+   6C64 7E            [ 7] 5815 	ld	a,(hl)
+   6C65 DD 77 C6      [19] 5816 	ld	-58 (ix),a
+   6C68 DD 6E EE      [19] 5817 	ld	l,-18 (ix)
+   6C6B DD 66 EF      [19] 5818 	ld	h,-17 (ix)
+   6C6E 7E            [ 7] 5819 	ld	a,(hl)
+   6C6F DD 77 C8      [19] 5820 	ld	-56 (ix),a
+   6C72 DD 6E E2      [19] 5821 	ld	l,-30 (ix)
+   6C75 DD 66 E3      [19] 5822 	ld	h,-29 (ix)
+   6C78 7E            [ 7] 5823 	ld	a,(hl)
+   6C79 DD 77 CA      [19] 5824 	ld	-54 (ix),a
+   6C7C DD 6E FE      [19] 5825 	ld	l,-2 (ix)
+   6C7F DD 66 FF      [19] 5826 	ld	h,-1 (ix)
+   6C82 7E            [ 7] 5827 	ld	a,(hl)
+   6C83 DD 77 CC      [19] 5828 	ld	-52 (ix),a
+   6C86 23            [ 6] 5829 	inc	hl
+   6C87 7E            [ 7] 5830 	ld	a,(hl)
+   6C88 DD 77 CD      [19] 5831 	ld	-51 (ix),a
+   6C8B DD 7E E4      [19] 5832 	ld	a,-28 (ix)
+   6C8E DD 77 B0      [19] 5833 	ld	-80 (ix),a
+   6C91 DD 7E E5      [19] 5834 	ld	a,-27 (ix)
+   6C94 DD 77 B1      [19] 5835 	ld	-79 (ix),a
+   6C97 DD 6E BE      [19] 5836 	ld	l,-66 (ix)
+   6C9A DD 66 BF      [19] 5837 	ld	h,-65 (ix)
+   6C9D 7E            [ 7] 5838 	ld	a,(hl)
+   6C9E DD 77 CE      [19] 5839 	ld	-50 (ix),a
+   6CA1 DD 6E AD      [19] 5840 	ld	l,-83 (ix)
+   6CA4 DD 66 AE      [19] 5841 	ld	h,-82 (ix)
+   6CA7 7E            [ 7] 5842 	ld	a,(hl)
+   6CA8 DD 77 AF      [19] 5843 	ld	-81 (ix),a
+   6CAB DD 5E F6      [19] 5844 	ld	e,-10 (ix)
+   6CAE DD 56 F7      [19] 5845 	ld	d,-9 (ix)
+   6CB1 DD 4E F4      [19] 5846 	ld	c,-12 (ix)
+   6CB4 DD 46 F5      [19] 5847 	ld	b,-11 (ix)
+   6CB7 DD 6E B2      [19] 5848 	ld	l,-78 (ix)
+   6CBA DD 66 B3      [19] 5849 	ld	h,-77 (ix)
+   6CBD E5            [11] 5850 	push	hl
+   6CBE FD E5         [15] 5851 	push	iy
+   6CC0 DD 6E B4      [19] 5852 	ld	l,-76 (ix)
+   6CC3 DD 66 B5      [19] 5853 	ld	h,-75 (ix)
+   6CC6 E5            [11] 5854 	push	hl
+   6CC7 DD 6E C4      [19] 5855 	ld	l,-60 (ix)
+   6CCA DD 66 C5      [19] 5856 	ld	h,-59 (ix)
+   6CCD E5            [11] 5857 	push	hl
+   6CCE DD 66 C6      [19] 5858 	ld	h,-58 (ix)
+   6CD1 DD 6E C8      [19] 5859 	ld	l,-56 (ix)
+   6CD4 E5            [11] 5860 	push	hl
+   6CD5 DD 7E CA      [19] 5861 	ld	a,-54 (ix)
+   6CD8 F5            [11] 5862 	push	af
+   6CD9 33            [ 6] 5863 	inc	sp
+   6CDA DD 6E CC      [19] 5864 	ld	l,-52 (ix)
+   6CDD DD 66 CD      [19] 5865 	ld	h,-51 (ix)
+   6CE0 E5            [11] 5866 	push	hl
+   6CE1 DD 6E B0      [19] 5867 	ld	l,-80 (ix)
+   6CE4 DD 66 B1      [19] 5868 	ld	h,-79 (ix)
+   6CE7 E5            [11] 5869 	push	hl
+   6CE8 DD 66 CE      [19] 5870 	ld	h,-50 (ix)
+   6CEB DD 6E AF      [19] 5871 	ld	l,-81 (ix)
+   6CEE E5            [11] 5872 	push	hl
+   6CEF D5            [11] 5873 	push	de
+   6CF0 C5            [11] 5874 	push	bc
+   6CF1 CD E0 63      [17] 5875 	call	_move
+   6CF4 21 15 00      [10] 5876 	ld	hl,#21
+   6CF7 39            [11] 5877 	add	hl,sp
+   6CF8 F9            [ 6] 5878 	ld	sp,hl
+   6CF9                    5879 00127$:
+                           5880 ;src/main.c:738: if(e.life > 0)
+   6CF9 DD 6E FC      [19] 5881 	ld	l,-4 (ix)
+   6CFC DD 66 FD      [19] 5882 	ld	h,-3 (ix)
+   6CFF 7E            [ 7] 5883 	ld	a, (hl)
+   6D00 B7            [ 4] 5884 	or	a, a
+   6D01 CA A7 6D      [10] 5885 	jp	Z,00136$
+                           5886 ;src/main.c:739: if(checkCollisions(p.x, p.y, e.x, e.y, p.atk) == 2){
+   6D04 DD 6E B8      [19] 5887 	ld	l,-72 (ix)
+   6D07 DD 66 B9      [19] 5888 	ld	h,-71 (ix)
+   6D0A 7E            [ 7] 5889 	ld	a,(hl)
+   6D0B DD 6E C0      [19] 5890 	ld	l,-64 (ix)
+   6D0E DD 66 C1      [19] 5891 	ld	h,-63 (ix)
+   6D11 4E            [ 7] 5892 	ld	c,(hl)
+   6D12 DD 6E C2      [19] 5893 	ld	l,-62 (ix)
+   6D15 DD 66 C3      [19] 5894 	ld	h,-61 (ix)
+   6D18 46            [ 7] 5895 	ld	b,(hl)
+   6D19 DD 6E BC      [19] 5896 	ld	l,-68 (ix)
+   6D1C DD 66 BD      [19] 5897 	ld	h,-67 (ix)
+   6D1F 5E            [ 7] 5898 	ld	e,(hl)
+   6D20 DD 6E EE      [19] 5899 	ld	l,-18 (ix)
+   6D23 DD 66 EF      [19] 5900 	ld	h,-17 (ix)
+   6D26 56            [ 7] 5901 	ld	d,(hl)
+   6D27 F5            [11] 5902 	push	af
+   6D28 33            [ 6] 5903 	inc	sp
+   6D29 79            [ 4] 5904 	ld	a,c
+   6D2A F5            [11] 5905 	push	af
+   6D2B 33            [ 6] 5906 	inc	sp
+   6D2C C5            [11] 5907 	push	bc
+   6D2D 33            [ 6] 5908 	inc	sp
+   6D2E 7B            [ 4] 5909 	ld	a,e
+   6D2F F5            [11] 5910 	push	af
+   6D30 33            [ 6] 5911 	inc	sp
+   6D31 D5            [11] 5912 	push	de
+   6D32 33            [ 6] 5913 	inc	sp
+   6D33 CD 88 49      [17] 5914 	call	_checkCollisions
+   6D36 F1            [10] 5915 	pop	af
+   6D37 F1            [10] 5916 	pop	af
+   6D38 33            [ 6] 5917 	inc	sp
+   6D39 7D            [ 4] 5918 	ld	a,l
+   6D3A D6 02         [ 7] 5919 	sub	a, #0x02
+   6D3C 20 29         [12] 5920 	jr	NZ,00133$
+                           5921 ;src/main.c:740: p.x = 0;
+   6D3E DD 6E EE      [19] 5922 	ld	l,-18 (ix)
+   6D41 DD 66 EF      [19] 5923 	ld	h,-17 (ix)
+   6D44 36 00         [10] 5924 	ld	(hl),#0x00
+                           5925 ;src/main.c:741: p.y = 80;
+   6D46 DD 6E BC      [19] 5926 	ld	l,-68 (ix)
+   6D49 DD 66 BD      [19] 5927 	ld	h,-67 (ix)
+   6D4C 36 50         [10] 5928 	ld	(hl),#0x50
+                           5929 ;src/main.c:742: p.life -= 1;
+   6D4E DD 6E AB      [19] 5930 	ld	l,-85 (ix)
+   6D51 DD 66 AC      [19] 5931 	ld	h,-84 (ix)
+   6D54 7E            [ 7] 5932 	ld	a,(hl)
+   6D55 C6 FF         [ 7] 5933 	add	a,#0xFF
+   6D57 DD 6E AB      [19] 5934 	ld	l,-85 (ix)
+   6D5A DD 66 AC      [19] 5935 	ld	h,-84 (ix)
+   6D5D 77            [ 7] 5936 	ld	(hl),a
+                           5937 ;src/main.c:743: if(p.life == 0){
+   6D5E B7            [ 4] 5938 	or	a, a
+   6D5F 20 46         [12] 5939 	jr	NZ,00136$
+                           5940 ;src/main.c:744: gameOver();
+   6D61 CD B4 4A      [17] 5941 	call	_gameOver
+                           5942 ;src/main.c:745: break;
+   6D64 C3 34 6E      [10] 5943 	jp	00146$
+   6D67                    5944 00133$:
+                           5945 ;src/main.c:747: }else if(checkCollisions(p.x, p.y, e.x, e.y, p.atk) == 1){
+   6D67 DD 6E B8      [19] 5946 	ld	l,-72 (ix)
+   6D6A DD 66 B9      [19] 5947 	ld	h,-71 (ix)
+   6D6D 7E            [ 7] 5948 	ld	a,(hl)
+   6D6E DD 6E C0      [19] 5949 	ld	l,-64 (ix)
+   6D71 DD 66 C1      [19] 5950 	ld	h,-63 (ix)
+   6D74 4E            [ 7] 5951 	ld	c,(hl)
+   6D75 DD 6E C2      [19] 5952 	ld	l,-62 (ix)
+   6D78 DD 66 C3      [19] 5953 	ld	h,-61 (ix)
+   6D7B 46            [ 7] 5954 	ld	b,(hl)
+   6D7C DD 6E BC      [19] 5955 	ld	l,-68 (ix)
+   6D7F DD 66 BD      [19] 5956 	ld	h,-67 (ix)
+   6D82 5E            [ 7] 5957 	ld	e,(hl)
+   6D83 DD 6E EE      [19] 5958 	ld	l,-18 (ix)
+   6D86 DD 66 EF      [19] 5959 	ld	h,-17 (ix)
+   6D89 56            [ 7] 5960 	ld	d,(hl)
+   6D8A F5            [11] 5961 	push	af
+   6D8B 33            [ 6] 5962 	inc	sp
+   6D8C 79            [ 4] 5963 	ld	a,c
+   6D8D F5            [11] 5964 	push	af
+   6D8E 33            [ 6] 5965 	inc	sp
+   6D8F C5            [11] 5966 	push	bc
+   6D90 33            [ 6] 5967 	inc	sp
+   6D91 7B            [ 4] 5968 	ld	a,e
+   6D92 F5            [11] 5969 	push	af
+   6D93 33            [ 6] 5970 	inc	sp
+   6D94 D5            [11] 5971 	push	de
+   6D95 33            [ 6] 5972 	inc	sp
+   6D96 CD 88 49      [17] 5973 	call	_checkCollisions
+   6D99 F1            [10] 5974 	pop	af
+   6D9A F1            [10] 5975 	pop	af
+   6D9B 33            [ 6] 5976 	inc	sp
+   6D9C 2D            [ 4] 5977 	dec	l
+   6D9D 20 08         [12] 5978 	jr	NZ,00136$
+                           5979 ;src/main.c:748: e.life =0;
+   6D9F DD 6E FC      [19] 5980 	ld	l,-4 (ix)
+   6DA2 DD 66 FD      [19] 5981 	ld	h,-3 (ix)
+   6DA5 36 00         [10] 5982 	ld	(hl),#0x00
+   6DA7                    5983 00136$:
+                           5984 ;src/main.c:752: if(arrow == 1){
+   6DA7 DD 7E 89      [19] 5985 	ld	a,-119 (ix)
+   6DAA 3D            [ 4] 5986 	dec	a
+   6DAB C2 2D 6E      [10] 5987 	jp	NZ,00140$
+                           5988 ;src/main.c:753: moveObject();
+   6DAE CD D8 5D      [17] 5989 	call	_moveObject
+                           5990 ;src/main.c:754: bound = checkBoundsCollisions(&object.x,&object.y,object.lx,object.ly,object.sizeX,object.sizeY,0,0,0,0);
+   6DB1 21 76 76      [10] 5991 	ld	hl, #_object + 9
+   6DB4 5E            [ 7] 5992 	ld	e,(hl)
+   6DB5 21 75 76      [10] 5993 	ld	hl, #_object + 8
+   6DB8 4E            [ 7] 5994 	ld	c,(hl)
+   6DB9 3A 70 76      [13] 5995 	ld	a,(#(_object + 0x0003) + 0)
+   6DBC DD 77 AF      [19] 5996 	ld	-81 (ix),a
+   6DBF 21 6F 76      [10] 5997 	ld	hl, #(_object + 0x0002) + 0
+   6DC2 56            [ 7] 5998 	ld	d,(hl)
+   6DC3 21 00 00      [10] 5999 	ld	hl,#0x0000
+   6DC6 E5            [11] 6000 	push	hl
+   6DC7 2E 00         [ 7] 6001 	ld	l, #0x00
+   6DC9 E5            [11] 6002 	push	hl
+   6DCA 2E 00         [ 7] 6003 	ld	l, #0x00
+   6DCC E5            [11] 6004 	push	hl
+   6DCD 2E 00         [ 7] 6005 	ld	l, #0x00
+   6DCF E5            [11] 6006 	push	hl
+   6DD0 7B            [ 4] 6007 	ld	a,e
+   6DD1 F5            [11] 6008 	push	af
+   6DD2 33            [ 6] 6009 	inc	sp
+   6DD3 79            [ 4] 6010 	ld	a,c
+   6DD4 F5            [11] 6011 	push	af
+   6DD5 33            [ 6] 6012 	inc	sp
+   6DD6 DD 7E AF      [19] 6013 	ld	a,-81 (ix)
+   6DD9 F5            [11] 6014 	push	af
+   6DDA 33            [ 6] 6015 	inc	sp
+   6DDB D5            [11] 6016 	push	de
+   6DDC 33            [ 6] 6017 	inc	sp
+   6DDD 21 6E 76      [10] 6018 	ld	hl,#(_object + 0x0001)
+   6DE0 E5            [11] 6019 	push	hl
+   6DE1 21 6D 76      [10] 6020 	ld	hl,#_object
+   6DE4 E5            [11] 6021 	push	hl
+   6DE5 CD E7 55      [17] 6022 	call	_checkBoundsCollisions
+   6DE8 FD 21 10 00   [14] 6023 	ld	iy,#16
+   6DEC FD 39         [15] 6024 	add	iy,sp
+   6DEE FD F9         [10] 6025 	ld	sp,iy
+   6DF0 DD 75 D5      [19] 6026 	ld	-43 (ix),l
+                           6027 ;src/main.c:755: if(checkCollisions(object.x, object.y, e.x, e.y, 21) == 1){
+   6DF3 DD 6E C0      [19] 6028 	ld	l,-64 (ix)
+   6DF6 DD 66 C1      [19] 6029 	ld	h,-63 (ix)
+   6DF9 4E            [ 7] 6030 	ld	c,(hl)
+   6DFA DD 6E C2      [19] 6031 	ld	l,-62 (ix)
+   6DFD DD 66 C3      [19] 6032 	ld	h,-61 (ix)
+   6E00 46            [ 7] 6033 	ld	b,(hl)
+   6E01 21 6E 76      [10] 6034 	ld	hl, #(_object + 0x0001) + 0
+   6E04 5E            [ 7] 6035 	ld	e,(hl)
+   6E05 21 6D 76      [10] 6036 	ld	hl, #_object + 0
+   6E08 56            [ 7] 6037 	ld	d,(hl)
+   6E09 3E 15         [ 7] 6038 	ld	a,#0x15
+   6E0B F5            [11] 6039 	push	af
+   6E0C 33            [ 6] 6040 	inc	sp
+   6E0D 79            [ 4] 6041 	ld	a,c
+   6E0E F5            [11] 6042 	push	af
+   6E0F 33            [ 6] 6043 	inc	sp
+   6E10 C5            [11] 6044 	push	bc
+   6E11 33            [ 6] 6045 	inc	sp
+   6E12 7B            [ 4] 6046 	ld	a,e
+   6E13 F5            [11] 6047 	push	af
+   6E14 33            [ 6] 6048 	inc	sp
+   6E15 D5            [11] 6049 	push	de
+   6E16 33            [ 6] 6050 	inc	sp
+   6E17 CD 88 49      [17] 6051 	call	_checkCollisions
+   6E1A F1            [10] 6052 	pop	af
+   6E1B F1            [10] 6053 	pop	af
+   6E1C 33            [ 6] 6054 	inc	sp
+   6E1D 2D            [ 4] 6055 	dec	l
+   6E1E 20 0D         [12] 6056 	jr	NZ,00140$
+                           6057 ;src/main.c:756: e.life = 0;
+   6E20 DD 6E FC      [19] 6058 	ld	l,-4 (ix)
+   6E23 DD 66 FD      [19] 6059 	ld	h,-3 (ix)
+   6E26 36 00         [10] 6060 	ld	(hl),#0x00
+                           6061 ;src/main.c:757: object.vivo = 0;
+   6E28 21 73 76      [10] 6062 	ld	hl,#(_object + 0x0006)
+   6E2B 36 00         [10] 6063 	ld	(hl),#0x00
+   6E2D                    6064 00140$:
+                           6065 ;src/main.c:761: if(finish == 1) return;
+   6E2D DD 7E 9A      [19] 6066 	ld	a,-102 (ix)
+   6E30 3D            [ 4] 6067 	dec	a
+   6E31 C2 F0 68      [10] 6068 	jp	NZ,00144$
+   6E34                    6069 00146$:
+   6E34 DD F9         [10] 6070 	ld	sp, ix
+   6E36 DD E1         [14] 6071 	pop	ix
+   6E38 C9            [10] 6072 	ret
+                           6073 ;src/main.c:768: void credits(){
+                           6074 ;	---------------------------------
+                           6075 ; Function credits
+                           6076 ; ---------------------------------
+   6E39                    6077 _credits::
+                           6078 ;src/main.c:770: cpct_clearScreen(0);
+   6E39 21 00 40      [10] 6079 	ld	hl,#0x4000
+   6E3C E5            [11] 6080 	push	hl
+   6E3D AF            [ 4] 6081 	xor	a, a
+   6E3E F5            [11] 6082 	push	af
+   6E3F 33            [ 6] 6083 	inc	sp
+   6E40 26 C0         [ 7] 6084 	ld	h, #0xC0
+   6E42 E5            [11] 6085 	push	hl
+   6E43 CD 91 73      [17] 6086 	call	_cpct_memset
+                           6087 ;src/main.c:771: memptr = cpct_getScreenPtr(VMEM,10,10);
+   6E46 21 0A 0A      [10] 6088 	ld	hl,#0x0A0A
+   6E49 E5            [11] 6089 	push	hl
+   6E4A 21 00 C0      [10] 6090 	ld	hl,#0xC000
+   6E4D E5            [11] 6091 	push	hl
+   6E4E CD 84 74      [17] 6092 	call	_cpct_getScreenPtr
+                           6093 ;src/main.c:772: cpct_drawStringM0("Lounge Gladiator",memptr,1,0);
+   6E51 EB            [ 4] 6094 	ex	de,hl
+   6E52 01 71 6E      [10] 6095 	ld	bc,#___str_5+0
+   6E55 21 01 00      [10] 6096 	ld	hl,#0x0001
+   6E58 E5            [11] 6097 	push	hl
+   6E59 D5            [11] 6098 	push	de
+   6E5A C5            [11] 6099 	push	bc
+   6E5B CD 48 72      [17] 6100 	call	_cpct_drawStringM0
+   6E5E 21 06 00      [10] 6101 	ld	hl,#6
+   6E61 39            [11] 6102 	add	hl,sp
+   6E62 F9            [ 6] 6103 	ld	sp,hl
+                           6104 ;src/main.c:774: while (1){
+   6E63                    6105 00104$:
+                           6106 ;src/main.c:776: cpct_scanKeyboard_f();
+   6E63 CD 67 71      [17] 6107 	call	_cpct_scanKeyboard_f
+                           6108 ;src/main.c:780: if(cpct_isKeyPressed(Key_Esc)) {
+   6E66 21 08 04      [10] 6109 	ld	hl,#0x0408
+   6E69 CD 5B 71      [17] 6110 	call	_cpct_isKeyPressed
+   6E6C 7D            [ 4] 6111 	ld	a,l
+   6E6D B7            [ 4] 6112 	or	a, a
+   6E6E 28 F3         [12] 6113 	jr	Z,00104$
+                           6114 ;src/main.c:782: return;
+   6E70 C9            [10] 6115 	ret
+   6E71                    6116 ___str_5:
+   6E71 4C 6F 75 6E 67 65  6117 	.ascii "Lounge Gladiator"
         20 47 6C 61 64 69
         61 74 6F 72
-   6E1F 00                 6045 	.db 0x00
-                           6046 ;src/main.c:780: void main(void) {
-                           6047 ;	---------------------------------
-                           6048 ; Function main
-                           6049 ; ---------------------------------
-   6E20                    6050 _main::
-                           6051 ;src/main.c:784: init();
-   6E20 CD 8F 4A      [17] 6052 	call	_init
-                           6053 ;src/main.c:787: while(1){
-   6E23                    6054 00106$:
-                           6055 ;src/main.c:788: x=menu();
-   6E23 CD F1 4A      [17] 6056 	call	_menu
-   6E26 5D            [ 4] 6057 	ld	e, l
-   6E27 54            [ 4] 6058 	ld	d, h
-                           6059 ;src/main.c:789: switch(x){
-   6E28 CB 7A         [ 8] 6060 	bit	7, d
-   6E2A 20 F7         [12] 6061 	jr	NZ,00106$
-   6E2C 3E 02         [ 7] 6062 	ld	a,#0x02
-   6E2E BB            [ 4] 6063 	cp	a, e
-   6E2F 3E 00         [ 7] 6064 	ld	a,#0x00
-   6E31 9A            [ 4] 6065 	sbc	a, d
-   6E32 E2 37 6E      [10] 6066 	jp	PO, 00122$
-   6E35 EE 80         [ 7] 6067 	xor	a, #0x80
-   6E37                    6068 00122$:
-   6E37 FA 23 6E      [10] 6069 	jp	M,00106$
-   6E3A 16 00         [ 7] 6070 	ld	d,#0x00
-   6E3C 21 42 6E      [10] 6071 	ld	hl,#00123$
-   6E3F 19            [11] 6072 	add	hl,de
-   6E40 19            [11] 6073 	add	hl,de
-                           6074 ;src/main.c:790: case 0: return;break;
-                           6075 ;src/main.c:791: case 1: game(); break;
-   6E41 E9            [ 4] 6076 	jp	(hl)
-   6E42                    6077 00123$:
-   6E42 18 10         [12] 6078 	jr	00108$
-   6E44 18 04         [12] 6079 	jr	00102$
-   6E46 18 07         [12] 6080 	jr	00103$
-   6E48 18 0A         [12] 6081 	jr	00108$
-   6E4A                    6082 00102$:
-   6E4A CD 13 65      [17] 6083 	call	_game
-   6E4D 18 D4         [12] 6084 	jr	00106$
-                           6085 ;src/main.c:792: case 2: credits();break;
-   6E4F                    6086 00103$:
-   6E4F CD D7 6D      [17] 6087 	call	_credits
-                           6088 ;src/main.c:793: }
-   6E52 18 CF         [12] 6089 	jr	00106$
-   6E54                    6090 00108$:
-   6E54 C9            [10] 6091 	ret
-                           6092 	.area _CODE
-                           6093 	.area _INITIALIZER
-                           6094 	.area _CABS (ABS)
+   6E81 00                 6118 	.db 0x00
+                           6119 ;src/main.c:792: void main(void) {
+                           6120 ;	---------------------------------
+                           6121 ; Function main
+                           6122 ; ---------------------------------
+   6E82                    6123 _main::
+                           6124 ;src/main.c:796: init();
+   6E82 CD 8F 4A      [17] 6125 	call	_init
+                           6126 ;src/main.c:799: while(1){
+   6E85                    6127 00106$:
+                           6128 ;src/main.c:800: x=menu();
+   6E85 CD F1 4A      [17] 6129 	call	_menu
+   6E88 5D            [ 4] 6130 	ld	e, l
+   6E89 54            [ 4] 6131 	ld	d, h
+                           6132 ;src/main.c:801: switch(x){
+   6E8A CB 7A         [ 8] 6133 	bit	7, d
+   6E8C 20 F7         [12] 6134 	jr	NZ,00106$
+   6E8E 3E 02         [ 7] 6135 	ld	a,#0x02
+   6E90 BB            [ 4] 6136 	cp	a, e
+   6E91 3E 00         [ 7] 6137 	ld	a,#0x00
+   6E93 9A            [ 4] 6138 	sbc	a, d
+   6E94 E2 99 6E      [10] 6139 	jp	PO, 00122$
+   6E97 EE 80         [ 7] 6140 	xor	a, #0x80
+   6E99                    6141 00122$:
+   6E99 FA 85 6E      [10] 6142 	jp	M,00106$
+   6E9C 16 00         [ 7] 6143 	ld	d,#0x00
+   6E9E 21 A4 6E      [10] 6144 	ld	hl,#00123$
+   6EA1 19            [11] 6145 	add	hl,de
+   6EA2 19            [11] 6146 	add	hl,de
+                           6147 ;src/main.c:802: case 0: return;break;
+                           6148 ;src/main.c:803: case 1: game(); break;
+   6EA3 E9            [ 4] 6149 	jp	(hl)
+   6EA4                    6150 00123$:
+   6EA4 18 10         [12] 6151 	jr	00108$
+   6EA6 18 04         [12] 6152 	jr	00102$
+   6EA8 18 07         [12] 6153 	jr	00103$
+   6EAA 18 0A         [12] 6154 	jr	00108$
+   6EAC                    6155 00102$:
+   6EAC CD 75 65      [17] 6156 	call	_game
+   6EAF 18 D4         [12] 6157 	jr	00106$
+                           6158 ;src/main.c:804: case 2: credits();break;
+   6EB1                    6159 00103$:
+   6EB1 CD 39 6E      [17] 6160 	call	_credits
+                           6161 ;src/main.c:805: }
+   6EB4 18 CF         [12] 6162 	jr	00106$
+   6EB6                    6163 00108$:
+   6EB6 C9            [10] 6164 	ret
+                           6165 	.area _CODE
+                           6166 	.area _INITIALIZER
+                           6167 	.area _CABS (ABS)
