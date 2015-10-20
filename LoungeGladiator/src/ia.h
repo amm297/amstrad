@@ -9,13 +9,11 @@
 #ifndef _IA_H_
 #define _IA_H_
 
-u8 detectPlayerRoom(u8 px,u8 py,u8 room){
-  u8 detected = 0; // no detectado
-  if (scene[py/tileheight][px/tilewidth] == room) detected = 1;
-  return detected;
+u8 detectPlayerRoom(u8 px,u8 py){
+  return scene[py/tileheight][px/tilewidth];
 }
 
-u8 chooseDirection(u8 d){
+u8 chooseDirection(){
 
   u8 dir = 0;
    u8 rnd = (rand()%4)+1;

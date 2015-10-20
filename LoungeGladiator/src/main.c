@@ -511,11 +511,46 @@ void moveObject(){
 
 
 
-u8 followPlayer(u8 px,u8 py,u8 *x,u8 *y,u8 lx,u8 ly,u8 *dir,u8 room,u8 sizeX,u8 sizeY){
-  u8 following = 1;
-  dir[0] = setDirection(px,py,x[0],y[0]);
-  movement(dir[0],&x[0],&y[0]);
-  if(scene[(y[0])/tileheight][(x[0])/tilewidth] == 1
+void followPlayer(u8 px,u8 py,u8 *x,u8 *y,u8 seenX,u8 seenY,u8 room){
+    /*u8 *memptr;
+    memptr = cpct_getScreenPtr(VMEM,5,50);*/
+    if(seenX < *x){
+        //cpct_drawSolidBox(memptr, 1, 2, 8);
+        if(scene[(y[0])/tileheight][(x[0]-1)/tilewidth] != 1){
+            *x-=1;
+        }else if(seenY < *y){
+            if(scene[(y[0]+tileheight)/tileheight][(x[0])/tilewidth] != 1)
+                *y-=1;
+        }else{
+            if(scene[(y[0]+tileheight)/tileheight][(x[0]+tilewidth)/tilewidth] != 1)
+                *y+=1;
+        }
+    }else if(seenX > *x){
+        //cpct_drawSolidBox(memptr, 10, 2, 8);
+        if(scene[(y[0])/tileheight][(x[0]+tilewidth)/tilewidth] != 1){
+            *x+=1;
+        }else if(py < *y){
+            if(scene[(y[0]+tileheight)/tileheight][(x[0])/tilewidth] != 1)
+                *y-=1;
+        }else{
+            if(scene[(y[0]+tileheight)/tileheight][(x[0]+tilewidth)/tilewidth] != 1)
+            *y+=1;
+        }
+    }else{
+        //
+        if(seenY > *y){
+            if(scene[(y[0]+tileheight)/tileheight][(x[0]+tilewidth)/tilewidth] != 1){
+                *y+=1;
+            }
+        }else{
+            if(scene[(y[0]+tileheight)/tileheight][(x[0])/tilewidth])
+                *y-=1;
+        }
+    }
+}
+
+/*
+if(scene[(y[0])/tileheight][(x[0])/tilewidth] == 1
   || scene[(y[0])/tileheight][(x[0]+sizeX-1)/tilewidth] == 1
   || scene[(y[0]+sizeY-2)/tileheight][(x[0])/tilewidth] == 1
   || scene[(y[0]+sizeY-2)/tileheight][(x[0]+sizeX-1)/tilewidth] == 1
@@ -523,10 +558,7 @@ u8 followPlayer(u8 px,u8 py,u8 *x,u8 *y,u8 lx,u8 ly,u8 *dir,u8 room,u8 sizeX,u8 
     *x=lx;
     *y=ly;
   }
-
-  return following;
-
-}
+*/
 
 void patrol(u8 dir,u8 lx,u8 ly,u8 *x,u8 *y,u8 room){
   //scene[(y[0])/tileheight][(x[0])/tilewidth] = room;
@@ -567,16 +599,24 @@ u8 vissionSensor(u8 x,u8 y,u8 px,u8 py){
 }
 
 
-void move(u8 *x,u8 *y,u8 lx, u8 ly,u8 *dir,u8 *s,u8 room,u8 px,u8 py,u8 *following){
+void move(u8 *x,u8 *y,u8 lx, u8 ly,u8 *dir,u8 *s,u8 room,u8 px,u8 py,u8 *seenX,u8 *seenY,u8 *following,u8 *pursue){
     if(temp > 20){
-        dir[0] = chooseDirection(dir[0]);
-        following[0] = detectPlayerRoom(px,py,room);
+        dir[0] = chooseDirection();
+        following[0] = detectPlayerRoom(px,py);
+        if(following[0] == room){
+            *seenX = px;
+            *seenY = py;
+        }
         temp = 0;
     }else{
-        patrol(dir[0],lx,ly,&x[0],&y[0],room);
+        if(temp%2 == 0)
+        if(following[0] == room)
+            followPlayer(px,py,x,y,*seenX,*seenY,room);
+        else
+            patrol(dir[0],lx,ly,&x[0],&y[0],room);
     }
     temp += 1;
-  }
+}
 
 /*
 if(detected == 0){
@@ -594,7 +634,7 @@ if(detected == 0){
 
 void game(){
   TPlayer p = {0,80,0,80,gladis_quieto_dcha,3,6,4,16,4,20,20,3};
-  TEnemy e = {52,80,52,80,52,80,chacho_dcha,3,2,3,3,0,0};
+  TEnemy e = {52,80,52,80,52,80,chacho_dcha,3,2,3,3,0,0,0};
   TNivel n = {0,0,0};
 
   //players[0] =p;
@@ -664,7 +704,7 @@ void game(){
       p.sprite = checkKeyboard(&p.x,&p.y,&p.atk,&p.dir,p.sprite,&p.sizeX,&p.bullets,&finish,&arrow);
       checkBoundsCollisions(&p.x,&p.y,p.lx,p.ly,p.sizeX,p.sizeY,&p.life,&p.bullets,&n.corazon,&n.bullet);
       if(e.life > 0)
-        move(&e.x,&e.y,e.lx,e.ly,&e.dir,e.sprite,e.room,p.x,p.y,&following);
+        move(&e.x,&e.y,e.lx,e.ly,&e.dir,e.sprite,e.room,p.x,p.y,&e.seenX,&e.seenY,&following,&e.pursue);
 
       if(e.life > 0)
           if(checkCollisions(p.x, p.y, e.x, e.y, p.atk) == 2){
