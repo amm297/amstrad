@@ -568,9 +568,7 @@ if(scene[(y[0])/tileheight][(x[0])/tilewidth] == 1
   }
 */
 
-void patrol(u8 dir,u8 lx,u8 ly,u8 *x,u8 *y,u8 room){
-  //scene[(y[0])/tileheight][(x[0])/tilewidth] = room;
-
+void patrol(u8 dir,u8 *x,u8 *y,u8 room){
   movement(dir,&x[0],&y[0]);
 
   if(scene[(y[0])/tileheight][(x[0])/tilewidth] != room
@@ -593,7 +591,6 @@ void patrol(u8 dir,u8 lx,u8 ly,u8 *x,u8 *y,u8 room){
         break;
     }
   }
-  //scene[(y[0])/tileheight][(x[0])/tilewidth] = 2;
 }
 
 u8 vissionSensor(u8 x,u8 y,u8 px,u8 py){
@@ -636,7 +633,7 @@ void move(u8 *x,u8 *y,u8 lx, u8 ly,u8 *dir,u8 *s,u8 *room,u8 px,u8 py,u8 *seenX,
             if(*seenX == *x && *seenY == *y)
                 *pursue = 0;
         }else{
-            patrol(dir[0],lx,ly,&x[0],&y[0],room[0]);
+            patrol(dir[0],&x[0],&y[0],room[0]);
         }
     }
     if((detectPlayerRoom(lx,ly) != detectPlayerRoom(px,py)) && pursue != 0){
@@ -646,18 +643,6 @@ void move(u8 *x,u8 *y,u8 lx, u8 ly,u8 *dir,u8 *s,u8 *room,u8 px,u8 py,u8 *seenX,
     *room = detectPlayerRoom(x[0],y[0]);
     temp += 1;
 }
-
-/*
-if(detected == 0){
-          if(following[0] == 1){
-            followPlayer(px,py,&x[0],&y[0],lx,ly,&dir[0],room,sizeX,sizeY);
-            following[0] = vissionSensor(x[0],y[0],px,py);
-          }else{
-            if(scene[(y[0])/tileheight][(x[0]+sizeX-1)/tilewidth] != 0
-            || scene[(y[0]+sizeY-2)/tileheight][(x[0])/tilewidth] != 0
-            || scene[(y[0]+sizeY-2)/tileheight][(x[0]+sizeX-1)/tilewidth] != 0){
-              patrol(dir[0],lx,ly,&x[0],&y[0],room,sizeX,sizeY);
-*/
 
 /*JUEGO*/
 
