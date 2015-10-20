@@ -579,8 +579,20 @@ void patrol(u8 dir,u8 lx,u8 ly,u8 *x,u8 *y,u8 room){
   || scene[(y[0]+tileheight-2)/tileheight][(x[0])/tilewidth] != room
   || scene[(y[0]+tileheight-2)/tileheight][(x[0]+tilewidth-1)/tilewidth] != room
   ){
-    *x=lx;
-    *y=ly;
+    switch(dir){
+    case 4:
+        movement(6,&x[0],&y[0]);
+        break;
+    case 6:
+        movement(4,&x[0],&y[0]);
+        break;
+    case 2:
+        movement(8,&x[0],&y[0]);
+        break;
+    case 8:
+    movement(2,&x[0],&y[0]);
+        break;
+    }
   }
   //scene[(y[0])/tileheight][(x[0])/tilewidth] = 2;
 }
