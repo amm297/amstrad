@@ -217,7 +217,7 @@ void checkBoundsCollisions(u8 *corazon,u8 *flecha){
 }
 
 u8 checkArrowCollisions(){
-    u8 auxX;
+    /*u8 auxX;
     u8 auxY;
     u8 bound =0;
 
@@ -233,6 +233,17 @@ u8 checkArrowCollisions(){
       || scene[(object.y)/auxY][(object.x+auxX-1)/auxX] == 1
       || scene[(object.y+auxY-2)/auxY][(object.x)/auxX] == 1
       || scene[(object.y+auxY-2)/auxY][(object.x+auxX-1)/auxX] == 1
+    ){
+        object.x=object.lx;
+        object.y=object.ly;
+        bound = 1;
+  }*/
+
+u8 bound =0;
+        if(    scene[(object.y)/tileheight][(object.x)/tilewidth] == 1
+      || scene[(object.y)/tileheight][(object.x+tilewidth-1)/tilewidth] == 1
+      || scene[(object.y+tileheight-2)/tileheight][(object.x)/tilewidth] == 1
+      || scene[(object.y+tileheight-2)/tileheight][(object.x+tilewidth-1)/tilewidth] == 1
     ){
         object.x=object.lx;
         object.y=object.ly;
@@ -445,9 +456,6 @@ void game(){
             player.x = 0;
             player.y = 80;
             player.life -= 1;
-            if(player.life == 0){
-                gameOver();
-            }
             break;
         }
     }
@@ -467,9 +475,12 @@ void game(){
             atkObj = 21;
         else
             atkObj = 22;
-        if(enemy.life > 0 && checkCollisions(object.x, object.y, enemy.x, enemy.y, atkObj) == 1){
+        if(enemy.life > 0 && checkCollisions(object.x, object.y, enemy.x, enemy.y, atkObj) == 1 && bound == 0){
             enemy.life -= 1;
+            enemy.x = enemy.ox;
+            enemy.y = enemy.oy;
             object.vivo = 0;
+            bound = 1;
         }
       }
       if(finish == 1) return;

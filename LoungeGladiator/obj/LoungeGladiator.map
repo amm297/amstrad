@@ -18,21 +18,21 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000004  l__INITIALIZER                  
      0000011C  l__DATA                         
      00000184  l__HOME                         
-     00002CC8  l__CODE                         
+     00002D33  l__CODE                         
      00004000  s__CODE                         
-     00006CC8  s__DATA                         
-     00006DE4  s__INITIALIZED                  
-     00006DE8  s__HOME                         
-     00006F6C  s__GSFINAL                      
-     00006F6C  s__GSINIT                       
-     00006F6C  s__INITIALIZER                  
+     00006D33  s__DATA                         
+     00006E4F  s__INITIALIZED                  
+     00006E53  s__HOME                         
+     00006FD7  s__GSFINAL                      
+     00006FD7  s__GSINIT                       
+     00006FD7  s__INITIALIZER                  
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00002CC8 =       11464. bytes (REL,CON)
+_CODE                               00004000    00002D33 =       11571. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -81,108 +81,108 @@ _CODE                               00004000    00002CC8 =       11464. bytes (R
      00005701  _checkBoundsCollisionsEnemy        main
      00005956  _checkBoundsCollisions             main
      00005D27  _checkArrowCollisions              main
-     00005DFD  _followPlayer                      main
-     00006115  _patrol                            main
-     000062AF  _vissionSensor                     main
-     0000632E  _move                              main
-     0000643C  _game                              main
+     00005E8A  _followPlayer                      main
+     000061A2  _patrol                            main
+     0000633C  _vissionSensor                     main
+     000063BB  _move                              main
+     00006490  _game                              main
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00002CC8 =       11464. bytes (REL,CON)
+_CODE                               00004000    00002D33 =       11571. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00006648  _credits                           main
-     000066EB  _main                              main
-     00006720  _muro                              muro
-     00006760  _flecha_arriba                     flecha
-     00006780  _flecha_abajo                      flecha
-     000067A0  _flecha_dcha                       flecha
-     000067C0  _flecha_izda                       flecha
-     000067E0  _cpct_setPalette                   cpct_video
-     000067E9  cpct_setPalette_asm                cpct_video
-     00006804  _cpct_isKeyPressed                 cpct_keyboard
-     00006804  cpct_isKeyPressed_asm              cpct_keyboard
-     00006810  _cpct_scanKeyboard_f               cpct_keyboard
-     00006810  cpct_scanKeyboard_f_asm            cpct_keyboard
-     0000687A  _rand                              rand
-     000068D6  _srand                             rand
-     000068F1  _cpct_drawStringM0                 cpct_strings
-     000068F9  cpct_drawStringM0_asm              cpct_strings
-     00006915  _cpct_drawSprite                   cpct_sprites
-     000069BA  dc_mode0_ct                        cpct_strings
-     000069CA  _cpct_drawCharM0                   cpct_strings
-     000069D7  cpct_drawCharM0_asm                cpct_strings
-     00006A57  __divuint                          
-     00006A5F  __divuchar                         
-     00006A66  __divu8                            
-     00006A69  __divu16                           
-     00006A98  _cpct_fw2hw                        cpct_video
-     00006AB2  _cpct_keyboardStatusBuffer         cpct_keyboard
-     00006ABC  _cpct_drawSpriteMasked             cpct_sprites
-     00006AEB  cpct_firmware2hw_colour            
-     00006B06  _cpct_waitVSYNC                    cpct_video
-     00006B06  cpct_waitVSYNC_asm                 cpct_video
-     00006B0E  _cpct_setVideoMode                 cpct_video
-     00006B13  cpct_setVideoMode_asm              cpct_video
-     00006B20  _cpct_memset                       cpct_memutils
-     00006B2E  _cpct_mode_rom_status              cpct_firmware
-     00006B2F  _cpct_firmware_address             cpct_firmware
-     00006B31  _cpct_disableFirmware              cpct_firmware
-     00006B31  cpct_disableFirmware_asm           cpct_firmware
-     00006B42  _cpct_drawSolidBox                 cpct_sprites
-     00006BFA  __modschar                         
-     00006C07  __modsint                          
-     00006C13  _cpct_getScreenPtr                 cpct_video
-     00006C33  _cpct_scanKeyboard                 cpct_keyboard
-     00006C33  cpct_scanKeyboard_asm              cpct_keyboard
-     00006C64  __divsint                          
-     00006C6D  __divschar                         
-     00006C74  __div8                             
-     00006C78  __div_signexte                     
-     00006C7C  __div16                            
-     00006CA2  __get_remainder                    
-     00006CAC  __mulint                           
+     000066B3  _credits                           main
+     00006756  _main                              main
+     0000678B  _muro                              muro
+     000067CB  _flecha_arriba                     flecha
+     000067EB  _flecha_abajo                      flecha
+     0000680B  _flecha_dcha                       flecha
+     0000682B  _flecha_izda                       flecha
+     0000684B  _cpct_setPalette                   cpct_video
+     00006854  cpct_setPalette_asm                cpct_video
+     0000686F  _cpct_isKeyPressed                 cpct_keyboard
+     0000686F  cpct_isKeyPressed_asm              cpct_keyboard
+     0000687B  _cpct_scanKeyboard_f               cpct_keyboard
+     0000687B  cpct_scanKeyboard_f_asm            cpct_keyboard
+     000068E5  _rand                              rand
+     00006941  _srand                             rand
+     0000695C  _cpct_drawStringM0                 cpct_strings
+     00006964  cpct_drawStringM0_asm              cpct_strings
+     00006980  _cpct_drawSprite                   cpct_sprites
+     00006A25  dc_mode0_ct                        cpct_strings
+     00006A35  _cpct_drawCharM0                   cpct_strings
+     00006A42  cpct_drawCharM0_asm                cpct_strings
+     00006AC2  _cpct_fw2hw                        cpct_video
+     00006ADC  _cpct_keyboardStatusBuffer         cpct_keyboard
+     00006AE6  _cpct_drawSpriteMasked             cpct_sprites
+     00006B15  cpct_firmware2hw_colour            
+     00006B30  _cpct_waitVSYNC                    cpct_video
+     00006B30  cpct_waitVSYNC_asm                 cpct_video
+     00006B38  _cpct_setVideoMode                 cpct_video
+     00006B3D  cpct_setVideoMode_asm              cpct_video
+     00006B4A  _cpct_memset                       cpct_memutils
+     00006B58  _cpct_mode_rom_status              cpct_firmware
+     00006B59  _cpct_firmware_address             cpct_firmware
+     00006B5B  _cpct_disableFirmware              cpct_firmware
+     00006B5B  cpct_disableFirmware_asm           cpct_firmware
+     00006B6C  _cpct_drawSolidBox                 cpct_sprites
+     00006C24  __modschar                         
+     00006C31  __modsint                          
+     00006C3D  _cpct_getScreenPtr                 cpct_video
+     00006C5D  _cpct_scanKeyboard                 cpct_keyboard
+     00006C5D  cpct_scanKeyboard_asm              cpct_keyboard
+     00006C8E  __divsint                          
+     00006C97  __divschar                         
+     00006C9E  __div8                             
+     00006CA2  __div_signexte                     
+     00006CA6  __div16                            
+     00006CCC  __get_remainder                    
+     00006CD6  __mulint                           
+     00006CDE  __mul16                            
+     00006CF2  __divuint                          
+     00006CFA  __divuchar                         
+     00006D01  __divu8                            
 ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00002CC8 =       11464. bytes (REL,CON)
+_CODE                               00004000    00002D33 =       11571. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00006CB4  __mul16                            
+     00006D04  __divu16                           
 ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_DATA                               00006CC8    0000011C =         284. bytes (REL,CON)
+_DATA                               00006D33    0000011C =         284. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00006CC8  _scene                             main
-     00006DB8  _temp                              main
-     00006DB9  _map                               main
-     00006DBA  _path                              main
-     00006DBB  _finish                            main
-     00006DBC  _arrow                             main
-     00006DBD  _following                         main
-     00006DBE  _bound                             main
-     00006DBF  _archer                            main
-     00006DC0  _object                            main
-     00006DCA  _player                            main
-     00006DD5  _enemy                             main
+     00006D33  _scene                             main
+     00006E23  _temp                              main
+     00006E24  _map                               main
+     00006E25  _path                              main
+     00006E26  _finish                            main
+     00006E27  _arrow                             main
+     00006E28  _following                         main
+     00006E29  _bound                             main
+     00006E2A  _archer                            main
+     00006E2B  _object                            main
+     00006E35  _player                            main
+     00006E40  _enemy                             main
 ASxxxx Linker V03.00 + NoICE + sdld,  page 6.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_INITIALIZED                        00006DE4    00000004 =           4. bytes (REL,CON)
+_INITIALIZED                        00006E4F    00000004 =           4. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -191,18 +191,18 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_HOME                               00006DE8    00000184 =         388. bytes (REL,CON)
+_HOME                               00006E53    00000184 =         388. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00006DE8  __mullong                          _mullong
+     00006E53  __mullong                          _mullong
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 8.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_INITIALIZER                        00006F6C    00000004 =           4. bytes (REL,CON)
+_INITIALIZER                        00006FD7    00000004 =           4. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -221,52 +221,52 @@ obj/flecha.rel                            [ flecha ]
 
 Libraries Linked                          [ object file ]
 
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_setPalette.rel ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_isKeyPressed.rel ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_scanKeyboard_f.rel ]
-/home/Pepe/cpctelera/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
+/home/Alberto/cpctelera/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
                                           [ rand.rel ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawStringM0.rel ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawSprite_cbindings.rel ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawCharM0.rel ]
-/home/Pepe/cpctelera/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
-                                          [ divunsigned.rel ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_fw2hw.rel ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ keyboard.rel ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawSpriteMasked_cbindings. ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_firmware2hw_colour_table.re ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_waitVSYNC.rel ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_setVideoMode.rel ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_memset_cbinding.rel ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_disableFirmware.rel ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawSolidBox_cbindings.rel ]
-/home/Pepe/cpctelera/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
+/home/Alberto/cpctelera/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
                                           [ _mullong.rel ]
-/home/Pepe/cpctelera/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
+/home/Alberto/cpctelera/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
                                           [ modsigned.rel ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_getScreenPtr_cbindings.rel ]
-/home/Pepe/cpctelera/cpctelera/cpctelera.lib
+/home/Alberto/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_scanKeyboard.rel ]
-/home/Pepe/cpctelera/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
+/home/Alberto/cpctelera/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
                                           [ divsigned.rel ]
-/home/Pepe/cpctelera/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
+/home/Alberto/cpctelera/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
                                           [ mul.rel ]
+/home/Alberto/cpctelera/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
+                                          [ divunsigned.rel ]
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 10.
 
