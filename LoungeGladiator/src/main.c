@@ -217,11 +217,22 @@ void checkBoundsCollisions(u8 *corazon,u8 *flecha){
 }
 
 u8 checkArrowCollisions(){
-  u8 bound =0;
- if(    scene[(object.y)/tileheight][(object.x)/tilewidth] == 1
-      || scene[(object.y)/tileheight][(object.x+tilewidth-1)/tilewidth] == 1
-      || scene[(object.y+tileheight-2)/tileheight][(object.x)/tilewidth] == 1
-      || scene[(object.y+tileheight-2)/tileheight][(object.x+tilewidth-1)/tilewidth] == 1
+    u8 auxX;
+    u8 auxY;
+    u8 bound =0;
+
+    if(object.dir == 2 || object.dir == 8){
+        auxX = 2;
+        auxY = 8;
+    }else{
+        auxX = 4;
+        auxY = 4;
+    }
+
+    if(    scene[(object.y)/auxY][(object.x)/auxX] == 1
+      || scene[(object.y)/auxY][(object.x+auxX-1)/auxX] == 1
+      || scene[(object.y+auxY-2)/auxY][(object.x)/auxX] == 1
+      || scene[(object.y+auxY-2)/auxY][(object.x+auxX-1)/auxX] == 1
     ){
         object.x=object.lx;
         object.y=object.ly;
@@ -248,7 +259,7 @@ void followPlayer(){
     memptr = cpct_getScreenPtr(VMEM,5,50);*/
     if(auxX < enemy.x){
         //cpct_drawSolidBox(memptr, 1, 2, 8);
-        if(scene[(enemy.y)/tileheight][(enemy.x)/tilewidth] != 1){
+        if(scene[(enemy.y)/tileheight][(enemy.x-1)/tilewidth] != 1){
             enemy.x-=1;
         }else if(auxY < enemy.y){
             if(scene[(enemy.y-1)/tileheight][(enemy.x)/tilewidth] != 1)
@@ -332,14 +343,14 @@ u8 vissionSensor(){
 
 
 void move(){
-    u8* memptr;
+    //u8* memptr;
     if(temp > 10){
         enemy.dir = chooseDirection();
         following = detectPlayerRoom(player.x,player.y);
-        memptr = cpct_getScreenPtr(VMEM,20,20);
+        /*memptr = cpct_getScreenPtr(VMEM,20,20);
         cpct_drawSolidBox(memptr, following, 2, 8);
         memptr = cpct_getScreenPtr(VMEM,24,20);
-        cpct_drawSolidBox(memptr, enemy.room, 2, 8);
+        cpct_drawSolidBox(memptr, enemy.room, 2, 8);*/
         if(following == enemy.room || enemy.pursue != 0){
             if(enemy.pursue == 0)
                 enemy.pursue = 3;
@@ -367,8 +378,8 @@ void move(){
 /*JUEGO*/
 
 void game(){
+  u8 atkObj = 0;
   TNivel n = {0,0,0};
-  u8 fps = 0;
   bound =0;
   temp = 0;
   map = 1;
@@ -396,27 +407,32 @@ void game(){
     erases();
 
     //Dibujar pickups
-    if(fps == 4)
+    if(temp == 10)
         drawPickUps(n.corazon,n.bullet);
 
     //Dibujar personajes
     draws();
 
     //Dibujar fatiga
-    if(fps == 4){
+    if(temp == 10){
         if(player.atk < 20) drawFatiga(player.atk,2);
         else if(player.atk > 20) drawFatiga(player.atk,1);
         else drawFatiga(player.atk,0);
-        fps = 0;
     }
 
 
     //guardar datos anteriores
-    player.lx = player.x;
-    player.ly = player.y;
+    if(temp%2 == 0){
+        player.lx = player.x;
+        player.ly = player.y;
+    }
+
     if(enemy.life > 0){
-        enemy.lx = enemy.x;
-        enemy.ly = enemy.y;
+        if(temp%2 == 1){
+            enemy.lx = enemy.x;
+            enemy.ly = enemy.y;
+        }
+
         move();
 
         switch(checkCollisions(player.x, player.y, enemy.x, enemy.y, player.atk)){
@@ -429,7 +445,9 @@ void game(){
             player.x = 0;
             player.y = 80;
             player.life -= 1;
-            
+            if(player.life == 0){
+                gameOver();
+            }
             break;
         }
     }
@@ -445,14 +463,15 @@ void game(){
       if(arrow == 1){
         moveObject();
         bound = checkArrowCollisions();
-        if(enemy.life > 0 && checkCollisions(object.x, object.y, enemy.x, enemy.y, 21) == 1){
+        if(object.dir == 2 || object.dir == 8)
+            atkObj = 21;
+        else
+            atkObj = 22;
+        if(enemy.life > 0 && checkCollisions(object.x, object.y, enemy.x, enemy.y, atkObj) == 1){
             enemy.life -= 1;
             object.vivo = 0;
         }
       }
-
-      fps++;
-      if(player.life == 0) gameOver();
       if(finish == 1) return;
 
    }
