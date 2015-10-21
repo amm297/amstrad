@@ -33,7 +33,7 @@ typedef struct
 
 }TPlayer;
 
-typedef struct 
+typedef struct
 {
   u8 x,y; //posicion personaje
   u8 lx,ly; //posicion personaje
@@ -71,7 +71,7 @@ typedef struct{
 //const u8* sprite = gladis_quieto_dcha;
 const u8 g_palette[5] = { 0,26,6,13 };
 u8 scene[height][width];
-int temp;
+u8 temp;
 u8 map;
 u8 path;
 u8 finish;

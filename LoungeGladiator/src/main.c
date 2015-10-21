@@ -280,17 +280,6 @@ void followPlayer(){
     }
 }
 
-/*
-if(scene[(y[0])/tileheight][(x[0])/tilewidth] == 1
-  || scene[(y[0])/tileheight][(x[0]+sizeX-1)/tilewidth] == 1
-  || scene[(y[0]+sizeY-2)/tileheight][(x[0])/tilewidth] == 1
-  || scene[(y[0]+sizeY-2)/tileheight][(x[0]+sizeX-1)/tilewidth] == 1
-  ){
-    *x=lx;
-    *y=ly;
-  }
-*/
-
 void patrol(){
   //scene[(y[0])/tileheight][(x[0])/tilewidth] = room;
 
@@ -343,13 +332,18 @@ u8 vissionSensor(){
 
 
 void move(){
+    u8* memptr;
     if(temp > 10){
         enemy.dir = chooseDirection();
         following = detectPlayerRoom(player.x,player.y);
+        memptr = cpct_getScreenPtr(VMEM,20,20);
+        cpct_drawSolidBox(memptr, following, 2, 8);
+        memptr = cpct_getScreenPtr(VMEM,24,20);
+        cpct_drawSolidBox(memptr, enemy.room, 2, 8);
         if(following == enemy.room || enemy.pursue != 0){
             if(enemy.pursue == 0)
-                enemy.pursue = 1;
-            else
+                enemy.pursue = 3;
+            else if(enemy.pursue > 1)
                 enemy.pursue -=1;
         }
         temp = 0;
@@ -362,7 +356,7 @@ void move(){
             patrol();
         }
     }
-    if((detectPlayerRoom(enemy.lx,enemy.ly) != detectPlayerRoom(player.x,player.y)) && enemy.pursue != 0){
+    if((detectPlayerRoom(enemy.lx,enemy.ly) == detectPlayerRoom(player.x,player.y)) || enemy.pursue > 1){
         enemy.seenX = player.x;
         enemy.seenY = player.y;
     }
@@ -374,6 +368,7 @@ void move(){
 
 void game(){
   TNivel n = {0,0,0};
+  u8 fps = 0;
   bound =0;
   temp = 0;
   map = 1;
@@ -399,23 +394,47 @@ void game(){
 
     //Desdibujar personajes
     erases();
-    
+
     //Dibujar pickups
-    drawPickUps(n.corazon,n.bullet);
+    if(fps == 4)
+        drawPickUps(n.corazon,n.bullet);
 
     //Dibujar personajes
     draws();
 
     //Dibujar fatiga
-    if(player.atk < 20) drawFatiga(player.atk,2);
-    else if(player.atk > 20) drawFatiga(player.atk,1);
-    else drawFatiga(player.atk,0);
+    if(fps == 4){
+        if(player.atk < 20) drawFatiga(player.atk,2);
+        else if(player.atk > 20) drawFatiga(player.atk,1);
+        else drawFatiga(player.atk,0);
+        fps = 0;
+    }
+
 
     //guardar datos anteriores
     player.lx = player.x;
     player.ly = player.y;
-    enemy.lx = enemy.x;
-    enemy.ly = enemy.y;
+    if(enemy.life > 0){
+        enemy.lx = enemy.x;
+        enemy.ly = enemy.y;
+        move();
+
+        switch(checkCollisions(player.x, player.y, enemy.x, enemy.y, player.atk)){
+        case 1:
+            enemy.x = enemy.ox;
+            enemy.y = enemy.oy;
+            enemy.life -= 1;
+            break;
+        case 2:
+            player.x = 0;
+            player.y = 80;
+            player.life -= 1;
+            if(player.life == 0){
+                gameOver();
+            }
+            break;
+        }
+    }
     player.latk = player.atk;
 
 
@@ -425,15 +444,16 @@ void game(){
       player.sprite = checkKeyboard();
       checkBoundsCollisions(&n.corazon,&n.bullet);
 
-        move();
-      
       if(arrow == 1){
         moveObject();
         bound = checkArrowCollisions();
-
-       
+        if(enemy.life > 0 && checkCollisions(object.x, object.y, enemy.x, enemy.y, 21) == 1){
+            enemy.life -= 1;
+            object.vivo = 0;
+        }
       }
 
+      fps++;
       if(finish == 1) return;
 
    }

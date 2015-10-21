@@ -92,7 +92,7 @@ void draw(u8 x,u8 y,u8 *sprite,u8 mode){
             cpct_drawSpriteMasked(sprite, memptr, 4, 4);
             break;
         }
-    
+
 }
 
 void erase(u8 x,u8 y,u8 mode){
@@ -117,19 +117,20 @@ void drawStats(){
     drawBullets(player.bullets,16);
     drawBullets(enemy.bullets,56);
     drawVida(enemy.life,65);
-    
+
 }
 
 
 void draws(){
  u8 i=0;
   draw(player.x,player.y,player.sprite,0);
-  draw(enemy.x,enemy.y,enemy.sprite,0);
-    if(arrow == 1){
-        if(object.dir == 4 || object.dir == 6 && object.vivo == 1)
-            draw(object.x,object.y,object.sprite,2);
-        else if(object.dir == 2 || object.dir == 8 && object.vivo == 1)
-            draw(object.x,object.y,object.sprite,1);
+  if(enemy.life > 0)
+    draw(enemy.x,enemy.y,enemy.sprite,0);
+  if(arrow == 1){
+    if(object.dir == 4 || object.dir == 6 && object.vivo == 1)
+        draw(object.x,object.y,object.sprite,2);
+    else if(object.dir == 2 || object.dir == 8 && object.vivo == 1)
+        draw(object.x,object.y,object.sprite,1);
     }
     drawStats();
 }
