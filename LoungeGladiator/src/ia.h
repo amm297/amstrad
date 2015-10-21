@@ -37,12 +37,12 @@ u8 setDirection(u8 px,u8 py,u8 x,u8 y){
   return dir;
 }
 
-void movement(u8 dir,u8 *x,u8 *y){
+void movement(u8 dir){
   switch(dir){
-      case 6: x[0] += 1; break;
-      case 4: x[0] -= 1; break;
-      case 8: y[0] -= 2; break;
-      case 2: y[0] += 2; break;
+      case 6: enemy.x += 1; break;
+      case 4: enemy.x -= 1; break;
+      case 8: enemy.y -= 2; break;
+      case 2: enemy.y += 2; break;
     }
 }
 
