@@ -128,26 +128,33 @@ void draws(){
     if(enemy.life > 0 && temp%2 == 1)
         draw(enemy.x,enemy.y,enemy.sprite,0);
     if(arrow == 1){
-        if(object.dir == 4 || object.dir == 6 && object.vivo == 1)
-            draw(object.x,object.y,object.sprite,2);
-        else if(object.dir == 2 || object.dir == 8 && object.vivo == 1)
-            draw(object.x,object.y,object.sprite,1);
+        if(parrow.dir == 4 || parrow.dir == 6 && parrow.vivo == 1)
+            draw(parrow.x,parrow.y,parrow.sprite,2);
+        else if(parrow.dir == 2 || parrow.dir == 8 && parrow.vivo == 1)
+            draw(parrow.x,parrow.y,parrow.sprite,1);
+    }
+    if(shooted == 1){
+        if(earrow.dir == 4 || earrow.dir == 6 && earrow.vivo == 1)
+            draw(earrow.x,earrow.y,earrow.sprite,2);
+        else if(earrow.dir == 2 || earrow.dir == 8 && earrow.vivo == 1)
+            draw(earrow.x,earrow.y,earrow.sprite,1);
     }
     drawStats();
 }
 
 void erases(){
     u8 i=0;
-    if(temp%2 == 0)
-        erase(player.lx,player.ly,0);
-    if(temp%2 == 1)
-        erase(enemy.lx,enemy.ly,0);
- if(arrow == 1){
-        if(object.dir == 4 || object.dir == 6)
-            erase(object.lx,object.ly,2);
-        else
-            erase(object.lx,object.ly,1);
-        if(bound == 1) arrow = 0;
+    if(temp%2 == 0) erase(player.lx,player.ly,0);
+    if(temp%2 == 1) erase(enemy.lx,enemy.ly,0);
+    if(arrow == 1){
+      if(parrow.dir == 4 || parrow.dir == 6) erase(parrow.lx,parrow.ly,2);
+      else erase(parrow.lx,parrow.ly,1);
+      if(bound == 1) arrow = 0;
+    }
+    if(shooted == 1){
+      if(earrow.dir == 4 || earrow.dir == 6) erase(earrow.lx,earrow.ly,2);
+      else erase(earrow.lx,earrow.ly,1);
+      if(bounds == 1) shooted = 0;
     }
 }
 

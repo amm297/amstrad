@@ -47,6 +47,25 @@ void movement(u8 dir){
 }
 
 
+void patrol(){
+
+  movement(enemy.dir);
+
+  if(scene[(enemy.y)/tileheight][(enemy.x)/tilewidth] != enemy.room
+  || scene[(enemy.y)/tileheight][(enemy.x+tilewidth-1)/tilewidth] != enemy.room
+  || scene[(enemy.y+tileheight-2)/tileheight][(enemy.x)/tilewidth] != enemy.room
+  || scene[(enemy.y+tileheight-2)/tileheight][(enemy.x+tilewidth-1)/tilewidth] != enemy.room
+  ){
+    switch(enemy.dir){
+    case 4: movement(6); break;
+    case 6: movement(4); break;
+    case 2: movement(8); break;
+    case 8: movement(2); break;
+    }
+  }
+}
+
+
 
 /*u8 followPlayer(){
   u8 following = 1;

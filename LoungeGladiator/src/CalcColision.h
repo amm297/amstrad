@@ -56,7 +56,42 @@ u8 checkCollisions(u8 pX, u8 pY, u8 eX, u8 eY, u8 atk){
     return 0;
 }
 
+u8 checkArrowCollisions(){
+    /*u8 auxX;
+    u8 auxY;
+    u8 bound =0;
 
+    if(parrow.dir == 2 || parrow.dir == 8){
+        auxX = 2;
+        auxY = 8;
+    }else{
+        auxX = 4;
+        auxY = 4;
+    }
+
+    if(    scene[(parrow.y)/auxY][(parrow.x)/auxX] == 1
+      || scene[(parrow.y)/auxY][(parrow.x+auxX-1)/auxX] == 1
+      || scene[(parrow.y+auxY-2)/auxY][(parrow.x)/auxX] == 1
+      || scene[(parrow.y+auxY-2)/auxY][(parrow.x+auxX-1)/auxX] == 1
+    ){
+        parrow.x=parrow.lx;
+        parrow.y=parrow.ly;
+        bound = 1;
+  }*/
+
+u8 bound =0;
+        if(    scene[(parrow.y)/tileheight][(parrow.x)/tilewidth] == 1
+      || scene[(parrow.y)/tileheight][(parrow.x+tilewidth-1)/tilewidth] == 1
+      || scene[(parrow.y+tileheight-2)/tileheight][(parrow.x)/tilewidth] == 1
+      || scene[(parrow.y+tileheight-2)/tileheight][(parrow.x+tilewidth-1)/tilewidth] == 1
+    ){
+        parrow.x=parrow.lx;
+        parrow.y=parrow.ly;
+        bound = 1;
+  }
+
+  return bound;
+}
 
 
 #endif // CALCCOLISION_H

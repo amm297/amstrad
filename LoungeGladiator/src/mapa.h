@@ -76,10 +76,13 @@ u8 map;
 u8 path;
 u8 finish;
 u8 arrow;
+u8 shooted;
 u8 following;
 u8 bound;
+u8 bounds;
 u8 archer;
-TObject object;
+TObject parrow;
+TObject earrow;
 TPlayer player;
 TEnemy enemy;
 

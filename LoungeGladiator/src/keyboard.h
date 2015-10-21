@@ -58,15 +58,15 @@ u8* checkKeyboard(){
             case 8: spr = flecha_arriba; xs=2;ys=8; break;
           }
           player.atk = 0;
-          object.x = player.x;
-          object.y = player.y+8;
-          object.x = object.x;
-          object.y = object.y;
-          object.sprite = spr;
-          object.vivo = 1;
-          object.dir = player.dir;
-          object.sizeX = xs;
-          object.sizeY = ys;
+          parrow.x = player.x;
+          parrow.y = player.y+8;
+          parrow.x = parrow.x;
+          parrow.y = parrow.y;
+          parrow.sprite = spr;
+          parrow.vivo = 1;
+          parrow.dir = player.dir;
+          parrow.sizeX = xs;
+          parrow.sizeY = ys;
           player.bullets--;
         }
           arrow=1;
@@ -97,17 +97,6 @@ u8* checkKeyboard(){
        finish = 1;
   }
   return s;
-}
-
-void moveObject(){
-  object.lx = object.x;
-  object.ly = object.y;
-  switch(object.dir){
-    case 6: object.x += 1; break;
-    case 4: object.x -= 1; break;
-    case 2: object.y += 2; break;
-    case 8: object.y -= 2; break;
-  }
 }
 
 

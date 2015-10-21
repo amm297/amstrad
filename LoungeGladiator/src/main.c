@@ -77,6 +77,9 @@ void gameOver(){
   cpct_clearScreen(0);
   memptr = cpct_getScreenPtr(VMEM,10,10);
   cpct_drawStringM0("Lounge Gladiator",memptr,1,0);
+  while(1){
+
+  }
 
 }
 
@@ -146,7 +149,28 @@ int menu(){
   */
 }
 
-
+void moveObject(u8 c){
+  if(c == 0){
+    parrow.lx = parrow.x;
+    parrow.ly = parrow.y;
+    switch(parrow.dir){
+      case 6: parrow.x += 1; break;
+      case 4: parrow.x -= 1; break;
+      case 2: parrow.y += 2; break;
+      case 8: parrow.y -= 2; break;
+    }
+  }
+  else{
+    earrow.lx = earrow.x;
+    earrow.ly = earrow.y;
+    switch(earrow.dir){
+      case 6: earrow.x += 1; break;
+      case 4: earrow.x -= 1; break;
+      case 2: earrow.y += 2; break;
+      case 8: earrow.y -= 2; break;
+    }
+  }
+}
 
 /*Colisiones*/
 
@@ -216,42 +240,7 @@ void checkBoundsCollisions(u8 *corazon,u8 *flecha){
   }
 }
 
-u8 checkArrowCollisions(){
-    /*u8 auxX;
-    u8 auxY;
-    u8 bound =0;
 
-    if(object.dir == 2 || object.dir == 8){
-        auxX = 2;
-        auxY = 8;
-    }else{
-        auxX = 4;
-        auxY = 4;
-    }
-
-    if(    scene[(object.y)/auxY][(object.x)/auxX] == 1
-      || scene[(object.y)/auxY][(object.x+auxX-1)/auxX] == 1
-      || scene[(object.y+auxY-2)/auxY][(object.x)/auxX] == 1
-      || scene[(object.y+auxY-2)/auxY][(object.x+auxX-1)/auxX] == 1
-    ){
-        object.x=object.lx;
-        object.y=object.ly;
-        bound = 1;
-  }*/
-
-u8 bound =0;
-        if(    scene[(object.y)/tileheight][(object.x)/tilewidth] == 1
-      || scene[(object.y)/tileheight][(object.x+tilewidth-1)/tilewidth] == 1
-      || scene[(object.y+tileheight-2)/tileheight][(object.x)/tilewidth] == 1
-      || scene[(object.y+tileheight-2)/tileheight][(object.x+tilewidth-1)/tilewidth] == 1
-    ){
-        object.x=object.lx;
-        object.y=object.ly;
-        bound = 1;
-  }
-
-  return bound;
-}
 
 
 
@@ -302,33 +291,7 @@ void followPlayer(){
     }
 }
 
-void patrol(){
-  //scene[(y[0])/tileheight][(x[0])/tilewidth] = room;
 
-  movement(enemy.dir);
-
-  if(scene[(enemy.y)/tileheight][(enemy.x)/tilewidth] != enemy.room
-  || scene[(enemy.y)/tileheight][(enemy.x+tilewidth-1)/tilewidth] != enemy.room
-  || scene[(enemy.y+tileheight-2)/tileheight][(enemy.x)/tilewidth] != enemy.room
-  || scene[(enemy.y+tileheight-2)/tileheight][(enemy.x+tilewidth-1)/tilewidth] != enemy.room
-  ){
-    switch(enemy.dir){
-    case 4:
-        movement(6);
-        break;
-    case 6:
-        movement(4);
-        break;
-    case 2:
-        movement(8);
-        break;
-    case 8:
-        movement(2);
-        break;
-    }
-  }
-  //scene[(y[0])/tileheight][(x[0])/tilewidth] = 2;
-}
 
 u8 vissionSensor(){
   u8 following = 0;
@@ -352,6 +315,72 @@ u8 vissionSensor(){
 
 }
 
+void shoot(){
+  u8 *spr = flecha_dcha,xs=2,ys=8;
+  switch(enemy.dir){
+    case 6: spr = flecha_dcha; xs=4;ys=4; break;
+    case 4: spr = flecha_izda; xs=4;ys=4; break;
+    case 2: spr = flecha_abajo; xs=2;ys=8; break;
+    case 8: spr = flecha_arriba; xs=2;ys=8; break;
+  }
+  earrow.x = enemy.x;
+  earrow.y = enemy.y+8;
+  earrow.x = earrow.x;
+  earrow.y = earrow.y;
+  earrow.sprite = spr;
+  earrow.vivo = 1;
+  earrow.dir = enemy.dir;
+  earrow.sizeX = xs;
+  earrow.sizeY = ys;
+  enemy.bullets--;
+  shooted = 1;
+}
+
+
+
+
+/*Conprobaciones */
+
+
+void arrowCheckings(u8 c){
+  u8 atkObj = 0;
+  if(c == 0){
+    if(arrow == 1){
+      moveObject(0);
+      bound = checkArrowCollisions();
+
+      if(parrow.dir == 2 || parrow.dir == 8) atkObj = 21;
+      else atkObj = 22;
+
+      if(enemy.life > 0 && checkCollisions(parrow.x, parrow.y, enemy.x, enemy.y, atkObj) == 1 && bound == 0){
+        enemy.life -= 1;
+        enemy.x = enemy.ox;
+        enemy.y = enemy.oy;
+        parrow.vivo = 0;
+        bound = 1;
+      }
+    }
+  }
+  else{
+    if(shooted == 1){
+      moveObject(1);
+      bounds = checkArrowCollisions();
+
+      if(earrow.dir == 2 || earrow.dir == 8) atkObj = 21;
+      else atkObj = 22;
+
+      if(player.life > 0 && checkCollisions(earrow.x, earrow.y, player.x, player.y, atkObj) == 1 && bounds == 0){
+        player.life -= 1;
+        player.x = 0;
+        player.y = 80;
+        earrow.vivo = 0;
+        bounds = 1;
+      }
+    }
+  }
+}
+
+
 
 void move(){
     //u8* memptr;
@@ -371,9 +400,19 @@ void move(){
         temp = 0;
     }else{
         if(enemy.pursue >= 1){
-            followPlayer();
-            if(enemy.seenX == enemy.x && enemy.seenY == enemy.y)
-                enemy.pursue = 0;
+            if(archer >= 2 && enemy.bullets > 0 && shooted == 0){
+              shoot();
+              archer =0;
+            }
+            else{
+              followPlayer();
+              if(shooted == 1) arrowCheckings(1);
+              if(enemy.seenX == enemy.x && enemy.seenY == enemy.y){
+                  enemy.pursue = 0;
+                  archer++;
+              }
+            }
+
         }else{
             patrol();
         }
@@ -386,10 +425,45 @@ void move(){
     temp += 1;
 }
 
+
+void enemyIa(){
+  if(enemy.life > 0){
+    if(temp%2 == 1){
+      enemy.lx = enemy.x;
+      enemy.ly = enemy.y;
+    }
+
+    move();
+
+    switch(checkCollisions(player.x, player.y, enemy.x, enemy.y, player.atk)){
+      case 1:
+            enemy.x = enemy.ox;
+            enemy.y = enemy.oy;
+            enemy.life -= 1;
+            break;
+      case 2:
+            player.x = 0;
+            player.y = 80;
+            player.life -= 1;
+            if(player.life == 0){
+              gameOver();
+              break;
+            }
+            break;
+    }
+  }
+}
+
+
+
+
+
+
+
 /*JUEGO*/
 
 void game(){
-  u8 atkObj = 0;
+  
   TNivel n = {0,0,0};
   bound =0;
   temp = 0;
@@ -398,6 +472,7 @@ void game(){
   finish =0;
   following =0;
   archer = 0;
+  shooted =0;
 
   initPlayer();
   initEnemies();
@@ -438,27 +513,7 @@ void game(){
         player.ly = player.y;
     }
 
-    if(enemy.life > 0){
-        if(temp%2 == 1){
-            enemy.lx = enemy.x;
-            enemy.ly = enemy.y;
-        }
-
-        move();
-
-        switch(checkCollisions(player.x, player.y, enemy.x, enemy.y, player.atk)){
-        case 1:
-            enemy.x = enemy.ox;
-            enemy.y = enemy.oy;
-            enemy.life -= 1;
-            break;
-        case 2:
-            player.x = 0;
-            player.y = 80;
-            player.life -= 1;
-            break;
-        }
-    }
+    enemyIa();
     player.latk = player.atk;
 
 
@@ -468,21 +523,8 @@ void game(){
       player.sprite = checkKeyboard();
       checkBoundsCollisions(&n.corazon,&n.bullet);
 
-      if(arrow == 1){
-        moveObject();
-        bound = checkArrowCollisions();
-        if(object.dir == 2 || object.dir == 8)
-            atkObj = 21;
-        else
-            atkObj = 22;
-        if(enemy.life > 0 && checkCollisions(object.x, object.y, enemy.x, enemy.y, atkObj) == 1 && bound == 0){
-            enemy.life -= 1;
-            enemy.x = enemy.ox;
-            enemy.y = enemy.oy;
-            object.vivo = 0;
-            bound = 1;
-        }
-      }
+      arrowCheckings(0);
+
       if(finish == 1) return;
 
    }
