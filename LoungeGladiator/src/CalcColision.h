@@ -5,10 +5,29 @@
 
 
 u8 checkCollisions(u8 pX, u8 pY, u8 eX, u8 eY, u8 atk){
-    u8 popX = pX + tilewidth;
-    u8 popY = pY + tileheight;
-    u8 eopX = eX + tilewidth;
-    u8 eopY = eY + tileheight;
+    u8 auxX;
+    u8 auxY;
+    u8 popX;
+    u8 popY;
+    u8 eopX;
+    u8 eopY;
+    switch(atk){
+    case 21:
+        auxX = 2;
+        auxY = 8;
+        break;
+    case 22:
+        auxX = 4;
+        auxY = 4;
+        break;
+    default:
+        auxX = tilewidth;
+        auxY = tileheight;
+    }
+    popX = pX + auxX;
+    popY = pY + auxY;
+    eopX = eX + auxX;
+    eopY = eY + auxY;
 
     if(eopX >= pX && eopX <= popX && eY >= pY && eY <= popY)
         if(atk >= 21)

@@ -122,23 +122,26 @@ void drawStats(){
 
 
 void draws(){
- u8 i=0;
-  draw(player.x,player.y,player.sprite,0);
-  if(enemy.life > 0)
-    draw(enemy.x,enemy.y,enemy.sprite,0);
-  if(arrow == 1){
-    if(object.dir == 4 || object.dir == 6 && object.vivo == 1)
-        draw(object.x,object.y,object.sprite,2);
-    else if(object.dir == 2 || object.dir == 8 && object.vivo == 1)
-        draw(object.x,object.y,object.sprite,1);
+    u8 i=0;
+    if(temp%2 == 0)
+        draw(player.x,player.y,player.sprite,0);
+    if(enemy.life > 0 && temp%2 == 1)
+        draw(enemy.x,enemy.y,enemy.sprite,0);
+    if(arrow == 1){
+        if(object.dir == 4 || object.dir == 6 && object.vivo == 1)
+            draw(object.x,object.y,object.sprite,2);
+        else if(object.dir == 2 || object.dir == 8 && object.vivo == 1)
+            draw(object.x,object.y,object.sprite,1);
     }
     drawStats();
 }
 
 void erases(){
- u8 i=0;
- erase(player.lx,player.ly,0);
-erase(enemy.lx,enemy.ly,0);
+    u8 i=0;
+    if(temp%2 == 0)
+        erase(player.lx,player.ly,0);
+    if(temp%2 == 1)
+        erase(enemy.lx,enemy.ly,0);
  if(arrow == 1){
         if(object.dir == 4 || object.dir == 6)
             erase(object.lx,object.ly,2);
