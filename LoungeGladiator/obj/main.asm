@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
-; Version 3.5.0 #9253 (Sep 22 2015) (CYGWIN)
-; This file was generated Wed Oct 21 13:04:42 2015
+; Version 3.5.0 #9253 (Sep 26 2015) (CYGWIN)
+; This file was generated Wed Oct 21 15:35:01 2015
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mz80
@@ -4133,7 +4133,7 @@ _followPlayer::
 	push	ix
 	ld	ix,#0
 	add	ix,sp
-	ld	hl,#-27
+	ld	hl,#-22
 	add	hl,sp
 	ld	sp,hl
 ;src/main.c:240: if(detectPlayerRoom(player.x,player.y) != enemy.room){
@@ -4146,82 +4146,61 @@ _followPlayer::
 	inc	sp
 	call	_detectPlayerRoom
 	pop	af
-	ld	-1 (ix),l
+	ld	-17 (ix),l
 	ld	hl, #_enemy + 11
-	ld	a,-1 (ix)
+	ld	a,-17 (ix)
 	sub	a,(hl)
 	jr	Z,00102$
 ;src/main.c:241: auxX = enemy.seenX;
 	ld	a,(#_enemy + 12)
-	ld	-27 (ix),a
+	ld	-22 (ix),a
 ;src/main.c:242: auxY = enemy.seenY;
 	ld	hl, #_enemy + 13
-	ld	d,(hl)
+	ld	c,(hl)
 	jr	00103$
 00102$:
 ;src/main.c:244: auxX = player.x;
 	ld	hl, #_player + 0
 	ld	a,(hl)
-	ld	-27 (ix),a
+	ld	-22 (ix),a
 ;src/main.c:245: auxY = player.y;
 	ld	hl, #(_player + 0x0001) + 0
-	ld	d,(hl)
+	ld	c,(hl)
 00103$:
 ;src/main.c:249: if(auxX < enemy.x){
 	ld	a,(#_enemy + 0)
-;src/main.c:251: if(scene[(enemy.y)/tileheight][(enemy.x-1)/tilewidth] != 1){
-	ld	-1 (ix), a
-	ld	-3 (ix),a
-	ld	-2 (ix),#0x00
-;src/main.c:254: if(scene[(enemy.y-1)/tileheight][(enemy.x)/tilewidth] != 1)
-	ld	a,-1 (ix)
+;src/main.c:251: if(scene[(enemy.y)/tileheight][(enemy.x)/tilewidth] != 1 || scene[(enemy.y+tileheight)/tileheight][(enemy.x)/tilewidth] != 1){
+	ld	-17 (ix), a
 	rrca
 	rrca
 	and	a,#0x3F
-	ld	-4 (ix),a
-;src/main.c:251: if(scene[(enemy.y)/tileheight][(enemy.x-1)/tilewidth] != 1){
+	ld	-16 (ix),a
 	ld	hl, #(_enemy + 0x0001) + 0
-	ld	e,(hl)
-	ld	a,-3 (ix)
-	add	a,#0xFF
-	ld	-6 (ix),a
-	ld	a,-2 (ix)
-	adc	a,#0xFF
-	ld	-5 (ix),a
-	ld	a,-3 (ix)
-	add	a, #0x02
-	ld	-8 (ix),a
-	ld	a,-2 (ix)
-	adc	a, #0x00
-	ld	-7 (ix),a
-	ld	a,e
+	ld	l,(hl)
+	ld	a,l
 	rlca
 	rlca
 	rlca
 	rlca
 	and	a,#0x0F
 	ld	h,a
-	ld	a,-5 (ix)
-	rlca
-	and	a,#0x01
-	ld	-9 (ix),a
+	ld	e,l
+	ld	d,#0x00
 ;src/main.c:253: }else if(auxY < enemy.y){
-	ld	a,d
-	sub	a, e
+	ld	a,c
+	sub	a, l
 	ld	a,#0x00
 	rla
-	ld	-10 (ix),a
+	ld	-9 (ix),a
 ;src/main.c:255: enemy.y-=1;
-	ld	a,e
+	ld	a,l
 	add	a,#0xFF
-	ld	-11 (ix),a
+	ld	-6 (ix),a
 ;src/main.c:258: enemy.y+=1;
-	ld	a,e
+	ld	a,l
 	inc	a
-	ld	-12 (ix),a
-;src/main.c:268: if(scene[(enemy.y+tileheight)/tileheight][(enemy.x)/tilewidth] != 1)
-	ld	d,#0x00
-;src/main.c:251: if(scene[(enemy.y)/tileheight][(enemy.x-1)/tilewidth] != 1){
+	ld	-3 (ix),a
+;src/main.c:251: if(scene[(enemy.y)/tileheight][(enemy.x)/tilewidth] != 1 || scene[(enemy.y+tileheight)/tileheight][(enemy.x)/tilewidth] != 1){
 	ld	c,h
 	ld	b,#0x00
 	ld	l, c
@@ -4231,277 +4210,259 @@ _followPlayer::
 	add	hl, bc
 	add	hl, hl
 	add	hl, hl
-	ld	-14 (ix),l
-	ld	-13 (ix),h
+	ld	-5 (ix),l
+	ld	-4 (ix),h
+	ld	hl,#0x0010
+	add	hl,de
+	ld	-11 (ix),l
+	ld	-10 (ix),h
 ;src/main.c:254: if(scene[(enemy.y-1)/tileheight][(enemy.x)/tilewidth] != 1)
 	ld	a,e
 	add	a,#0xFF
-	ld	-16 (ix),a
+	ld	-8 (ix),a
 	ld	a,d
 	adc	a,#0xFF
-	ld	-15 (ix),a
+	ld	-7 (ix),a
 	ld	hl,#0x000E
 	add	hl,de
-	ld	-18 (ix),l
-	ld	-17 (ix),h
-;src/main.c:257: if(scene[(enemy.y+tileheight)/tileheight][(enemy.x)/tilewidth] != 1)
-	ld	hl,#0x0010
-	add	hl,de
-	ld	-20 (ix),l
-	ld	-19 (ix),h
+	ld	-2 (ix),l
+	ld	-1 (ix),h
+;src/main.c:268: if(scene[(enemy.y+tileheight)/tileheight][(enemy.x)/tilewidth] != 1)
 	ld	hl,#0x001F
 	add	hl,de
-	ld	-22 (ix),l
-	ld	-21 (ix),h
+	ld	-19 (ix),l
+	ld	-18 (ix),h
+;src/main.c:251: if(scene[(enemy.y)/tileheight][(enemy.x)/tilewidth] != 1 || scene[(enemy.y+tileheight)/tileheight][(enemy.x)/tilewidth] != 1){
+	ld	a,-10 (ix)
+	rlca
+	and	a,#0x01
+	ld	-14 (ix),a
 ;src/main.c:254: if(scene[(enemy.y-1)/tileheight][(enemy.x)/tilewidth] != 1)
-	ld	a,-15 (ix)
+	ld	a,-7 (ix)
 	rlca
 	and	a,#0x01
-	ld	-23 (ix),a
-;src/main.c:257: if(scene[(enemy.y+tileheight)/tileheight][(enemy.x)/tilewidth] != 1)
-	ld	a,-19 (ix)
-	rlca
-	and	a,#0x01
-	ld	-24 (ix),a
+	ld	-15 (ix),a
 ;src/main.c:249: if(auxX < enemy.x){
-	ld	a,-27 (ix)
-	sub	a, -1 (ix)
-	jp	NC,00135$
-;src/main.c:251: if(scene[(enemy.y)/tileheight][(enemy.x-1)/tilewidth] != 1){
+	ld	a,-22 (ix)
+	sub	a, -17 (ix)
+	jp	NC,00136$
+;src/main.c:251: if(scene[(enemy.y)/tileheight][(enemy.x)/tilewidth] != 1 || scene[(enemy.y+tileheight)/tileheight][(enemy.x)/tilewidth] != 1){
+	ld	bc,#_scene+0
+	ld	l,-5 (ix)
+	ld	h,-4 (ix)
+	add	hl,bc
+	ld	e,-16 (ix)
+	ld	d,#0x00
+	add	hl,de
+	ld	a,(hl)
+	dec	a
+	jr	NZ,00111$
+	ld	l,-11 (ix)
+	ld	h,-10 (ix)
 	ld	a,-14 (ix)
-	add	a, #<(_scene)
-	ld	l,a
-	ld	a,-13 (ix)
-	adc	a, #>(_scene)
-	ld	h,a
-	ld	e,-6 (ix)
-	ld	d,-5 (ix)
-	ld	a,-9 (ix)
 	or	a, a
-	jr	Z,00139$
-	ld	e,-8 (ix)
-	ld	d,-7 (ix)
-00139$:
-	sra	d
-	rr	e
-	sra	d
-	rr	e
+	jr	Z,00140$
+	ld	l,-19 (ix)
+	ld	h,-18 (ix)
+00140$:
+	sra	h
+	rr	l
+	sra	h
+	rr	l
+	sra	h
+	rr	l
+	sra	h
+	rr	l
+	ld	e, l
+	ld	d, h
+	add	hl, hl
+	add	hl, hl
+	add	hl, de
+	add	hl, hl
+	add	hl, hl
+	add	hl,bc
+	ld	e,-16 (ix)
+	ld	d,#0x00
 	add	hl,de
 	ld	a,(hl)
 	dec	a
 	jr	Z,00112$
+00111$:
 ;src/main.c:252: enemy.x-=1;
-	ld	d,-1 (ix)
+	ld	d,-17 (ix)
 	dec	d
 	ld	hl,#_enemy
 	ld	(hl),d
-	jp	00137$
+	jp	00138$
 00112$:
 ;src/main.c:253: }else if(auxY < enemy.y){
-	ld	a,-10 (ix)
+	ld	a,-9 (ix)
 	or	a, a
 	jr	Z,00109$
 ;src/main.c:254: if(scene[(enemy.y-1)/tileheight][(enemy.x)/tilewidth] != 1)
-	ld	c,-16 (ix)
-	ld	b,-15 (ix)
-	ld	a,-23 (ix)
-	or	a, a
-	jr	Z,00140$
-	ld	c,-18 (ix)
-	ld	b,-17 (ix)
-00140$:
-	sra	b
-	rr	c
-	sra	b
-	rr	c
-	sra	b
-	rr	c
-	sra	b
-	rr	c
-	ld	l, c
-	ld	h, b
-	add	hl, hl
-	add	hl, hl
-	add	hl, bc
-	add	hl, hl
-	add	hl, hl
-	ld	de,#_scene
-	add	hl,de
-	ld	e,-4 (ix)
-	ld	d,#0x00
-	add	hl,de
-	ld	a,(hl)
-	dec	a
-	jp	Z,00137$
-;src/main.c:255: enemy.y-=1;
-	ld	hl,#(_enemy + 0x0001)
-	ld	a,-11 (ix)
-	ld	(hl),a
-	jp	00137$
-00109$:
-;src/main.c:257: if(scene[(enemy.y+tileheight)/tileheight][(enemy.x)/tilewidth] != 1)
-	ld	c,-20 (ix)
-	ld	b,-19 (ix)
-	ld	a,-24 (ix)
+	ld	e,-8 (ix)
+	ld	d,-7 (ix)
+	ld	a,-15 (ix)
 	or	a, a
 	jr	Z,00141$
-	ld	c,-22 (ix)
-	ld	b,-21 (ix)
+	ld	e,-2 (ix)
+	ld	d,-1 (ix)
 00141$:
-	sra	b
-	rr	c
-	sra	b
-	rr	c
-	sra	b
-	rr	c
-	sra	b
-	rr	c
-	ld	l, c
-	ld	h, b
+	sra	d
+	rr	e
+	sra	d
+	rr	e
+	sra	d
+	rr	e
+	sra	d
+	rr	e
+	ld	l, e
+	ld	h, d
 	add	hl, hl
 	add	hl, hl
-	add	hl, bc
+	add	hl, de
 	add	hl, hl
 	add	hl, hl
-	ld	de,#_scene
-	add	hl,de
-	ld	e,-4 (ix)
+	add	hl,bc
+	ld	e,-16 (ix)
 	ld	d,#0x00
 	add	hl,de
 	ld	a,(hl)
 	dec	a
-	jp	Z,00137$
-;src/main.c:258: enemy.y+=1;
+	jp	Z,00138$
+;src/main.c:255: enemy.y-=1;
 	ld	hl,#(_enemy + 0x0001)
-	ld	a,-12 (ix)
+	ld	a,-6 (ix)
 	ld	(hl),a
-	jp	00137$
-00135$:
-;src/main.c:260: }else if(auxX > enemy.x){
-	ld	a,-1 (ix)
-	sub	a, -27 (ix)
-	jp	NC,00132$
-;src/main.c:262: if(scene[(enemy.y)/tileheight][(enemy.x+tilewidth)/tilewidth] != 1){
-	ld	a,#<(_scene)
-	add	a, -14 (ix)
-	ld	-14 (ix),a
-	ld	a,#>(_scene)
-	adc	a, -13 (ix)
-	ld	-13 (ix),a
-	ld	a,-3 (ix)
-	add	a, #0x04
-	ld	h,a
-	ld	a,-2 (ix)
-	adc	a, #0x00
-	ld	l,a
-	ld	-26 (ix),h
-	ld	-25 (ix),l
-	bit	7, l
+	jp	00138$
+00109$:
+;src/main.c:257: if(scene[(enemy.y+tileheight)/tileheight][(enemy.x)/tilewidth] != 1)
+	ld	e,-11 (ix)
+	ld	d,-10 (ix)
+	ld	a,-14 (ix)
+	or	a, a
 	jr	Z,00142$
-	ld	a,-3 (ix)
-	add	a, #0x07
-	ld	-26 (ix),a
-	ld	a,-2 (ix)
-	adc	a, #0x00
-	ld	-25 (ix),a
+	ld	e,-19 (ix)
+	ld	d,-18 (ix)
 00142$:
-	ld	l,-26 (ix)
-	ld	h,-25 (ix)
-	sra	h
-	rr	l
-	sra	h
-	rr	l
-	ld	e,-14 (ix)
-	ld	d,-13 (ix)
+	sra	d
+	rr	e
+	sra	d
+	rr	e
+	sra	d
+	rr	e
+	sra	d
+	rr	e
+	ld	l, e
+	ld	h, d
+	add	hl, hl
+	add	hl, hl
+	add	hl, de
+	add	hl, hl
+	add	hl, hl
+	add	hl,bc
+	ld	e,-16 (ix)
+	ld	d,#0x00
 	add	hl,de
 	ld	a,(hl)
 	dec	a
-	jr	Z,00122$
-;src/main.c:263: enemy.x+=1;
-	ld	a,-1 (ix)
-	inc	a
-	ld	(#_enemy),a
-	jp	00137$
-00122$:
-;src/main.c:264: }else if(auxY < enemy.y){
-	ld	a,-10 (ix)
-	or	a, a
-	jr	Z,00119$
-;src/main.c:265: if(scene[(enemy.y)/tileheight][(enemy.x-1)/tilewidth] != 1)
-	ld	c,-6 (ix)
-	ld	b,-5 (ix)
-	ld	a,-9 (ix)
-	or	a, a
+	jp	Z,00138$
+;src/main.c:258: enemy.y+=1;
+	ld	hl,#(_enemy + 0x0001)
+	ld	a,-3 (ix)
+	ld	(hl),a
+	jp	00138$
+00136$:
+;src/main.c:260: }else if(auxX > enemy.x){
+	ld	a,-17 (ix)
+	sub	a, -22 (ix)
+	jp	NC,00133$
+;src/main.c:262: if(scene[(enemy.y)/tileheight][(enemy.x+tilewidth)/tilewidth] != 1){
+	ld	a,#<(_scene)
+	add	a, -5 (ix)
+	ld	-5 (ix),a
+	ld	a,#>(_scene)
+	adc	a, -4 (ix)
+	ld	-4 (ix),a
+	ld	a,-17 (ix)
+	ld	-21 (ix),a
+	ld	-20 (ix),#0x00
+	ld	a,-21 (ix)
+	add	a, #0x04
+	ld	h,a
+	ld	a,-20 (ix)
+	adc	a, #0x00
+	ld	l,a
+	ld	-13 (ix),h
+	ld	-12 (ix),l
+	bit	7, l
 	jr	Z,00143$
-	ld	c,-8 (ix)
-	ld	b,-7 (ix)
+	ld	a,-21 (ix)
+	add	a, #0x07
+	ld	-13 (ix),a
+	ld	a,-20 (ix)
+	adc	a, #0x00
+	ld	-12 (ix),a
 00143$:
-	sra	b
-	rr	c
-	sra	b
-	rr	c
-	ld	l,-14 (ix)
-	ld	h,-13 (ix)
-	add	hl,bc
+	ld	l,-13 (ix)
+	ld	h,-12 (ix)
+	sra	h
+	rr	l
+	sra	h
+	rr	l
+	ld	e,-5 (ix)
+	ld	d,-4 (ix)
+	add	hl,de
 	ld	a,(hl)
 	dec	a
-	jp	Z,00137$
-;src/main.c:266: enemy.y-=1;
-	ld	hl,#(_enemy + 0x0001)
-	ld	a,-11 (ix)
-	ld	(hl),a
-	jp	00137$
-00119$:
-;src/main.c:268: if(scene[(enemy.y+tileheight)/tileheight][(enemy.x)/tilewidth] != 1)
-	ld	c,-20 (ix)
-	ld	b,-19 (ix)
-	ld	a,-24 (ix)
+	jr	Z,00123$
+;src/main.c:263: enemy.x+=1;
+	ld	a,-17 (ix)
+	inc	a
+	ld	(#_enemy),a
+	jp	00138$
+00123$:
+;src/main.c:264: }else if(auxY < enemy.y){
+	ld	a,-9 (ix)
 	or	a, a
+	jr	Z,00120$
+;src/main.c:265: if(scene[(enemy.y)/tileheight][(enemy.x-1)/tilewidth] != 1)
+	ld	l,-21 (ix)
+	ld	h,-20 (ix)
+	dec	hl
+	ld	c, l
+	ld	b, h
+	bit	7, h
 	jr	Z,00144$
-	ld	c,-22 (ix)
-	ld	b,-21 (ix)
+	ld	c,-21 (ix)
+	ld	b,-20 (ix)
+	inc	bc
+	inc	bc
 00144$:
 	sra	b
 	rr	c
 	sra	b
 	rr	c
-	sra	b
-	rr	c
-	sra	b
-	rr	c
-	ld	l, c
-	ld	h, b
-	add	hl, hl
-	add	hl, hl
-	add	hl, bc
-	add	hl, hl
-	add	hl, hl
-	ld	de,#_scene
-	add	hl,de
-	ld	e,-4 (ix)
-	ld	d,#0x00
-	add	hl,de
+	ld	l,-5 (ix)
+	ld	h,-4 (ix)
+	add	hl,bc
 	ld	a,(hl)
 	dec	a
-	jp	Z,00137$
-;src/main.c:269: enemy.y+=1;
+	jp	Z,00138$
+;src/main.c:266: enemy.y-=1;
 	ld	hl,#(_enemy + 0x0001)
-	ld	a,-12 (ix)
+	ld	a,-6 (ix)
 	ld	(hl),a
-	jp	00137$
-00132$:
-;src/main.c:273: if(auxY < enemy.y){
-	ld	a,-10 (ix)
-	or	a, a
-	jr	Z,00129$
-;src/main.c:274: if(scene[(enemy.y-1)/tileheight][(enemy.x)/tilewidth] != 1)
-	ld	c,-16 (ix)
-	ld	b,-15 (ix)
-	ld	a,-23 (ix)
+	jp	00138$
+00120$:
+;src/main.c:268: if(scene[(enemy.y+tileheight)/tileheight][(enemy.x)/tilewidth] != 1)
+	ld	c,-11 (ix)
+	ld	b,-10 (ix)
+	ld	a,-14 (ix)
 	or	a, a
 	jr	Z,00145$
-	ld	c,-18 (ix)
-	ld	b,-17 (ix)
+	ld	c,-19 (ix)
+	ld	b,-18 (ix)
 00145$:
 	sra	b
 	rr	c
@@ -4520,35 +4481,83 @@ _followPlayer::
 	add	hl, hl
 	ld	de,#_scene
 	add	hl,de
-	ld	e,-4 (ix)
+	ld	e,-16 (ix)
 	ld	d,#0x00
 	add	hl,de
 	ld	a,(hl)
 	dec	a
-	jr	Z,00137$
-;src/main.c:275: enemy.y-=1;
+	jp	Z,00138$
+;src/main.c:269: enemy.y+=1;
 	ld	hl,#(_enemy + 0x0001)
-	ld	a,-11 (ix)
+	ld	a,-3 (ix)
 	ld	(hl),a
-	jr	00137$
-00129$:
-;src/main.c:277: if(scene[(enemy.y+tileheight)/tileheight][(enemy.x)/tilewidth] != 1)
-	ld	c,-20 (ix)
-	ld	b,-19 (ix)
-	ld	a,-24 (ix)
+	jp	00138$
+00133$:
+;src/main.c:273: if(auxY < enemy.y){
+	ld	a,-9 (ix)
+	or	a, a
+	jr	Z,00130$
+;src/main.c:274: if(scene[(enemy.y-1)/tileheight][(enemy.x)/tilewidth] != 1)
+	ld	bc,#_scene+0
+	ld	e,-8 (ix)
+	ld	d,-7 (ix)
+	ld	a,-15 (ix)
 	or	a, a
 	jr	Z,00146$
-	ld	c,-22 (ix)
-	ld	b,-21 (ix)
+	ld	e,-2 (ix)
+	ld	d,-1 (ix)
 00146$:
-	sra	b
-	rr	c
-	sra	b
-	rr	c
-	sra	b
-	rr	c
-	sra	b
-	rr	c
+	sra	d
+	rr	e
+	sra	d
+	rr	e
+	sra	d
+	rr	e
+	sra	d
+	rr	e
+	ld	l, e
+	ld	h, d
+	add	hl, hl
+	add	hl, hl
+	add	hl, de
+	add	hl, hl
+	add	hl, hl
+	add	hl,bc
+	ld	e,-16 (ix)
+	ld	d,#0x00
+	add	hl,de
+	ld	a,(hl)
+	dec	a
+	jp	Z,00138$
+;src/main.c:275: enemy.y-=1;
+	ld	hl,#(_enemy + 0x0001)
+	ld	a,-6 (ix)
+	ld	(hl),a
+	jp	00138$
+00130$:
+;src/main.c:277: if(scene[(enemy.y+tileheight)/tileheight][(enemy.x)/tilewidth] != 1)
+	ld	a,-11 (ix)
+	ld	-13 (ix),a
+	ld	a,-10 (ix)
+	ld	-12 (ix),a
+	ld	a,-14 (ix)
+	or	a, a
+	jr	Z,00147$
+	ld	a,-19 (ix)
+	ld	-13 (ix),a
+	ld	a,-18 (ix)
+	ld	-12 (ix),a
+00147$:
+	sra	-12 (ix)
+	rr	-13 (ix)
+	sra	-12 (ix)
+	rr	-13 (ix)
+	sra	-12 (ix)
+	rr	-13 (ix)
+	sra	-12 (ix)
+	rr	-13 (ix)
+	ld	c,-13 (ix)
+	ld	b,-12 (ix)
 	ld	l, c
 	ld	h, b
 	add	hl, hl
@@ -4556,19 +4565,31 @@ _followPlayer::
 	add	hl, bc
 	add	hl, hl
 	add	hl, hl
-	ld	de,#_scene
-	add	hl,de
-	ld	e,-4 (ix)
-	ld	d,#0x00
-	add	hl,de
+	ld	-13 (ix),l
+	ld	-12 (ix),h
+	ld	a,#<(_scene)
+	add	a, -13 (ix)
+	ld	-13 (ix),a
+	ld	a,#>(_scene)
+	adc	a, -12 (ix)
+	ld	-12 (ix),a
+	ld	a,-13 (ix)
+	add	a, -16 (ix)
+	ld	-13 (ix),a
+	ld	a,-12 (ix)
+	adc	a, #0x00
+	ld	-12 (ix),a
+	ld	l,-13 (ix)
+	ld	h,-12 (ix)
 	ld	a,(hl)
+	ld	-13 (ix), a
 	dec	a
-	jr	Z,00137$
+	jr	Z,00138$
 ;src/main.c:278: enemy.y+=1;
 	ld	hl,#(_enemy + 0x0001)
-	ld	a,-12 (ix)
+	ld	a,-3 (ix)
 	ld	(hl),a
-00137$:
+00138$:
 	ld	sp, ix
 	pop	ix
 	ret
@@ -5095,7 +5116,7 @@ _game::
 	push	ix
 	ld	ix,#0
 	add	ix,sp
-	ld	hl,#-12
+	ld	hl,#-15
 	add	hl,sp
 	ld	sp,hl
 ;src/main.c:370: TNivel n = {0,0,0};
@@ -5107,10 +5128,10 @@ _game::
 	ld	e, l
 	ld	d, h
 	inc	hl
-	ld	-8 (ix),l
-	ld	-7 (ix),h
-	ld	l,-8 (ix)
-	ld	h,-7 (ix)
+	ld	-4 (ix),l
+	ld	-3 (ix),h
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	(hl),#0x00
 	inc	de
 	inc	de
@@ -5120,7 +5141,7 @@ _game::
 	ld	h,-5 (ix)
 	ld	(hl),#0x00
 ;src/main.c:371: u8 fps = 0;
-	ld	-12 (ix),#0x00
+	ld	-15 (ix),#0x00
 ;src/main.c:372: bound =0;
 	ld	hl,#_bound + 0
 	ld	(hl), #0x00
@@ -5166,17 +5187,17 @@ _game::
 	ld	-2 (ix),a
 	ld	a,-5 (ix)
 	ld	-1 (ix),a
-	ld	a,-8 (ix)
-	ld	-4 (ix),a
-	ld	a,-7 (ix)
-	ld	-3 (ix),a
+	ld	a,-4 (ix)
+	ld	-10 (ix),a
+	ld	a,-3 (ix)
+	ld	-9 (ix),a
 00126$:
 ;src/main.c:393: cpct_waitVSYNC();
 	call	_cpct_waitVSYNC
 ;src/main.c:396: erases();
 	call	_erases
 ;src/main.c:399: if(fps == 4)
-	ld	a,-12 (ix)
+	ld	a,-15 (ix)
 	sub	a, #0x04
 	jr	NZ,00182$
 	ld	a,#0x01
@@ -5191,8 +5212,8 @@ _game::
 	ld	l,-6 (ix)
 	ld	h,-5 (ix)
 	ld	a,(hl)
-	ld	l,-8 (ix)
-	ld	h,-7 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	d,(hl)
 	push	de
 	push	af
@@ -5249,7 +5270,7 @@ _game::
 	pop	af
 00108$:
 ;src/main.c:410: fps = 0;
-	ld	-12 (ix),#0x00
+	ld	-15 (ix),#0x00
 00110$:
 ;src/main.c:415: player.lx = player.x;
 	ld	a, (#_player + 0)
@@ -5262,10 +5283,11 @@ _game::
 	ld	hl, #(_enemy + 0x0008) + 0
 	ld	l,(hl)
 ;src/main.c:419: enemy.ly = enemy.y;
+;src/main.c:431: player.life -= 1;
 ;src/main.c:417: if(enemy.life > 0){
 	ld	a,l
 	or	a, a
-	jr	Z,00117$
+	jr	Z,00115$
 ;src/main.c:418: enemy.lx = enemy.x;
 	ld	a, (#_enemy + 0)
 	ld	(#(_enemy + 0x0002)),a
@@ -5300,7 +5322,7 @@ _game::
 	ld	a,l
 	sub	a, #0x02
 	jr	Z,00112$
-	jr	00117$
+	jr	00115$
 ;src/main.c:423: case 1:
 00111$:
 ;src/main.c:424: enemy.x = enemy.ox;
@@ -5315,7 +5337,7 @@ _game::
 	ld	hl,#(_enemy + 0x0008)
 	ld	(hl),a
 ;src/main.c:427: break;
-	jr	00117$
+	jr	00115$
 ;src/main.c:428: case 2:
 00112$:
 ;src/main.c:429: player.x = 0;
@@ -5325,69 +5347,62 @@ _game::
 	ld	hl,#(_player + 0x0001)
 	ld	(hl),#0x50
 ;src/main.c:431: player.life -= 1;
-	ld	hl,#_player + 6
-	ld	a,(hl)
+	ld	a, (#(_player + 0x0006) + 0)
 	add	a,#0xFF
+	ld	hl,#(_player + 0x0006)
 	ld	(hl),a
-;src/main.c:432: if(player.life == 0){
-	or	a, a
-	jr	NZ,00117$
-;src/main.c:433: gameOver();
-	call	_gameOver
-;src/main.c:436: }
-00117$:
-;src/main.c:438: player.latk = player.atk;
+;src/main.c:434: }
+00115$:
+;src/main.c:436: player.latk = player.atk;
 	ld	de,#_player + 9
 	ld	a, (#(_player + 0x0008) + 0)
 	ld	(de),a
-;src/main.c:443: cpct_scanKeyboard_f();
+;src/main.c:441: cpct_scanKeyboard_f();
 	call	_cpct_scanKeyboard_f
-;src/main.c:444: player.sprite = checkKeyboard();
+;src/main.c:442: player.sprite = checkKeyboard();
 	call	_checkKeyboard
 	ld	e,l
 	ld	d,h
 	ld	((_player + 0x0004)), de
-;src/main.c:445: checkBoundsCollisions(&n.corazon,&n.bullet);
+;src/main.c:443: checkBoundsCollisions(&n.corazon,&n.bullet);
 	ld	l,-2 (ix)
 	ld	h,-1 (ix)
-	ld	e,-4 (ix)
-	ld	d,-3 (ix)
+	ld	e,-10 (ix)
+	ld	d,-9 (ix)
 	push	hl
 	push	de
 	call	_checkBoundsCollisions
 	pop	af
 	pop	af
-;src/main.c:447: if(arrow == 1){
+;src/main.c:445: if(arrow == 1){
 	ld	a,(#_arrow + 0)
 	dec	a
-	jr	NZ,00122$
-;src/main.c:448: moveObject();
+	jr	NZ,00120$
+;src/main.c:446: moveObject();
 	call	_moveObject
-;src/main.c:449: bound = checkArrowCollisions();
+;src/main.c:447: bound = checkArrowCollisions();
 	call	_checkArrowCollisions
 	ld	iy,#_bound
 	ld	0 (iy),l
-;src/main.c:450: if(enemy.life > 0 && checkCollisions(object.x, object.y, enemy.x, enemy.y, 21) == 1){
+;src/main.c:448: if(enemy.life > 0 && checkCollisions(object.x, object.y, enemy.x, enemy.y, 21) == 1){
 	ld	a, (#(_enemy + 0x0008) + 0)
 	or	a, a
-	jr	Z,00122$
-	ld	hl, #(_enemy + 0x0001) + 0
-	ld	c,(hl)
-	ld	hl, #_enemy + 0
-	ld	b,(hl)
-	ld	hl, #_object + 1
-	ld	e,(hl)
+	jr	Z,00120$
+	ld	a,(#(_enemy + 0x0001) + 0)
+	ld	-8 (ix),a
+	ld	a,(#_enemy + 0)
+	ld	-7 (ix),a
+	ld	a,(#_object + 1)
+	ld	-11 (ix),a
 	ld	hl, #_object + 0
 	ld	d,(hl)
 	ld	a,#0x15
 	push	af
 	inc	sp
-	ld	a,c
-	push	af
-	inc	sp
-	push	bc
-	inc	sp
-	ld	a,e
+	ld	h,-8 (ix)
+	ld	l,-7 (ix)
+	push	hl
+	ld	a,-11 (ix)
 	push	af
 	inc	sp
 	push	de
@@ -5397,30 +5412,36 @@ _game::
 	pop	af
 	inc	sp
 	dec	l
-	jr	NZ,00122$
-;src/main.c:451: enemy.life -= 1;
+	jr	NZ,00120$
+;src/main.c:449: enemy.life -= 1;
 	ld	a, (#(_enemy + 0x0008) + 0)
 	add	a,#0xFF
 	ld	(#(_enemy + 0x0008)),a
-;src/main.c:452: object.vivo = 0;
+;src/main.c:450: object.vivo = 0;
 	ld	hl,#_object + 6
 	ld	(hl),#0x00
+00120$:
+;src/main.c:454: fps++;
+	inc	-15 (ix)
+;src/main.c:455: if(player.life == 0) gameOver();
+	ld	a, (#(_player + 0x0006) + 0)
+	or	a, a
+	jr	NZ,00122$
+	call	_gameOver
 00122$:
-;src/main.c:456: fps++;
-	inc	-12 (ix)
-;src/main.c:457: if(finish == 1) return;
+;src/main.c:456: if(finish == 1) return;
 	ld	a,(#_finish + 0)
 	dec	a
 	jp	NZ,00126$
 	ld	sp, ix
 	pop	ix
 	ret
-;src/main.c:464: void credits(){
+;src/main.c:463: void credits(){
 ;	---------------------------------
 ; Function credits
 ; ---------------------------------
 _credits::
-;src/main.c:466: cpct_clearScreen(0);
+;src/main.c:465: cpct_clearScreen(0);
 	ld	hl,#0x4000
 	push	hl
 	xor	a, a
@@ -5429,13 +5450,13 @@ _credits::
 	ld	h, #0xC0
 	push	hl
 	call	_cpct_memset
-;src/main.c:467: memptr = cpct_getScreenPtr(VMEM,10,10);
+;src/main.c:466: memptr = cpct_getScreenPtr(VMEM,10,10);
 	ld	hl,#0x0A0A
 	push	hl
 	ld	hl,#0xC000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:468: cpct_drawStringM0("Lounge Gladiator",memptr,1,0);
+;src/main.c:467: cpct_drawStringM0("Lounge Gladiator",memptr,1,0);
 	ex	de,hl
 	ld	bc,#___str_5
 	push	de
@@ -5448,13 +5469,13 @@ _credits::
 	add	hl,sp
 	ld	sp,hl
 	pop	de
-;src/main.c:470: while (1){
+;src/main.c:469: while (1){
 00104$:
-;src/main.c:472: cpct_scanKeyboard_f();
+;src/main.c:471: cpct_scanKeyboard_f();
 	push	de
 	call	_cpct_scanKeyboard_f
 	pop	de
-;src/main.c:473: cpct_drawStringM0("Josep Domenech Mingot",memptr,1,0);
+;src/main.c:472: cpct_drawStringM0("Josep Domenech Mingot",memptr,1,0);
 	ld	bc,#___str_6
 	push	de
 	ld	hl,#0x0001
@@ -5466,7 +5487,7 @@ _credits::
 	add	hl,sp
 	ld	sp,hl
 	pop	de
-;src/main.c:474: cpct_drawStringM0("Alberto Martinez Martinez",memptr,1,0);
+;src/main.c:473: cpct_drawStringM0("Alberto Martinez Martinez",memptr,1,0);
 	ld	bc,#___str_7
 	push	de
 	ld	hl,#0x0001
@@ -5483,7 +5504,7 @@ _credits::
 	pop	de
 	or	a, a
 	jr	Z,00104$
-;src/main.c:478: return;
+;src/main.c:477: return;
 	ret
 ___str_5:
 	.ascii "Lounge Gladiator"
@@ -5494,20 +5515,20 @@ ___str_6:
 ___str_7:
 	.ascii "Alberto Martinez Martinez"
 	.db 0x00
-;src/main.c:488: void main(void) {
+;src/main.c:487: void main(void) {
 ;	---------------------------------
 ; Function main
 ; ---------------------------------
 _main::
-;src/main.c:492: init();
+;src/main.c:491: init();
 	call	_init
-;src/main.c:495: while(1){
+;src/main.c:494: while(1){
 00106$:
-;src/main.c:496: x=menu();
+;src/main.c:495: x=menu();
 	call	_menu
 	ld	e, l
 	ld	d, h
-;src/main.c:497: switch(x){
+;src/main.c:496: switch(x){
 	bit	7, d
 	jr	NZ,00106$
 	ld	a,#0x02
@@ -5522,8 +5543,8 @@ _main::
 	ld	hl,#00123$
 	add	hl,de
 	add	hl,de
-;src/main.c:498: case 0: return;break;
-;src/main.c:499: case 1: game(); break;
+;src/main.c:497: case 0: return;break;
+;src/main.c:498: case 1: game(); break;
 	jp	(hl)
 00123$:
 	jr	00108$
@@ -5533,10 +5554,10 @@ _main::
 00102$:
 	call	_game
 	jr	00106$
-;src/main.c:500: case 2: credits();break;
+;src/main.c:499: case 2: credits();break;
 00103$:
 	call	_credits
-;src/main.c:501: }
+;src/main.c:500: }
 	jr	00106$
 00108$:
 	ret

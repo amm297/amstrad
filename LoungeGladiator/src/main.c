@@ -248,7 +248,7 @@ void followPlayer(){
     memptr = cpct_getScreenPtr(VMEM,5,50);*/
     if(auxX < enemy.x){
         //cpct_drawSolidBox(memptr, 1, 2, 8);
-        if(scene[(enemy.y)/tileheight][(enemy.x-1)/tilewidth] != 1){
+        if(scene[(enemy.y)/tileheight][(enemy.x)/tilewidth] != 1){
             enemy.x-=1;
         }else if(auxY < enemy.y){
             if(scene[(enemy.y-1)/tileheight][(enemy.x)/tilewidth] != 1)
@@ -429,9 +429,7 @@ void game(){
             player.x = 0;
             player.y = 80;
             player.life -= 1;
-            if(player.life == 0){
-                gameOver();
-            }
+            
             break;
         }
     }
@@ -454,6 +452,7 @@ void game(){
       }
 
       fps++;
+      if(player.life == 0) gameOver();
       if(finish == 1) return;
 
    }
