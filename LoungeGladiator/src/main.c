@@ -147,6 +147,29 @@ int menu(){
 }
 
 
+void moveObject(u8 c){
+  if(c == 0){
+    parrow.lx = parrow.x;
+    parrow.ly = parrow.y;
+    switch(parrow.dir){
+      case 6: parrow.x += 1; break;
+      case 4: parrow.x -= 1; break;
+      case 2: parrow.y += 2; break;
+      case 8: parrow.y -= 2; break;
+    }
+  }
+  else{
+    earrow.lx = earrow.x;
+    earrow.ly = earrow.y;
+    switch(earrow.dir){
+      case 6: earrow.x += 1; break;
+      case 4: earrow.x -= 1; break;
+      case 2: earrow.y += 2; break;
+      case 8: earrow.y -= 2; break;
+    }
+  }
+}
+
 
 /*Colisiones*/
 
@@ -216,33 +239,7 @@ void checkBoundsCollisions(u8 *corazon,u8 *flecha){
   }
 }
 
-u8 checkArrowCollisions(){
 
-    u8 bound =0;
-        if(    scene[(object.y)/tileheight][(object.x)/tilewidth] == 1
-      || scene[(object.y)/tileheight][(object.x+tilewidth-1)/tilewidth] == 1
-      || scene[(object.y+6)/tileheight][(object.x)/tilewidth] == 1
-      || scene[(object.y+6)/tileheight][(object.x+tilewidth-1)/tilewidth] == 1
-    ){
-        object.x=object.lx;
-        object.y=object.ly;
-        bound = 1;
-        return bound;
-  }
-
-  if(    scene[(object.y)/tileheight][(object.x)/tilewidth] == 9
-      || scene[(object.y)/tileheight][(object.x+tilewidth-1)/tilewidth] == 9
-      || scene[(object.y+6)/tileheight][(object.x)/tilewidth] == 9
-      || scene[(object.y+6)/tileheight][(object.x+tilewidth-1)/tilewidth] == 9
-    ){
-        object.x=object.lx;
-        object.y=object.ly;
-        bound = 1;
-        return bound;
-  }
-
-  return bound;
-}
 
 
 
@@ -295,33 +292,7 @@ void followPlayer(){
     }
 }
 
-void patrol(){
-  //scene[(y[0])/tileheight][(x[0])/tilewidth] = room;
 
-  movement(enemy.dir);
-
-  if(scene[(enemy.y)/tileheight][(enemy.x)/tilewidth] != enemy.room
-  || scene[(enemy.y)/tileheight][(enemy.x+tilewidth-1)/tilewidth] != enemy.room
-  || scene[(enemy.y+tileheight-2)/tileheight][(enemy.x)/tilewidth] != enemy.room
-  || scene[(enemy.y+tileheight-2)/tileheight][(enemy.x+tilewidth-1)/tilewidth] != enemy.room
-  ){
-    switch(enemy.dir){
-    case 4:
-        movement(6);
-        break;
-    case 6:
-        movement(4);
-        break;
-    case 2:
-        movement(8);
-        break;
-    case 8:
-        movement(2);
-        break;
-    }
-  }
-  //scene[(y[0])/tileheight][(x[0])/tilewidth] = 2;
-}
 
 void move(){
     //u8* memptr;
@@ -440,17 +411,17 @@ void game(){
       checkBoundsCollisions(&n.corazon,&n.bullet);
 
       if(arrow == 1){
-        moveObject();
+        moveObject(0);
         bound = checkArrowCollisions();
-        if(object.dir == 2 || object.dir == 8)
+        if(parrow.dir == 2 || parrow.dir == 8)
             atkObj = 21;
         else
             atkObj = 22;
-        if(enemy.life > 0 && checkCollisions(object.x, object.y, enemy.x, enemy.y, atkObj) == 1 && bound == 0){
+        if(enemy.life > 0 && checkCollisions(parrow.x, parrow.y, enemy.x, enemy.y, atkObj) == 1 && bound == 0){
             enemy.life -= 1;
             enemy.x = enemy.ox;
             enemy.y = enemy.oy;
-            object.vivo = 0;
+            parrow.vivo = 0;
             bound = 1;
         }
       }
