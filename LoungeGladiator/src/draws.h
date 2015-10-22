@@ -140,7 +140,7 @@ void erases(){
     u8 i=0;
     if(temp%2 == 0)
         erase(player.lx,player.ly,0);
-    if(temp%2 == 1)
+    if(temp%2 == 1 && enemy.life > 0)
         erase(enemy.lx,enemy.ly,0);
  if(arrow == 1){
         if(object.dir == 4 || object.dir == 6)

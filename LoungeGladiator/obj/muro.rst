@@ -42,70 +42,70 @@
                              42 ;--------------------------------------------------------
                              43 	.area _CODE
                              44 	.area _CODE
-   678B                      45 _muro:
-   678B CC                   46 	.db #0xCC	; 204
-   678C CC                   47 	.db #0xCC	; 204
-   678D 44                   48 	.db #0x44	; 68	'D'
-   678E CC                   49 	.db #0xCC	; 204
-   678F CC                   50 	.db #0xCC	; 204
-   6790 CC                   51 	.db #0xCC	; 204
-   6791 44                   52 	.db #0x44	; 68	'D'
-   6792 CC                   53 	.db #0xCC	; 204
-   6793 00                   54 	.db #0x00	; 0
-   6794 00                   55 	.db #0x00	; 0
-   6795 00                   56 	.db #0x00	; 0
-   6796 00                   57 	.db #0x00	; 0
-   6797 CC                   58 	.db #0xCC	; 204
-   6798 44                   59 	.db #0x44	; 68	'D'
-   6799 CC                   60 	.db #0xCC	; 204
-   679A 44                   61 	.db #0x44	; 68	'D'
-   679B CC                   62 	.db #0xCC	; 204
-   679C 44                   63 	.db #0x44	; 68	'D'
-   679D CC                   64 	.db #0xCC	; 204
-   679E 44                   65 	.db #0x44	; 68	'D'
-   679F CC                   66 	.db #0xCC	; 204
-   67A0 44                   67 	.db #0x44	; 68	'D'
-   67A1 CC                   68 	.db #0xCC	; 204
-   67A2 44                   69 	.db #0x44	; 68	'D'
-   67A3 00                   70 	.db #0x00	; 0
-   67A4 00                   71 	.db #0x00	; 0
-   67A5 00                   72 	.db #0x00	; 0
-   67A6 00                   73 	.db #0x00	; 0
-   67A7 CC                   74 	.db #0xCC	; 204
-   67A8 CC                   75 	.db #0xCC	; 204
-   67A9 44                   76 	.db #0x44	; 68	'D'
-   67AA CC                   77 	.db #0xCC	; 204
-   67AB CC                   78 	.db #0xCC	; 204
-   67AC CC                   79 	.db #0xCC	; 204
-   67AD 44                   80 	.db #0x44	; 68	'D'
-   67AE CC                   81 	.db #0xCC	; 204
-   67AF CC                   82 	.db #0xCC	; 204
-   67B0 CC                   83 	.db #0xCC	; 204
-   67B1 44                   84 	.db #0x44	; 68	'D'
-   67B2 CC                   85 	.db #0xCC	; 204
-   67B3 00                   86 	.db #0x00	; 0
-   67B4 00                   87 	.db #0x00	; 0
-   67B5 00                   88 	.db #0x00	; 0
-   67B6 00                   89 	.db #0x00	; 0
-   67B7 CC                   90 	.db #0xCC	; 204
-   67B8 44                   91 	.db #0x44	; 68	'D'
-   67B9 CC                   92 	.db #0xCC	; 204
-   67BA 44                   93 	.db #0x44	; 68	'D'
-   67BB CC                   94 	.db #0xCC	; 204
-   67BC 44                   95 	.db #0x44	; 68	'D'
-   67BD CC                   96 	.db #0xCC	; 204
-   67BE 44                   97 	.db #0x44	; 68	'D'
-   67BF CC                   98 	.db #0xCC	; 204
-   67C0 44                   99 	.db #0x44	; 68	'D'
-   67C1 CC                  100 	.db #0xCC	; 204
-   67C2 44                  101 	.db #0x44	; 68	'D'
-   67C3 00                  102 	.db #0x00	; 0
-   67C4 00                  103 	.db #0x00	; 0
-   67C5 00                  104 	.db #0x00	; 0
-   67C6 00                  105 	.db #0x00	; 0
-   67C7 CC                  106 	.db #0xCC	; 204
-   67C8 CC                  107 	.db #0xCC	; 204
-   67C9 44                  108 	.db #0x44	; 68	'D'
-   67CA CC                  109 	.db #0xCC	; 204
+   6B7D                      45 _muro:
+   6B7D CC                   46 	.db #0xCC	; 204
+   6B7E CC                   47 	.db #0xCC	; 204
+   6B7F 44                   48 	.db #0x44	; 68	'D'
+   6B80 CC                   49 	.db #0xCC	; 204
+   6B81 CC                   50 	.db #0xCC	; 204
+   6B82 CC                   51 	.db #0xCC	; 204
+   6B83 44                   52 	.db #0x44	; 68	'D'
+   6B84 CC                   53 	.db #0xCC	; 204
+   6B85 00                   54 	.db #0x00	; 0
+   6B86 00                   55 	.db #0x00	; 0
+   6B87 00                   56 	.db #0x00	; 0
+   6B88 00                   57 	.db #0x00	; 0
+   6B89 CC                   58 	.db #0xCC	; 204
+   6B8A 44                   59 	.db #0x44	; 68	'D'
+   6B8B CC                   60 	.db #0xCC	; 204
+   6B8C 44                   61 	.db #0x44	; 68	'D'
+   6B8D CC                   62 	.db #0xCC	; 204
+   6B8E 44                   63 	.db #0x44	; 68	'D'
+   6B8F CC                   64 	.db #0xCC	; 204
+   6B90 44                   65 	.db #0x44	; 68	'D'
+   6B91 CC                   66 	.db #0xCC	; 204
+   6B92 44                   67 	.db #0x44	; 68	'D'
+   6B93 CC                   68 	.db #0xCC	; 204
+   6B94 44                   69 	.db #0x44	; 68	'D'
+   6B95 00                   70 	.db #0x00	; 0
+   6B96 00                   71 	.db #0x00	; 0
+   6B97 00                   72 	.db #0x00	; 0
+   6B98 00                   73 	.db #0x00	; 0
+   6B99 CC                   74 	.db #0xCC	; 204
+   6B9A CC                   75 	.db #0xCC	; 204
+   6B9B 44                   76 	.db #0x44	; 68	'D'
+   6B9C CC                   77 	.db #0xCC	; 204
+   6B9D CC                   78 	.db #0xCC	; 204
+   6B9E CC                   79 	.db #0xCC	; 204
+   6B9F 44                   80 	.db #0x44	; 68	'D'
+   6BA0 CC                   81 	.db #0xCC	; 204
+   6BA1 CC                   82 	.db #0xCC	; 204
+   6BA2 CC                   83 	.db #0xCC	; 204
+   6BA3 44                   84 	.db #0x44	; 68	'D'
+   6BA4 CC                   85 	.db #0xCC	; 204
+   6BA5 00                   86 	.db #0x00	; 0
+   6BA6 00                   87 	.db #0x00	; 0
+   6BA7 00                   88 	.db #0x00	; 0
+   6BA8 00                   89 	.db #0x00	; 0
+   6BA9 CC                   90 	.db #0xCC	; 204
+   6BAA 44                   91 	.db #0x44	; 68	'D'
+   6BAB CC                   92 	.db #0xCC	; 204
+   6BAC 44                   93 	.db #0x44	; 68	'D'
+   6BAD CC                   94 	.db #0xCC	; 204
+   6BAE 44                   95 	.db #0x44	; 68	'D'
+   6BAF CC                   96 	.db #0xCC	; 204
+   6BB0 44                   97 	.db #0x44	; 68	'D'
+   6BB1 CC                   98 	.db #0xCC	; 204
+   6BB2 44                   99 	.db #0x44	; 68	'D'
+   6BB3 CC                  100 	.db #0xCC	; 204
+   6BB4 44                  101 	.db #0x44	; 68	'D'
+   6BB5 00                  102 	.db #0x00	; 0
+   6BB6 00                  103 	.db #0x00	; 0
+   6BB7 00                  104 	.db #0x00	; 0
+   6BB8 00                  105 	.db #0x00	; 0
+   6BB9 CC                  106 	.db #0xCC	; 204
+   6BBA CC                  107 	.db #0xCC	; 204
+   6BBB 44                  108 	.db #0x44	; 68	'D'
+   6BBC CC                  109 	.db #0xCC	; 204
                             110 	.area _INITIALIZER
                             111 	.area _CABS (ABS)

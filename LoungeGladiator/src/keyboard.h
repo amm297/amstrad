@@ -49,7 +49,6 @@ u8* checkKeyboard(){
          player.dir = 8;
          s = gladis_arriba;
       }else if(cpct_isKeyPressed(Key_X) && arrow == 0 && player.atk == 20 && player.bullets >0){
-        if(player.bullets> 0){
           u8 *spr = flecha_dcha,xs=2,ys=8;
           switch(player.dir){
             case 6: spr = flecha_dcha; xs=4;ys=4; break;
@@ -68,7 +67,6 @@ u8* checkKeyboard(){
           object.sizeX = xs;
           object.sizeY = ys;
           player.bullets--;
-        }
           arrow=1;
       }else {
         switch(player.dir){
@@ -85,7 +83,7 @@ u8* checkKeyboard(){
             s = gladis_abajo;
             break;
         }
-        
+
       }
   }
 

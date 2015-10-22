@@ -217,37 +217,28 @@ void checkBoundsCollisions(u8 *corazon,u8 *flecha){
 }
 
 u8 checkArrowCollisions(){
-    /*u8 auxX;
-    u8 auxY;
+
     u8 bound =0;
-
-    if(object.dir == 2 || object.dir == 8){
-        auxX = 2;
-        auxY = 8;
-    }else{
-        auxX = 4;
-        auxY = 4;
-    }
-
-    if(    scene[(object.y)/auxY][(object.x)/auxX] == 1
-      || scene[(object.y)/auxY][(object.x+auxX-1)/auxX] == 1
-      || scene[(object.y+auxY-2)/auxY][(object.x)/auxX] == 1
-      || scene[(object.y+auxY-2)/auxY][(object.x+auxX-1)/auxX] == 1
-    ){
-        object.x=object.lx;
-        object.y=object.ly;
-        bound = 1;
-  }*/
-
-u8 bound =0;
         if(    scene[(object.y)/tileheight][(object.x)/tilewidth] == 1
       || scene[(object.y)/tileheight][(object.x+tilewidth-1)/tilewidth] == 1
-      || scene[(object.y+tileheight-2)/tileheight][(object.x)/tilewidth] == 1
-      || scene[(object.y+tileheight-2)/tileheight][(object.x+tilewidth-1)/tilewidth] == 1
+      || scene[(object.y+6)/tileheight][(object.x)/tilewidth] == 1
+      || scene[(object.y+6)/tileheight][(object.x+tilewidth-1)/tilewidth] == 1
     ){
         object.x=object.lx;
         object.y=object.ly;
         bound = 1;
+        return bound;
+  }
+
+  if(    scene[(object.y)/tileheight][(object.x)/tilewidth] == 9
+      || scene[(object.y)/tileheight][(object.x+tilewidth-1)/tilewidth] == 9
+      || scene[(object.y+6)/tileheight][(object.x)/tilewidth] == 9
+      || scene[(object.y+6)/tileheight][(object.x+tilewidth-1)/tilewidth] == 9
+    ){
+        object.x=object.lx;
+        object.y=object.ly;
+        bound = 1;
+        return bound;
   }
 
   return bound;
@@ -270,7 +261,8 @@ void followPlayer(){
     memptr = cpct_getScreenPtr(VMEM,5,50);*/
     if(auxX < enemy.x){
         //cpct_drawSolidBox(memptr, 1, 2, 8);
-        if(scene[(enemy.y)/tileheight][(enemy.x-1)/tilewidth] != 1){
+        if(scene[(enemy.y)/tileheight][(enemy.x-1)/tilewidth] != 1
+           && scene[(enemy.y+tileheight)/tileheight][(enemy.x-1)/tilewidth] != 1){
             enemy.x-=1;
         }else if(auxY < enemy.y){
             if(scene[(enemy.y-1)/tileheight][(enemy.x)/tilewidth] != 1)
@@ -281,7 +273,8 @@ void followPlayer(){
         }
     }else if(auxX > enemy.x){
         //cpct_drawSolidBox(memptr, 10, 2, 8);
-        if(scene[(enemy.y)/tileheight][(enemy.x+tilewidth)/tilewidth] != 1){
+        if(scene[(enemy.y)/tileheight][(enemy.x+tilewidth)/tilewidth] != 1
+           && scene[(enemy.y+tileheight)/tileheight][(enemy.x+tilewidth)/tilewidth] != 1){
             enemy.x+=1;
         }else if(auxY < enemy.y){
             if(scene[(enemy.y)/tileheight][(enemy.x-1)/tilewidth] != 1)
@@ -330,29 +323,6 @@ void patrol(){
   //scene[(y[0])/tileheight][(x[0])/tilewidth] = 2;
 }
 
-u8 vissionSensor(){
-  u8 following = 0;
-  u8 cx = enemy.x/tilewidth;
-  u8 cy = enemy.y/tilewidth;
-  u8 pcx = player.x/tilewidth;
-  u8 pcy = player.y/tilewidth;
-  u8 lex,mex,ley,mey;
-  u8 i=0;
-  for(i=0;i<3;i++){
-    lex = cx - i;
-    ley = cy - i;
-    mex = cx + i;
-    mey = cy + i;
-    if(lex == pcx || ley == pcy || mex == pcx || mey == pcy){
-      following = 1;
-    }
-  }
-
-  return following;
-
-}
-
-
 void move(){
     //u8* memptr;
     if(temp > 10){
@@ -364,11 +334,10 @@ void move(){
         cpct_drawSolidBox(memptr, enemy.room, 2, 8);*/
         if(following == enemy.room || enemy.pursue != 0){
             if(enemy.pursue == 0)
-                enemy.pursue = 3;
+                enemy.pursue = 4;
             else if(enemy.pursue > 1)
                 enemy.pursue -=1;
         }
-        temp = 0;
     }else{
         if(enemy.pursue >= 1){
             followPlayer();
@@ -383,7 +352,6 @@ void move(){
         enemy.seenY = player.y;
     }
     enemy.room = detectPlayerRoom(enemy.x,enemy.y);
-    temp += 1;
 }
 
 /*JUEGO*/
@@ -404,10 +372,6 @@ void game(){
 
    cpct_clearScreen(0);
    drawMap(map);
-   //drawStats();
-
-   //Volver a dibujar los stats cuando se mate a alguien
-
 
    while (1){
 
@@ -451,14 +415,19 @@ void game(){
             enemy.x = enemy.ox;
             enemy.y = enemy.oy;
             enemy.life -= 1;
+            player.atk = 20;
             break;
         case 2:
             player.x = 0;
             player.y = 80;
             player.life -= 1;
+            player.atk = 20;
             break;
         }
     }
+    if(temp > 10)
+        temp = 0;
+    temp += 1;
     player.latk = player.atk;
 
 
