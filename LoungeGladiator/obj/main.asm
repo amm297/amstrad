@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.5.0 #9253 (Sep 22 2015) (CYGWIN)
-; This file was generated Thu Oct 22 12:29:28 2015
+; This file was generated Thu Oct 22 12:48:52 2015
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mz80
@@ -637,7 +637,7 @@ _mapa1:
 	.db #0x06	; 6
 	.db #0x06	; 6
 	.db #0x06	; 6
-	.db #0x01	; 1
+	.db #0x03	; 3
 	.db #0x03	; 3
 	.db #0x03	; 3
 	.db #0x03	; 3
