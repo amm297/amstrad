@@ -12,9 +12,9 @@ Symbol Table
   0 ___str_2                                                       103E R
   0 ___str_3                                                       104C R
   0 ___str_4                                                       1055 R
-  0 ___str_5                                                       2447 R
-  0 ___str_6                                                       2458 R
-  0 ___str_7                                                       246E R
+  0 ___str_5                                                       244D R
+  0 ___str_6                                                       245E R
+  0 ___str_7                                                       2474 R
     __modsint                                                      **** GX
   1 _archer                                                        00F7 GR
   1 _arrow                                                         00F4 GR
@@ -42,7 +42,7 @@ Symbol Table
     _cpct_setPalette                                               **** GX
     _cpct_setVideoMode                                             **** GX
     _cpct_waitVSYNC                                                **** GX
-  0 _credits                                                       23E5 GR
+  0 _credits                                                       23EB GR
   0 _detectPlayerRoom                                              08BC GR
   0 _draw                                                          04F4 GR
   0 _drawBullets                                                   0498 GR
@@ -70,7 +70,7 @@ Symbol Table
   0 _followPlayer                                                  18CA GR
   1 _following                                                     00F5 GR
   0 _g_palette                                                     024E GR
-  0 _game                                                          21A6 GR
+  0 _game                                                          21A7 GR
   0 _gameOver                                                      0E0D GR
     _gladis_abajo                                                  **** GX
     _gladis_arriba                                                 **** GX
@@ -83,7 +83,7 @@ Symbol Table
   0 _init                                                          0D79 GR
   0 _initEnemies                                                   0DD4 GR
   0 _initPlayer                                                    0D9E GR
-  0 _main                                                          2488 GR
+  0 _main                                                          248E GR
   1 _map                                                           00F1 GR
   0 _mapa1                                                         0257 GR
   0 _mapa2                                                         0347 GR
@@ -107,7 +107,7 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size 24BD   flags    0
+   0 _CODE                                      size 24C3   flags    0
    1 _DATA                                      size  11C   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8

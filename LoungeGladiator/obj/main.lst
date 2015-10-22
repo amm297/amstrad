@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 3.5.0 #9253 (Sep 22 2015) (CYGWIN)
-                              4 ; This file was generated Thu Oct 22 12:48:52 2015
+                              4 ; This file was generated Thu Oct 22 16:08:16 2015
                               5 ;--------------------------------------------------------
                               6 	.module main
                               7 	.optsdcc -mz80
@@ -5286,633 +5286,637 @@
    20DA 3E 0A         [ 7] 5279 	ld	a,#0x0A
    20DC FD 21rF0r00   [14] 5280 	ld	iy,#_temp
    20E0 FD 96 00      [19] 5281 	sub	a, 0 (iy)
-   20E3 30 44         [12] 5282 	jr	NC,00116$
-                           5283 ;src/main.c:329: enemy.dir = chooseDirection();
-   20E5 CDrE9r08      [17] 5284 	call	_chooseDirection
-   20E8 7D            [ 4] 5285 	ld	a,l
-   20E9 21r16r01      [10] 5286 	ld	hl,#(_enemy + 0x0009)
-   20EC 77            [ 7] 5287 	ld	(hl),a
-                           5288 ;src/main.c:330: following = detectPlayerRoom(player.x,player.y);
-   20ED 3Ar03r01      [13] 5289 	ld	a, (#_player + 1)
-   20F0 21r02r01      [10] 5290 	ld	hl, #_player + 0
-   20F3 56            [ 7] 5291 	ld	d,(hl)
-   20F4 F5            [11] 5292 	push	af
-   20F5 33            [ 6] 5293 	inc	sp
-   20F6 D5            [11] 5294 	push	de
-   20F7 33            [ 6] 5295 	inc	sp
-   20F8 CDrBCr08      [17] 5296 	call	_detectPlayerRoom
-   20FB F1            [10] 5297 	pop	af
-   20FC FD 21rF5r00   [14] 5298 	ld	iy,#_following
-   2100 FD 75 00      [19] 5299 	ld	0 (iy),l
-                           5300 ;src/main.c:335: if(following == enemy.room || enemy.pursue != 0){
-   2103 21r18r01      [10] 5301 	ld	hl, #_enemy + 11
-   2106 56            [ 7] 5302 	ld	d,(hl)
-   2107 01r1Br01      [10] 5303 	ld	bc,#_enemy + 14
-   210A 0A            [ 7] 5304 	ld	a,(bc)
-   210B 5F            [ 4] 5305 	ld	e,a
-   210C 3ArF5r00      [13] 5306 	ld	a,(#_following + 0)
-   210F 92            [ 4] 5307 	sub	a, d
-   2110 28 04         [12] 5308 	jr	Z,00106$
-   2112 7B            [ 4] 5309 	ld	a,e
-   2113 B7            [ 4] 5310 	or	a, a
-   2114 28 3F         [12] 5311 	jr	Z,00117$
-   2116                    5312 00106$:
-                           5313 ;src/main.c:336: if(enemy.pursue == 0)
-   2116 7B            [ 4] 5314 	ld	a,e
-   2117 B7            [ 4] 5315 	or	a, a
-   2118 20 05         [12] 5316 	jr	NZ,00104$
-                           5317 ;src/main.c:337: enemy.pursue = 4;
-   211A 3E 04         [ 7] 5318 	ld	a,#0x04
-   211C 02            [ 7] 5319 	ld	(bc),a
-   211D 18 36         [12] 5320 	jr	00117$
-   211F                    5321 00104$:
-                           5322 ;src/main.c:338: else if(enemy.pursue > 1)
-   211F 3E 01         [ 7] 5323 	ld	a,#0x01
-   2121 93            [ 4] 5324 	sub	a, e
-   2122 30 31         [12] 5325 	jr	NC,00117$
-                           5326 ;src/main.c:339: enemy.pursue -=1;
-   2124 1D            [ 4] 5327 	dec	e
-   2125 7B            [ 4] 5328 	ld	a,e
-   2126 02            [ 7] 5329 	ld	(bc),a
-   2127 18 2C         [12] 5330 	jr	00117$
-   2129                    5331 00116$:
-                           5332 ;src/main.c:342: if(enemy.pursue >= 1){
-   2129 3Ar1Br01      [13] 5333 	ld	a,(#(_enemy + 0x000e) + 0)
-   212C D6 01         [ 7] 5334 	sub	a, #0x01
-   212E 38 22         [12] 5335 	jr	C,00113$
-                           5336 ;src/main.c:343: followPlayer();
-   2130 CDrCAr18      [17] 5337 	call	_followPlayer
-                           5338 ;src/main.c:344: if(enemy.seenX == enemy.x && enemy.seenY == enemy.y)
-   2133 21r19r01      [10] 5339 	ld	hl, #_enemy + 12
-   2136 56            [ 7] 5340 	ld	d,(hl)
-   2137 21r0Dr01      [10] 5341 	ld	hl, #_enemy + 0
-   213A 5E            [ 7] 5342 	ld	e,(hl)
-   213B 7A            [ 4] 5343 	ld	a,d
-   213C 93            [ 4] 5344 	sub	a, e
-   213D 20 16         [12] 5345 	jr	NZ,00117$
-   213F 21r1Ar01      [10] 5346 	ld	hl, #_enemy + 13
-   2142 56            [ 7] 5347 	ld	d,(hl)
-   2143 21r0Er01      [10] 5348 	ld	hl, #_enemy + 1
-   2146 5E            [ 7] 5349 	ld	e,(hl)
-   2147 7A            [ 4] 5350 	ld	a,d
-   2148 93            [ 4] 5351 	sub	a, e
-   2149 20 0A         [12] 5352 	jr	NZ,00117$
-                           5353 ;src/main.c:345: enemy.pursue = 0;
-   214B 21r1Br01      [10] 5354 	ld	hl,#(_enemy + 0x000e)
-   214E 36 00         [10] 5355 	ld	(hl),#0x00
-   2150 18 03         [12] 5356 	jr	00117$
-   2152                    5357 00113$:
-                           5358 ;src/main.c:347: patrol();
-   2152 CDr40r1F      [17] 5359 	call	_patrol
-   2155                    5360 00117$:
-                           5361 ;src/main.c:350: if((detectPlayerRoom(enemy.lx,enemy.ly) == detectPlayerRoom(player.x,player.y)) || enemy.pursue > 1){
-   2155 21r10r01      [10] 5362 	ld	hl, #_enemy + 3
-   2158 56            [ 7] 5363 	ld	d,(hl)
-   2159 3Ar0Fr01      [13] 5364 	ld	a, (#_enemy + 2)
-   215C D5            [11] 5365 	push	de
-   215D 33            [ 6] 5366 	inc	sp
-   215E F5            [11] 5367 	push	af
-   215F 33            [ 6] 5368 	inc	sp
-   2160 CDrBCr08      [17] 5369 	call	_detectPlayerRoom
-   2163 F1            [10] 5370 	pop	af
-   2164 55            [ 4] 5371 	ld	d,l
-   2165 3Ar03r01      [13] 5372 	ld	a, (#(_player + 0x0001) + 0)
-   2168 21r02r01      [10] 5373 	ld	hl, #_player + 0
-   216B 46            [ 7] 5374 	ld	b,(hl)
-   216C D5            [11] 5375 	push	de
-   216D F5            [11] 5376 	push	af
-   216E 33            [ 6] 5377 	inc	sp
-   216F C5            [11] 5378 	push	bc
-   2170 33            [ 6] 5379 	inc	sp
-   2171 CDrBCr08      [17] 5380 	call	_detectPlayerRoom
-   2174 F1            [10] 5381 	pop	af
-   2175 45            [ 4] 5382 	ld	b,l
-   2176 D1            [10] 5383 	pop	de
-   2177 7A            [ 4] 5384 	ld	a,d
-   2178 90            [ 4] 5385 	sub	a, b
-   2179 28 09         [12] 5386 	jr	Z,00118$
-   217B 21r1Br01      [10] 5387 	ld	hl, #_enemy + 14
-   217E 66            [ 7] 5388 	ld	h,(hl)
-   217F 3E 01         [ 7] 5389 	ld	a,#0x01
-   2181 94            [ 4] 5390 	sub	a, h
-   2182 30 0E         [12] 5391 	jr	NC,00119$
-   2184                    5392 00118$:
-                           5393 ;src/main.c:351: enemy.seenX = player.x;
-   2184 11r19r01      [10] 5394 	ld	de,#_enemy + 12
-   2187 3Ar02r01      [13] 5395 	ld	a, (#_player + 0)
-   218A 12            [ 7] 5396 	ld	(de),a
-                           5397 ;src/main.c:352: enemy.seenY = player.y;
-   218B 11r1Ar01      [10] 5398 	ld	de,#_enemy + 13
-   218E 3Ar03r01      [13] 5399 	ld	a, (#(_player + 0x0001) + 0)
-   2191 12            [ 7] 5400 	ld	(de),a
-   2192                    5401 00119$:
-                           5402 ;src/main.c:354: enemy.room = detectPlayerRoom(enemy.x,enemy.y);
-   2192 3Ar0Er01      [13] 5403 	ld	a, (#_enemy + 1)
-   2195 21r0Dr01      [10] 5404 	ld	hl, #_enemy + 0
-   2198 56            [ 7] 5405 	ld	d,(hl)
-   2199 F5            [11] 5406 	push	af
-   219A 33            [ 6] 5407 	inc	sp
-   219B D5            [11] 5408 	push	de
-   219C 33            [ 6] 5409 	inc	sp
-   219D CDrBCr08      [17] 5410 	call	_detectPlayerRoom
-   21A0 F1            [10] 5411 	pop	af
-   21A1 7D            [ 4] 5412 	ld	a,l
-   21A2 32r18r01      [13] 5413 	ld	(#(_enemy + 0x000b)),a
-   21A5 C9            [10] 5414 	ret
-                           5415 ;src/main.c:359: void game(){
-                           5416 ;	---------------------------------
-                           5417 ; Function game
-                           5418 ; ---------------------------------
-   21A6                    5419 _game::
-   21A6 DD E5         [15] 5420 	push	ix
-   21A8 DD 21 00 00   [14] 5421 	ld	ix,#0
-   21AC DD 39         [15] 5422 	add	ix,sp
-   21AE 21 F4 FF      [10] 5423 	ld	hl,#-12
-   21B1 39            [11] 5424 	add	hl,sp
-   21B2 F9            [ 6] 5425 	ld	sp,hl
-                           5426 ;src/main.c:361: TNivel n = {0,0,0};
-   21B3 21 00 00      [10] 5427 	ld	hl,#0x0000
-   21B6 39            [11] 5428 	add	hl,sp
-   21B7 36 00         [10] 5429 	ld	(hl),#0x00
-   21B9 21 00 00      [10] 5430 	ld	hl,#0x0000
-   21BC 39            [11] 5431 	add	hl,sp
-   21BD 5D            [ 4] 5432 	ld	e, l
-   21BE 54            [ 4] 5433 	ld	d, h
-   21BF 23            [ 6] 5434 	inc	hl
-   21C0 DD 75 FC      [19] 5435 	ld	-4 (ix),l
-   21C3 DD 74 FD      [19] 5436 	ld	-3 (ix),h
-   21C6 DD 6E FC      [19] 5437 	ld	l,-4 (ix)
-   21C9 DD 66 FD      [19] 5438 	ld	h,-3 (ix)
-   21CC 36 00         [10] 5439 	ld	(hl),#0x00
-   21CE 13            [ 6] 5440 	inc	de
+   20E3 30 45         [12] 5282 	jr	NC,00117$
+                           5283 ;src/main.c:329: following = detectPlayerRoom(player.x,player.y);
+   20E5 3Ar03r01      [13] 5284 	ld	a, (#_player + 1)
+   20E8 21r02r01      [10] 5285 	ld	hl, #_player + 0
+   20EB 56            [ 7] 5286 	ld	d,(hl)
+   20EC F5            [11] 5287 	push	af
+   20ED 33            [ 6] 5288 	inc	sp
+   20EE D5            [11] 5289 	push	de
+   20EF 33            [ 6] 5290 	inc	sp
+   20F0 CDrBCr08      [17] 5291 	call	_detectPlayerRoom
+   20F3 F1            [10] 5292 	pop	af
+   20F4 FD 21rF5r00   [14] 5293 	ld	iy,#_following
+   20F8 FD 75 00      [19] 5294 	ld	0 (iy),l
+                           5295 ;src/main.c:334: if(following == enemy.room || enemy.pursue != 0){
+   20FB 21r18r01      [10] 5296 	ld	hl, #_enemy + 11
+   20FE 56            [ 7] 5297 	ld	d,(hl)
+   20FF 01r1Br01      [10] 5298 	ld	bc,#_enemy + 14
+   2102 0A            [ 7] 5299 	ld	a,(bc)
+   2103 5F            [ 4] 5300 	ld	e,a
+   2104 3ArF5r00      [13] 5301 	ld	a,(#_following + 0)
+   2107 92            [ 4] 5302 	sub	a, d
+   2108 28 04         [12] 5303 	jr	Z,00106$
+   210A 7B            [ 4] 5304 	ld	a,e
+   210B B7            [ 4] 5305 	or	a, a
+   210C 28 13         [12] 5306 	jr	Z,00107$
+   210E                    5307 00106$:
+                           5308 ;src/main.c:335: if(enemy.pursue == 0)
+   210E 7B            [ 4] 5309 	ld	a,e
+   210F B7            [ 4] 5310 	or	a, a
+   2110 20 05         [12] 5311 	jr	NZ,00104$
+                           5312 ;src/main.c:336: enemy.pursue = 4;
+   2112 3E 04         [ 7] 5313 	ld	a,#0x04
+   2114 02            [ 7] 5314 	ld	(bc),a
+   2115 18 3F         [12] 5315 	jr	00118$
+   2117                    5316 00104$:
+                           5317 ;src/main.c:337: else if(enemy.pursue > 1)
+   2117 3E 01         [ 7] 5318 	ld	a,#0x01
+   2119 93            [ 4] 5319 	sub	a, e
+   211A 30 3A         [12] 5320 	jr	NC,00118$
+                           5321 ;src/main.c:338: enemy.pursue -=1;
+   211C 1D            [ 4] 5322 	dec	e
+   211D 7B            [ 4] 5323 	ld	a,e
+   211E 02            [ 7] 5324 	ld	(bc),a
+   211F 18 35         [12] 5325 	jr	00118$
+   2121                    5326 00107$:
+                           5327 ;src/main.c:340: enemy.dir = chooseDirection();
+   2121 CDrE9r08      [17] 5328 	call	_chooseDirection
+   2124 7D            [ 4] 5329 	ld	a,l
+   2125 32r16r01      [13] 5330 	ld	(#(_enemy + 0x0009)),a
+   2128 18 2C         [12] 5331 	jr	00118$
+   212A                    5332 00117$:
+                           5333 ;src/main.c:343: if(enemy.pursue >= 1){
+   212A 3Ar1Br01      [13] 5334 	ld	a,(#(_enemy + 0x000e) + 0)
+   212D D6 01         [ 7] 5335 	sub	a, #0x01
+   212F 38 22         [12] 5336 	jr	C,00114$
+                           5337 ;src/main.c:344: followPlayer();
+   2131 CDrCAr18      [17] 5338 	call	_followPlayer
+                           5339 ;src/main.c:345: if(enemy.seenX == enemy.x && enemy.seenY == enemy.y)
+   2134 21r19r01      [10] 5340 	ld	hl, #_enemy + 12
+   2137 56            [ 7] 5341 	ld	d,(hl)
+   2138 21r0Dr01      [10] 5342 	ld	hl, #_enemy + 0
+   213B 5E            [ 7] 5343 	ld	e,(hl)
+   213C 7A            [ 4] 5344 	ld	a,d
+   213D 93            [ 4] 5345 	sub	a, e
+   213E 20 16         [12] 5346 	jr	NZ,00118$
+   2140 21r1Ar01      [10] 5347 	ld	hl, #_enemy + 13
+   2143 56            [ 7] 5348 	ld	d,(hl)
+   2144 21r0Er01      [10] 5349 	ld	hl, #_enemy + 1
+   2147 5E            [ 7] 5350 	ld	e,(hl)
+   2148 7A            [ 4] 5351 	ld	a,d
+   2149 93            [ 4] 5352 	sub	a, e
+   214A 20 0A         [12] 5353 	jr	NZ,00118$
+                           5354 ;src/main.c:346: enemy.pursue = 0;
+   214C 21r1Br01      [10] 5355 	ld	hl,#(_enemy + 0x000e)
+   214F 36 00         [10] 5356 	ld	(hl),#0x00
+   2151 18 03         [12] 5357 	jr	00118$
+   2153                    5358 00114$:
+                           5359 ;src/main.c:348: patrol();
+   2153 CDr40r1F      [17] 5360 	call	_patrol
+   2156                    5361 00118$:
+                           5362 ;src/main.c:351: if((detectPlayerRoom(enemy.lx,enemy.ly) == detectPlayerRoom(player.x,player.y)) || enemy.pursue > 1){
+   2156 21r10r01      [10] 5363 	ld	hl, #_enemy + 3
+   2159 56            [ 7] 5364 	ld	d,(hl)
+   215A 3Ar0Fr01      [13] 5365 	ld	a, (#_enemy + 2)
+   215D D5            [11] 5366 	push	de
+   215E 33            [ 6] 5367 	inc	sp
+   215F F5            [11] 5368 	push	af
+   2160 33            [ 6] 5369 	inc	sp
+   2161 CDrBCr08      [17] 5370 	call	_detectPlayerRoom
+   2164 F1            [10] 5371 	pop	af
+   2165 55            [ 4] 5372 	ld	d,l
+   2166 3Ar03r01      [13] 5373 	ld	a, (#(_player + 0x0001) + 0)
+   2169 21r02r01      [10] 5374 	ld	hl, #_player + 0
+   216C 46            [ 7] 5375 	ld	b,(hl)
+   216D D5            [11] 5376 	push	de
+   216E F5            [11] 5377 	push	af
+   216F 33            [ 6] 5378 	inc	sp
+   2170 C5            [11] 5379 	push	bc
+   2171 33            [ 6] 5380 	inc	sp
+   2172 CDrBCr08      [17] 5381 	call	_detectPlayerRoom
+   2175 F1            [10] 5382 	pop	af
+   2176 45            [ 4] 5383 	ld	b,l
+   2177 D1            [10] 5384 	pop	de
+   2178 7A            [ 4] 5385 	ld	a,d
+   2179 90            [ 4] 5386 	sub	a, b
+   217A 28 09         [12] 5387 	jr	Z,00119$
+   217C 21r1Br01      [10] 5388 	ld	hl, #_enemy + 14
+   217F 66            [ 7] 5389 	ld	h,(hl)
+   2180 3E 01         [ 7] 5390 	ld	a,#0x01
+   2182 94            [ 4] 5391 	sub	a, h
+   2183 30 0E         [12] 5392 	jr	NC,00120$
+   2185                    5393 00119$:
+                           5394 ;src/main.c:352: enemy.seenX = player.x;
+   2185 11r19r01      [10] 5395 	ld	de,#_enemy + 12
+   2188 3Ar02r01      [13] 5396 	ld	a, (#_player + 0)
+   218B 12            [ 7] 5397 	ld	(de),a
+                           5398 ;src/main.c:353: enemy.seenY = player.y;
+   218C 11r1Ar01      [10] 5399 	ld	de,#_enemy + 13
+   218F 3Ar03r01      [13] 5400 	ld	a, (#(_player + 0x0001) + 0)
+   2192 12            [ 7] 5401 	ld	(de),a
+   2193                    5402 00120$:
+                           5403 ;src/main.c:355: enemy.room = detectPlayerRoom(enemy.x,enemy.y);
+   2193 3Ar0Er01      [13] 5404 	ld	a, (#_enemy + 1)
+   2196 21r0Dr01      [10] 5405 	ld	hl, #_enemy + 0
+   2199 56            [ 7] 5406 	ld	d,(hl)
+   219A F5            [11] 5407 	push	af
+   219B 33            [ 6] 5408 	inc	sp
+   219C D5            [11] 5409 	push	de
+   219D 33            [ 6] 5410 	inc	sp
+   219E CDrBCr08      [17] 5411 	call	_detectPlayerRoom
+   21A1 F1            [10] 5412 	pop	af
+   21A2 7D            [ 4] 5413 	ld	a,l
+   21A3 32r18r01      [13] 5414 	ld	(#(_enemy + 0x000b)),a
+   21A6 C9            [10] 5415 	ret
+                           5416 ;src/main.c:360: void game(){
+                           5417 ;	---------------------------------
+                           5418 ; Function game
+                           5419 ; ---------------------------------
+   21A7                    5420 _game::
+   21A7 DD E5         [15] 5421 	push	ix
+   21A9 DD 21 00 00   [14] 5422 	ld	ix,#0
+   21AD DD 39         [15] 5423 	add	ix,sp
+   21AF 21 F4 FF      [10] 5424 	ld	hl,#-12
+   21B2 39            [11] 5425 	add	hl,sp
+   21B3 F9            [ 6] 5426 	ld	sp,hl
+                           5427 ;src/main.c:362: TNivel n = {0,0,0};
+   21B4 21 00 00      [10] 5428 	ld	hl,#0x0000
+   21B7 39            [11] 5429 	add	hl,sp
+   21B8 36 00         [10] 5430 	ld	(hl),#0x00
+   21BA 21 00 00      [10] 5431 	ld	hl,#0x0000
+   21BD 39            [11] 5432 	add	hl,sp
+   21BE 5D            [ 4] 5433 	ld	e, l
+   21BF 54            [ 4] 5434 	ld	d, h
+   21C0 23            [ 6] 5435 	inc	hl
+   21C1 DD 75 F7      [19] 5436 	ld	-9 (ix),l
+   21C4 DD 74 F8      [19] 5437 	ld	-8 (ix),h
+   21C7 DD 6E F7      [19] 5438 	ld	l,-9 (ix)
+   21CA DD 66 F8      [19] 5439 	ld	h,-8 (ix)
+   21CD 36 00         [10] 5440 	ld	(hl),#0x00
    21CF 13            [ 6] 5441 	inc	de
-   21D0 DD 73 F8      [19] 5442 	ld	-8 (ix),e
-   21D3 DD 72 F9      [19] 5443 	ld	-7 (ix),d
-   21D6 DD 6E F8      [19] 5444 	ld	l,-8 (ix)
-   21D9 DD 66 F9      [19] 5445 	ld	h,-7 (ix)
-   21DC 36 00         [10] 5446 	ld	(hl),#0x00
-                           5447 ;src/main.c:362: bound =0;
-   21DE 21rF6r00      [10] 5448 	ld	hl,#_bound + 0
-   21E1 36 00         [10] 5449 	ld	(hl), #0x00
-                           5450 ;src/main.c:363: temp = 0;
-   21E3 21rF0r00      [10] 5451 	ld	hl,#_temp + 0
-   21E6 36 00         [10] 5452 	ld	(hl), #0x00
-                           5453 ;src/main.c:364: map = 1;
-   21E8 21rF1r00      [10] 5454 	ld	hl,#_map + 0
-   21EB 36 01         [10] 5455 	ld	(hl), #0x01
-                           5456 ;src/main.c:365: arrow =0;
-   21ED 21rF4r00      [10] 5457 	ld	hl,#_arrow + 0
-   21F0 36 00         [10] 5458 	ld	(hl), #0x00
-                           5459 ;src/main.c:366: finish =0;
-   21F2 21rF3r00      [10] 5460 	ld	hl,#_finish + 0
-   21F5 36 00         [10] 5461 	ld	(hl), #0x00
-                           5462 ;src/main.c:367: following =0;
-   21F7 21rF5r00      [10] 5463 	ld	hl,#_following + 0
-   21FA 36 00         [10] 5464 	ld	(hl), #0x00
-                           5465 ;src/main.c:368: archer = 0;
-   21FC 21rF7r00      [10] 5466 	ld	hl,#_archer + 0
-   21FF 36 00         [10] 5467 	ld	(hl), #0x00
-                           5468 ;src/main.c:370: initPlayer();
-   2201 CDr9Er0D      [17] 5469 	call	_initPlayer
-                           5470 ;src/main.c:371: initEnemies();
-   2204 CDrD4r0D      [17] 5471 	call	_initEnemies
-                           5472 ;src/main.c:373: cpct_clearScreen(0);
-   2207 21 00 40      [10] 5473 	ld	hl,#0x4000
-   220A E5            [11] 5474 	push	hl
-   220B AF            [ 4] 5475 	xor	a, a
-   220C F5            [11] 5476 	push	af
-   220D 33            [ 6] 5477 	inc	sp
-   220E 26 C0         [ 7] 5478 	ld	h, #0xC0
-   2210 E5            [11] 5479 	push	hl
-   2211 CDr00r00      [17] 5480 	call	_cpct_memset
-                           5481 ;src/main.c:374: drawMap(map);
-   2214 3ArF1r00      [13] 5482 	ld	a,(_map)
-   2217 F5            [11] 5483 	push	af
-   2218 33            [ 6] 5484 	inc	sp
-   2219 CDr00r00      [17] 5485 	call	_drawMap
-   221C 33            [ 6] 5486 	inc	sp
-                           5487 ;src/main.c:376: while (1){
-   221D DD 7E F8      [19] 5488 	ld	a,-8 (ix)
-   2220 DD 77 FE      [19] 5489 	ld	-2 (ix),a
-   2223 DD 7E F9      [19] 5490 	ld	a,-7 (ix)
-   2226 DD 77 FF      [19] 5491 	ld	-1 (ix),a
-   2229 DD 7E FC      [19] 5492 	ld	a,-4 (ix)
-   222C DD 77 FA      [19] 5493 	ld	-6 (ix),a
-   222F DD 7E FD      [19] 5494 	ld	a,-3 (ix)
-   2232 DD 77 FB      [19] 5495 	ld	-5 (ix),a
-   2235                    5496 00135$:
-                           5497 ;src/main.c:379: cpct_waitVSYNC();
-   2235 CDr00r00      [17] 5498 	call	_cpct_waitVSYNC
-                           5499 ;src/main.c:382: erases();
-   2238 CDrADr06      [17] 5500 	call	_erases
-                           5501 ;src/main.c:385: if(temp == 10)
-   223B 3ArF0r00      [13] 5502 	ld	a,(#_temp + 0)
-   223E D6 0A         [ 7] 5503 	sub	a, #0x0A
-   2240 20 1C         [12] 5504 	jr	NZ,00102$
-                           5505 ;src/main.c:386: drawPickUps(n.corazon,n.bullet);
-   2242 DD 6E F8      [19] 5506 	ld	l,-8 (ix)
-   2245 DD 66 F9      [19] 5507 	ld	h,-7 (ix)
-   2248 7E            [ 7] 5508 	ld	a,(hl)
-   2249 DD 77 F7      [19] 5509 	ld	-9 (ix),a
-   224C DD 6E FC      [19] 5510 	ld	l,-4 (ix)
-   224F DD 66 FD      [19] 5511 	ld	h,-3 (ix)
-   2252 56            [ 7] 5512 	ld	d,(hl)
-   2253 DD 7E F7      [19] 5513 	ld	a,-9 (ix)
-   2256 F5            [11] 5514 	push	af
-   2257 33            [ 6] 5515 	inc	sp
-   2258 D5            [11] 5516 	push	de
-   2259 33            [ 6] 5517 	inc	sp
-   225A CDr54r08      [17] 5518 	call	_drawPickUps
-   225D F1            [10] 5519 	pop	af
-   225E                    5520 00102$:
-                           5521 ;src/main.c:389: draws();
-   225E CDrEEr05      [17] 5522 	call	_draws
-                           5523 ;src/main.c:392: if(temp == 10){
-   2261 3ArF0r00      [13] 5524 	ld	a,(#_temp + 0)
-   2264 D6 0A         [ 7] 5525 	sub	a, #0x0A
-   2266 20 2F         [12] 5526 	jr	NZ,00110$
-                           5527 ;src/main.c:393: if(player.atk < 20) drawFatiga(player.atk,2);
-   2268 21r0Ar01      [10] 5528 	ld	hl, #(_player + 0x0008) + 0
-   226B 56            [ 7] 5529 	ld	d,(hl)
-   226C 7A            [ 4] 5530 	ld	a,d
-   226D D6 14         [ 7] 5531 	sub	a, #0x14
-   226F 30 0C         [12] 5532 	jr	NC,00107$
-   2271 3E 02         [ 7] 5533 	ld	a,#0x02
-   2273 F5            [11] 5534 	push	af
-   2274 33            [ 6] 5535 	inc	sp
-   2275 D5            [11] 5536 	push	de
-   2276 33            [ 6] 5537 	inc	sp
-   2277 CDr2Er07      [17] 5538 	call	_drawFatiga
-   227A F1            [10] 5539 	pop	af
-   227B 18 1A         [12] 5540 	jr	00110$
-   227D                    5541 00107$:
-                           5542 ;src/main.c:394: else if(player.atk > 20) drawFatiga(player.atk,1);
-   227D 3E 14         [ 7] 5543 	ld	a,#0x14
-   227F 92            [ 4] 5544 	sub	a, d
-   2280 30 0C         [12] 5545 	jr	NC,00104$
-   2282 3E 01         [ 7] 5546 	ld	a,#0x01
-   2284 F5            [11] 5547 	push	af
-   2285 33            [ 6] 5548 	inc	sp
-   2286 D5            [11] 5549 	push	de
-   2287 33            [ 6] 5550 	inc	sp
-   2288 CDr2Er07      [17] 5551 	call	_drawFatiga
-   228B F1            [10] 5552 	pop	af
-   228C 18 09         [12] 5553 	jr	00110$
-   228E                    5554 00104$:
-                           5555 ;src/main.c:395: else drawFatiga(player.atk,0);
-   228E AF            [ 4] 5556 	xor	a, a
-   228F F5            [11] 5557 	push	af
-   2290 33            [ 6] 5558 	inc	sp
-   2291 D5            [11] 5559 	push	de
-   2292 33            [ 6] 5560 	inc	sp
-   2293 CDr2Er07      [17] 5561 	call	_drawFatiga
-   2296 F1            [10] 5562 	pop	af
-   2297                    5563 00110$:
-                           5564 ;src/main.c:400: if(temp%2 == 0){
-   2297 FD 21rF0r00   [14] 5565 	ld	iy,#_temp
-   229B FD CB 00 46   [20] 5566 	bit	0, 0 (iy)
-   229F 20 0D         [12] 5567 	jr	NZ,00112$
-                           5568 ;src/main.c:401: player.lx = player.x;
-   22A1 3Ar02r01      [13] 5569 	ld	a, (#_player + 0)
-   22A4 21r04r01      [10] 5570 	ld	hl,#(_player + 0x0002)
-   22A7 77            [ 7] 5571 	ld	(hl),a
-                           5572 ;src/main.c:402: player.ly = player.y;
-   22A8 3Ar03r01      [13] 5573 	ld	a, (#(_player + 0x0001) + 0)
-   22AB 32r05r01      [13] 5574 	ld	(#(_player + 0x0003)),a
-   22AE                    5575 00112$:
-                           5576 ;src/main.c:405: if(enemy.life > 0){
-   22AE 21r15r01      [10] 5577 	ld	hl, #(_enemy + 0x0008) + 0
-   22B1 6E            [ 7] 5578 	ld	l,(hl)
-                           5579 ;src/main.c:408: enemy.ly = enemy.y;
-                           5580 ;src/main.c:415: enemy.x = enemy.ox;
-                           5581 ;src/main.c:416: enemy.y = enemy.oy;
-                           5582 ;src/main.c:405: if(enemy.life > 0){
-   22B2 7D            [ 4] 5583 	ld	a,l
-   22B3 B7            [ 4] 5584 	or	a, a
-   22B4 28 71         [12] 5585 	jr	Z,00119$
-                           5586 ;src/main.c:406: if(temp%2 == 1){
-   22B6 3ArF0r00      [13] 5587 	ld	a,(#_temp + 0)
-   22B9 E6 01         [ 7] 5588 	and	a, #0x01
-   22BB 3D            [ 4] 5589 	dec	a
-   22BC 20 0D         [12] 5590 	jr	NZ,00114$
-                           5591 ;src/main.c:407: enemy.lx = enemy.x;
-   22BE 3Ar0Dr01      [13] 5592 	ld	a, (#_enemy + 0)
-   22C1 32r0Fr01      [13] 5593 	ld	(#(_enemy + 0x0002)),a
-                           5594 ;src/main.c:408: enemy.ly = enemy.y;
-   22C4 11r10r01      [10] 5595 	ld	de,#_enemy + 3
-   22C7 3Ar0Er01      [13] 5596 	ld	a, (#(_enemy + 0x0001) + 0)
-   22CA 12            [ 7] 5597 	ld	(de),a
-   22CB                    5598 00114$:
-                           5599 ;src/main.c:411: move();
-   22CB CDrDAr20      [17] 5600 	call	_move
-                           5601 ;src/main.c:413: switch(checkCollisions(player.x, player.y, enemy.x, enemy.y, player.atk)){
-   22CE 21r0Ar01      [10] 5602 	ld	hl, #(_player + 0x0008) + 0
-   22D1 56            [ 7] 5603 	ld	d,(hl)
-   22D2 3Ar0Er01      [13] 5604 	ld	a, (#(_enemy + 0x0001) + 0)
-   22D5 21r0Dr01      [10] 5605 	ld	hl, #_enemy + 0
-   22D8 5E            [ 7] 5606 	ld	e,(hl)
-   22D9 21r03r01      [10] 5607 	ld	hl, #(_player + 0x0001) + 0
-   22DC 46            [ 7] 5608 	ld	b,(hl)
-   22DD 21r02r01      [10] 5609 	ld	hl, #_player + 0
-   22E0 4E            [ 7] 5610 	ld	c,(hl)
-   22E1 D5            [11] 5611 	push	de
-   22E2 33            [ 6] 5612 	inc	sp
-   22E3 57            [ 4] 5613 	ld	d,a
-   22E4 D5            [11] 5614 	push	de
-   22E5 C5            [11] 5615 	push	bc
-   22E6 CDr98r09      [17] 5616 	call	_checkCollisions
-   22E9 F1            [10] 5617 	pop	af
+   21D0 13            [ 6] 5442 	inc	de
+   21D1 DD 73 FD      [19] 5443 	ld	-3 (ix),e
+   21D4 DD 72 FE      [19] 5444 	ld	-2 (ix),d
+   21D7 DD 6E FD      [19] 5445 	ld	l,-3 (ix)
+   21DA DD 66 FE      [19] 5446 	ld	h,-2 (ix)
+   21DD 36 00         [10] 5447 	ld	(hl),#0x00
+                           5448 ;src/main.c:363: bound =0;
+   21DF 21rF6r00      [10] 5449 	ld	hl,#_bound + 0
+   21E2 36 00         [10] 5450 	ld	(hl), #0x00
+                           5451 ;src/main.c:364: temp = 0;
+   21E4 21rF0r00      [10] 5452 	ld	hl,#_temp + 0
+   21E7 36 00         [10] 5453 	ld	(hl), #0x00
+                           5454 ;src/main.c:365: map = 1;
+   21E9 21rF1r00      [10] 5455 	ld	hl,#_map + 0
+   21EC 36 01         [10] 5456 	ld	(hl), #0x01
+                           5457 ;src/main.c:366: arrow =0;
+   21EE 21rF4r00      [10] 5458 	ld	hl,#_arrow + 0
+   21F1 36 00         [10] 5459 	ld	(hl), #0x00
+                           5460 ;src/main.c:367: finish =0;
+   21F3 21rF3r00      [10] 5461 	ld	hl,#_finish + 0
+   21F6 36 00         [10] 5462 	ld	(hl), #0x00
+                           5463 ;src/main.c:368: following =0;
+   21F8 21rF5r00      [10] 5464 	ld	hl,#_following + 0
+   21FB 36 00         [10] 5465 	ld	(hl), #0x00
+                           5466 ;src/main.c:369: archer = 0;
+   21FD 21rF7r00      [10] 5467 	ld	hl,#_archer + 0
+   2200 36 00         [10] 5468 	ld	(hl), #0x00
+                           5469 ;src/main.c:371: initPlayer();
+   2202 CDr9Er0D      [17] 5470 	call	_initPlayer
+                           5471 ;src/main.c:372: initEnemies();
+   2205 CDrD4r0D      [17] 5472 	call	_initEnemies
+                           5473 ;src/main.c:374: cpct_clearScreen(0);
+   2208 21 00 40      [10] 5474 	ld	hl,#0x4000
+   220B E5            [11] 5475 	push	hl
+   220C AF            [ 4] 5476 	xor	a, a
+   220D F5            [11] 5477 	push	af
+   220E 33            [ 6] 5478 	inc	sp
+   220F 26 C0         [ 7] 5479 	ld	h, #0xC0
+   2211 E5            [11] 5480 	push	hl
+   2212 CDr00r00      [17] 5481 	call	_cpct_memset
+                           5482 ;src/main.c:375: drawMap(map);
+   2215 3ArF1r00      [13] 5483 	ld	a,(_map)
+   2218 F5            [11] 5484 	push	af
+   2219 33            [ 6] 5485 	inc	sp
+   221A CDr00r00      [17] 5486 	call	_drawMap
+   221D 33            [ 6] 5487 	inc	sp
+                           5488 ;src/main.c:377: while (1){
+   221E DD 7E FD      [19] 5489 	ld	a,-3 (ix)
+   2221 DD 77 F9      [19] 5490 	ld	-7 (ix),a
+   2224 DD 7E FE      [19] 5491 	ld	a,-2 (ix)
+   2227 DD 77 FA      [19] 5492 	ld	-6 (ix),a
+   222A DD 7E F7      [19] 5493 	ld	a,-9 (ix)
+   222D DD 77 FB      [19] 5494 	ld	-5 (ix),a
+   2230 DD 7E F8      [19] 5495 	ld	a,-8 (ix)
+   2233 DD 77 FC      [19] 5496 	ld	-4 (ix),a
+   2236                    5497 00135$:
+                           5498 ;src/main.c:380: cpct_waitVSYNC();
+   2236 CDr00r00      [17] 5499 	call	_cpct_waitVSYNC
+                           5500 ;src/main.c:383: erases();
+   2239 CDrADr06      [17] 5501 	call	_erases
+                           5502 ;src/main.c:386: if(temp == 10)
+   223C 3ArF0r00      [13] 5503 	ld	a,(#_temp + 0)
+   223F D6 0A         [ 7] 5504 	sub	a, #0x0A
+   2241 20 1C         [12] 5505 	jr	NZ,00102$
+                           5506 ;src/main.c:387: drawPickUps(n.corazon,n.bullet);
+   2243 DD 6E FD      [19] 5507 	ld	l,-3 (ix)
+   2246 DD 66 FE      [19] 5508 	ld	h,-2 (ix)
+   2249 7E            [ 7] 5509 	ld	a,(hl)
+   224A DD 77 FF      [19] 5510 	ld	-1 (ix),a
+   224D DD 6E F7      [19] 5511 	ld	l,-9 (ix)
+   2250 DD 66 F8      [19] 5512 	ld	h,-8 (ix)
+   2253 56            [ 7] 5513 	ld	d,(hl)
+   2254 DD 7E FF      [19] 5514 	ld	a,-1 (ix)
+   2257 F5            [11] 5515 	push	af
+   2258 33            [ 6] 5516 	inc	sp
+   2259 D5            [11] 5517 	push	de
+   225A 33            [ 6] 5518 	inc	sp
+   225B CDr54r08      [17] 5519 	call	_drawPickUps
+   225E F1            [10] 5520 	pop	af
+   225F                    5521 00102$:
+                           5522 ;src/main.c:390: draws();
+   225F CDrEEr05      [17] 5523 	call	_draws
+                           5524 ;src/main.c:393: if(temp == 10){
+   2262 3ArF0r00      [13] 5525 	ld	a,(#_temp + 0)
+   2265 D6 0A         [ 7] 5526 	sub	a, #0x0A
+   2267 20 2F         [12] 5527 	jr	NZ,00110$
+                           5528 ;src/main.c:394: if(player.atk < 20) drawFatiga(player.atk,2);
+   2269 21r0Ar01      [10] 5529 	ld	hl, #(_player + 0x0008) + 0
+   226C 56            [ 7] 5530 	ld	d,(hl)
+   226D 7A            [ 4] 5531 	ld	a,d
+   226E D6 14         [ 7] 5532 	sub	a, #0x14
+   2270 30 0C         [12] 5533 	jr	NC,00107$
+   2272 3E 02         [ 7] 5534 	ld	a,#0x02
+   2274 F5            [11] 5535 	push	af
+   2275 33            [ 6] 5536 	inc	sp
+   2276 D5            [11] 5537 	push	de
+   2277 33            [ 6] 5538 	inc	sp
+   2278 CDr2Er07      [17] 5539 	call	_drawFatiga
+   227B F1            [10] 5540 	pop	af
+   227C 18 1A         [12] 5541 	jr	00110$
+   227E                    5542 00107$:
+                           5543 ;src/main.c:395: else if(player.atk > 20) drawFatiga(player.atk,1);
+   227E 3E 14         [ 7] 5544 	ld	a,#0x14
+   2280 92            [ 4] 5545 	sub	a, d
+   2281 30 0C         [12] 5546 	jr	NC,00104$
+   2283 3E 01         [ 7] 5547 	ld	a,#0x01
+   2285 F5            [11] 5548 	push	af
+   2286 33            [ 6] 5549 	inc	sp
+   2287 D5            [11] 5550 	push	de
+   2288 33            [ 6] 5551 	inc	sp
+   2289 CDr2Er07      [17] 5552 	call	_drawFatiga
+   228C F1            [10] 5553 	pop	af
+   228D 18 09         [12] 5554 	jr	00110$
+   228F                    5555 00104$:
+                           5556 ;src/main.c:396: else drawFatiga(player.atk,0);
+   228F AF            [ 4] 5557 	xor	a, a
+   2290 F5            [11] 5558 	push	af
+   2291 33            [ 6] 5559 	inc	sp
+   2292 D5            [11] 5560 	push	de
+   2293 33            [ 6] 5561 	inc	sp
+   2294 CDr2Er07      [17] 5562 	call	_drawFatiga
+   2297 F1            [10] 5563 	pop	af
+   2298                    5564 00110$:
+                           5565 ;src/main.c:401: if(temp%2 == 0){
+   2298 FD 21rF0r00   [14] 5566 	ld	iy,#_temp
+   229C FD CB 00 46   [20] 5567 	bit	0, 0 (iy)
+   22A0 20 0D         [12] 5568 	jr	NZ,00112$
+                           5569 ;src/main.c:402: player.lx = player.x;
+   22A2 3Ar02r01      [13] 5570 	ld	a, (#_player + 0)
+   22A5 21r04r01      [10] 5571 	ld	hl,#(_player + 0x0002)
+   22A8 77            [ 7] 5572 	ld	(hl),a
+                           5573 ;src/main.c:403: player.ly = player.y;
+   22A9 3Ar03r01      [13] 5574 	ld	a, (#(_player + 0x0001) + 0)
+   22AC 32r05r01      [13] 5575 	ld	(#(_player + 0x0003)),a
+   22AF                    5576 00112$:
+                           5577 ;src/main.c:406: if(enemy.life > 0){
+   22AF 21r15r01      [10] 5578 	ld	hl, #(_enemy + 0x0008) + 0
+   22B2 6E            [ 7] 5579 	ld	l,(hl)
+                           5580 ;src/main.c:409: enemy.ly = enemy.y;
+                           5581 ;src/main.c:416: enemy.x = enemy.ox;
+                           5582 ;src/main.c:417: enemy.y = enemy.oy;
+                           5583 ;src/main.c:406: if(enemy.life > 0){
+   22B3 7D            [ 4] 5584 	ld	a,l
+   22B4 B7            [ 4] 5585 	or	a, a
+   22B5 28 76         [12] 5586 	jr	Z,00119$
+                           5587 ;src/main.c:407: if(temp%2 == 1){
+   22B7 3ArF0r00      [13] 5588 	ld	a,(#_temp + 0)
+   22BA E6 01         [ 7] 5589 	and	a, #0x01
+   22BC 3D            [ 4] 5590 	dec	a
+   22BD 20 0D         [12] 5591 	jr	NZ,00114$
+                           5592 ;src/main.c:408: enemy.lx = enemy.x;
+   22BF 3Ar0Dr01      [13] 5593 	ld	a, (#_enemy + 0)
+   22C2 32r0Fr01      [13] 5594 	ld	(#(_enemy + 0x0002)),a
+                           5595 ;src/main.c:409: enemy.ly = enemy.y;
+   22C5 11r10r01      [10] 5596 	ld	de,#_enemy + 3
+   22C8 3Ar0Er01      [13] 5597 	ld	a, (#(_enemy + 0x0001) + 0)
+   22CB 12            [ 7] 5598 	ld	(de),a
+   22CC                    5599 00114$:
+                           5600 ;src/main.c:412: move();
+   22CC CDrDAr20      [17] 5601 	call	_move
+                           5602 ;src/main.c:414: switch(checkCollisions(player.x, player.y, enemy.x, enemy.y, player.atk)){
+   22CF 21r0Ar01      [10] 5603 	ld	hl, #(_player + 0x0008) + 0
+   22D2 56            [ 7] 5604 	ld	d,(hl)
+   22D3 3Ar0Er01      [13] 5605 	ld	a, (#(_enemy + 0x0001) + 0)
+   22D6 21r0Dr01      [10] 5606 	ld	hl, #_enemy + 0
+   22D9 5E            [ 7] 5607 	ld	e,(hl)
+   22DA 21r03r01      [10] 5608 	ld	hl, #(_player + 0x0001) + 0
+   22DD 46            [ 7] 5609 	ld	b,(hl)
+   22DE 21r02r01      [10] 5610 	ld	hl, #_player + 0
+   22E1 4E            [ 7] 5611 	ld	c,(hl)
+   22E2 D5            [11] 5612 	push	de
+   22E3 33            [ 6] 5613 	inc	sp
+   22E4 57            [ 4] 5614 	ld	d,a
+   22E5 D5            [11] 5615 	push	de
+   22E6 C5            [11] 5616 	push	bc
+   22E7 CDr98r09      [17] 5617 	call	_checkCollisions
    22EA F1            [10] 5618 	pop	af
-   22EB 33            [ 6] 5619 	inc	sp
-   22EC 7D            [ 4] 5620 	ld	a,l
-   22ED 3D            [ 4] 5621 	dec	a
-   22EE 28 07         [12] 5622 	jr	Z,00115$
-   22F0 7D            [ 4] 5623 	ld	a,l
-   22F1 D6 02         [ 7] 5624 	sub	a, #0x02
-   22F3 28 1D         [12] 5625 	jr	Z,00116$
-   22F5 18 30         [12] 5626 	jr	00119$
-                           5627 ;src/main.c:414: case 1:
-   22F7                    5628 00115$:
-                           5629 ;src/main.c:415: enemy.x = enemy.ox;
-   22F7 3Ar11r01      [13] 5630 	ld	a, (#(_enemy + 0x0004) + 0)
-   22FA 32r0Dr01      [13] 5631 	ld	(#_enemy),a
-                           5632 ;src/main.c:416: enemy.y = enemy.oy;
-   22FD 3Ar12r01      [13] 5633 	ld	a, (#(_enemy + 0x0005) + 0)
-   2300 32r0Er01      [13] 5634 	ld	(#(_enemy + 0x0001)),a
-                           5635 ;src/main.c:417: enemy.life -= 1;
-   2303 3Ar15r01      [13] 5636 	ld	a, (#(_enemy + 0x0008) + 0)
-   2306 C6 FF         [ 7] 5637 	add	a,#0xFF
-   2308 32r15r01      [13] 5638 	ld	(#(_enemy + 0x0008)),a
-                           5639 ;src/main.c:418: player.atk = 20;
-   230B 21r0Ar01      [10] 5640 	ld	hl,#(_player + 0x0008)
-   230E 36 14         [10] 5641 	ld	(hl),#0x14
-                           5642 ;src/main.c:419: break;
-   2310 18 15         [12] 5643 	jr	00119$
-                           5644 ;src/main.c:420: case 2:
-   2312                    5645 00116$:
-                           5646 ;src/main.c:421: player.x = 0;
-   2312 21r02r01      [10] 5647 	ld	hl,#_player
-   2315 36 00         [10] 5648 	ld	(hl),#0x00
-                           5649 ;src/main.c:422: player.y = 80;
-   2317 21r03r01      [10] 5650 	ld	hl,#(_player + 0x0001)
-   231A 36 50         [10] 5651 	ld	(hl),#0x50
-                           5652 ;src/main.c:423: player.life -= 1;
-   231C 21r08r01      [10] 5653 	ld	hl,#_player + 6
-   231F 56            [ 7] 5654 	ld	d,(hl)
-   2320 15            [ 4] 5655 	dec	d
-   2321 72            [ 7] 5656 	ld	(hl),d
-                           5657 ;src/main.c:424: player.atk = 20;
-   2322 21r0Ar01      [10] 5658 	ld	hl,#(_player + 0x0008)
-   2325 36 14         [10] 5659 	ld	(hl),#0x14
-                           5660 ;src/main.c:426: }
-   2327                    5661 00119$:
-                           5662 ;src/main.c:428: if(temp > 10)
-   2327 3E 0A         [ 7] 5663 	ld	a,#0x0A
-   2329 FD 21rF0r00   [14] 5664 	ld	iy,#_temp
-   232D FD 96 00      [19] 5665 	sub	a, 0 (iy)
-   2330 30 08         [12] 5666 	jr	NC,00121$
-                           5667 ;src/main.c:429: temp = 0;
-   2332 FD 21rF0r00   [14] 5668 	ld	iy,#_temp
-   2336 FD 36 00 00   [19] 5669 	ld	0 (iy),#0x00
-   233A                    5670 00121$:
-                           5671 ;src/main.c:430: temp += 1;
-   233A FD 21rF0r00   [14] 5672 	ld	iy,#_temp
-   233E FD 34 00      [23] 5673 	inc	0 (iy)
-                           5674 ;src/main.c:431: player.latk = player.atk;
-   2341 11r0Br01      [10] 5675 	ld	de,#_player + 9
-   2344 3Ar0Ar01      [13] 5676 	ld	a, (#(_player + 0x0008) + 0)
-   2347 12            [ 7] 5677 	ld	(de),a
-                           5678 ;src/main.c:436: cpct_scanKeyboard_f();
-   2348 CDr00r00      [17] 5679 	call	_cpct_scanKeyboard_f
-                           5680 ;src/main.c:437: player.sprite = checkKeyboard();
-   234B CDrB9r0A      [17] 5681 	call	_checkKeyboard
-   234E 5D            [ 4] 5682 	ld	e,l
-   234F 54            [ 4] 5683 	ld	d,h
-   2350 ED 53r06r01   [20] 5684 	ld	((_player + 0x0004)), de
-                           5685 ;src/main.c:438: checkBoundsCollisions(&n.corazon,&n.bullet);
-   2354 DD 6E FE      [19] 5686 	ld	l,-2 (ix)
-   2357 DD 66 FF      [19] 5687 	ld	h,-1 (ix)
-   235A DD 5E FA      [19] 5688 	ld	e,-6 (ix)
-   235D DD 56 FB      [19] 5689 	ld	d,-5 (ix)
-   2360 E5            [11] 5690 	push	hl
-   2361 D5            [11] 5691 	push	de
-   2362 CDrB0r12      [17] 5692 	call	_checkBoundsCollisions
-   2365 F1            [10] 5693 	pop	af
-   2366 F1            [10] 5694 	pop	af
-                           5695 ;src/main.c:440: if(arrow == 1){
-   2367 3ArF4r00      [13] 5696 	ld	a,(#_arrow + 0)
-   236A 3D            [ 4] 5697 	dec	a
-   236B 20 6C         [12] 5698 	jr	NZ,00131$
-                           5699 ;src/main.c:441: moveObject();
-   236D CDr44r0D      [17] 5700 	call	_moveObject
-                           5701 ;src/main.c:442: bound = checkArrowCollisions();
-   2370 CDr81r16      [17] 5702 	call	_checkArrowCollisions
-   2373 FD 21rF6r00   [14] 5703 	ld	iy,#_bound
-   2377 FD 75 00      [19] 5704 	ld	0 (iy),l
-                           5705 ;src/main.c:443: if(object.dir == 2 || object.dir == 8)
-   237A 3ArFFr00      [13] 5706 	ld	a,(#_object + 7)
-   237D FE 02         [ 7] 5707 	cp	a,#0x02
-   237F 28 04         [12] 5708 	jr	Z,00122$
-   2381 D6 08         [ 7] 5709 	sub	a, #0x08
-   2383 20 04         [12] 5710 	jr	NZ,00123$
-   2385                    5711 00122$:
-                           5712 ;src/main.c:444: atkObj = 21;
-   2385 06 15         [ 7] 5713 	ld	b,#0x15
-   2387 18 02         [12] 5714 	jr	00124$
-   2389                    5715 00123$:
-                           5716 ;src/main.c:446: atkObj = 22;
-   2389 06 16         [ 7] 5717 	ld	b,#0x16
-   238B                    5718 00124$:
-                           5719 ;src/main.c:447: if(enemy.life > 0 && checkCollisions(object.x, object.y, enemy.x, enemy.y, atkObj) == 1 && bound == 0){
-   238B 3Ar15r01      [13] 5720 	ld	a, (#(_enemy + 0x0008) + 0)
-   238E B7            [ 4] 5721 	or	a, a
-   238F 28 48         [12] 5722 	jr	Z,00131$
-   2391 3Ar0Er01      [13] 5723 	ld	a, (#(_enemy + 0x0001) + 0)
-   2394 21r0Dr01      [10] 5724 	ld	hl, #_enemy + 0
-   2397 4E            [ 7] 5725 	ld	c,(hl)
-   2398 21rF9r00      [10] 5726 	ld	hl, #_object + 1
-   239B 5E            [ 7] 5727 	ld	e,(hl)
-   239C 21rF8r00      [10] 5728 	ld	hl, #_object + 0
-   239F 56            [ 7] 5729 	ld	d,(hl)
-   23A0 C5            [11] 5730 	push	bc
-   23A1 33            [ 6] 5731 	inc	sp
-   23A2 F5            [11] 5732 	push	af
-   23A3 33            [ 6] 5733 	inc	sp
-   23A4 79            [ 4] 5734 	ld	a,c
-   23A5 F5            [11] 5735 	push	af
-   23A6 33            [ 6] 5736 	inc	sp
-   23A7 7B            [ 4] 5737 	ld	a,e
-   23A8 F5            [11] 5738 	push	af
-   23A9 33            [ 6] 5739 	inc	sp
-   23AA D5            [11] 5740 	push	de
-   23AB 33            [ 6] 5741 	inc	sp
-   23AC CDr98r09      [17] 5742 	call	_checkCollisions
-   23AF F1            [10] 5743 	pop	af
-   23B0 F1            [10] 5744 	pop	af
+   22EB F1            [10] 5619 	pop	af
+   22EC 33            [ 6] 5620 	inc	sp
+   22ED 7D            [ 4] 5621 	ld	a,l
+   22EE 3D            [ 4] 5622 	dec	a
+   22EF 28 07         [12] 5623 	jr	Z,00115$
+   22F1 7D            [ 4] 5624 	ld	a,l
+   22F2 D6 02         [ 7] 5625 	sub	a, #0x02
+   22F4 28 1D         [12] 5626 	jr	Z,00116$
+   22F6 18 35         [12] 5627 	jr	00119$
+                           5628 ;src/main.c:415: case 1:
+   22F8                    5629 00115$:
+                           5630 ;src/main.c:416: enemy.x = enemy.ox;
+   22F8 3Ar11r01      [13] 5631 	ld	a, (#(_enemy + 0x0004) + 0)
+   22FB 32r0Dr01      [13] 5632 	ld	(#_enemy),a
+                           5633 ;src/main.c:417: enemy.y = enemy.oy;
+   22FE 3Ar12r01      [13] 5634 	ld	a, (#(_enemy + 0x0005) + 0)
+   2301 32r0Er01      [13] 5635 	ld	(#(_enemy + 0x0001)),a
+                           5636 ;src/main.c:418: enemy.life -= 1;
+   2304 3Ar15r01      [13] 5637 	ld	a, (#(_enemy + 0x0008) + 0)
+   2307 C6 FF         [ 7] 5638 	add	a,#0xFF
+   2309 32r15r01      [13] 5639 	ld	(#(_enemy + 0x0008)),a
+                           5640 ;src/main.c:419: player.atk = 20;
+   230C 21r0Ar01      [10] 5641 	ld	hl,#(_player + 0x0008)
+   230F 36 14         [10] 5642 	ld	(hl),#0x14
+                           5643 ;src/main.c:420: break;
+   2311 18 1A         [12] 5644 	jr	00119$
+                           5645 ;src/main.c:421: case 2:
+   2313                    5646 00116$:
+                           5647 ;src/main.c:422: player.x = 0;
+   2313 21r02r01      [10] 5648 	ld	hl,#_player
+   2316 36 00         [10] 5649 	ld	(hl),#0x00
+                           5650 ;src/main.c:423: player.y = 80;
+   2318 21r03r01      [10] 5651 	ld	hl,#(_player + 0x0001)
+   231B 36 50         [10] 5652 	ld	(hl),#0x50
+                           5653 ;src/main.c:424: player.life -= 1;
+   231D 21r08r01      [10] 5654 	ld	hl,#_player + 6
+   2320 56            [ 7] 5655 	ld	d,(hl)
+   2321 15            [ 4] 5656 	dec	d
+   2322 72            [ 7] 5657 	ld	(hl),d
+                           5658 ;src/main.c:425: player.atk = 20;
+   2323 21r0Ar01      [10] 5659 	ld	hl,#(_player + 0x0008)
+   2326 36 14         [10] 5660 	ld	(hl),#0x14
+                           5661 ;src/main.c:426: enemy.pursue = 0;
+   2328 21r1Br01      [10] 5662 	ld	hl,#_enemy + 14
+   232B 36 00         [10] 5663 	ld	(hl),#0x00
+                           5664 ;src/main.c:428: }
+   232D                    5665 00119$:
+                           5666 ;src/main.c:430: if(temp > 10)
+   232D 3E 0A         [ 7] 5667 	ld	a,#0x0A
+   232F FD 21rF0r00   [14] 5668 	ld	iy,#_temp
+   2333 FD 96 00      [19] 5669 	sub	a, 0 (iy)
+   2336 30 08         [12] 5670 	jr	NC,00121$
+                           5671 ;src/main.c:431: temp = 0;
+   2338 FD 21rF0r00   [14] 5672 	ld	iy,#_temp
+   233C FD 36 00 00   [19] 5673 	ld	0 (iy),#0x00
+   2340                    5674 00121$:
+                           5675 ;src/main.c:432: temp += 1;
+   2340 FD 21rF0r00   [14] 5676 	ld	iy,#_temp
+   2344 FD 34 00      [23] 5677 	inc	0 (iy)
+                           5678 ;src/main.c:433: player.latk = player.atk;
+   2347 11r0Br01      [10] 5679 	ld	de,#_player + 9
+   234A 3Ar0Ar01      [13] 5680 	ld	a, (#(_player + 0x0008) + 0)
+   234D 12            [ 7] 5681 	ld	(de),a
+                           5682 ;src/main.c:438: cpct_scanKeyboard_f();
+   234E CDr00r00      [17] 5683 	call	_cpct_scanKeyboard_f
+                           5684 ;src/main.c:439: player.sprite = checkKeyboard();
+   2351 CDrB9r0A      [17] 5685 	call	_checkKeyboard
+   2354 5D            [ 4] 5686 	ld	e,l
+   2355 54            [ 4] 5687 	ld	d,h
+   2356 ED 53r06r01   [20] 5688 	ld	((_player + 0x0004)), de
+                           5689 ;src/main.c:440: checkBoundsCollisions(&n.corazon,&n.bullet);
+   235A DD 6E F9      [19] 5690 	ld	l,-7 (ix)
+   235D DD 66 FA      [19] 5691 	ld	h,-6 (ix)
+   2360 DD 5E FB      [19] 5692 	ld	e,-5 (ix)
+   2363 DD 56 FC      [19] 5693 	ld	d,-4 (ix)
+   2366 E5            [11] 5694 	push	hl
+   2367 D5            [11] 5695 	push	de
+   2368 CDrB0r12      [17] 5696 	call	_checkBoundsCollisions
+   236B F1            [10] 5697 	pop	af
+   236C F1            [10] 5698 	pop	af
+                           5699 ;src/main.c:442: if(arrow == 1){
+   236D 3ArF4r00      [13] 5700 	ld	a,(#_arrow + 0)
+   2370 3D            [ 4] 5701 	dec	a
+   2371 20 6C         [12] 5702 	jr	NZ,00131$
+                           5703 ;src/main.c:443: moveObject();
+   2373 CDr44r0D      [17] 5704 	call	_moveObject
+                           5705 ;src/main.c:444: bound = checkArrowCollisions();
+   2376 CDr81r16      [17] 5706 	call	_checkArrowCollisions
+   2379 FD 21rF6r00   [14] 5707 	ld	iy,#_bound
+   237D FD 75 00      [19] 5708 	ld	0 (iy),l
+                           5709 ;src/main.c:445: if(object.dir == 2 || object.dir == 8)
+   2380 3ArFFr00      [13] 5710 	ld	a,(#_object + 7)
+   2383 FE 02         [ 7] 5711 	cp	a,#0x02
+   2385 28 04         [12] 5712 	jr	Z,00122$
+   2387 D6 08         [ 7] 5713 	sub	a, #0x08
+   2389 20 04         [12] 5714 	jr	NZ,00123$
+   238B                    5715 00122$:
+                           5716 ;src/main.c:446: atkObj = 21;
+   238B 06 15         [ 7] 5717 	ld	b,#0x15
+   238D 18 02         [12] 5718 	jr	00124$
+   238F                    5719 00123$:
+                           5720 ;src/main.c:448: atkObj = 22;
+   238F 06 16         [ 7] 5721 	ld	b,#0x16
+   2391                    5722 00124$:
+                           5723 ;src/main.c:449: if(enemy.life > 0 && checkCollisions(object.x, object.y, enemy.x, enemy.y, atkObj) == 1 && bound == 0){
+   2391 3Ar15r01      [13] 5724 	ld	a, (#(_enemy + 0x0008) + 0)
+   2394 B7            [ 4] 5725 	or	a, a
+   2395 28 48         [12] 5726 	jr	Z,00131$
+   2397 3Ar0Er01      [13] 5727 	ld	a, (#(_enemy + 0x0001) + 0)
+   239A 21r0Dr01      [10] 5728 	ld	hl, #_enemy + 0
+   239D 4E            [ 7] 5729 	ld	c,(hl)
+   239E 21rF9r00      [10] 5730 	ld	hl, #_object + 1
+   23A1 5E            [ 7] 5731 	ld	e,(hl)
+   23A2 21rF8r00      [10] 5732 	ld	hl, #_object + 0
+   23A5 56            [ 7] 5733 	ld	d,(hl)
+   23A6 C5            [11] 5734 	push	bc
+   23A7 33            [ 6] 5735 	inc	sp
+   23A8 F5            [11] 5736 	push	af
+   23A9 33            [ 6] 5737 	inc	sp
+   23AA 79            [ 4] 5738 	ld	a,c
+   23AB F5            [11] 5739 	push	af
+   23AC 33            [ 6] 5740 	inc	sp
+   23AD 7B            [ 4] 5741 	ld	a,e
+   23AE F5            [11] 5742 	push	af
+   23AF 33            [ 6] 5743 	inc	sp
+   23B0 D5            [11] 5744 	push	de
    23B1 33            [ 6] 5745 	inc	sp
-   23B2 2D            [ 4] 5746 	dec	l
-   23B3 20 24         [12] 5747 	jr	NZ,00131$
-   23B5 3ArF6r00      [13] 5748 	ld	a,(#_bound + 0)
-   23B8 B7            [ 4] 5749 	or	a, a
-   23B9 20 1E         [12] 5750 	jr	NZ,00131$
-                           5751 ;src/main.c:448: enemy.life -= 1;
-   23BB 3Ar15r01      [13] 5752 	ld	a, (#(_enemy + 0x0008) + 0)
-   23BE C6 FF         [ 7] 5753 	add	a,#0xFF
-   23C0 32r15r01      [13] 5754 	ld	(#(_enemy + 0x0008)),a
-                           5755 ;src/main.c:449: enemy.x = enemy.ox;
-   23C3 3Ar11r01      [13] 5756 	ld	a, (#(_enemy + 0x0004) + 0)
-   23C6 32r0Dr01      [13] 5757 	ld	(#_enemy),a
-                           5758 ;src/main.c:450: enemy.y = enemy.oy;
-   23C9 3Ar12r01      [13] 5759 	ld	a, (#(_enemy + 0x0005) + 0)
-   23CC 32r0Er01      [13] 5760 	ld	(#(_enemy + 0x0001)),a
-                           5761 ;src/main.c:451: object.vivo = 0;
-   23CF 21rFEr00      [10] 5762 	ld	hl,#_object + 6
-   23D2 36 00         [10] 5763 	ld	(hl),#0x00
-                           5764 ;src/main.c:452: bound = 1;
-   23D4 21rF6r00      [10] 5765 	ld	hl,#_bound + 0
-   23D7 36 01         [10] 5766 	ld	(hl), #0x01
-   23D9                    5767 00131$:
-                           5768 ;src/main.c:455: if(finish == 1) return;
-   23D9 3ArF3r00      [13] 5769 	ld	a,(#_finish + 0)
-   23DC 3D            [ 4] 5770 	dec	a
-   23DD C2r35r22      [10] 5771 	jp	NZ,00135$
-   23E0 DD F9         [10] 5772 	ld	sp, ix
-   23E2 DD E1         [14] 5773 	pop	ix
-   23E4 C9            [10] 5774 	ret
-                           5775 ;src/main.c:462: void credits(){
-                           5776 ;	---------------------------------
-                           5777 ; Function credits
-                           5778 ; ---------------------------------
-   23E5                    5779 _credits::
-                           5780 ;src/main.c:464: cpct_clearScreen(0);
-   23E5 21 00 40      [10] 5781 	ld	hl,#0x4000
-   23E8 E5            [11] 5782 	push	hl
-   23E9 AF            [ 4] 5783 	xor	a, a
-   23EA F5            [11] 5784 	push	af
-   23EB 33            [ 6] 5785 	inc	sp
-   23EC 26 C0         [ 7] 5786 	ld	h, #0xC0
-   23EE E5            [11] 5787 	push	hl
-   23EF CDr00r00      [17] 5788 	call	_cpct_memset
-                           5789 ;src/main.c:465: memptr = cpct_getScreenPtr(VMEM,10,10);
-   23F2 21 0A 0A      [10] 5790 	ld	hl,#0x0A0A
-   23F5 E5            [11] 5791 	push	hl
-   23F6 21 00 C0      [10] 5792 	ld	hl,#0xC000
-   23F9 E5            [11] 5793 	push	hl
-   23FA CDr00r00      [17] 5794 	call	_cpct_getScreenPtr
-                           5795 ;src/main.c:466: cpct_drawStringM0("Lounge Gladiator",memptr,1,0);
-   23FD EB            [ 4] 5796 	ex	de,hl
-   23FE 01r47r24      [10] 5797 	ld	bc,#___str_5
-   2401 D5            [11] 5798 	push	de
-   2402 21 01 00      [10] 5799 	ld	hl,#0x0001
-   2405 E5            [11] 5800 	push	hl
-   2406 D5            [11] 5801 	push	de
-   2407 C5            [11] 5802 	push	bc
-   2408 CDr00r00      [17] 5803 	call	_cpct_drawStringM0
-   240B 21 06 00      [10] 5804 	ld	hl,#6
-   240E 39            [11] 5805 	add	hl,sp
-   240F F9            [ 6] 5806 	ld	sp,hl
-   2410 D1            [10] 5807 	pop	de
-                           5808 ;src/main.c:468: while (1){
-   2411                    5809 00104$:
-                           5810 ;src/main.c:470: cpct_scanKeyboard_f();
-   2411 D5            [11] 5811 	push	de
-   2412 CDr00r00      [17] 5812 	call	_cpct_scanKeyboard_f
-   2415 D1            [10] 5813 	pop	de
-                           5814 ;src/main.c:471: cpct_drawStringM0("Josep Domenech Mingot",memptr,1,0);
-   2416 01r58r24      [10] 5815 	ld	bc,#___str_6
-   2419 D5            [11] 5816 	push	de
-   241A 21 01 00      [10] 5817 	ld	hl,#0x0001
-   241D E5            [11] 5818 	push	hl
-   241E D5            [11] 5819 	push	de
-   241F C5            [11] 5820 	push	bc
-   2420 CDr00r00      [17] 5821 	call	_cpct_drawStringM0
-   2423 21 06 00      [10] 5822 	ld	hl,#6
-   2426 39            [11] 5823 	add	hl,sp
-   2427 F9            [ 6] 5824 	ld	sp,hl
-   2428 D1            [10] 5825 	pop	de
-                           5826 ;src/main.c:472: cpct_drawStringM0("Alberto Martinez Martinez",memptr,1,0);
-   2429 01r6Er24      [10] 5827 	ld	bc,#___str_7
-   242C D5            [11] 5828 	push	de
-   242D 21 01 00      [10] 5829 	ld	hl,#0x0001
-   2430 E5            [11] 5830 	push	hl
-   2431 D5            [11] 5831 	push	de
-   2432 C5            [11] 5832 	push	bc
-   2433 CDr00r00      [17] 5833 	call	_cpct_drawStringM0
-   2436 21 06 00      [10] 5834 	ld	hl,#6
-   2439 39            [11] 5835 	add	hl,sp
-   243A F9            [ 6] 5836 	ld	sp,hl
-   243B 21 08 04      [10] 5837 	ld	hl,#0x0408
-   243E CDr00r00      [17] 5838 	call	_cpct_isKeyPressed
-   2441 7D            [ 4] 5839 	ld	a,l
-   2442 D1            [10] 5840 	pop	de
-   2443 B7            [ 4] 5841 	or	a, a
-   2444 28 CB         [12] 5842 	jr	Z,00104$
-                           5843 ;src/main.c:476: return;
-   2446 C9            [10] 5844 	ret
-   2447                    5845 ___str_5:
-   2447 4C 6F 75 6E 67 65  5846 	.ascii "Lounge Gladiator"
+   23B2 CDr98r09      [17] 5746 	call	_checkCollisions
+   23B5 F1            [10] 5747 	pop	af
+   23B6 F1            [10] 5748 	pop	af
+   23B7 33            [ 6] 5749 	inc	sp
+   23B8 2D            [ 4] 5750 	dec	l
+   23B9 20 24         [12] 5751 	jr	NZ,00131$
+   23BB 3ArF6r00      [13] 5752 	ld	a,(#_bound + 0)
+   23BE B7            [ 4] 5753 	or	a, a
+   23BF 20 1E         [12] 5754 	jr	NZ,00131$
+                           5755 ;src/main.c:450: enemy.life -= 1;
+   23C1 3Ar15r01      [13] 5756 	ld	a, (#(_enemy + 0x0008) + 0)
+   23C4 C6 FF         [ 7] 5757 	add	a,#0xFF
+   23C6 32r15r01      [13] 5758 	ld	(#(_enemy + 0x0008)),a
+                           5759 ;src/main.c:451: enemy.x = enemy.ox;
+   23C9 3Ar11r01      [13] 5760 	ld	a, (#(_enemy + 0x0004) + 0)
+   23CC 32r0Dr01      [13] 5761 	ld	(#_enemy),a
+                           5762 ;src/main.c:452: enemy.y = enemy.oy;
+   23CF 3Ar12r01      [13] 5763 	ld	a, (#(_enemy + 0x0005) + 0)
+   23D2 32r0Er01      [13] 5764 	ld	(#(_enemy + 0x0001)),a
+                           5765 ;src/main.c:453: object.vivo = 0;
+   23D5 21rFEr00      [10] 5766 	ld	hl,#_object + 6
+   23D8 36 00         [10] 5767 	ld	(hl),#0x00
+                           5768 ;src/main.c:454: bound = 1;
+   23DA 21rF6r00      [10] 5769 	ld	hl,#_bound + 0
+   23DD 36 01         [10] 5770 	ld	(hl), #0x01
+   23DF                    5771 00131$:
+                           5772 ;src/main.c:457: if(finish == 1) return;
+   23DF 3ArF3r00      [13] 5773 	ld	a,(#_finish + 0)
+   23E2 3D            [ 4] 5774 	dec	a
+   23E3 C2r36r22      [10] 5775 	jp	NZ,00135$
+   23E6 DD F9         [10] 5776 	ld	sp, ix
+   23E8 DD E1         [14] 5777 	pop	ix
+   23EA C9            [10] 5778 	ret
+                           5779 ;src/main.c:464: void credits(){
+                           5780 ;	---------------------------------
+                           5781 ; Function credits
+                           5782 ; ---------------------------------
+   23EB                    5783 _credits::
+                           5784 ;src/main.c:466: cpct_clearScreen(0);
+   23EB 21 00 40      [10] 5785 	ld	hl,#0x4000
+   23EE E5            [11] 5786 	push	hl
+   23EF AF            [ 4] 5787 	xor	a, a
+   23F0 F5            [11] 5788 	push	af
+   23F1 33            [ 6] 5789 	inc	sp
+   23F2 26 C0         [ 7] 5790 	ld	h, #0xC0
+   23F4 E5            [11] 5791 	push	hl
+   23F5 CDr00r00      [17] 5792 	call	_cpct_memset
+                           5793 ;src/main.c:467: memptr = cpct_getScreenPtr(VMEM,10,10);
+   23F8 21 0A 0A      [10] 5794 	ld	hl,#0x0A0A
+   23FB E5            [11] 5795 	push	hl
+   23FC 21 00 C0      [10] 5796 	ld	hl,#0xC000
+   23FF E5            [11] 5797 	push	hl
+   2400 CDr00r00      [17] 5798 	call	_cpct_getScreenPtr
+                           5799 ;src/main.c:468: cpct_drawStringM0("Lounge Gladiator",memptr,1,0);
+   2403 EB            [ 4] 5800 	ex	de,hl
+   2404 01r4Dr24      [10] 5801 	ld	bc,#___str_5
+   2407 D5            [11] 5802 	push	de
+   2408 21 01 00      [10] 5803 	ld	hl,#0x0001
+   240B E5            [11] 5804 	push	hl
+   240C D5            [11] 5805 	push	de
+   240D C5            [11] 5806 	push	bc
+   240E CDr00r00      [17] 5807 	call	_cpct_drawStringM0
+   2411 21 06 00      [10] 5808 	ld	hl,#6
+   2414 39            [11] 5809 	add	hl,sp
+   2415 F9            [ 6] 5810 	ld	sp,hl
+   2416 D1            [10] 5811 	pop	de
+                           5812 ;src/main.c:470: while (1){
+   2417                    5813 00104$:
+                           5814 ;src/main.c:472: cpct_scanKeyboard_f();
+   2417 D5            [11] 5815 	push	de
+   2418 CDr00r00      [17] 5816 	call	_cpct_scanKeyboard_f
+   241B D1            [10] 5817 	pop	de
+                           5818 ;src/main.c:473: cpct_drawStringM0("Josep Domenech Mingot",memptr,1,0);
+   241C 01r5Er24      [10] 5819 	ld	bc,#___str_6
+   241F D5            [11] 5820 	push	de
+   2420 21 01 00      [10] 5821 	ld	hl,#0x0001
+   2423 E5            [11] 5822 	push	hl
+   2424 D5            [11] 5823 	push	de
+   2425 C5            [11] 5824 	push	bc
+   2426 CDr00r00      [17] 5825 	call	_cpct_drawStringM0
+   2429 21 06 00      [10] 5826 	ld	hl,#6
+   242C 39            [11] 5827 	add	hl,sp
+   242D F9            [ 6] 5828 	ld	sp,hl
+   242E D1            [10] 5829 	pop	de
+                           5830 ;src/main.c:474: cpct_drawStringM0("Alberto Martinez Martinez",memptr,1,0);
+   242F 01r74r24      [10] 5831 	ld	bc,#___str_7
+   2432 D5            [11] 5832 	push	de
+   2433 21 01 00      [10] 5833 	ld	hl,#0x0001
+   2436 E5            [11] 5834 	push	hl
+   2437 D5            [11] 5835 	push	de
+   2438 C5            [11] 5836 	push	bc
+   2439 CDr00r00      [17] 5837 	call	_cpct_drawStringM0
+   243C 21 06 00      [10] 5838 	ld	hl,#6
+   243F 39            [11] 5839 	add	hl,sp
+   2440 F9            [ 6] 5840 	ld	sp,hl
+   2441 21 08 04      [10] 5841 	ld	hl,#0x0408
+   2444 CDr00r00      [17] 5842 	call	_cpct_isKeyPressed
+   2447 7D            [ 4] 5843 	ld	a,l
+   2448 D1            [10] 5844 	pop	de
+   2449 B7            [ 4] 5845 	or	a, a
+   244A 28 CB         [12] 5846 	jr	Z,00104$
+                           5847 ;src/main.c:478: return;
+   244C C9            [10] 5848 	ret
+   244D                    5849 ___str_5:
+   244D 4C 6F 75 6E 67 65  5850 	.ascii "Lounge Gladiator"
         20 47 6C 61 64 69
         61 74 6F 72
-   2457 00                 5847 	.db 0x00
-   2458                    5848 ___str_6:
-   2458 4A 6F 73 65 70 20  5849 	.ascii "Josep Domenech Mingot"
+   245D 00                 5851 	.db 0x00
+   245E                    5852 ___str_6:
+   245E 4A 6F 73 65 70 20  5853 	.ascii "Josep Domenech Mingot"
         44 6F 6D 65 6E 65
         63 68 20 4D 69 6E
         67 6F 74
-   246D 00                 5850 	.db 0x00
-   246E                    5851 ___str_7:
-   246E 41 6C 62 65 72 74  5852 	.ascii "Alberto Martinez Martinez"
+   2473 00                 5854 	.db 0x00
+   2474                    5855 ___str_7:
+   2474 41 6C 62 65 72 74  5856 	.ascii "Alberto Martinez Martinez"
         6F 20 4D 61 72 74
         69 6E 65 7A 20 4D
         61 72 74 69 6E 65
         7A
-   2487 00                 5853 	.db 0x00
-                           5854 ;src/main.c:486: void main(void) {
-                           5855 ;	---------------------------------
-                           5856 ; Function main
-                           5857 ; ---------------------------------
-   2488                    5858 _main::
-                           5859 ;src/main.c:490: init();
-   2488 CDr79r0D      [17] 5860 	call	_init
-                           5861 ;src/main.c:493: while(1){
-   248B                    5862 00106$:
-                           5863 ;src/main.c:494: x=menu();
-   248B CDr4Ar0E      [17] 5864 	call	_menu
-   248E 5D            [ 4] 5865 	ld	e, l
-   248F 54            [ 4] 5866 	ld	d, h
-                           5867 ;src/main.c:495: switch(x){
-   2490 CB 7A         [ 8] 5868 	bit	7, d
-   2492 20 F7         [12] 5869 	jr	NZ,00106$
-   2494 3E 02         [ 7] 5870 	ld	a,#0x02
-   2496 BB            [ 4] 5871 	cp	a, e
-   2497 3E 00         [ 7] 5872 	ld	a,#0x00
-   2499 9A            [ 4] 5873 	sbc	a, d
-   249A E2r9Fr24      [10] 5874 	jp	PO, 00122$
-   249D EE 80         [ 7] 5875 	xor	a, #0x80
-   249F                    5876 00122$:
-   249F FAr8Br24      [10] 5877 	jp	M,00106$
-   24A2 16 00         [ 7] 5878 	ld	d,#0x00
-   24A4 21rAAr24      [10] 5879 	ld	hl,#00123$
-   24A7 19            [11] 5880 	add	hl,de
-   24A8 19            [11] 5881 	add	hl,de
-                           5882 ;src/main.c:496: case 0: return;break;
-                           5883 ;src/main.c:497: case 1: game(); break;
-   24A9 E9            [ 4] 5884 	jp	(hl)
-   24AA                    5885 00123$:
-   24AA 18 10         [12] 5886 	jr	00108$
-   24AC 18 04         [12] 5887 	jr	00102$
-   24AE 18 07         [12] 5888 	jr	00103$
-   24B0 18 0A         [12] 5889 	jr	00108$
-   24B2                    5890 00102$:
-   24B2 CDrA6r21      [17] 5891 	call	_game
-   24B5 18 D4         [12] 5892 	jr	00106$
-                           5893 ;src/main.c:498: case 2: credits();break;
-   24B7                    5894 00103$:
-   24B7 CDrE5r23      [17] 5895 	call	_credits
-                           5896 ;src/main.c:499: }
-   24BA 18 CF         [12] 5897 	jr	00106$
-   24BC                    5898 00108$:
-   24BC C9            [10] 5899 	ret
-                           5900 	.area _CODE
-                           5901 	.area _INITIALIZER
-                           5902 	.area _CABS (ABS)
+   248D 00                 5857 	.db 0x00
+                           5858 ;src/main.c:488: void main(void) {
+                           5859 ;	---------------------------------
+                           5860 ; Function main
+                           5861 ; ---------------------------------
+   248E                    5862 _main::
+                           5863 ;src/main.c:492: init();
+   248E CDr79r0D      [17] 5864 	call	_init
+                           5865 ;src/main.c:495: while(1){
+   2491                    5866 00106$:
+                           5867 ;src/main.c:496: x=menu();
+   2491 CDr4Ar0E      [17] 5868 	call	_menu
+   2494 5D            [ 4] 5869 	ld	e, l
+   2495 54            [ 4] 5870 	ld	d, h
+                           5871 ;src/main.c:497: switch(x){
+   2496 CB 7A         [ 8] 5872 	bit	7, d
+   2498 20 F7         [12] 5873 	jr	NZ,00106$
+   249A 3E 02         [ 7] 5874 	ld	a,#0x02
+   249C BB            [ 4] 5875 	cp	a, e
+   249D 3E 00         [ 7] 5876 	ld	a,#0x00
+   249F 9A            [ 4] 5877 	sbc	a, d
+   24A0 E2rA5r24      [10] 5878 	jp	PO, 00122$
+   24A3 EE 80         [ 7] 5879 	xor	a, #0x80
+   24A5                    5880 00122$:
+   24A5 FAr91r24      [10] 5881 	jp	M,00106$
+   24A8 16 00         [ 7] 5882 	ld	d,#0x00
+   24AA 21rB0r24      [10] 5883 	ld	hl,#00123$
+   24AD 19            [11] 5884 	add	hl,de
+   24AE 19            [11] 5885 	add	hl,de
+                           5886 ;src/main.c:498: case 0: return;break;
+                           5887 ;src/main.c:499: case 1: game(); break;
+   24AF E9            [ 4] 5888 	jp	(hl)
+   24B0                    5889 00123$:
+   24B0 18 10         [12] 5890 	jr	00108$
+   24B2 18 04         [12] 5891 	jr	00102$
+   24B4 18 07         [12] 5892 	jr	00103$
+   24B6 18 0A         [12] 5893 	jr	00108$
+   24B8                    5894 00102$:
+   24B8 CDrA7r21      [17] 5895 	call	_game
+   24BB 18 D4         [12] 5896 	jr	00106$
+                           5897 ;src/main.c:500: case 2: credits();break;
+   24BD                    5898 00103$:
+   24BD CDrEBr23      [17] 5899 	call	_credits
+                           5900 ;src/main.c:501: }
+   24C0 18 CF         [12] 5901 	jr	00106$
+   24C2                    5902 00108$:
+   24C2 C9            [10] 5903 	ret
+                           5904 	.area _CODE
+                           5905 	.area _INITIALIZER
+                           5906 	.area _CABS (ABS)

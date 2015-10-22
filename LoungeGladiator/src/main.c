@@ -326,7 +326,6 @@ void patrol(){
 void move(){
     //u8* memptr;
     if(temp > 10){
-        enemy.dir = chooseDirection();
         following = detectPlayerRoom(player.x,player.y);
         /*memptr = cpct_getScreenPtr(VMEM,20,20);
         cpct_drawSolidBox(memptr, following, 2, 8);
@@ -337,6 +336,8 @@ void move(){
                 enemy.pursue = 4;
             else if(enemy.pursue > 1)
                 enemy.pursue -=1;
+        }else{
+            enemy.dir = chooseDirection();
         }
     }else{
         if(enemy.pursue >= 1){
@@ -422,6 +423,7 @@ void game(){
             player.y = 80;
             player.life -= 1;
             player.atk = 20;
+            enemy.pursue = 0;
             break;
         }
     }

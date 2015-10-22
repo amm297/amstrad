@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.5.0 #9253 (Sep 22 2015) (CYGWIN)
-; This file was generated Thu Oct 22 12:48:52 2015
+; This file was generated Thu Oct 22 16:08:16 2015
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mz80
@@ -5279,13 +5279,8 @@ _move::
 	ld	a,#0x0A
 	ld	iy,#_temp
 	sub	a, 0 (iy)
-	jr	NC,00116$
-;src/main.c:329: enemy.dir = chooseDirection();
-	call	_chooseDirection
-	ld	a,l
-	ld	hl,#(_enemy + 0x0009)
-	ld	(hl),a
-;src/main.c:330: following = detectPlayerRoom(player.x,player.y);
+	jr	NC,00117$
+;src/main.c:329: following = detectPlayerRoom(player.x,player.y);
 	ld	a, (#_player + 1)
 	ld	hl, #_player + 0
 	ld	d,(hl)
@@ -5297,7 +5292,7 @@ _move::
 	pop	af
 	ld	iy,#_following
 	ld	0 (iy),l
-;src/main.c:335: if(following == enemy.room || enemy.pursue != 0){
+;src/main.c:334: if(following == enemy.room || enemy.pursue != 0){
 	ld	hl, #_enemy + 11
 	ld	d,(hl)
 	ld	bc,#_enemy + 14
@@ -5308,57 +5303,63 @@ _move::
 	jr	Z,00106$
 	ld	a,e
 	or	a, a
-	jr	Z,00117$
+	jr	Z,00107$
 00106$:
-;src/main.c:336: if(enemy.pursue == 0)
+;src/main.c:335: if(enemy.pursue == 0)
 	ld	a,e
 	or	a, a
 	jr	NZ,00104$
-;src/main.c:337: enemy.pursue = 4;
+;src/main.c:336: enemy.pursue = 4;
 	ld	a,#0x04
 	ld	(bc),a
-	jr	00117$
+	jr	00118$
 00104$:
-;src/main.c:338: else if(enemy.pursue > 1)
+;src/main.c:337: else if(enemy.pursue > 1)
 	ld	a,#0x01
 	sub	a, e
-	jr	NC,00117$
-;src/main.c:339: enemy.pursue -=1;
+	jr	NC,00118$
+;src/main.c:338: enemy.pursue -=1;
 	dec	e
 	ld	a,e
 	ld	(bc),a
-	jr	00117$
-00116$:
-;src/main.c:342: if(enemy.pursue >= 1){
+	jr	00118$
+00107$:
+;src/main.c:340: enemy.dir = chooseDirection();
+	call	_chooseDirection
+	ld	a,l
+	ld	(#(_enemy + 0x0009)),a
+	jr	00118$
+00117$:
+;src/main.c:343: if(enemy.pursue >= 1){
 	ld	a,(#(_enemy + 0x000e) + 0)
 	sub	a, #0x01
-	jr	C,00113$
-;src/main.c:343: followPlayer();
+	jr	C,00114$
+;src/main.c:344: followPlayer();
 	call	_followPlayer
-;src/main.c:344: if(enemy.seenX == enemy.x && enemy.seenY == enemy.y)
+;src/main.c:345: if(enemy.seenX == enemy.x && enemy.seenY == enemy.y)
 	ld	hl, #_enemy + 12
 	ld	d,(hl)
 	ld	hl, #_enemy + 0
 	ld	e,(hl)
 	ld	a,d
 	sub	a, e
-	jr	NZ,00117$
+	jr	NZ,00118$
 	ld	hl, #_enemy + 13
 	ld	d,(hl)
 	ld	hl, #_enemy + 1
 	ld	e,(hl)
 	ld	a,d
 	sub	a, e
-	jr	NZ,00117$
-;src/main.c:345: enemy.pursue = 0;
+	jr	NZ,00118$
+;src/main.c:346: enemy.pursue = 0;
 	ld	hl,#(_enemy + 0x000e)
 	ld	(hl),#0x00
-	jr	00117$
-00113$:
-;src/main.c:347: patrol();
+	jr	00118$
+00114$:
+;src/main.c:348: patrol();
 	call	_patrol
-00117$:
-;src/main.c:350: if((detectPlayerRoom(enemy.lx,enemy.ly) == detectPlayerRoom(player.x,player.y)) || enemy.pursue > 1){
+00118$:
+;src/main.c:351: if((detectPlayerRoom(enemy.lx,enemy.ly) == detectPlayerRoom(player.x,player.y)) || enemy.pursue > 1){
 	ld	hl, #_enemy + 3
 	ld	d,(hl)
 	ld	a, (#_enemy + 2)
@@ -5383,23 +5384,23 @@ _move::
 	pop	de
 	ld	a,d
 	sub	a, b
-	jr	Z,00118$
+	jr	Z,00119$
 	ld	hl, #_enemy + 14
 	ld	h,(hl)
 	ld	a,#0x01
 	sub	a, h
-	jr	NC,00119$
-00118$:
-;src/main.c:351: enemy.seenX = player.x;
+	jr	NC,00120$
+00119$:
+;src/main.c:352: enemy.seenX = player.x;
 	ld	de,#_enemy + 12
 	ld	a, (#_player + 0)
 	ld	(de),a
-;src/main.c:352: enemy.seenY = player.y;
+;src/main.c:353: enemy.seenY = player.y;
 	ld	de,#_enemy + 13
 	ld	a, (#(_player + 0x0001) + 0)
 	ld	(de),a
-00119$:
-;src/main.c:354: enemy.room = detectPlayerRoom(enemy.x,enemy.y);
+00120$:
+;src/main.c:355: enemy.room = detectPlayerRoom(enemy.x,enemy.y);
 	ld	a, (#_enemy + 1)
 	ld	hl, #_enemy + 0
 	ld	d,(hl)
@@ -5412,7 +5413,7 @@ _move::
 	ld	a,l
 	ld	(#(_enemy + 0x000b)),a
 	ret
-;src/main.c:359: void game(){
+;src/main.c:360: void game(){
 ;	---------------------------------
 ; Function game
 ; ---------------------------------
@@ -5423,7 +5424,7 @@ _game::
 	ld	hl,#-12
 	add	hl,sp
 	ld	sp,hl
-;src/main.c:361: TNivel n = {0,0,0};
+;src/main.c:362: TNivel n = {0,0,0};
 	ld	hl,#0x0000
 	add	hl,sp
 	ld	(hl),#0x00
@@ -5432,44 +5433,44 @@ _game::
 	ld	e, l
 	ld	d, h
 	inc	hl
-	ld	-4 (ix),l
-	ld	-3 (ix),h
-	ld	l,-4 (ix)
-	ld	h,-3 (ix)
+	ld	-9 (ix),l
+	ld	-8 (ix),h
+	ld	l,-9 (ix)
+	ld	h,-8 (ix)
 	ld	(hl),#0x00
 	inc	de
 	inc	de
-	ld	-8 (ix),e
-	ld	-7 (ix),d
-	ld	l,-8 (ix)
-	ld	h,-7 (ix)
+	ld	-3 (ix),e
+	ld	-2 (ix),d
+	ld	l,-3 (ix)
+	ld	h,-2 (ix)
 	ld	(hl),#0x00
-;src/main.c:362: bound =0;
+;src/main.c:363: bound =0;
 	ld	hl,#_bound + 0
 	ld	(hl), #0x00
-;src/main.c:363: temp = 0;
+;src/main.c:364: temp = 0;
 	ld	hl,#_temp + 0
 	ld	(hl), #0x00
-;src/main.c:364: map = 1;
+;src/main.c:365: map = 1;
 	ld	hl,#_map + 0
 	ld	(hl), #0x01
-;src/main.c:365: arrow =0;
+;src/main.c:366: arrow =0;
 	ld	hl,#_arrow + 0
 	ld	(hl), #0x00
-;src/main.c:366: finish =0;
+;src/main.c:367: finish =0;
 	ld	hl,#_finish + 0
 	ld	(hl), #0x00
-;src/main.c:367: following =0;
+;src/main.c:368: following =0;
 	ld	hl,#_following + 0
 	ld	(hl), #0x00
-;src/main.c:368: archer = 0;
+;src/main.c:369: archer = 0;
 	ld	hl,#_archer + 0
 	ld	(hl), #0x00
-;src/main.c:370: initPlayer();
+;src/main.c:371: initPlayer();
 	call	_initPlayer
-;src/main.c:371: initEnemies();
+;src/main.c:372: initEnemies();
 	call	_initEnemies
-;src/main.c:373: cpct_clearScreen(0);
+;src/main.c:374: cpct_clearScreen(0);
 	ld	hl,#0x4000
 	push	hl
 	xor	a, a
@@ -5478,39 +5479,39 @@ _game::
 	ld	h, #0xC0
 	push	hl
 	call	_cpct_memset
-;src/main.c:374: drawMap(map);
+;src/main.c:375: drawMap(map);
 	ld	a,(_map)
 	push	af
 	inc	sp
 	call	_drawMap
 	inc	sp
-;src/main.c:376: while (1){
-	ld	a,-8 (ix)
-	ld	-2 (ix),a
-	ld	a,-7 (ix)
-	ld	-1 (ix),a
-	ld	a,-4 (ix)
-	ld	-6 (ix),a
+;src/main.c:377: while (1){
 	ld	a,-3 (ix)
+	ld	-7 (ix),a
+	ld	a,-2 (ix)
+	ld	-6 (ix),a
+	ld	a,-9 (ix)
 	ld	-5 (ix),a
+	ld	a,-8 (ix)
+	ld	-4 (ix),a
 00135$:
-;src/main.c:379: cpct_waitVSYNC();
+;src/main.c:380: cpct_waitVSYNC();
 	call	_cpct_waitVSYNC
-;src/main.c:382: erases();
+;src/main.c:383: erases();
 	call	_erases
-;src/main.c:385: if(temp == 10)
+;src/main.c:386: if(temp == 10)
 	ld	a,(#_temp + 0)
 	sub	a, #0x0A
 	jr	NZ,00102$
-;src/main.c:386: drawPickUps(n.corazon,n.bullet);
-	ld	l,-8 (ix)
-	ld	h,-7 (ix)
+;src/main.c:387: drawPickUps(n.corazon,n.bullet);
+	ld	l,-3 (ix)
+	ld	h,-2 (ix)
 	ld	a,(hl)
-	ld	-9 (ix),a
-	ld	l,-4 (ix)
-	ld	h,-3 (ix)
+	ld	-1 (ix),a
+	ld	l,-9 (ix)
+	ld	h,-8 (ix)
 	ld	d,(hl)
-	ld	a,-9 (ix)
+	ld	a,-1 (ix)
 	push	af
 	inc	sp
 	push	de
@@ -5518,13 +5519,13 @@ _game::
 	call	_drawPickUps
 	pop	af
 00102$:
-;src/main.c:389: draws();
+;src/main.c:390: draws();
 	call	_draws
-;src/main.c:392: if(temp == 10){
+;src/main.c:393: if(temp == 10){
 	ld	a,(#_temp + 0)
 	sub	a, #0x0A
 	jr	NZ,00110$
-;src/main.c:393: if(player.atk < 20) drawFatiga(player.atk,2);
+;src/main.c:394: if(player.atk < 20) drawFatiga(player.atk,2);
 	ld	hl, #(_player + 0x0008) + 0
 	ld	d,(hl)
 	ld	a,d
@@ -5539,7 +5540,7 @@ _game::
 	pop	af
 	jr	00110$
 00107$:
-;src/main.c:394: else if(player.atk > 20) drawFatiga(player.atk,1);
+;src/main.c:395: else if(player.atk > 20) drawFatiga(player.atk,1);
 	ld	a,#0x14
 	sub	a, d
 	jr	NC,00104$
@@ -5552,7 +5553,7 @@ _game::
 	pop	af
 	jr	00110$
 00104$:
-;src/main.c:395: else drawFatiga(player.atk,0);
+;src/main.c:396: else drawFatiga(player.atk,0);
 	xor	a, a
 	push	af
 	inc	sp
@@ -5561,44 +5562,44 @@ _game::
 	call	_drawFatiga
 	pop	af
 00110$:
-;src/main.c:400: if(temp%2 == 0){
+;src/main.c:401: if(temp%2 == 0){
 	ld	iy,#_temp
 	bit	0, 0 (iy)
 	jr	NZ,00112$
-;src/main.c:401: player.lx = player.x;
+;src/main.c:402: player.lx = player.x;
 	ld	a, (#_player + 0)
 	ld	hl,#(_player + 0x0002)
 	ld	(hl),a
-;src/main.c:402: player.ly = player.y;
+;src/main.c:403: player.ly = player.y;
 	ld	a, (#(_player + 0x0001) + 0)
 	ld	(#(_player + 0x0003)),a
 00112$:
-;src/main.c:405: if(enemy.life > 0){
+;src/main.c:406: if(enemy.life > 0){
 	ld	hl, #(_enemy + 0x0008) + 0
 	ld	l,(hl)
-;src/main.c:408: enemy.ly = enemy.y;
-;src/main.c:415: enemy.x = enemy.ox;
-;src/main.c:416: enemy.y = enemy.oy;
-;src/main.c:405: if(enemy.life > 0){
+;src/main.c:409: enemy.ly = enemy.y;
+;src/main.c:416: enemy.x = enemy.ox;
+;src/main.c:417: enemy.y = enemy.oy;
+;src/main.c:406: if(enemy.life > 0){
 	ld	a,l
 	or	a, a
 	jr	Z,00119$
-;src/main.c:406: if(temp%2 == 1){
+;src/main.c:407: if(temp%2 == 1){
 	ld	a,(#_temp + 0)
 	and	a, #0x01
 	dec	a
 	jr	NZ,00114$
-;src/main.c:407: enemy.lx = enemy.x;
+;src/main.c:408: enemy.lx = enemy.x;
 	ld	a, (#_enemy + 0)
 	ld	(#(_enemy + 0x0002)),a
-;src/main.c:408: enemy.ly = enemy.y;
+;src/main.c:409: enemy.ly = enemy.y;
 	ld	de,#_enemy + 3
 	ld	a, (#(_enemy + 0x0001) + 0)
 	ld	(de),a
 00114$:
-;src/main.c:411: move();
+;src/main.c:412: move();
 	call	_move
-;src/main.c:413: switch(checkCollisions(player.x, player.y, enemy.x, enemy.y, player.atk)){
+;src/main.c:414: switch(checkCollisions(player.x, player.y, enemy.x, enemy.y, player.atk)){
 	ld	hl, #(_player + 0x0008) + 0
 	ld	d,(hl)
 	ld	a, (#(_enemy + 0x0001) + 0)
@@ -5624,99 +5625,102 @@ _game::
 	sub	a, #0x02
 	jr	Z,00116$
 	jr	00119$
-;src/main.c:414: case 1:
+;src/main.c:415: case 1:
 00115$:
-;src/main.c:415: enemy.x = enemy.ox;
+;src/main.c:416: enemy.x = enemy.ox;
 	ld	a, (#(_enemy + 0x0004) + 0)
 	ld	(#_enemy),a
-;src/main.c:416: enemy.y = enemy.oy;
+;src/main.c:417: enemy.y = enemy.oy;
 	ld	a, (#(_enemy + 0x0005) + 0)
 	ld	(#(_enemy + 0x0001)),a
-;src/main.c:417: enemy.life -= 1;
+;src/main.c:418: enemy.life -= 1;
 	ld	a, (#(_enemy + 0x0008) + 0)
 	add	a,#0xFF
 	ld	(#(_enemy + 0x0008)),a
-;src/main.c:418: player.atk = 20;
+;src/main.c:419: player.atk = 20;
 	ld	hl,#(_player + 0x0008)
 	ld	(hl),#0x14
-;src/main.c:419: break;
+;src/main.c:420: break;
 	jr	00119$
-;src/main.c:420: case 2:
+;src/main.c:421: case 2:
 00116$:
-;src/main.c:421: player.x = 0;
+;src/main.c:422: player.x = 0;
 	ld	hl,#_player
 	ld	(hl),#0x00
-;src/main.c:422: player.y = 80;
+;src/main.c:423: player.y = 80;
 	ld	hl,#(_player + 0x0001)
 	ld	(hl),#0x50
-;src/main.c:423: player.life -= 1;
+;src/main.c:424: player.life -= 1;
 	ld	hl,#_player + 6
 	ld	d,(hl)
 	dec	d
 	ld	(hl),d
-;src/main.c:424: player.atk = 20;
+;src/main.c:425: player.atk = 20;
 	ld	hl,#(_player + 0x0008)
 	ld	(hl),#0x14
-;src/main.c:426: }
+;src/main.c:426: enemy.pursue = 0;
+	ld	hl,#_enemy + 14
+	ld	(hl),#0x00
+;src/main.c:428: }
 00119$:
-;src/main.c:428: if(temp > 10)
+;src/main.c:430: if(temp > 10)
 	ld	a,#0x0A
 	ld	iy,#_temp
 	sub	a, 0 (iy)
 	jr	NC,00121$
-;src/main.c:429: temp = 0;
+;src/main.c:431: temp = 0;
 	ld	iy,#_temp
 	ld	0 (iy),#0x00
 00121$:
-;src/main.c:430: temp += 1;
+;src/main.c:432: temp += 1;
 	ld	iy,#_temp
 	inc	0 (iy)
-;src/main.c:431: player.latk = player.atk;
+;src/main.c:433: player.latk = player.atk;
 	ld	de,#_player + 9
 	ld	a, (#(_player + 0x0008) + 0)
 	ld	(de),a
-;src/main.c:436: cpct_scanKeyboard_f();
+;src/main.c:438: cpct_scanKeyboard_f();
 	call	_cpct_scanKeyboard_f
-;src/main.c:437: player.sprite = checkKeyboard();
+;src/main.c:439: player.sprite = checkKeyboard();
 	call	_checkKeyboard
 	ld	e,l
 	ld	d,h
 	ld	((_player + 0x0004)), de
-;src/main.c:438: checkBoundsCollisions(&n.corazon,&n.bullet);
-	ld	l,-2 (ix)
-	ld	h,-1 (ix)
-	ld	e,-6 (ix)
-	ld	d,-5 (ix)
+;src/main.c:440: checkBoundsCollisions(&n.corazon,&n.bullet);
+	ld	l,-7 (ix)
+	ld	h,-6 (ix)
+	ld	e,-5 (ix)
+	ld	d,-4 (ix)
 	push	hl
 	push	de
 	call	_checkBoundsCollisions
 	pop	af
 	pop	af
-;src/main.c:440: if(arrow == 1){
+;src/main.c:442: if(arrow == 1){
 	ld	a,(#_arrow + 0)
 	dec	a
 	jr	NZ,00131$
-;src/main.c:441: moveObject();
+;src/main.c:443: moveObject();
 	call	_moveObject
-;src/main.c:442: bound = checkArrowCollisions();
+;src/main.c:444: bound = checkArrowCollisions();
 	call	_checkArrowCollisions
 	ld	iy,#_bound
 	ld	0 (iy),l
-;src/main.c:443: if(object.dir == 2 || object.dir == 8)
+;src/main.c:445: if(object.dir == 2 || object.dir == 8)
 	ld	a,(#_object + 7)
 	cp	a,#0x02
 	jr	Z,00122$
 	sub	a, #0x08
 	jr	NZ,00123$
 00122$:
-;src/main.c:444: atkObj = 21;
+;src/main.c:446: atkObj = 21;
 	ld	b,#0x15
 	jr	00124$
 00123$:
-;src/main.c:446: atkObj = 22;
+;src/main.c:448: atkObj = 22;
 	ld	b,#0x16
 00124$:
-;src/main.c:447: if(enemy.life > 0 && checkCollisions(object.x, object.y, enemy.x, enemy.y, atkObj) == 1 && bound == 0){
+;src/main.c:449: if(enemy.life > 0 && checkCollisions(object.x, object.y, enemy.x, enemy.y, atkObj) == 1 && bound == 0){
 	ld	a, (#(_enemy + 0x0008) + 0)
 	or	a, a
 	jr	Z,00131$
@@ -5748,36 +5752,36 @@ _game::
 	ld	a,(#_bound + 0)
 	or	a, a
 	jr	NZ,00131$
-;src/main.c:448: enemy.life -= 1;
+;src/main.c:450: enemy.life -= 1;
 	ld	a, (#(_enemy + 0x0008) + 0)
 	add	a,#0xFF
 	ld	(#(_enemy + 0x0008)),a
-;src/main.c:449: enemy.x = enemy.ox;
+;src/main.c:451: enemy.x = enemy.ox;
 	ld	a, (#(_enemy + 0x0004) + 0)
 	ld	(#_enemy),a
-;src/main.c:450: enemy.y = enemy.oy;
+;src/main.c:452: enemy.y = enemy.oy;
 	ld	a, (#(_enemy + 0x0005) + 0)
 	ld	(#(_enemy + 0x0001)),a
-;src/main.c:451: object.vivo = 0;
+;src/main.c:453: object.vivo = 0;
 	ld	hl,#_object + 6
 	ld	(hl),#0x00
-;src/main.c:452: bound = 1;
+;src/main.c:454: bound = 1;
 	ld	hl,#_bound + 0
 	ld	(hl), #0x01
 00131$:
-;src/main.c:455: if(finish == 1) return;
+;src/main.c:457: if(finish == 1) return;
 	ld	a,(#_finish + 0)
 	dec	a
 	jp	NZ,00135$
 	ld	sp, ix
 	pop	ix
 	ret
-;src/main.c:462: void credits(){
+;src/main.c:464: void credits(){
 ;	---------------------------------
 ; Function credits
 ; ---------------------------------
 _credits::
-;src/main.c:464: cpct_clearScreen(0);
+;src/main.c:466: cpct_clearScreen(0);
 	ld	hl,#0x4000
 	push	hl
 	xor	a, a
@@ -5786,13 +5790,13 @@ _credits::
 	ld	h, #0xC0
 	push	hl
 	call	_cpct_memset
-;src/main.c:465: memptr = cpct_getScreenPtr(VMEM,10,10);
+;src/main.c:467: memptr = cpct_getScreenPtr(VMEM,10,10);
 	ld	hl,#0x0A0A
 	push	hl
 	ld	hl,#0xC000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:466: cpct_drawStringM0("Lounge Gladiator",memptr,1,0);
+;src/main.c:468: cpct_drawStringM0("Lounge Gladiator",memptr,1,0);
 	ex	de,hl
 	ld	bc,#___str_5
 	push	de
@@ -5805,13 +5809,13 @@ _credits::
 	add	hl,sp
 	ld	sp,hl
 	pop	de
-;src/main.c:468: while (1){
+;src/main.c:470: while (1){
 00104$:
-;src/main.c:470: cpct_scanKeyboard_f();
+;src/main.c:472: cpct_scanKeyboard_f();
 	push	de
 	call	_cpct_scanKeyboard_f
 	pop	de
-;src/main.c:471: cpct_drawStringM0("Josep Domenech Mingot",memptr,1,0);
+;src/main.c:473: cpct_drawStringM0("Josep Domenech Mingot",memptr,1,0);
 	ld	bc,#___str_6
 	push	de
 	ld	hl,#0x0001
@@ -5823,7 +5827,7 @@ _credits::
 	add	hl,sp
 	ld	sp,hl
 	pop	de
-;src/main.c:472: cpct_drawStringM0("Alberto Martinez Martinez",memptr,1,0);
+;src/main.c:474: cpct_drawStringM0("Alberto Martinez Martinez",memptr,1,0);
 	ld	bc,#___str_7
 	push	de
 	ld	hl,#0x0001
@@ -5840,7 +5844,7 @@ _credits::
 	pop	de
 	or	a, a
 	jr	Z,00104$
-;src/main.c:476: return;
+;src/main.c:478: return;
 	ret
 ___str_5:
 	.ascii "Lounge Gladiator"
@@ -5851,20 +5855,20 @@ ___str_6:
 ___str_7:
 	.ascii "Alberto Martinez Martinez"
 	.db 0x00
-;src/main.c:486: void main(void) {
+;src/main.c:488: void main(void) {
 ;	---------------------------------
 ; Function main
 ; ---------------------------------
 _main::
-;src/main.c:490: init();
+;src/main.c:492: init();
 	call	_init
-;src/main.c:493: while(1){
+;src/main.c:495: while(1){
 00106$:
-;src/main.c:494: x=menu();
+;src/main.c:496: x=menu();
 	call	_menu
 	ld	e, l
 	ld	d, h
-;src/main.c:495: switch(x){
+;src/main.c:497: switch(x){
 	bit	7, d
 	jr	NZ,00106$
 	ld	a,#0x02
@@ -5879,8 +5883,8 @@ _main::
 	ld	hl,#00123$
 	add	hl,de
 	add	hl,de
-;src/main.c:496: case 0: return;break;
-;src/main.c:497: case 1: game(); break;
+;src/main.c:498: case 0: return;break;
+;src/main.c:499: case 1: game(); break;
 	jp	(hl)
 00123$:
 	jr	00108$
@@ -5890,10 +5894,10 @@ _main::
 00102$:
 	call	_game
 	jr	00106$
-;src/main.c:498: case 2: credits();break;
+;src/main.c:500: case 2: credits();break;
 00103$:
 	call	_credits
-;src/main.c:499: }
+;src/main.c:501: }
 	jr	00106$
 00108$:
 	ret
