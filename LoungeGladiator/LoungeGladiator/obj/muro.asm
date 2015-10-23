@@ -1,0 +1,303 @@
+;--------------------------------------------------------
+; File Created by SDCC : free open source ANSI-C Compiler
+; Version 3.5.0 #9253 (Sep 22 2015) (CYGWIN)
+; This file was generated Tue Oct  6 12:40:57 2015
+;--------------------------------------------------------
+	.module muro
+	.optsdcc -mz80
+	
+;--------------------------------------------------------
+; Public variables in this module
+;--------------------------------------------------------
+	.globl _muro
+;--------------------------------------------------------
+; special function registers
+;--------------------------------------------------------
+;--------------------------------------------------------
+; ram data
+;--------------------------------------------------------
+	.area _DATA
+;--------------------------------------------------------
+; ram data
+;--------------------------------------------------------
+	.area _INITIALIZED
+;--------------------------------------------------------
+; absolute external ram data
+;--------------------------------------------------------
+	.area _DABS (ABS)
+;--------------------------------------------------------
+; global & static initialisations
+;--------------------------------------------------------
+	.area _HOME
+	.area _GSINIT
+	.area _GSFINAL
+	.area _GSINIT
+;--------------------------------------------------------
+; Home
+;--------------------------------------------------------
+	.area _HOME
+	.area _HOME
+;--------------------------------------------------------
+; code
+;--------------------------------------------------------
+	.area _CODE
+	.area _CODE
+_muro:
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x00AA
+	.dw #0x0040
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0055
+	.dw #0x0080
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0055
+	.dw #0x0080
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x00AA
+	.dw #0x0040
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x00AA
+	.dw #0x0040
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x00AA
+	.dw #0x0040
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x00AA
+	.dw #0x0040
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x00AA
+	.dw #0x0040
+	.dw #0x0055
+	.dw #0x0080
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0055
+	.dw #0x0080
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0055
+	.dw #0x0080
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x0055
+	.dw #0x0080
+	.dw #0x00AA
+	.dw #0x0040
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0055
+	.dw #0x0080
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0055
+	.dw #0x0080
+	.dw #0x00AA
+	.dw #0x0040
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0055
+	.dw #0x0080
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x00AA
+	.dw #0x0040
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x0055
+	.dw #0x0080
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x00AA
+	.dw #0x0040
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x00AA
+	.dw #0x0040
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x00AA
+	.dw #0x0040
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x00AA
+	.dw #0x0040
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0055
+	.dw #0x0080
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0055
+	.dw #0x0080
+	.dw #0x00AA
+	.dw #0x0040
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x00AA
+	.dw #0x0040
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0055
+	.dw #0x0080
+	.dw #0x00AA
+	.dw #0x0040
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x00AA
+	.dw #0x0040
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x0055
+	.dw #0x0080
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x00AA
+	.dw #0x0040
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x00FF
+	.dw #0x0000
+	.dw #0x00AA
+	.dw #0x0040
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.dw #0x0000
+	.dw #0x00C0
+	.area _INITIALIZER
+	.area _CABS (ABS)

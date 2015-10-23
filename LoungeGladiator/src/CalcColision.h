@@ -56,27 +56,68 @@ u8 checkCollisions(u8 pX, u8 pY, u8 eX, u8 eY, u8 atk){
     return 0;
 }
 
+
+void checkBoundsCollisions(u8 *corazon,u8 *flecha){
+ if(    scene[(player.y)/tileheight][(player.x)/tilewidth] == 1
+      || scene[(player.y)/tileheight][(player.x+tilewidth-1)/tilewidth] == 1
+      || scene[(player.y+tileheight-2)/tileheight][(player.x)/tilewidth] == 1
+      || scene[(player.y+tileheight-2)/tileheight][(player.x+tilewidth-1)/tilewidth] == 1
+    ){
+        player.x=player.lx;
+        player.y=player.ly;
+  }
+   else if(    scene[(player.y)/tileheight][(player.x)/tilewidth] == 2
+      || scene[(player.y)/tileheight][(player.x+tilewidth-1)/tilewidth] == 2
+      || scene[(player.y+tileheight-2)/tileheight][(player.x)/tilewidth] == 2
+      || scene[(player.y+tileheight-2)/tileheight][(player.x+tilewidth-1)/tilewidth] == 2
+    ){
+      if(player.life < 3 && *corazon == 0){
+        player.life += 1;
+        *corazon = 1;
+      }
+  }
+  else if(    scene[(player.y)/tileheight][(player.x)/tilewidth] == 5
+      || scene[(player.y)/tileheight][(player.x+tilewidth-1)/tilewidth] == 5
+      || scene[(player.y+tileheight-2)/tileheight][(player.x)/tilewidth] == 5
+      || scene[(player.y+tileheight-2)/tileheight][(player.x+tilewidth-1)/tilewidth] == 5
+    ){
+      if(player.bullets < 3 && *flecha == 0){
+        player.bullets += 1;
+        *flecha = 1;
+      }
+  }else if(    scene[(player.y)/tileheight][(player.x)/tilewidth] == 9
+      || scene[(player.y)/tileheight][(player.x+tilewidth-1)/tilewidth] == 9
+      || scene[(player.y+tileheight-2)/tileheight][(player.x)/tilewidth] == 9
+      || scene[(player.y+tileheight-2)/tileheight][(player.x+tilewidth-1)/tilewidth] == 9
+
+    ){
+        cpct_clearScreen(0);
+        map+=1;
+        drawMap(map);
+  }
+}
+
 u8 checkArrowCollisions(){
 
     u8 bound =0;
-        if(    scene[(parrow.y)/tileheight][(parrow.x)/tilewidth] == 1
-      || scene[(parrow.y)/tileheight][(parrow.x+tilewidth-1)/tilewidth] == 1
-      || scene[(parrow.y+6)/tileheight][(parrow.x)/tilewidth] == 1
-      || scene[(parrow.y+6)/tileheight][(parrow.x+tilewidth-1)/tilewidth] == 1
+        if(    scene[(object.y)/tileheight][(object.x)/tilewidth] == 1
+      || scene[(object.y)/tileheight][(object.x+tilewidth-1)/tilewidth] == 1
+      || scene[(object.y+6)/tileheight][(object.x)/tilewidth] == 1
+      || scene[(object.y+6)/tileheight][(object.x+tilewidth-1)/tilewidth] == 1
     ){
-        parrow.x=parrow.lx;
-        parrow.y=parrow.ly;
+        object.x=object.lx;
+        object.y=object.ly;
         bound = 1;
         return bound;
   }
 
-  if(    scene[(parrow.y)/tileheight][(parrow.x)/tilewidth] == 9
-      || scene[(parrow.y)/tileheight][(parrow.x+tilewidth-1)/tilewidth] == 9
-      || scene[(parrow.y+6)/tileheight][(parrow.x)/tilewidth] == 9
-      || scene[(parrow.y+6)/tileheight][(parrow.x+tilewidth-1)/tilewidth] == 9
+  if(    scene[(object.y)/tileheight][(object.x)/tilewidth] == 9
+      || scene[(object.y)/tileheight][(object.x+tilewidth-1)/tilewidth] == 9
+      || scene[(object.y+6)/tileheight][(object.x)/tilewidth] == 9
+      || scene[(object.y+6)/tileheight][(object.x+tilewidth-1)/tilewidth] == 9
     ){
-        parrow.x=parrow.lx;
-        parrow.y=parrow.ly;
+        object.x=object.lx;
+        object.y=object.ly;
         bound = 1;
         return bound;
   }

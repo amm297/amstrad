@@ -7,26 +7,25 @@ Symbol Table
     .__.ABS.                                                    =  0000 G
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
-  0 ___str_0                                                       1273 R
-  0 ___str_1                                                       1467 R
-  0 ___str_2                                                       1478 R
-  0 ___str_3                                                       1486 R
-  0 ___str_4                                                       148F R
-  0 ___str_5                                                       252B R
-  0 ___str_6                                                       253C R
-  0 ___str_7                                                       2552 R
+  0 ___str_0                                                       1D8F R
+  0 ___str_1                                                       1DA0 R
+  0 ___str_2                                                       1F96 R
+  0 ___str_3                                                       1FA7 R
+  0 ___str_4                                                       1FB5 R
+  0 ___str_5                                                       1FBE R
+  0 ___str_6                                                       2206 R
+  0 ___str_7                                                       2217 R
+  0 ___str_8                                                       222D R
     __modsint                                                      **** GX
-  1 _archer                                                        00F9 GR
+  1 _archer                                                        00F7 GR
   1 _arrow                                                         00F4 GR
-  1 _bound                                                         00F7 GR
-  1 _bounds                                                        00F8 GR
+  1 _bound                                                         00F6 GR
     _chacho_dcha                                                   **** GX
-  0 _checkArrowCollisions                                          0CF3 GR
-  0 _checkBoundsCollisions                                         176D GR
-  0 _checkBoundsCollisionsEnemy                                    1518 GR
-  0 _checkCollisions                                               0BD2 GR
-  0 _checkKeyboard                                                 0F3C GR
-  0 _chooseDirection                                               0989 GR
+  0 _checkArrowCollisions                                          173A GR
+  0 _checkBoundsCollisions                                         1369 GR
+  0 _checkCollisions                                               1248 GR
+  0 _checkKeyboard                                                 1983 GR
+  0 _chooseDirection                                               08ED GR
     _corazon_lleno                                                 **** GX
     _corazon_roto                                                  **** GX
     _cpct_disableFirmware                                          **** GX
@@ -36,6 +35,7 @@ Symbol Table
     _cpct_drawStringM0                                             **** GX
     _cpct_fw2hw                                                    **** GX
     _cpct_getScreenPtr                                             **** GX
+    _cpct_isAnyKeyPressed                                          **** GX
     _cpct_isKeyPressed                                             **** GX
     _cpct_memset                                                   **** GX
     _cpct_scanKeyboard                                             **** GX
@@ -43,20 +43,20 @@ Symbol Table
     _cpct_setPalette                                               **** GX
     _cpct_setVideoMode                                             **** GX
     _cpct_waitVSYNC                                                **** GX
-  0 _credits                                                       24C9 GR
-  0 _detectPlayerRoom                                              095C GR
-  0 _draw                                                          04F4 GR
-  0 _drawBullets                                                   0498 GR
-  0 _drawFatiga                                                    07CE GR
+  0 _credits                                                       21A4 GR
+  1 _dead                                                          00F8 GR
+  0 _detectPlayerRoom                                              08C0 GR
+  0 _draw                                                          04F8 GR
+  0 _drawBullets                                                   049C GR
+  0 _drawFatiga                                                    0732 GR
   0 _drawMap                                                       0000 GR
-  0 _drawPickUps                                                   08F4 GR
-  0 _drawStats                                                     05B5 GR
-  0 _drawVida                                                      0437 GR
-  0 _draws                                                         05EE GR
-  1 _earrow                                                        0104 GR
-  1 _enemy                                                         0119 GR
-  0 _erase                                                         0554 GR
-  0 _erases                                                        0711 GR
+  0 _drawPickUps                                                   0858 GR
+  0 _drawStats                                                     05B9 GR
+  0 _drawVida                                                      043B GR
+  0 _draws                                                         05F2 GR
+  1 _enemy                                                         0111 GR
+  0 _erase                                                         0558 GR
+  0 _erases                                                        06B1 GR
     _fatiga_full                                                   **** GX
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
 Hexadecimal [16-Bits]
@@ -69,11 +69,11 @@ Symbol Table
     _flecha_arriba                                                 **** GX
     _flecha_dcha                                                   **** GX
     _flecha_izda                                                   **** GX
-  0 _followPlayer                                                  1B3E GR
-  1 _following                                                     00F6 GR
+  0 _followPlayer                                                  096B GR
+  1 _following                                                     00F5 GR
   0 _g_palette                                                     024E GR
-  0 _game                                                          2281 GR
-  0 _gameOver                                                      1247 GR
+  0 _game                                                          1FC4 GR
+  0 _gameOver                                                      1D3D GR
     _gladis_abajo                                                  **** GX
     _gladis_arriba                                                 **** GX
     _gladis_atk_abajo                                              **** GX
@@ -82,36 +82,38 @@ Symbol Table
     _gladis_atk_izda                                               **** GX
     _gladis_quieto_dcha                                            **** GX
     _gladis_quieto_izda                                            **** GX
-  0 _init                                                          11B3 GR
-  0 _initEnemies                                                   120E GR
-  0 _initPlayer                                                    11D8 GR
-  0 _main                                                          256C GR
+  0 _init                                                          1C43 GR
+  0 _initEnemies                                                   1CB3 GR
+  0 _initNivel                                                     1D04 GR
+  0 _initPlayer                                                    1C68 GR
+  0 _initVariables                                                 1D14 GR
+  0 _main                                                          2247 GR
   1 _map                                                           00F1 GR
-  0 _mapa1                                                         0257 GR
-  0 _mapa2                                                         0347 GR
-  0 _menu                                                          1284 GR
-  0 _move                                                          21B4 GR
-  0 _moveObject                                                    1495 GR
-  0 _movement                                                      09F8 GR
+  0 _mapa1                                                         025B GR
+  0 _mapa2                                                         034B GR
+  0 _menu                                                          1DB6 GR
+  0 _move                                                          117B GR
+  0 _moveObject                                                    1C0E GR
+  0 _movement                                                      092B GR
     _muro                                                          **** GX
+  1 _n                                                             00F9 GR
+  1 _object                                                        00FC GR
   0 _origins                                                       0253 GR
-  1 _parrow                                                        00FA GR
   1 _path                                                          00F2 GR
-  0 _patrol                                                        0A38 GR
-  1 _player                                                        010E GR
+  0 _patrol                                                        0FE1 GR
+  1 _player                                                        0106 GR
     _rand                                                          **** GX
   1 _scene                                                         0000 GR
-  0 _setDirection                                                  09C7 GR
-  1 _shooted                                                       00F5 GR
   1 _temp                                                          00F0 GR
+
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 3.
 Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size 25A1   flags    0
-   1 _DATA                                      size  128   flags    0
+   0 _CODE                                      size 227C   flags    0
+   1 _DATA                                      size  120   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8
    4 _HOME                                      size    0   flags    0
