@@ -47,7 +47,7 @@ void gameOver(){
   memptr = cpct_getScreenPtr(VMEM,10,10);
   cpct_drawStringM0("Lounge Gladiator",memptr,1,0);
 
-    memptr = cpct_getScreenPtr(VMEM,10,30);
+    memptr = cpct_getScreenPtr(VMEM,10,50);
    cpct_drawSprite(gameover,memptr,60,28);
 
 
@@ -129,7 +129,6 @@ int menu(){
 }
 
 /*JUEGO*/
-
 void game(){
   u8 atkObj = 0;
 
@@ -173,7 +172,7 @@ void game(){
             enemy.ly = enemy.y;
         }
 
-        move();
+       move();
 
         switch(checkCollisions(player.x, player.y, enemy.x, enemy.y, player.atk)){
           case 1:
@@ -216,13 +215,17 @@ void game(){
             atkObj = 21;
         else
             atkObj = 22;
-        if(enemy.life > 0 && checkCollisions(object.x, object.y, enemy.x, enemy.y, atkObj) == 1 && bound == 0){
-            enemy.life -= 1;
-            enemy.x = enemy.ox;
-            enemy.y = enemy.oy;
-            object.vivo = 0;
-            bound = 1;
-        }
+       if(enemy.life > 0 && checkCollisions(object.x, object.y, enemy.x, enemy.y, atkObj) == 1 && bound == 0){
+         enemy.life -= 1;
+         erase(enemy.lx,enemy.ly,0);
+         enemy.x = enemy.ox;
+         enemy.y = enemy.oy;
+         enemy.lx = enemy.x;
+         enemy.ly = enemy.y;
+         enemy.pursue = 0;
+         object.vivo = 0;
+         bound = 1;
+       }
       }
       
       if(player.life == 0){
@@ -288,6 +291,8 @@ void controles(){
   
   memptr = cpct_getScreenPtr(VMEM, 13, 115); 
   cpct_drawStringM0("Esc: Menu", memptr, 2, 0); 
+  memptr = cpct_getScreenPtr(VMEM, 13, 130); 
+  cpct_drawStringM0("Disparar: X", memptr, 2, 0); 
 
   memptr = cpct_getScreenPtr(VMEM, 12, 175); 
   cpct_drawStringM0("Pulsa espacio", memptr, 1, 0); 

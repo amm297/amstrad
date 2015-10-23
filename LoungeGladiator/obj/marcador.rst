@@ -42,22 +42,22 @@
                              42 ;--------------------------------------------------------
                              43 	.area _CODE
                              44 	.area _CODE
-   769E                      45 _marcador:
-   769E 0C                   46 	.db #0x0C	; 12
-   769F 0C                   47 	.db #0x0C	; 12
-   76A0 0C                   48 	.db #0x0C	; 12
-   76A1 0C                   49 	.db #0x0C	; 12
-   76A2 0C                   50 	.db #0x0C	; 12
-   76A3 0C                   51 	.db #0x0C	; 12
-   76A4 0C                   52 	.db #0x0C	; 12
-   76A5 0C                   53 	.db #0x0C	; 12
-   76A6 0C                   54 	.db #0x0C	; 12
-   76A7 0C                   55 	.db #0x0C	; 12
-   76A8 0C                   56 	.db #0x0C	; 12
-   76A9 0C                   57 	.db #0x0C	; 12
-   76AA 0C                   58 	.db #0x0C	; 12
-   76AB 0C                   59 	.db #0x0C	; 12
-   76AC 0C                   60 	.db #0x0C	; 12
-   76AD 0C                   61 	.db #0x0C	; 12
+   7646                      45 _marcador:
+   7646 0C                   46 	.db #0x0C	; 12
+   7647 0C                   47 	.db #0x0C	; 12
+   7648 0C                   48 	.db #0x0C	; 12
+   7649 0C                   49 	.db #0x0C	; 12
+   764A 0C                   50 	.db #0x0C	; 12
+   764B 0C                   51 	.db #0x0C	; 12
+   764C 0C                   52 	.db #0x0C	; 12
+   764D 0C                   53 	.db #0x0C	; 12
+   764E 0C                   54 	.db #0x0C	; 12
+   764F 0C                   55 	.db #0x0C	; 12
+   7650 0C                   56 	.db #0x0C	; 12
+   7651 0C                   57 	.db #0x0C	; 12
+   7652 0C                   58 	.db #0x0C	; 12
+   7653 0C                   59 	.db #0x0C	; 12
+   7654 0C                   60 	.db #0x0C	; 12
+   7655 0C                   61 	.db #0x0C	; 12
                              62 	.area _INITIALIZER
                              63 	.area _CABS (ABS)
