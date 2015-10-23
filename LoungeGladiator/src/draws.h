@@ -15,8 +15,8 @@ void endGame(){
   memptr = cpct_getScreenPtr(VMEM,10,10);
   cpct_drawStringM0("Congratulations",memptr,1,0);
 
-  memptr = cpct_getScreenPtr(VMEM,2,180);
-   cpct_drawStringM0("Pulsa cualquier tecla",memptr,1,0);
+  memptr = cpct_getScreenPtr(VMEM, 12, 175); 
+  cpct_drawStringM0("Pulsa una tecla", memptr, 1, 0); 
 
   while(1){
     cpct_scanKeyboard_f();
