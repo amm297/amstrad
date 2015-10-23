@@ -176,7 +176,7 @@ void game(){
   initPlayer(map);
   initNivel();
   initEnemies(map);
-  
+
 
    cpct_clearScreen(0);
    drawMap(map);
@@ -220,14 +220,20 @@ void game(){
 
         switch(checkCollisions(player.x, player.y, enemy.x, enemy.y, player.atk)){
         case 1:
+            erase(enemy.lx,enemy.ly,0);
             enemy.x = enemy.ox;
             enemy.y = enemy.oy;
+            enemy.lx = enemy.x;
+            enemy.ly = enemy.y;
             enemy.life -= 1;
             player.atk = 20;
             break;
         case 2:
+            erase(player.lx,player.ly,0);
             player.x = 0;
             player.y = 80;
+            player.lx = 0;
+            player.ly = 80;
             player.life -= 1;
             player.atk = 20;
             enemy.pursue = 0;
@@ -238,8 +244,6 @@ void game(){
         temp = 0;
     temp += 1;
     player.latk = player.atk;
-
-
 
       //Comprobar teclado
       cpct_scanKeyboard_f();
@@ -261,11 +265,11 @@ void game(){
             bound = 1;
         }
       }
-      
+
       if(player.life == 0){
         gameOver();
         finish = 1;
-      } 
+      }
       if(finish == 1) return;
 
    }

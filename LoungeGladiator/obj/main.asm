@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
-; Version 3.5.0 #9253 (Sep 26 2015) (CYGWIN)
-; This file was generated Fri Oct 23 09:05:00 2015
+; Version 3.5.0 #9253 (Sep 22 2015) (CYGWIN)
+; This file was generated Fri Oct 23 09:22:38 2015
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mz80
@@ -5258,8 +5258,11 @@ _game::
 	pop	af
 00110$:
 ;src/main.c:208: if(temp%2 == 0){
-	ld	iy,#_temp
-	bit	0, 0 (iy)
+	ld	a,(#_temp + 0)
+;src/main.c:209: player.lx = player.x;
+;src/main.c:210: player.ly = player.y;
+;src/main.c:208: if(temp%2 == 0){
+	and	a,#0x01
 	jr	NZ,00112$
 ;src/main.c:209: player.lx = player.x;
 	ld	a, (#_player + 0)
@@ -5273,24 +5276,27 @@ _game::
 	ld	hl, #(_enemy + 0x0008) + 0
 	ld	l,(hl)
 ;src/main.c:216: enemy.ly = enemy.y;
-;src/main.c:223: enemy.x = enemy.ox;
-;src/main.c:224: enemy.y = enemy.oy;
+;src/main.c:224: enemy.x = enemy.ox;
+;src/main.c:225: enemy.y = enemy.oy;
 ;src/main.c:213: if(enemy.life > 0){
 	ld	a,l
 	or	a, a
-	jr	Z,00119$
+	jp	Z,00119$
 ;src/main.c:214: if(temp%2 == 1){
 	ld	a,(#_temp + 0)
 	and	a, #0x01
-	dec	a
+	ld	h,a
+;src/main.c:215: enemy.lx = enemy.x;
+;src/main.c:216: enemy.ly = enemy.y;
+;src/main.c:214: if(temp%2 == 1){
+	dec	h
 	jr	NZ,00114$
 ;src/main.c:215: enemy.lx = enemy.x;
 	ld	a, (#_enemy + 0)
 	ld	(#(_enemy + 0x0002)),a
 ;src/main.c:216: enemy.ly = enemy.y;
-	ld	de,#_enemy + 3
 	ld	a, (#(_enemy + 0x0001) + 0)
-	ld	(de),a
+	ld	(#(_enemy + 0x0003)),a
 00114$:
 ;src/main.c:219: move();
 	call	_move
@@ -5322,65 +5328,108 @@ _game::
 	jr	00119$
 ;src/main.c:222: case 1:
 00115$:
-;src/main.c:223: enemy.x = enemy.ox;
+;src/main.c:223: erase(enemy.lx,enemy.ly,0);
+	ld	hl, #(_enemy + 0x0003) + 0
+	ld	d,(hl)
+	ld	hl, #(_enemy + 0x0002) + 0
+	ld	b,(hl)
+	xor	a, a
+	push	af
+	inc	sp
+	push	de
+	inc	sp
+	push	bc
+	inc	sp
+	call	_erase
+	pop	af
+	inc	sp
+;src/main.c:224: enemy.x = enemy.ox;
 	ld	a, (#(_enemy + 0x0004) + 0)
 	ld	(#_enemy),a
-;src/main.c:224: enemy.y = enemy.oy;
-	ld	a, (#(_enemy + 0x0005) + 0)
-	ld	(#(_enemy + 0x0001)),a
-;src/main.c:225: enemy.life -= 1;
+;src/main.c:225: enemy.y = enemy.oy;
+	ld	hl, #(_enemy + 0x0005) + 0
+	ld	e,(hl)
+	ld	hl,#(_enemy + 0x0001)
+	ld	(hl),e
+;src/main.c:226: enemy.lx = enemy.x;
+	ld	(#(_enemy + 0x0002)),a
+;src/main.c:227: enemy.ly = enemy.y;
+	ld	hl,#(_enemy + 0x0003)
+	ld	(hl),e
+;src/main.c:228: enemy.life -= 1;
 	ld	a, (#(_enemy + 0x0008) + 0)
 	add	a,#0xFF
 	ld	(#(_enemy + 0x0008)),a
-;src/main.c:226: player.atk = 20;
+;src/main.c:229: player.atk = 20;
 	ld	hl,#(_player + 0x0008)
 	ld	(hl),#0x14
-;src/main.c:227: break;
+;src/main.c:230: break;
 	jr	00119$
-;src/main.c:228: case 2:
+;src/main.c:231: case 2:
 00116$:
-;src/main.c:229: player.x = 0;
+;src/main.c:232: erase(player.lx,player.ly,0);
+	ld	hl, #(_player + 0x0003) + 0
+	ld	d,(hl)
+	ld	hl, #(_player + 0x0002) + 0
+	ld	b,(hl)
+	xor	a, a
+	push	af
+	inc	sp
+	push	de
+	inc	sp
+	push	bc
+	inc	sp
+	call	_erase
+	pop	af
+	inc	sp
+;src/main.c:233: player.x = 0;
 	ld	hl,#_player
 	ld	(hl),#0x00
-;src/main.c:230: player.y = 80;
+;src/main.c:234: player.y = 80;
 	ld	hl,#(_player + 0x0001)
 	ld	(hl),#0x50
-;src/main.c:231: player.life -= 1;
+;src/main.c:235: player.lx = 0;
+	ld	hl,#(_player + 0x0002)
+	ld	(hl),#0x00
+;src/main.c:236: player.ly = 80;
+	ld	hl,#(_player + 0x0003)
+	ld	(hl),#0x50
+;src/main.c:237: player.life -= 1;
 	ld	a, (#(_player + 0x0006) + 0)
 	add	a,#0xFF
 	ld	(#(_player + 0x0006)),a
-;src/main.c:232: player.atk = 20;
+;src/main.c:238: player.atk = 20;
 	ld	hl,#(_player + 0x0008)
 	ld	(hl),#0x14
-;src/main.c:233: enemy.pursue = 0;
+;src/main.c:239: enemy.pursue = 0;
 	ld	hl,#_enemy + 14
 	ld	(hl),#0x00
-;src/main.c:235: }
+;src/main.c:241: }
 00119$:
-;src/main.c:237: if(temp > 10)
+;src/main.c:243: if(temp > 10)
 	ld	a,#0x0A
 	ld	iy,#_temp
 	sub	a, 0 (iy)
 	jr	NC,00121$
-;src/main.c:238: temp = 0;
+;src/main.c:244: temp = 0;
 	ld	iy,#_temp
 	ld	0 (iy),#0x00
 00121$:
-;src/main.c:239: temp += 1;
+;src/main.c:245: temp += 1;
 	ld	iy,#_temp
 	inc	0 (iy)
-;src/main.c:240: player.latk = player.atk;
+;src/main.c:246: player.latk = player.atk;
 	ld	de,#_player + 9
 	ld	a, (#(_player + 0x0008) + 0)
 	ld	(de),a
-;src/main.c:245: cpct_scanKeyboard_f();
+;src/main.c:249: cpct_scanKeyboard_f();
 	call	_cpct_scanKeyboard_f
-;src/main.c:246: player.sprite = checkKeyboard();
+;src/main.c:250: player.sprite = checkKeyboard();
 	call	_checkKeyboard
 	ld	e,l
 	ld	d,h
 	ld	((_player + 0x0004)), de
-;src/main.c:247: checkBoundsCollisions(&n.corazon,&n.bullet);
+;src/main.c:251: checkBoundsCollisions(&n.corazon,&n.bullet);
 	ld	hl,#(_n + 0x0002)
 	ld	de,#(_n + 0x0001)
 	push	hl
@@ -5388,17 +5437,17 @@ _game::
 	call	_checkBoundsCollisions
 	pop	af
 	pop	af
-;src/main.c:249: if(arrow == 1){
+;src/main.c:253: if(arrow == 1){
 	ld	a,(#_arrow + 0)
 	dec	a
 	jr	NZ,00131$
-;src/main.c:250: moveObject();
+;src/main.c:254: moveObject();
 	call	_moveObject
-;src/main.c:251: bound = checkArrowCollisions();
+;src/main.c:255: bound = checkArrowCollisions();
 	call	_checkArrowCollisions
 	ld	iy,#_bound
 	ld	0 (iy),l
-;src/main.c:252: if(object.dir == 2 || object.dir == 8)
+;src/main.c:256: if(object.dir == 2 || object.dir == 8)
 	ld	hl, #_object + 7
 	ld	a, (hl)
 	cp	a,#0x02
@@ -5406,14 +5455,14 @@ _game::
 	sub	a, #0x08
 	jr	NZ,00123$
 00122$:
-;src/main.c:253: atkObj = 21;
+;src/main.c:257: atkObj = 21;
 	ld	b,#0x15
 	jr	00124$
 00123$:
-;src/main.c:255: atkObj = 22;
+;src/main.c:259: atkObj = 22;
 	ld	b,#0x16
 00124$:
-;src/main.c:256: if(enemy.life > 0 && checkCollisions(object.x, object.y, enemy.x, enemy.y, atkObj) == 1 && bound == 0){
+;src/main.c:260: if(enemy.life > 0 && checkCollisions(object.x, object.y, enemy.x, enemy.y, atkObj) == 1 && bound == 0){
 	ld	a, (#(_enemy + 0x0008) + 0)
 	or	a, a
 	jr	Z,00131$
@@ -5445,44 +5494,44 @@ _game::
 	ld	a,(#_bound + 0)
 	or	a, a
 	jr	NZ,00131$
-;src/main.c:257: enemy.life -= 1;
+;src/main.c:261: enemy.life -= 1;
 	ld	a, (#(_enemy + 0x0008) + 0)
 	add	a,#0xFF
 	ld	(#(_enemy + 0x0008)),a
-;src/main.c:258: enemy.x = enemy.ox;
+;src/main.c:262: enemy.x = enemy.ox;
 	ld	a, (#(_enemy + 0x0004) + 0)
 	ld	(#_enemy),a
-;src/main.c:259: enemy.y = enemy.oy;
+;src/main.c:263: enemy.y = enemy.oy;
 	ld	a, (#(_enemy + 0x0005) + 0)
 	ld	(#(_enemy + 0x0001)),a
-;src/main.c:260: object.vivo = 0;
+;src/main.c:264: object.vivo = 0;
 	ld	hl,#_object + 6
 	ld	(hl),#0x00
-;src/main.c:261: bound = 1;
+;src/main.c:265: bound = 1;
 	ld	iy,#_bound
 	ld	0 (iy),#0x01
 00131$:
-;src/main.c:265: if(player.life == 0){
+;src/main.c:269: if(player.life == 0){
 	ld	a, (#(_player + 0x0006) + 0)
 	or	a, a
 	jr	NZ,00133$
-;src/main.c:266: gameOver();
+;src/main.c:270: gameOver();
 	call	_gameOver
-;src/main.c:267: finish = 1;
+;src/main.c:271: finish = 1;
 	ld	hl,#_finish + 0
 	ld	(hl), #0x01
 00133$:
-;src/main.c:269: if(finish == 1) return;
+;src/main.c:273: if(finish == 1) return;
 	ld	a,(#_finish + 0)
 	dec	a
 	jp	NZ,00137$
 	ret
-;src/main.c:276: void credits(){
+;src/main.c:280: void credits(){
 ;	---------------------------------
 ; Function credits
 ; ---------------------------------
 _credits::
-;src/main.c:278: cpct_clearScreen(0);
+;src/main.c:282: cpct_clearScreen(0);
 	ld	hl,#0x4000
 	push	hl
 	xor	a, a
@@ -5491,13 +5540,13 @@ _credits::
 	ld	h, #0xC0
 	push	hl
 	call	_cpct_memset
-;src/main.c:279: memptr = cpct_getScreenPtr(VMEM,10,10);
+;src/main.c:283: memptr = cpct_getScreenPtr(VMEM,10,10);
 	ld	hl,#0x0A0A
 	push	hl
 	ld	hl,#0xC000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:280: cpct_drawStringM0("Lounge Gladiator",memptr,1,0);
+;src/main.c:284: cpct_drawStringM0("Lounge Gladiator",memptr,1,0);
 	ex	de,hl
 	ld	bc,#___str_6
 	push	de
@@ -5510,13 +5559,13 @@ _credits::
 	add	hl,sp
 	ld	sp,hl
 	pop	de
-;src/main.c:282: while (1){
+;src/main.c:286: while (1){
 00104$:
-;src/main.c:284: cpct_scanKeyboard_f();
+;src/main.c:288: cpct_scanKeyboard_f();
 	push	de
 	call	_cpct_scanKeyboard_f
 	pop	de
-;src/main.c:285: cpct_drawStringM0("Josep Domenech Mingot",memptr,1,0);
+;src/main.c:289: cpct_drawStringM0("Josep Domenech Mingot",memptr,1,0);
 	ld	bc,#___str_7
 	push	de
 	ld	hl,#0x0001
@@ -5528,7 +5577,7 @@ _credits::
 	add	hl,sp
 	ld	sp,hl
 	pop	de
-;src/main.c:286: cpct_drawStringM0("Alberto Martinez Martinez",memptr,1,0);
+;src/main.c:290: cpct_drawStringM0("Alberto Martinez Martinez",memptr,1,0);
 	ld	bc,#___str_8
 	push	de
 	ld	hl,#0x0001
@@ -5545,7 +5594,7 @@ _credits::
 	pop	de
 	or	a, a
 	jr	Z,00104$
-;src/main.c:290: return;
+;src/main.c:294: return;
 	ret
 ___str_6:
 	.ascii "Lounge Gladiator"
@@ -5556,20 +5605,20 @@ ___str_7:
 ___str_8:
 	.ascii "Alberto Martinez Martinez"
 	.db 0x00
-;src/main.c:300: void main(void) {
+;src/main.c:304: void main(void) {
 ;	---------------------------------
 ; Function main
 ; ---------------------------------
 _main::
-;src/main.c:304: init();
+;src/main.c:308: init();
 	call	_init
-;src/main.c:307: while(1){
+;src/main.c:311: while(1){
 00106$:
-;src/main.c:308: x=menu();
+;src/main.c:312: x=menu();
 	call	_menu
 	ld	e, l
 	ld	d, h
-;src/main.c:309: switch(x){
+;src/main.c:313: switch(x){
 	bit	7, d
 	jr	NZ,00106$
 	ld	a,#0x02
@@ -5584,8 +5633,8 @@ _main::
 	ld	hl,#00123$
 	add	hl,de
 	add	hl,de
-;src/main.c:310: case 0: return;break;
-;src/main.c:311: case 1: game(); break;
+;src/main.c:314: case 0: return;break;
+;src/main.c:315: case 1: game(); break;
 	jp	(hl)
 00123$:
 	jr	00108$
@@ -5595,10 +5644,10 @@ _main::
 00102$:
 	call	_game
 	jr	00106$
-;src/main.c:312: case 2: credits();break;
+;src/main.c:316: case 2: credits();break;
 00103$:
 	call	_credits
-;src/main.c:313: }
+;src/main.c:317: }
 	jr	00106$
 00108$:
 	ret

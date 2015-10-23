@@ -13,9 +13,9 @@ Symbol Table
   0 ___str_3                                                       1FA7 R
   0 ___str_4                                                       1FB5 R
   0 ___str_5                                                       1FBE R
-  0 ___str_6                                                       2206 R
-  0 ___str_7                                                       2217 R
-  0 ___str_8                                                       222D R
+  0 ___str_6                                                       223F R
+  0 ___str_7                                                       2250 R
+  0 ___str_8                                                       2266 R
     __modsint                                                      **** GX
   1 _archer                                                        00F7 GR
   1 _arrow                                                         00F4 GR
@@ -43,7 +43,7 @@ Symbol Table
     _cpct_setPalette                                               **** GX
     _cpct_setVideoMode                                             **** GX
     _cpct_waitVSYNC                                                **** GX
-  0 _credits                                                       21A4 GR
+  0 _credits                                                       21DD GR
   1 _dead                                                          00F8 GR
   0 _detectPlayerRoom                                              08C0 GR
   0 _draw                                                          04F8 GR
@@ -87,7 +87,7 @@ Symbol Table
   0 _initNivel                                                     1D04 GR
   0 _initPlayer                                                    1C68 GR
   0 _initVariables                                                 1D14 GR
-  0 _main                                                          2247 GR
+  0 _main                                                          2280 GR
   1 _map                                                           00F1 GR
   0 _mapa1                                                         025B GR
   0 _mapa2                                                         034B GR
@@ -112,7 +112,7 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size 227C   flags    0
+   0 _CODE                                      size 22B5   flags    0
    1 _DATA                                      size  120   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8
