@@ -9,35 +9,35 @@ Symbol Table
     .__.H$L.                                                    =  0000 L
   0 ___str_0                                                       03B8 R
   0 ___str_1                                                       03C8 R
-  0 ___str_10                                                      293A R
-  0 ___str_11                                                      294B R
-  0 ___str_12                                                      2954 R
-  0 ___str_13                                                      2963 R
-  0 ___str_14                                                      296A R
-  0 ___str_15                                                      2A24 R
-  0 ___str_16                                                      2A2F R
-  0 ___str_17                                                      2A3C R
-  0 ___str_18                                                      2A44 R
-  0 ___str_19                                                      2A4E R
-  0 ___str_2                                                       2341 R
-  0 ___str_3                                                       2352 R
-  0 ___str_4                                                       258A R
-  0 ___str_5                                                       2598 R
-  0 ___str_6                                                       25A1 R
-  0 ___str_7                                                       25AC R
-  0 ___str_8                                                       2924 R
-  0 ___str_9                                                       2930 R
+  0 ___str_10                                                      296F R
+  0 ___str_11                                                      2980 R
+  0 ___str_12                                                      2989 R
+  0 ___str_13                                                      2998 R
+  0 ___str_14                                                      299F R
+  0 ___str_15                                                      2A59 R
+  0 ___str_16                                                      2A64 R
+  0 ___str_17                                                      2A71 R
+  0 ___str_18                                                      2A79 R
+  0 ___str_19                                                      2A83 R
+  0 ___str_2                                                       2356 R
+  0 ___str_3                                                       2367 R
+  0 ___str_4                                                       259F R
+  0 ___str_5                                                       25AD R
+  0 ___str_6                                                       25B6 R
+  0 ___str_7                                                       25C1 R
+  0 ___str_8                                                       2959 R
+  0 ___str_9                                                       2965 R
     __modsint                                                      **** GX
   1 _archer                                                        00F7 GR
   1 _arrow                                                         00F4 GR
   1 _bound                                                         00F6 GR
     _chacho_dcha                                                   **** GX
-  0 _checkArrowCollisions                                          1DF5 GR
-  0 _checkBoundsCollisions                                         16ED GR
-  0 _checkCollisions                                               15CC GR
-  0 _checkKeyboard                                                 203E GR
+  0 _checkArrowCollisions                                          1E0A GR
+  0 _checkBoundsCollisions                                         1702 GR
+  0 _checkCollisions                                               15E1 GR
+  0 _checkKeyboard                                                 2053 GR
   0 _chooseDirection                                               0C86 GR
-  0 _controles                                                     2978 GR
+  0 _controles                                                     29AD GR
     _corazon_lleno                                                 **** GX
     _corazon_roto                                                  **** GX
     _cpct_disableFirmware                                          **** GX
@@ -55,7 +55,7 @@ Symbol Table
     _cpct_setPalette                                               **** GX
     _cpct_setVideoMode                                             **** GX
     _cpct_waitVSYNC                                                **** GX
-  0 _credits                                                       283E GR
+  0 _credits                                                       2873 GR
   1 _dead                                                          00F8 GR
   0 _detectPlayerRoom                                              0C59 GR
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
@@ -87,8 +87,8 @@ Symbol Table
   0 _g_palette                                                     0025 GR
     _g_tile_puerta_0                                               **** GX
     _g_tile_puerta_1                                               **** GX
-  0 _game                                                          25B2 GR
-  0 _gameOver                                                      22EF GR
+  0 _game                                                          25C7 GR
+  0 _gameOver                                                      2304 GR
     _gladis_abajo                                                  **** GX
     _gladis_arriba                                                 **** GX
     _gladis_atk_abajo                                              **** GX
@@ -102,15 +102,15 @@ Symbol Table
   0 _initNivel                                                     0327 GR
   0 _initPlayer                                                    0239 GR
   0 _initVariables                                                 0337 GR
-  0 _main                                                          2A5C GR
+  0 _main                                                          2A91 GR
   1 _map                                                           00F1 GR
   0 _mapSelector                                                   0407 GR
   0 _mapa1                                                         0059 GR
   0 _mapa2                                                         0149 GR
     _marcador                                                      **** GX
-  0 _menu                                                          2368 GR
+  0 _menu                                                          237D GR
   0 _move                                                          1514 GR
-  0 _moveObject                                                    22BA GR
+  0 _moveObject                                                    22CF GR
   0 _movement                                                      0CC4 GR
     _muro                                                          **** GX
   1 _n                                                             00F9 GR
@@ -139,7 +139,7 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size 2A98   flags    0
+   0 _CODE                                      size 2ACD   flags    0
    1 _DATA                                      size  120   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8

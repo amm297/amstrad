@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
-; Version 3.5.0 #9253 (Sep 26 2015) (CYGWIN)
-; This file was generated Fri Oct 23 14:03:17 2015
+; Version 3.5.0 #9253 (Sep 22 2015) (CYGWIN)
+; This file was generated Fri Oct 23 16:55:16 2015
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mz80
@@ -858,7 +858,7 @@ _initEnemies::
 ;src/init.h:54: enemy.sprite = sprite;
 	ld	hl,#_chacho_dcha
 	ld	((_enemy + 0x0006)), hl
-;src/init.h:55: enemy.life = 1;//p;
+;src/init.h:55: enemy.life = 1;
 	ld	hl,#_enemy + 8
 	ld	(hl),#0x01
 ;src/init.h:56: enemy.dir = 6;
@@ -3555,12 +3555,12 @@ _move::
 	sub	a, 0 (iy)
 	jr	NC,00117$
 ;src/ia.h:111: following = detectPlayerRoom(player.x,player.y);
-	ld	hl, #_player + 1
+	ld	a, (#_player + 1)
+	ld	hl, #_player + 0
 	ld	d,(hl)
-	ld	a, (#_player + 0)
-	push	de
-	inc	sp
 	push	af
+	inc	sp
+	push	de
 	inc	sp
 	call	_detectPlayerRoom
 	pop	af
@@ -3568,34 +3568,34 @@ _move::
 	ld	0 (iy),l
 ;src/ia.h:112: if(following == enemy.room || enemy.pursue != 0){
 	ld	hl, #_enemy + 10
-	ld	c,(hl)
-	ld	de,#_enemy + 13
-	ld	a,(de)
-	ld	b,a
+	ld	d,(hl)
+	ld	bc,#_enemy + 13
+	ld	a,(bc)
+	ld	e,a
 	ld	a,(#_following + 0)
-	sub	a, c
+	sub	a, d
 	jr	Z,00106$
-	ld	a,b
+	ld	a,e
 	or	a, a
 	jr	Z,00107$
 00106$:
 ;src/ia.h:113: if(enemy.pursue == 0)
-	ld	a,b
+	ld	a,e
 	or	a, a
 	jr	NZ,00104$
 ;src/ia.h:114: enemy.pursue = 4;
 	ld	a,#0x04
-	ld	(de),a
+	ld	(bc),a
 	jr	00118$
 00104$:
 ;src/ia.h:115: else if(enemy.pursue > 1)
 	ld	a,#0x01
-	sub	a, b
+	sub	a, e
 	jr	NC,00118$
 ;src/ia.h:116: enemy.pursue -=1;
-	dec	b
-	ld	a,b
-	ld	(de),a
+	dec	e
+	ld	a,e
+	ld	(bc),a
 	jr	00118$
 00107$:
 ;src/ia.h:118: enemy.dir = chooseDirection();
@@ -3605,32 +3605,29 @@ _move::
 	jr	00118$
 00117$:
 ;src/ia.h:121: if(enemy.pursue >= 1){
-	ld	de,#_enemy + 13
-	ld	a,(de)
+	ld	a,(#(_enemy + 0x000d) + 0)
 	sub	a, #0x01
 	jr	C,00114$
 ;src/ia.h:122: followPlayer();
-	push	de
 	call	_followPlayer
-	pop	de
 ;src/ia.h:123: if(enemy.seenX == enemy.x && enemy.seenY == enemy.y)
 	ld	hl, #_enemy + 11
-	ld	b,(hl)
+	ld	d,(hl)
 	ld	hl, #_enemy + 0
-	ld	c,(hl)
-	ld	a,b
-	sub	a, c
+	ld	e,(hl)
+	ld	a,d
+	sub	a, e
 	jr	NZ,00118$
 	ld	hl, #_enemy + 12
-	ld	b,(hl)
+	ld	d,(hl)
 	ld	hl, #_enemy + 1
-	ld	c,(hl)
-	ld	a,b
-	sub	a, c
+	ld	e,(hl)
+	ld	a,d
+	sub	a, e
 	jr	NZ,00118$
 ;src/ia.h:124: enemy.pursue = 0;
-	xor	a, a
-	ld	(de),a
+	ld	hl,#(_enemy + 0x000d)
+	ld	(hl),#0x00
 	jr	00118$
 00114$:
 ;src/ia.h:126: patrol();
@@ -3647,13 +3644,13 @@ _move::
 	call	_detectPlayerRoom
 	pop	af
 	ld	d,l
-	ld	hl, #(_player + 0x0001) + 0
+	ld	a, (#(_player + 0x0001) + 0)
+	ld	hl, #_player + 0
 	ld	b,(hl)
-	ld	a, (#_player + 0)
 	push	de
-	push	bc
-	inc	sp
 	push	af
+	inc	sp
+	push	bc
 	inc	sp
 	call	_detectPlayerRoom
 	pop	af
@@ -3666,15 +3663,29 @@ _move::
 	ld	h,(hl)
 	ld	a,#0x01
 	sub	a, h
-	ret	NC
+	jr	NC,00120$
 00119$:
 ;src/ia.h:130: enemy.seenX = player.x;
+	ld	de,#_enemy + 11
 	ld	a, (#_player + 0)
-	ld	hl,#(_enemy + 0x000b)
-	ld	(hl),a
+	ld	(de),a
 ;src/ia.h:131: enemy.seenY = player.y;
+	ld	de,#_enemy + 12
 	ld	a, (#(_player + 0x0001) + 0)
-	ld	(#(_enemy + 0x000c)),a
+	ld	(de),a
+00120$:
+;src/ia.h:133: enemy.room = detectPlayerRoom(enemy.x,enemy.y);
+	ld	a, (#_enemy + 1)
+	ld	hl, #_enemy + 0
+	ld	d,(hl)
+	push	af
+	inc	sp
+	push	de
+	inc	sp
+	call	_detectPlayerRoom
+	pop	af
+	ld	a,l
+	ld	(#(_enemy + 0x000a)),a
 	ret
 ;src/CalcColision.h:7: u8 checkCollisions(u8 pX, u8 pY, u8 eX, u8 eY, u8 atk){
 ;	---------------------------------
@@ -3698,61 +3709,60 @@ _checkCollisions::
 ;src/CalcColision.h:15: case 21:
 00101$:
 ;src/CalcColision.h:16: auxX = 2;
-	ld	e,#0x02
 ;src/CalcColision.h:17: auxY = 8;
-	ld	c,#0x08
+	ld	hl,#0x0802
 ;src/CalcColision.h:18: break;
 	jr	00104$
 ;src/CalcColision.h:19: case 22:
 00102$:
 ;src/CalcColision.h:20: auxX = 4;
-	ld	e,#0x04
 ;src/CalcColision.h:21: auxY = 4;
-	ld	c,#0x04
+	ld	hl,#0x0404
 ;src/CalcColision.h:22: break;
 	jr	00104$
 ;src/CalcColision.h:23: default:
 00103$:
 ;src/CalcColision.h:24: auxX = tilewidth;
-	ld	e,#0x04
 ;src/CalcColision.h:25: auxY = tileheight;
-	ld	c,#0x10
+	ld	hl,#0x1004
 ;src/CalcColision.h:26: }
 00104$:
 ;src/CalcColision.h:27: popX = pX + auxX;
 	ld	a,4 (ix)
-	add	a, e
+	add	a, l
 	ld	l,a
 ;src/CalcColision.h:28: popY = pY + auxY;
 	ld	a,5 (ix)
-	add	a, c
+	add	a, h
 	ld	-6 (ix),a
-;src/CalcColision.h:29: eopX = eX + auxX;
-	ld	a,6 (ix)
-	add	a, e
-	ld	e,a
-;src/CalcColision.h:30: eopY = eY + auxY;
+;src/CalcColision.h:29: eopX = eX + 4;
+	ld	e,6 (ix)
+	inc	e
+	inc	e
+	inc	e
+	inc	e
+;src/CalcColision.h:30: eopY = eY + 16;
 	ld	a,7 (ix)
-	add	a, c
+	add	a, #0x10
 	ld	-5 (ix),a
-;src/CalcColision.h:32: if(eopX >= pX && eopX <= popX && eY >= pY && eY <= popY)
+;src/CalcColision.h:32: if(eopX >= pX && eopX <= popX && eY <= pY && eY >= popY)
 	ld	a,e
 	sub	a, 4 (ix)
 	ld	a,#0x00
 	rla
-	ld	-4 (ix),a
+	ld	-2 (ix),a
 	ld	a,l
 	sub	a, e
 	ld	a,#0x00
 	rla
-	ld	-3 (ix),a
-	ld	a,7 (ix)
-	sub	a, 5 (ix)
+	ld	-4 (ix),a
+	ld	a,5 (ix)
+	sub	a, 7 (ix)
 	ld	a,#0x00
 	rla
 	ld	e,a
-	ld	a,-6 (ix)
-	sub	a, 7 (ix)
+	ld	a,7 (ix)
+	sub	a, -6 (ix)
 	ld	a,#0x00
 	rla
 	ld	c,a
@@ -3761,12 +3771,12 @@ _checkCollisions::
 	sub	a, #0x15
 	ld	a,#0x00
 	rla
-	ld	-1 (ix),a
-;src/CalcColision.h:32: if(eopX >= pX && eopX <= popX && eY >= pY && eY <= popY)
-	ld	a,-4 (ix)
+	ld	-3 (ix),a
+;src/CalcColision.h:32: if(eopX >= pX && eopX <= popX && eY <= pY && eY >= popY)
+	ld	a,-2 (ix)
 	or	a, a
 	jr	NZ,00109$
-	ld	a,-3 (ix)
+	ld	a,-4 (ix)
 	or	a,a
 	jr	NZ,00109$
 	or	a,e
@@ -3774,7 +3784,7 @@ _checkCollisions::
 	or	a,c
 	jr	NZ,00109$
 ;src/CalcColision.h:33: if(atk >= 21)
-	ld	a,-1 (ix)
+	ld	a,-3 (ix)
 	or	a, a
 	jr	NZ,00106$
 ;src/CalcColision.h:34: return 1;
@@ -3785,18 +3795,18 @@ _checkCollisions::
 	ld	l,#0x02
 	jp	00137$
 00109$:
-;src/CalcColision.h:38: if(eX >= pX && eX <= popX && eY >= pY && eY <= popY)
+;src/CalcColision.h:38: if(eX >= pX && eX <= popX && eY <= pY && eY >= popY)
 	ld	a,6 (ix)
 	sub	a, 4 (ix)
 	ld	a,#0x00
 	rla
-	ld	-2 (ix),a
+	ld	-1 (ix),a
 	ld	a,l
 	sub	a, 6 (ix)
 	ld	a,#0x00
 	rla
 	ld	l,a
-	ld	a,-2 (ix)
+	ld	a,-1 (ix)
 	or	a,a
 	jr	NZ,00117$
 	or	a,l
@@ -3806,7 +3816,7 @@ _checkCollisions::
 	or	a,c
 	jr	NZ,00117$
 ;src/CalcColision.h:39: if(atk >= 21)
-	ld	a,-1 (ix)
+	ld	a,-3 (ix)
 	or	a, a
 	jr	NZ,00114$
 ;src/CalcColision.h:40: return 1;
@@ -3817,18 +3827,18 @@ _checkCollisions::
 	ld	l,#0x02
 	jr	00137$
 00117$:
-;src/CalcColision.h:44: if(eX >= pX && eX <= popX && eopY >= pY && eopY <= popY)
-	ld	a,-5 (ix)
-	sub	a, 5 (ix)
-	ld	a,#0x00
-	rla
-	ld	e,a
-	ld	a,-6 (ix)
+;src/CalcColision.h:44: if(eX >= pX && eX <= popX && eopY <= pY && eopY >= popY)
+	ld	a,5 (ix)
 	sub	a, -5 (ix)
 	ld	a,#0x00
 	rla
+	ld	e,a
+	ld	a,-5 (ix)
+	sub	a, -6 (ix)
+	ld	a,#0x00
+	rla
 	ld	h,a
-	ld	a,-2 (ix)
+	ld	a,-1 (ix)
 	or	a,a
 	jr	NZ,00125$
 	or	a,l
@@ -3838,7 +3848,7 @@ _checkCollisions::
 	or	a,h
 	jr	NZ,00125$
 ;src/CalcColision.h:45: if(atk >= 21)
-	ld	a,-1 (ix)
+	ld	a,-3 (ix)
 	or	a, a
 	jr	NZ,00122$
 ;src/CalcColision.h:46: return 1;
@@ -3849,11 +3859,11 @@ _checkCollisions::
 	ld	l,#0x02
 	jr	00137$
 00125$:
-;src/CalcColision.h:50: if(eopX >= pX && eopX <= popX && eopY >= pY && eopY <= popY)
-	ld	a,-4 (ix)
+;src/CalcColision.h:50: if(eopX >= pX && eopX <= popX && eopY <= pY && eopY >= popY)
+	ld	a,-2 (ix)
 	or	a, a
 	jr	NZ,00133$
-	ld	a,-3 (ix)
+	ld	a,-4 (ix)
 	or	a,a
 	jr	NZ,00133$
 	or	a,e
@@ -3861,7 +3871,7 @@ _checkCollisions::
 	or	a,h
 	jr	NZ,00133$
 ;src/CalcColision.h:51: if(atk >= 21)
-	ld	a,-1 (ix)
+	ld	a,-3 (ix)
 	or	a, a
 	jr	NZ,00130$
 ;src/CalcColision.h:52: return 1;
@@ -5981,9 +5991,11 @@ _game::
 ;src/main.c:158: if(enemy.life > 0){
 	ld	hl, #(_enemy + 0x0008) + 0
 	ld	l,(hl)
+;src/main.c:160: enemy.lx = enemy.x;
 ;src/main.c:161: enemy.ly = enemy.y;
 ;src/main.c:169: enemy.x = enemy.ox;
 ;src/main.c:170: enemy.y = enemy.oy;
+;src/main.c:177: enemy.pursue = 0;
 ;src/main.c:158: if(enemy.life > 0){
 	ld	a,l
 	or	a, a
@@ -5991,11 +6003,7 @@ _game::
 ;src/main.c:159: if(temp%2 == 1){
 	ld	a,(#_temp + 0)
 	and	a, #0x01
-	ld	h,a
-;src/main.c:160: enemy.lx = enemy.x;
-;src/main.c:161: enemy.ly = enemy.y;
-;src/main.c:159: if(temp%2 == 1){
-	dec	h
+	dec	a
 	jr	NZ,00116$
 ;src/main.c:160: enemy.lx = enemy.x;
 	ld	a, (#_enemy + 0)
@@ -6025,8 +6033,6 @@ _game::
 	pop	af
 	pop	af
 	inc	sp
-;src/main.c:177: enemy.pursue = 0;
-;src/main.c:166: switch(checkCollisions(player.x, player.y, enemy.x, enemy.y, player.atk)){
 	ld	a,l
 	dec	a
 	jr	Z,00117$
@@ -6056,14 +6062,14 @@ _game::
 	ld	(#_enemy),a
 ;src/main.c:170: enemy.y = enemy.oy;
 	ld	hl, #(_enemy + 0x0005) + 0
-	ld	e,(hl)
+	ld	d,(hl)
 	ld	hl,#(_enemy + 0x0001)
-	ld	(hl),e
+	ld	(hl),d
 ;src/main.c:171: enemy.lx = enemy.x;
 	ld	(#(_enemy + 0x0002)),a
 ;src/main.c:172: enemy.ly = enemy.y;
 	ld	hl,#(_enemy + 0x0003)
-	ld	(hl),e
+	ld	(hl),d
 ;src/main.c:173: enemy.ox = originse[map-1][4];
 	ld	hl,#_map + 0
 	ld	d, (hl)
@@ -6220,7 +6226,7 @@ _game::
 ;src/main.c:200: if(arrow == 1){
 	ld	a,(#_arrow + 0)
 	dec	a
-	jr	NZ,00133$
+	jp	NZ,00133$
 ;src/main.c:201: moveObject();
 	call	_moveObject
 ;src/main.c:202: bound = checkArrowCollisions();
@@ -6278,35 +6284,58 @@ _game::
 	ld	a, (#(_enemy + 0x0008) + 0)
 	add	a,#0xFF
 	ld	(#(_enemy + 0x0008)),a
-;src/main.c:209: enemy.x = enemy.ox;
-	ld	a, (#(_enemy + 0x0004) + 0)
-	ld	(#_enemy),a
-;src/main.c:210: enemy.y = enemy.oy;
+;src/main.c:209: erase(enemy.lx,enemy.ly,0);
+	ld	hl, #(_enemy + 0x0003) + 0
+	ld	b,(hl)
+	ld	hl, #(_enemy + 0x0002) + 0
+	ld	d,(hl)
+	xor	a, a
+	push	af
+	inc	sp
+	ld	c, d
+	push	bc
+	call	_erase
+	pop	af
+	inc	sp
+;src/main.c:210: enemy.x = enemy.ox;
+	ld	hl, #(_enemy + 0x0004) + 0
+	ld	d,(hl)
+	ld	hl,#_enemy
+	ld	(hl),d
+;src/main.c:211: enemy.y = enemy.oy;
 	ld	a, (#(_enemy + 0x0005) + 0)
 	ld	(#(_enemy + 0x0001)),a
-;src/main.c:211: object.vivo = 0;
+;src/main.c:212: enemy.lx = enemy.x;
+	ld	hl,#(_enemy + 0x0002)
+	ld	(hl),d
+;src/main.c:213: enemy.ly = enemy.y;
+	ld	(#(_enemy + 0x0003)),a
+;src/main.c:214: enemy.pursue = 0;
+	ld	hl,#(_enemy + 0x000d)
+	ld	(hl),#0x00
+;src/main.c:215: object.vivo = 0;
 	ld	hl,#_object + 6
 	ld	(hl),#0x00
-;src/main.c:212: bound = 1;
+;src/main.c:216: bound = 1;
 	ld	iy,#_bound
 	ld	0 (iy),#0x01
 00133$:
-;src/main.c:216: if(player.life == 0){
+;src/main.c:220: if(player.life == 0){
 	ld	a, (#(_player + 0x0006) + 0)
 	or	a, a
 	jp	NZ,00137$
-;src/main.c:217: gameOver();
+;src/main.c:221: gameOver();
 	call	_gameOver
-;src/main.c:218: finish = 1;
+;src/main.c:222: finish = 1;
 	ld	hl,#_finish + 0
 	ld	(hl), #0x01
 	jp	00137$
-;src/main.c:227: void credits(){
+;src/main.c:231: void credits(){
 ;	---------------------------------
 ; Function credits
 ; ---------------------------------
 _credits::
-;src/main.c:229: cpct_clearScreen(0);
+;src/main.c:233: cpct_clearScreen(0);
 	ld	hl,#0x4000
 	push	hl
 	xor	a, a
@@ -6315,13 +6344,13 @@ _credits::
 	ld	h, #0xC0
 	push	hl
 	call	_cpct_memset
-;src/main.c:231: memptr = cpct_getScreenPtr(VMEM, 18, 30); 
+;src/main.c:235: memptr = cpct_getScreenPtr(VMEM, 18, 30);
 	ld	hl,#0x1E12
 	push	hl
 	ld	hl,#0xC000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:232: cpct_drawStringM0("Grupo Pyxis", memptr, 1, 0); 
+;src/main.c:236: cpct_drawStringM0("Grupo Pyxis", memptr, 1, 0);
 	ex	de,hl
 	ld	bc,#___str_8+0
 	ld	hl,#0x0001
@@ -6332,13 +6361,13 @@ _credits::
 	ld	hl,#6
 	add	hl,sp
 	ld	sp,hl
-;src/main.c:234: memptr = cpct_getScreenPtr(VMEM, 23, 60); 
+;src/main.c:238: memptr = cpct_getScreenPtr(VMEM, 23, 60);
 	ld	hl,#0x3C17
 	push	hl
 	ld	hl,#0xC000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:235: cpct_drawStringM0("Miembros:", memptr, 1, 0); 
+;src/main.c:239: cpct_drawStringM0("Miembros:", memptr, 1, 0);
 	ex	de,hl
 	ld	bc,#___str_9+0
 	ld	hl,#0x0001
@@ -6349,13 +6378,13 @@ _credits::
 	ld	hl,#6
 	add	hl,sp
 	ld	sp,hl
-;src/main.c:237: memptr = cpct_getScreenPtr(VMEM, 10, 80); 
+;src/main.c:241: memptr = cpct_getScreenPtr(VMEM, 10, 80);
 	ld	hl,#0x500A
 	push	hl
 	ld	hl,#0xC000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:238: cpct_drawStringM0("Alberto Martinez", memptr,2, 0); 
+;src/main.c:242: cpct_drawStringM0("Alberto Martinez", memptr,2, 0);
 	ex	de,hl
 	ld	bc,#___str_10+0
 	ld	hl,#0x0002
@@ -6366,13 +6395,13 @@ _credits::
 	ld	hl,#6
 	add	hl,sp
 	ld	sp,hl
-;src/main.c:239: memptr = cpct_getScreenPtr(VMEM, 27, 95); 
+;src/main.c:243: memptr = cpct_getScreenPtr(VMEM, 27, 95);
 	ld	hl,#0x5F1B
 	push	hl
 	ld	hl,#0xC000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:240: cpct_drawStringM0("Martinez", memptr,2, 0); 
+;src/main.c:244: cpct_drawStringM0("Martinez", memptr,2, 0);
 	ex	de,hl
 	ld	bc,#___str_11+0
 	ld	hl,#0x0002
@@ -6383,13 +6412,13 @@ _credits::
 	ld	hl,#6
 	add	hl,sp
 	ld	sp,hl
-;src/main.c:242: memptr = cpct_getScreenPtr(VMEM, 13, 115); 
+;src/main.c:246: memptr = cpct_getScreenPtr(VMEM, 13, 115);
 	ld	hl,#0x730D
 	push	hl
 	ld	hl,#0xC000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:243: cpct_drawStringM0("Josep Domenech", memptr,2, 0);
+;src/main.c:247: cpct_drawStringM0("Josep Domenech", memptr,2, 0);
 	ex	de,hl
 	ld	bc,#___str_12+0
 	ld	hl,#0x0002
@@ -6400,13 +6429,13 @@ _credits::
 	ld	hl,#6
 	add	hl,sp
 	ld	sp,hl
-;src/main.c:244: memptr = cpct_getScreenPtr(VMEM, 27, 125); 
+;src/main.c:248: memptr = cpct_getScreenPtr(VMEM, 27, 125);
 	ld	hl,#0x7D1B
 	push	hl
 	ld	hl,#0xC000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:245: cpct_drawStringM0("Mingot", memptr, 2, 0);  
+;src/main.c:249: cpct_drawStringM0("Mingot", memptr, 2, 0);
 	ex	de,hl
 	ld	bc,#___str_13+0
 	ld	hl,#0x0002
@@ -6417,13 +6446,13 @@ _credits::
 	ld	hl,#6
 	add	hl,sp
 	ld	sp,hl
-;src/main.c:247: memptr = cpct_getScreenPtr(VMEM, 12, 175); 
+;src/main.c:251: memptr = cpct_getScreenPtr(VMEM, 12, 175);
 	ld	hl,#0xAF0C
 	push	hl
 	ld	hl,#0xC000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:248: cpct_drawStringM0("Pulsa una esc", memptr, 1, 0); 
+;src/main.c:252: cpct_drawStringM0("Pulsa una esc", memptr, 1, 0);
 	ex	de,hl
 	ld	bc,#___str_14+0
 	ld	hl,#0x0001
@@ -6434,17 +6463,17 @@ _credits::
 	ld	hl,#6
 	add	hl,sp
 	ld	sp,hl
-;src/main.c:252: while (1){
+;src/main.c:256: while (1){
 00104$:
-;src/main.c:253: cpct_scanKeyboard_f();
+;src/main.c:257: cpct_scanKeyboard_f();
 	call	_cpct_scanKeyboard_f
-;src/main.c:254: if(cpct_isKeyPressed(Key_Esc)) {
+;src/main.c:258: if(cpct_isKeyPressed(Key_Esc)) {
 	ld	hl,#0x0408
 	call	_cpct_isKeyPressed
 	ld	a,l
 	or	a, a
 	jr	Z,00104$
-;src/main.c:256: return;
+;src/main.c:260: return;
 	ret
 ___str_8:
 	.ascii "Grupo Pyxis"
@@ -6467,12 +6496,12 @@ ___str_13:
 ___str_14:
 	.ascii "Pulsa una esc"
 	.db 0x00
-;src/main.c:265: void controles(){
+;src/main.c:269: void controles(){
 ;	---------------------------------
 ; Function controles
 ; ---------------------------------
 _controles::
-;src/main.c:267: cpct_clearScreen(0);
+;src/main.c:271: cpct_clearScreen(0);
 	ld	hl,#0x4000
 	push	hl
 	xor	a, a
@@ -6481,13 +6510,13 @@ _controles::
 	ld	h, #0xC0
 	push	hl
 	call	_cpct_memset
-;src/main.c:269: memptr = cpct_getScreenPtr(VMEM, 23, 60); 
+;src/main.c:273: memptr = cpct_getScreenPtr(VMEM, 23, 60);
 	ld	hl,#0x3C17
 	push	hl
 	ld	hl,#0xC000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:270: cpct_drawStringM0("Controles:", memptr, 1, 0); 
+;src/main.c:274: cpct_drawStringM0("Controles:", memptr, 1, 0);
 	ex	de,hl
 	ld	bc,#___str_15+0
 	ld	hl,#0x0001
@@ -6498,13 +6527,13 @@ _controles::
 	ld	hl,#6
 	add	hl,sp
 	ld	sp,hl
-;src/main.c:272: memptr = cpct_getScreenPtr(VMEM, 11, 80); 
+;src/main.c:276: memptr = cpct_getScreenPtr(VMEM, 11, 80);
 	ld	hl,#0x500B
 	push	hl
 	ld	hl,#0xC000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:273: cpct_drawStringM0("Movimiento: ", memptr, 2, 0); 
+;src/main.c:277: cpct_drawStringM0("Movimiento: ", memptr, 2, 0);
 	ex	de,hl
 	ld	bc,#___str_16+0
 	ld	hl,#0x0002
@@ -6515,13 +6544,13 @@ _controles::
 	ld	hl,#6
 	add	hl,sp
 	ld	sp,hl
-;src/main.c:274: memptr = cpct_getScreenPtr(VMEM, 27, 95); 
+;src/main.c:278: memptr = cpct_getScreenPtr(VMEM, 27, 95);
 	ld	hl,#0x5F1B
 	push	hl
 	ld	hl,#0xC000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:275: cpct_drawStringM0("Flechas", memptr, 2, 0); 
+;src/main.c:279: cpct_drawStringM0("Flechas", memptr, 2, 0);
 	ex	de,hl
 	ld	bc,#___str_17+0
 	ld	hl,#0x0002
@@ -6532,13 +6561,13 @@ _controles::
 	ld	hl,#6
 	add	hl,sp
 	ld	sp,hl
-;src/main.c:277: memptr = cpct_getScreenPtr(VMEM, 13, 115); 
+;src/main.c:281: memptr = cpct_getScreenPtr(VMEM, 13, 115);
 	ld	hl,#0x730D
 	push	hl
 	ld	hl,#0xC000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:278: cpct_drawStringM0("Esc: Menu", memptr, 2, 0); 
+;src/main.c:282: cpct_drawStringM0("Esc: Menu", memptr, 2, 0);
 	ex	de,hl
 	ld	bc,#___str_18+0
 	ld	hl,#0x0002
@@ -6549,13 +6578,13 @@ _controles::
 	ld	hl,#6
 	add	hl,sp
 	ld	sp,hl
-;src/main.c:280: memptr = cpct_getScreenPtr(VMEM, 12, 175); 
+;src/main.c:284: memptr = cpct_getScreenPtr(VMEM, 12, 175);
 	ld	hl,#0xAF0C
 	push	hl
 	ld	hl,#0xC000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:281: cpct_drawStringM0("Pulsa una esc", memptr, 1, 0); 
+;src/main.c:285: cpct_drawStringM0("Pulsa una esc", memptr, 1, 0);
 	ex	de,hl
 	ld	bc,#___str_19+0
 	ld	hl,#0x0001
@@ -6566,17 +6595,17 @@ _controles::
 	ld	hl,#6
 	add	hl,sp
 	ld	sp,hl
-;src/main.c:283: while (1){
+;src/main.c:287: while (1){
 00104$:
-;src/main.c:284: cpct_scanKeyboard_f();
+;src/main.c:288: cpct_scanKeyboard_f();
 	call	_cpct_scanKeyboard_f
-;src/main.c:285: if(cpct_isKeyPressed(Key_Esc)) {
+;src/main.c:289: if(cpct_isKeyPressed(Key_Esc)) {
 	ld	hl,#0x0408
 	call	_cpct_isKeyPressed
 	ld	a,l
 	or	a, a
 	jr	Z,00104$
-;src/main.c:287: return;
+;src/main.c:291: return;
 	ret
 ___str_15:
 	.ascii "Controles:"
@@ -6593,20 +6622,20 @@ ___str_18:
 ___str_19:
 	.ascii "Pulsa una esc"
 	.db 0x00
-;src/main.c:295: void main(void) {
+;src/main.c:299: void main(void) {
 ;	---------------------------------
 ; Function main
 ; ---------------------------------
 _main::
-;src/main.c:297: init();
+;src/main.c:301: init();
 	call	_init
-;src/main.c:300: while(1){
+;src/main.c:304: while(1){
 00107$:
-;src/main.c:301: x=menu();
+;src/main.c:305: x=menu();
 	call	_menu
 	ld	e, l
 	ld	d, h
-;src/main.c:302: switch(x){
+;src/main.c:306: switch(x){
 	bit	7, d
 	jr	NZ,00107$
 	ld	a,#0x03
@@ -6621,8 +6650,8 @@ _main::
 	ld	hl,#00124$
 	add	hl,de
 	add	hl,de
-;src/main.c:303: case 0: return;break;
-;src/main.c:304: case 1: game(); break;
+;src/main.c:307: case 0: return;break;
+;src/main.c:308: case 1: game(); break;
 	jp	(hl)
 00124$:
 	jr	00109$
@@ -6633,14 +6662,14 @@ _main::
 00102$:
 	call	_game
 	jr	00107$
-;src/main.c:305: case 2: credits();break;
+;src/main.c:309: case 2: credits();break;
 00103$:
 	call	_credits
 	jr	00107$
-;src/main.c:306: case 3: controles();break;
+;src/main.c:310: case 3: controles();break;
 00104$:
 	call	_controles
-;src/main.c:307: }
+;src/main.c:311: }
 	jr	00107$
 00109$:
 	ret

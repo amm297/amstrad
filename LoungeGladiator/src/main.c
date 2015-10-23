@@ -206,18 +206,22 @@ void game(){
             atkObj = 22;
         if(enemy.life > 0 && checkCollisions(object.x, object.y, enemy.x, enemy.y, atkObj) == 1 && bound == 0){
             enemy.life -= 1;
+            erase(enemy.lx,enemy.ly,0);
             enemy.x = enemy.ox;
             enemy.y = enemy.oy;
+            enemy.lx = enemy.x;
+            enemy.ly = enemy.y;
+            enemy.pursue = 0;
             object.vivo = 0;
             bound = 1;
         }
       }
-      
+
       if(player.life == 0){
         gameOver();
         finish = 1;
-      } 
-      
+      }
+
 
    }
 }
@@ -228,24 +232,24 @@ void credits(){
 u8* memptr;
   cpct_clearScreen(0);
 
-  memptr = cpct_getScreenPtr(VMEM, 18, 30); 
-  cpct_drawStringM0("Grupo Pyxis", memptr, 1, 0); 
+  memptr = cpct_getScreenPtr(VMEM, 18, 30);
+  cpct_drawStringM0("Grupo Pyxis", memptr, 1, 0);
 
-  memptr = cpct_getScreenPtr(VMEM, 23, 60); 
-  cpct_drawStringM0("Miembros:", memptr, 1, 0); 
-  
-  memptr = cpct_getScreenPtr(VMEM, 10, 80); 
-  cpct_drawStringM0("Alberto Martinez", memptr,2, 0); 
-  memptr = cpct_getScreenPtr(VMEM, 27, 95); 
-  cpct_drawStringM0("Martinez", memptr,2, 0); 
-  
-  memptr = cpct_getScreenPtr(VMEM, 13, 115); 
+  memptr = cpct_getScreenPtr(VMEM, 23, 60);
+  cpct_drawStringM0("Miembros:", memptr, 1, 0);
+
+  memptr = cpct_getScreenPtr(VMEM, 10, 80);
+  cpct_drawStringM0("Alberto Martinez", memptr,2, 0);
+  memptr = cpct_getScreenPtr(VMEM, 27, 95);
+  cpct_drawStringM0("Martinez", memptr,2, 0);
+
+  memptr = cpct_getScreenPtr(VMEM, 13, 115);
   cpct_drawStringM0("Josep Domenech", memptr,2, 0);
-  memptr = cpct_getScreenPtr(VMEM, 27, 125); 
-  cpct_drawStringM0("Mingot", memptr, 2, 0);  
+  memptr = cpct_getScreenPtr(VMEM, 27, 125);
+  cpct_drawStringM0("Mingot", memptr, 2, 0);
 
-  memptr = cpct_getScreenPtr(VMEM, 12, 175); 
-  cpct_drawStringM0("Pulsa una esc", memptr, 1, 0); 
+  memptr = cpct_getScreenPtr(VMEM, 12, 175);
+  cpct_drawStringM0("Pulsa una esc", memptr, 1, 0);
 
 
 
@@ -266,19 +270,19 @@ void controles(){
   u8* memptr;
   cpct_clearScreen(0);
 
-  memptr = cpct_getScreenPtr(VMEM, 23, 60); 
-  cpct_drawStringM0("Controles:", memptr, 1, 0); 
-  
-  memptr = cpct_getScreenPtr(VMEM, 11, 80); 
-  cpct_drawStringM0("Movimiento: ", memptr, 2, 0); 
-  memptr = cpct_getScreenPtr(VMEM, 27, 95); 
-  cpct_drawStringM0("Flechas", memptr, 2, 0); 
-  
-  memptr = cpct_getScreenPtr(VMEM, 13, 115); 
-  cpct_drawStringM0("Esc: Menu", memptr, 2, 0); 
+  memptr = cpct_getScreenPtr(VMEM, 23, 60);
+  cpct_drawStringM0("Controles:", memptr, 1, 0);
 
-  memptr = cpct_getScreenPtr(VMEM, 12, 175); 
-  cpct_drawStringM0("Pulsa una esc", memptr, 1, 0); 
+  memptr = cpct_getScreenPtr(VMEM, 11, 80);
+  cpct_drawStringM0("Movimiento: ", memptr, 2, 0);
+  memptr = cpct_getScreenPtr(VMEM, 27, 95);
+  cpct_drawStringM0("Flechas", memptr, 2, 0);
+
+  memptr = cpct_getScreenPtr(VMEM, 13, 115);
+  cpct_drawStringM0("Esc: Menu", memptr, 2, 0);
+
+  memptr = cpct_getScreenPtr(VMEM, 12, 175);
+  cpct_drawStringM0("Pulsa una esc", memptr, 1, 0);
 
    while (1){
     cpct_scanKeyboard_f();

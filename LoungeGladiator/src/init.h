@@ -52,7 +52,7 @@ void initEnemies(u8 p){
     enemy.ox = originse[p-1][2];
     enemy.oy = originse[p-1][3];
     enemy.sprite = sprite;
-    enemy.life = 1//p;
+    enemy.life = 1;
     enemy.dir = 6;
     enemy.room = 3;
     enemy.lp = 75 - ((p-1)*5);
