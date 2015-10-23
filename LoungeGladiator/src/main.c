@@ -173,7 +173,6 @@ void game(){
         }
 
        move();
-
         switch(checkCollisions(player.x, player.y, enemy.x, enemy.y, player.atk)){
           case 1:
             erase(enemy.lx,enemy.ly,0);
