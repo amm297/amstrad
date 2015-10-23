@@ -26,6 +26,7 @@
 #include "gladis.h"
 #include "chacho-quieto.h"
 #include "flecha.h"
+#include "puerta.h"
 #include "mapa.h"
 #include "init.h"
 #include "vida.h"
@@ -33,7 +34,6 @@
 #include "ia.h"
 #include "CalcColision.h"
 #include "keyboard.h"
-#include "portada.h"
 
 
 /*GAME OVER*/
@@ -64,13 +64,16 @@ int menu(){
    cpct_drawStringM0("Lounge Gladiator",memptr,1,0);
 
    //Opciones
-   memptr = cpct_getScreenPtr(VMEM,20,50);
+   memptr = cpct_getScreenPtr(VMEM,20,90);
    cpct_drawStringM0("Nueva Partida",memptr,1,0);
 
-   memptr = cpct_getScreenPtr(VMEM,20,70);
+   memptr = cpct_getScreenPtr(VMEM,20,110);
    cpct_drawStringM0("Creditos",memptr,1,0);
 
-   memptr = cpct_getScreenPtr(VMEM,20,90);
+   memptr = cpct_getScreenPtr(VMEM,20,130);
+   cpct_drawStringM0("Constroles",memptr,1,0);
+
+   memptr = cpct_getScreenPtr(VMEM,20,150);
    cpct_drawStringM0("Salir",memptr,1,0);
 
     /*memptr = cpct_getScreenPtr(VMEM,18,180);
@@ -92,9 +95,10 @@ int menu(){
       }
 
       switch (pushed){
-        case 0: init = 50;break;
-        case 1: init = 70;break;
-        case 2: init = 90;break;
+        case 0: init = 90;break;
+        case 1: init = 110;break;
+        case 2: init = 130;break;
+        case 3: init = 150;break;
       }
       memptr = cpct_getScreenPtr(VMEM,15,init);
       cpct_drawSolidBox(memptr, 3, 2, 8);
@@ -102,13 +106,11 @@ int menu(){
         switch (pushed){
         case 0: return 1;break;
         case 1: return 2;break;
-        case 2: return 0;break;
+        case 2: return 3;break;
+        case 3: return 0;break;
       }
       }
       cont++;
-
-
-
    }
 }
 
@@ -122,12 +124,10 @@ void game(){
   initNivel();
   initEnemies(map);
 
-
    cpct_clearScreen(0);
    drawMap(map);
-
    while (1){
-
+    if(finish == 1) return;
     //Esperar el retrazado
     cpct_waitVSYNC();
 
@@ -147,8 +147,6 @@ void game(){
         else if(player.atk > 20) drawFatiga(player.atk,1);
         else drawFatiga(player.atk,0);
     }
-
-
     //guardar datos anteriores
     if(temp%2 == 0){
         player.lx = player.x;
@@ -164,35 +162,34 @@ void game(){
         move();
 
         switch(checkCollisions(player.x, player.y, enemy.x, enemy.y, player.atk)){
-         case 1:
-         erase(enemy.lx,enemy.ly,0);
-         enemy.x = enemy.ox;
-         enemy.y = enemy.oy;
-         enemy.lx = enemy.x;
-         enemy.ly = enemy.y;
-         enemy.life -= 1;
-         player.atk = 20;
-         break;
-         case 2:
-         erase(player.lx,player.ly,0);
-         player.x = 0;
-         player.y = 80;
-         player.lx = 0;
-         player.ly = 80;
-         player.life -= 1;
-         player.atk = 20;
-         enemy.pursue = 0;
-         break;
-         }
-         enemy.room = detectPlayerRoom(enemy.x,enemy.y);
+          case 1:
+            erase(enemy.lx,enemy.ly,0);
+            enemy.x = enemy.ox;
+            enemy.y = enemy.oy;
+            enemy.lx = enemy.x;
+            enemy.ly = enemy.y;
+            enemy.ox = originse[map-1][4];
+            enemy.oy = originse[map-1][5];
+            enemy.life -= 1;
+            player.atk = 20;
+            enemy.pursue = 0;
+            break;
+          case 2:
+            erase(player.lx,player.ly,0);
+            player.x =originsp[map-1][0];
+            player.y = originsp[map-1][1];
+            player.lx =originsp[map-1][0];
+            player.ly = originsp[map-1][1];
+            player.life -= 1;
+            player.atk = 20;
+            enemy.pursue = 0;
+            break;
+        }
     }
     if(temp > 10)
         temp = 0;
     temp += 1;
     player.latk = player.atk;
-
-
-
       //Comprobar teclado
       cpct_scanKeyboard_f();
       player.sprite = checkKeyboard();
@@ -213,12 +210,12 @@ void game(){
             bound = 1;
         }
       }
-
+      
       if(player.life == 0){
         gameOver();
         finish = 1;
-      }
-      if(finish == 1) return;
+      } 
+      
 
    }
 }
@@ -247,11 +244,27 @@ void credits(){
 
 
 
+/* Controles */
+void controles(){
+  u8* memptr;
+  cpct_clearScreen(0);
+  memptr = cpct_getScreenPtr(VMEM,10,10);
+  cpct_drawStringM0("Controles",memptr,1,0);
+
+  while (1){
+
+      
+     if(cpct_isAnyKeyPressed()) {
+
+        return;
+      }
+
+   }
+}
+
+
 /*EMPIEZA EL CODIGO*/
-
 void main(void) {
-
-
   int x =0;
    init();
 
@@ -262,6 +275,7 @@ void main(void) {
         case 0: return;break;
         case 1: game(); break;
         case 2: credits();break;
+        case 3: controles();break;
       }
    }
 

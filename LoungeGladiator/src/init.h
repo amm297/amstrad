@@ -19,10 +19,10 @@ void init(){
 
 void initPlayer(u8 p){
   u8 *sprite = gladis_quieto_dcha;
-  player.x = origins[p-1][0];
-  player.y = origins[p-1][1];
-  player.lx = origins[p-1][0];
-  player.ly = origins[p-1][1];
+  player.x = originsp[p-1][0];
+  player.y = originsp[p-1][1];
+  player.lx = originsp[p-1][0];
+  player.ly = originsp[p-1][1];
   player.sprite = sprite;
   player.life = 3;
   player.dir = 6;
@@ -31,20 +31,31 @@ void initPlayer(u8 p){
   player.bullets = 3;
 }
 
+void restartPlayer(u8 p){
+  u8 *sprite = gladis_quieto_dcha;
+  player.x = originsp[p-1][0];
+  player.y = originsp[p-1][1];
+  player.lx = originsp[p-1][0];
+  player.ly = originsp[p-1][1];
+  player.sprite = sprite;
+  player.dir = 6;
+  player.atk = 20;
+  player.latk = 20;
+}
+
 void initEnemies(u8 p){
   u8 *sprite = chacho_dcha;
-    enemy.x = origins[p-1][2];
-    enemy.y = origins[p-1][3];
-    enemy.lx = origins[p-1][2];
-    enemy.ly = origins[p-1][3];
-    enemy.ox = origins[p-1][2];
-    enemy.oy = origins[p-1][3];
+    enemy.x = originse[p-1][0];
+    enemy.y = originse[p-1][1];
+    enemy.lx = originse[p-1][0];
+    enemy.ly = originse[p-1][1];
+    enemy.ox = originse[p-1][2];
+    enemy.oy = originse[p-1][3];
     enemy.sprite = sprite;
-    enemy.life = 3;
+    enemy.life = 1;//p;
     enemy.dir = 6;
-    enemy.bullets = 3;
     enemy.room = 3;
-
+    enemy.lp = 75 - ((p-1)*5);
 }
 
 void initNivel(){

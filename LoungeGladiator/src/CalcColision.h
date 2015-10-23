@@ -1,6 +1,9 @@
 #ifndef CALCCOLISION_H
 #define CALCCOLISION_H
 
+
+
+
 u8 checkCollisions(u8 pX, u8 pY, u8 eX, u8 eY, u8 atk){
     u8 auxX;
     u8 auxY;
@@ -88,17 +91,27 @@ void checkBoundsCollisions(u8 *corazon,u8 *flecha){
       || scene[(player.y+tileheight-2)/tileheight][(player.x+tilewidth-1)/tilewidth] == 9
 
     ){
-        map+=1;
+      if(enemy.life == 0){
+          map+=1;
+          if(map > maps){
+            endGame();
+            finish = 1;
+            return;
+          }
 
-        initVariables(map);
-        initPlayer(map);
-        initNivel();
-        initEnemies(map);
+          initVariables(map);
+          restartPlayer(map);
+          initNivel();
+          initEnemies(map);
 
-        cpct_clearScreen(0);
-
-        drawMap(map);
-
+          cpct_clearScreen(0);
+          
+          drawMap(map);
+        }else {
+          player.x=player.lx;
+          player.y=player.ly;
+        }
+        
   }
 }
 
