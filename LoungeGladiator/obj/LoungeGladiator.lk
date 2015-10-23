@@ -11,11 +11,13 @@ obj/gladis.rel
 obj/puerta.rel
 obj/chacho-quieto.rel
 obj/ia.rel
+obj/cup.rel
 obj/vida.rel
 obj/main.rel
 obj/muro.rel
 obj/flecha.rel
 obj/marcador.rel
+obj/gameover.rel
 obj/portada.rel
 
 -e

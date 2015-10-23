@@ -26,8 +26,8 @@ u8 checkCollisions(u8 pX, u8 pY, u8 eX, u8 eY, u8 atk){
     }
     popX = pX + auxX;
     popY = pY + auxY;
-    eopX = eX + auxX;
-    eopY = eY + auxY;
+    eopX = eX + tilewidth;
+    eopY = eY + tileheight;
 
     if(eopX >= pX && eopX <= popX && eY >= pY && eY <= popY)
         if(atk >= 21)

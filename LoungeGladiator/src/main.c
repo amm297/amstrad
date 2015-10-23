@@ -29,6 +29,8 @@
 #include "puerta.h"
 #include "portada.h"
 #include "marcador.h"
+#include "gameOver.h"
+#include "cup.h"
 #include "mapa.h"
 #include "init.h"
 #include "vida.h"
@@ -45,13 +47,23 @@ void gameOver(){
   memptr = cpct_getScreenPtr(VMEM,10,10);
   cpct_drawStringM0("Lounge Gladiator",memptr,1,0);
 
-  memptr = cpct_getScreenPtr(VMEM,2,180);
-   cpct_drawStringM0("Pulsa cualquier tecla",memptr,1,0);
+    memptr = cpct_getScreenPtr(VMEM,10,30);
+   cpct_drawSprite(gameover,memptr,60,28);
 
-  while(1){
+
+  memptr = cpct_getScreenPtr(VMEM, 12, 175); 
+  cpct_drawStringM0("Pulsa espacio", memptr, 1, 0); 
+
+
+
+  while (1){
     cpct_scanKeyboard_f();
-    if(cpct_isAnyKeyPressed()) return;
-  }
+     if(cpct_isKeyPressed(Key_Space)) {
+
+        return;
+      }
+
+   }
 }
 
 /*MENU*/
@@ -245,13 +257,13 @@ u8* memptr;
   cpct_drawStringM0("Mingot", memptr, 2, 0);  
 
   memptr = cpct_getScreenPtr(VMEM, 12, 175); 
-  cpct_drawStringM0("Pulsa una esc", memptr, 1, 0); 
+  cpct_drawStringM0("Pulsa espacio", memptr, 1, 0); 
 
 
 
   while (1){
     cpct_scanKeyboard_f();
-     if(cpct_isKeyPressed(Key_Esc)) {
+     if(cpct_isKeyPressed(Key_Space)) {
 
         return;
       }
@@ -278,11 +290,11 @@ void controles(){
   cpct_drawStringM0("Esc: Menu", memptr, 2, 0); 
 
   memptr = cpct_getScreenPtr(VMEM, 12, 175); 
-  cpct_drawStringM0("Pulsa una esc", memptr, 1, 0); 
+  cpct_drawStringM0("Pulsa espacio", memptr, 1, 0); 
 
    while (1){
     cpct_scanKeyboard_f();
-     if(cpct_isKeyPressed(Key_Esc)) {
+     if(cpct_isKeyPressed(Key_Space)) {
 
         return;
       }
