@@ -18,21 +18,21 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000004  l__INITIALIZER                  
      00000120  l__DATA                         
      00000184  l__HOME                         
-     0000367D  l__CODE                         
      00004000  s__CODE                         
-     0000767D  s__DATA                         
-     0000779D  s__INITIALIZED                  
-     000077A1  s__HOME                         
-     00007925  s__GSFINAL                      
-     00007925  s__GSINIT                       
-     00007925  s__INITIALIZER                  
+     000045AD  l__CODE                         
+     000085AD  s__DATA                         
+     000086CD  s__INITIALIZED                  
+     000086D1  s__HOME                         
+     00008855  s__GSFINAL                      
+     00008855  s__GSINIT                       
+     00008855  s__INITIALIZER                  
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    0000367D =       13949. bytes (REL,CON)
+_CODE                               00004000    000045AD =       17837. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -67,136 +67,137 @@ _CODE                               00004000    0000367D =       13949. bytes (R
      00004A67  _initNivel                         main
      00004A77  _initVariables                     main
      00004AA3  _endGame                           main
-     00004B1E  _vaciar                            main
-     00004B4D  _mapSelector                       main
-     00004DE4  _drawMap                           main
-     00004EE9  _drawVida                          main
-     00004F50  _drawBullets                       main
-     00004FAC  _draw                              main
-     0000500C  _erase                             main
-     0000506D  _drawStats                         main
-     000050A1  _draws                             main
-     00005160  _erases                            main
-     000051E1  _drawFatiga                        main
-     00005307  _drawPickUps                       main
-     0000539F  _detectPlayerRoom                  main
-     000053CC  _chooseDirection                   main
-     0000540A  _movement                          main
-     0000544A  _followPlayer                      main
-     00005AC0  _patrol                            main
-     00005C5A  _move                              main
-     00005D27  _checkCollisions                   main
+     00004B18  _vaciar                            main
+     00004B47  _mapSelector                       main
+     00004DDE  _drawMap                           main
+     00004EE3  _drawVida                          main
+     00004F4A  _drawBullets                       main
+     00004FA6  _draw                              main
+     00005006  _erase                             main
+     00005067  _drawStats                         main
+     0000509B  _draws                             main
+     0000515A  _erases                            main
+     000051DB  _drawFatiga                        main
+     00005301  _drawPickUps                       main
+     00005399  _detectPlayerRoom                  main
+     000053C6  _chooseDirection                   main
+     00005404  _movement                          main
+     00005444  _followPlayer                      main
+     00005ABA  _patrol                            main
+     00005C54  _move                              main
+     00005D0C  _checkCollisions                   main
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    0000367D =       13949. bytes (REL,CON)
+_CODE                               00004000    000045AD =       17837. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00005E48  _checkBoundsCollisions             main
-     00006550  _checkArrowCollisions              main
-     00006799  _checkKeyboard                     main
-     00006A24  _moveObject                        main
-     00006A59  _gameOver                          main
-     00006AD2  _menu                              main
-     00006D21  _game                              main
-     00006FAD  _credits                           main
-     00007050  _controles                         main
-     0000708C  _main                              main
-     000070C8  _muro                              muro
-     00007108  _flecha_arriba                     flecha
-     00007128  _flecha_abajo                      flecha
-     00007148  _flecha_dcha                       flecha
-     00007168  _flecha_izda                       flecha
-     00007188  _cpct_setPalette                   cpct_video
-     00007191  cpct_setPalette_asm                cpct_video
-     000071AC  _cpct_isKeyPressed                 cpct_keyboard
-     000071AC  cpct_isKeyPressed_asm              cpct_keyboard
-     000071B8  _cpct_scanKeyboard_f               cpct_keyboard
-     000071B8  cpct_scanKeyboard_f_asm            cpct_keyboard
-     00007222  _rand                              rand
-     0000727E  _srand                             rand
-     00007299  _cpct_drawStringM0                 cpct_strings
-     000072A1  cpct_drawStringM0_asm              cpct_strings
-     000072BD  _cpct_drawSprite                   cpct_sprites
-     00007362  dc_mode0_ct                        cpct_strings
-     00007372  _cpct_drawCharM0                   cpct_strings
-     0000737F  cpct_drawCharM0_asm                cpct_strings
-     000073FF  _cpct_fw2hw                        cpct_video
-     00007419  _cpct_keyboardStatusBuffer         cpct_keyboard
-     00007423  _cpct_drawSpriteMasked             cpct_sprites
-     00007452  cpct_firmware2hw_colour            
-     0000746D  _cpct_isAnyKeyPressed              cpct_keyboard
-     0000746D  cpct_isAnyKeyPressed_asm           cpct_keyboard
-     0000747A  _cpct_waitVSYNC                    cpct_video
-     0000747A  cpct_waitVSYNC_asm                 cpct_video
-     00007482  _cpct_setVideoMode                 cpct_video
-     00007487  cpct_setVideoMode_asm              cpct_video
-     00007494  _cpct_memset                       cpct_memutils
-     000074A2  _cpct_mode_rom_status              cpct_firmware
-     000074A3  _cpct_firmware_address             cpct_firmware
-     000074A5  _cpct_disableFirmware              cpct_firmware
-     000074A5  cpct_disableFirmware_asm           cpct_firmware
-     000074B6  _cpct_drawSolidBox                 cpct_sprites
-     0000756E  __modschar                         
-     0000757B  __modsint                          
-     00007587  _cpct_getScreenPtr                 cpct_video
-     000075A7  _cpct_scanKeyboard                 cpct_keyboard
-     000075A7  cpct_scanKeyboard_asm              cpct_keyboard
-     000075D8  __divsint                          
+     00005E2D  _checkBoundsCollisions             main
+     00006535  _checkArrowCollisions              main
+     0000677E  _checkKeyboard                     main
+     000069FA  _moveObject                        main
+     00006A2F  _gameOver                          main
+     00006AA8  _menu                              main
+     00006CF2  _game                              main
+     00006F7E  _credits                           main
+     000070B8  _controles                         main
+     0000719C  _main                              main
+     000071D8  _muro                              muro
+     00007218  _flecha_arriba                     flecha
+     00007238  _flecha_abajo                      flecha
+     00007258  _flecha_dcha                       flecha
+     00007278  _flecha_izda                       flecha
+     00007298  _marcador                          marcador
+     000072A8  _portada1                          portada
+     000080B8  _cpct_setPalette                   cpct_video
+     000080C1  cpct_setPalette_asm                cpct_video
+     000080DC  _cpct_isKeyPressed                 cpct_keyboard
+     000080DC  cpct_isKeyPressed_asm              cpct_keyboard
+     000080E8  _cpct_scanKeyboard_f               cpct_keyboard
+     000080E8  cpct_scanKeyboard_f_asm            cpct_keyboard
+     00008152  _rand                              rand
+     000081AE  _srand                             rand
+     000081C9  _cpct_drawStringM0                 cpct_strings
+     000081D1  cpct_drawStringM0_asm              cpct_strings
+     000081ED  _cpct_drawSprite                   cpct_sprites
+     00008292  dc_mode0_ct                        cpct_strings
+     000082A2  _cpct_drawCharM0                   cpct_strings
+     000082AF  cpct_drawCharM0_asm                cpct_strings
+     0000832F  _cpct_fw2hw                        cpct_video
+     00008349  _cpct_keyboardStatusBuffer         cpct_keyboard
+     00008353  _cpct_drawSpriteMasked             cpct_sprites
+     00008382  cpct_firmware2hw_colour            
+     0000839D  _cpct_isAnyKeyPressed              cpct_keyboard
+     0000839D  cpct_isAnyKeyPressed_asm           cpct_keyboard
+     000083AA  _cpct_waitVSYNC                    cpct_video
+     000083AA  cpct_waitVSYNC_asm                 cpct_video
+     000083B2  _cpct_setVideoMode                 cpct_video
+     000083B7  cpct_setVideoMode_asm              cpct_video
+     000083C4  _cpct_memset                       cpct_memutils
+     000083D2  _cpct_mode_rom_status              cpct_firmware
+     000083D3  _cpct_firmware_address             cpct_firmware
+     000083D5  _cpct_disableFirmware              cpct_firmware
+     000083D5  cpct_disableFirmware_asm           cpct_firmware
+     000083E6  _cpct_drawSolidBox                 cpct_sprites
+     0000849E  __modschar                         
+     000084AB  __modsint                          
+     000084B7  _cpct_getScreenPtr                 cpct_video
+     000084D7  _cpct_scanKeyboard                 cpct_keyboard
 ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    0000367D =       13949. bytes (REL,CON)
+_CODE                               00004000    000045AD =       17837. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     000075E1  __divschar                         
-     000075E8  __div8                             
-     000075EC  __div_signexte                     
-     000075F0  __div16                            
-     00007616  __get_remainder                    
-     00007620  __mulint                           
-     00007628  __mul16                            
-     0000763C  __divuint                          
-     00007644  __divuchar                         
-     0000764B  __divu8                            
-     0000764E  __divu16                           
-
+     000084D7  cpct_scanKeyboard_asm              cpct_keyboard
+     00008508  __divsint                          
+     00008511  __divschar                         
+     00008518  __div8                             
+     0000851C  __div_signexte                     
+     00008520  __div16                            
+     00008546  __get_remainder                    
+     00008550  __mulint                           
+     00008558  __mul16                            
+     0000856C  __divuint                          
+     00008574  __divuchar                         
+     0000857B  __divu8                            
+     0000857E  __divu16                           
 ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_DATA                               0000767D    00000120 =         288. bytes (REL,CON)
+_DATA                               000085AD    00000120 =         288. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     0000767D  _scene                             main
-     0000776D  _temp                              main
-     0000776E  _map                               main
-     0000776F  _path                              main
-     00007770  _finish                            main
-     00007771  _arrow                             main
-     00007772  _following                         main
-     00007773  _bound                             main
-     00007774  _archer                            main
-     00007775  _dead                              main
-     00007776  _n                                 main
-     00007779  _object                            main
-     00007783  _player                            main
-     0000778E  _enemy                             main
+     000085AD  _scene                             main
+     0000869D  _temp                              main
+     0000869E  _map                               main
+     0000869F  _path                              main
+     000086A0  _finish                            main
+     000086A1  _arrow                             main
+     000086A2  _following                         main
+     000086A3  _bound                             main
+     000086A4  _archer                            main
+     000086A5  _dead                              main
+     000086A6  _n                                 main
+     000086A9  _object                            main
+     000086B3  _player                            main
+     000086BE  _enemy                             main
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 6.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_INITIALIZED                        0000779D    00000004 =           4. bytes (REL,CON)
+_INITIALIZED                        000086CD    00000004 =           4. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -205,18 +206,18 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_HOME                               000077A1    00000184 =         388. bytes (REL,CON)
+_HOME                               000086D1    00000184 =         388. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     000077A1  __mullong                          _mullong
+     000086D1  __mullong                          _mullong
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 8.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_INITIALIZER                        00007925    00000004 =           4. bytes (REL,CON)
+_INITIALIZER                        00008855    00000004 =           4. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -232,6 +233,8 @@ obj/vida.rel                              [ vida ]
 obj/main.rel                              [ main ]
 obj/muro.rel                              [ muro ]
 obj/flecha.rel                            [ flecha ]
+obj/marcador.rel                          [ marcador ]
+obj/portada.rel                           [ portada ]
 
 
 Libraries Linked                          [ object file ]
