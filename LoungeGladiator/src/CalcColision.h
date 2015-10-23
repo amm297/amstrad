@@ -1,9 +1,6 @@
 #ifndef CALCCOLISION_H
 #define CALCCOLISION_H
 
-
-
-
 u8 checkCollisions(u8 pX, u8 pY, u8 eX, u8 eY, u8 atk){
     u8 auxX;
     u8 auxY;
@@ -99,9 +96,9 @@ void checkBoundsCollisions(u8 *corazon,u8 *flecha){
         initEnemies(map);
 
         cpct_clearScreen(0);
-        
+
         drawMap(map);
-        
+
   }
 }
 

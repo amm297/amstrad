@@ -33,7 +33,7 @@
 #include "ia.h"
 #include "CalcColision.h"
 #include "keyboard.h"
-
+#include "portada.h"
 
 
 /*GAME OVER*/
@@ -121,7 +121,7 @@ void game(){
   initPlayer(map);
   initNivel();
   initEnemies(map);
-  
+
 
    cpct_clearScreen(0);
    drawMap(map);
@@ -184,6 +184,7 @@ void game(){
          enemy.pursue = 0;
          break;
          }
+         enemy.room = detectPlayerRoom(enemy.x,enemy.y);
     }
     if(temp > 10)
         temp = 0;
@@ -212,11 +213,11 @@ void game(){
             bound = 1;
         }
       }
-      
+
       if(player.life == 0){
         gameOver();
         finish = 1;
-      } 
+      }
       if(finish == 1) return;
 
    }

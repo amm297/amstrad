@@ -14,5 +14,6 @@ obj/vida.rel
 obj/main.rel
 obj/muro.rel
 obj/flecha.rel
+obj/portada.rel
 
 -e
