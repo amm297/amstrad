@@ -46,10 +46,7 @@ void followPlayer(){
         auxX = player.x;
         auxY = player.y;
     }
-    /*u8 *memptr;
-    memptr = cpct_getScreenPtr(VMEM,5,50);*/
     if(auxX < enemy.x){
-        //cpct_drawSolidBox(memptr, 1, 2, 8);
         if(scene[(enemy.y)/tileheight][(enemy.x-1)/tilewidth] != 1
            && scene[(enemy.y+tileheight)/tileheight][(enemy.x-1)/tilewidth] != 1){
             enemy.x-=1;
@@ -61,7 +58,6 @@ void followPlayer(){
                 enemy.y+=1;
         }
     }else if(auxX > enemy.x){
-        //cpct_drawSolidBox(memptr, 10, 2, 8);
         if(scene[(enemy.y)/tileheight][(enemy.x+tilewidth)/tilewidth] != 1
            && scene[(enemy.y+tileheight)/tileheight][(enemy.x+tilewidth)/tilewidth] != 1){
             enemy.x+=1;
@@ -85,8 +81,6 @@ void followPlayer(){
 }
 
 void patrol(){
-  //scene[(y[0])/tileheight][(x[0])/tilewidth] = room;
-
   movement(enemy.dir);
 
   if(scene[(enemy.y)/tileheight][(enemy.x)/tilewidth] != enemy.room
@@ -109,17 +103,12 @@ void patrol(){
         break;
     }
   }
-  //scene[(y[0])/tileheight][(x[0])/tilewidth] = 2;
 }
 
 void move(){
     //u8* memptr;
     if(temp > 10){
         following = detectPlayerRoom(player.x,player.y);
-        /*memptr = cpct_getScreenPtr(VMEM,20,20);
-        cpct_drawSolidBox(memptr, following, 2, 8);
-        memptr = cpct_getScreenPtr(VMEM,24,20);
-        cpct_drawSolidBox(memptr, enemy.room, 2, 8);*/
         if(following == enemy.room || enemy.pursue != 0){
             if(enemy.pursue == 0)
                 enemy.pursue = 4;

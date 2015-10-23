@@ -9,27 +9,81 @@
 #ifndef _DRAWS_H_
 #define _DRAWS_H_
 
+void endGame(){
+    u8* memptr;
+  cpct_clearScreen(0);
+  memptr = cpct_getScreenPtr(VMEM,10,10);
+  cpct_drawStringM0("Congratulations",memptr,1,0);
 
+  memptr = cpct_getScreenPtr(VMEM,2,180);
+   cpct_drawStringM0("Pulsa cualquier tecla",memptr,1,0);
+
+  while(1){
+    cpct_scanKeyboard_f();
+    if(cpct_isKeyPressed(Key_Space)) return;
+  }
+}
+
+
+void vaciar(){
+  u8 x=0,y=0;
+  for(y=0;y<height;y++){
+        for(x=0;x<width;x++){
+          scene[y][x] = 0;
+        }
+      }
+}
+
+
+void mapSelector(u8 t){
+  u8 x=0,y=0,aux =0; 
+  vaciar();
+  switch(t){
+    case 1: 
+      for(y=0;y<height;y++){
+        for(x=0;x<width;x++){
+          scene[y][x] = mapa1[y][x];
+        }
+      }
+    break;
+    case 2:
+      for(y=0;y<height;y++){
+        for(x=0;x<width;x++){
+          scene[y][x] = mapa2[y][x];
+        }
+      }
+    break;
+    case 3: 
+      for(y=height-1;y!=0;y--){
+        for(x=0;x<width;x++){
+          scene[aux][x] = mapa1[y][x];
+        }
+        aux++;
+      }
+      for(x=0;x<width;x++){
+          scene[aux][x] = mapa1[0][x];
+        }
+    break;
+    case 4:
+      for(y=height-1;y!=0;y--){
+        for(x=0;x<width;x++){
+          scene[aux][x] = mapa2[y][x];
+        }
+        aux++;
+      }
+      for(x=0;x<width;x++){
+          scene[aux][x] = mapa2[0][x];
+        }
+    break;
+  }
+}
 /*MAPA*/
 void drawMap(u8 t){
-   int posX=0,posY =0,x=0,y=0;
+   u8 posX=0,posY =0;
+   u8 aux = 0;
    u8* memptr;
 
-   if(t == 1){
-    for(y=0;y<height;y++){
-      for(x=0;x<width;x++){
-        scene[y][x] = mapa1[y][x];
-      }
-    }
-  }
-
-  if(t == 2){
-    for(y=0;y<height;y++){
-      for(x=0;x<width;x++){
-        scene[y][x] = mapa2[y][x];
-      }
-    }
-  }
+   mapSelector(t);
 
    for(posY=0; posY<height;posY++){
       for(posX=0; posX<width;posX++){
@@ -38,25 +92,31 @@ void drawMap(u8 t){
             cpct_drawSprite(muro,memptr,tilewidth, tileheight);
          }
          if(scene[posY][posX] == 9){
-            cpct_drawSolidBox(memptr, 9, tilewidth, tileheight);
+          if(aux == 0){
+           cpct_drawSprite(g_tile_puerta_0,memptr,tilewidth, tileheight);
+           aux += 1;
+         }
+          else cpct_drawSprite(g_tile_puerta_1,memptr,tilewidth, tileheight);
          }
       }
    }
 }
 
 /*VIDA*/
-void drawVida(u8 life,u8 pos){
+void drawVida(u8 life,u8 pos,u8 lim){
 
   u8* memptr;
      u8 p = pos;
      u8 i =1;
-     for(i=1;i<=3;i++){
+     for(i=1;i<=5;i++){
       memptr = cpct_getScreenPtr(VMEM,p,192);
       p+=5;
       if(i<=life)  cpct_drawSpriteMasked(corazon_lleno, memptr, 4, 8);
       else {
-        cpct_drawSolidBox(memptr,0,4,8);
-        cpct_drawSpriteMasked(corazon_roto, memptr, 4, 8);
+        if(i<=lim){
+          cpct_drawSolidBox(memptr,0,4,8);
+          cpct_drawSpriteMasked(corazon_roto, memptr, 4, 8);
+        }
       }
      }
 
@@ -113,10 +173,9 @@ void erase(u8 x,u8 y,u8 mode){
 }
 
 void drawStats(){
-    drawVida(player.life,1);
+    drawVida(player.life,1,3);
     drawBullets(player.bullets,16);
-    drawBullets(enemy.bullets,56);
-    drawVida(enemy.life,65);
+    drawVida(enemy.life,enemy.lp,map);
 
 }
 
@@ -200,13 +259,13 @@ void drawFatiga(u8 atk, u8 col){
 void drawPickUps(u8 corazon, u8 bullet){
     u8* memptr;
 
-    memptr = cpct_getScreenPtr(VMEM, 1*tilewidth, 10*tileheight);
+    memptr = cpct_getScreenPtr(VMEM, originsu[map-1][0],originsu[map-1][1] );
     if(corazon == 0)
         cpct_drawSpriteMasked(corazon_lleno,memptr,4,8);
     else
         cpct_drawSolidBox(memptr, 0, 4, 8);
 
-    memptr = cpct_getScreenPtr(VMEM, 2*tilewidth, 1*tileheight);
+    memptr = cpct_getScreenPtr(VMEM, originsu[map-1][2],originsu[map-1][3]);
     if(bullet == 0)
         cpct_drawSpriteMasked(flecha_arriba,memptr,2,8);
     else
