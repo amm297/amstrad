@@ -130,6 +130,7 @@ void move(){
         enemy.seenX = player.x;
         enemy.seenY = player.y;
     }
+    enemy.room = detectPlayerRoom(enemy.x,enemy.y);
 }
 
 

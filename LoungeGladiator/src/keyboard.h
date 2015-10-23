@@ -87,10 +87,6 @@ u8* checkKeyboard(){
       }
   }
 
-
-  if(cpct_isKeyPressed(Key_L)){
-       arrow = 0;
-  }
   if(cpct_isKeyPressed(Key_Esc)){
        finish = 1;
   }

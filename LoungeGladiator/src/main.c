@@ -27,6 +27,8 @@
 #include "chacho-quieto.h"
 #include "flecha.h"
 #include "puerta.h"
+#include "portada.h"
+#include "marcador.h"
 #include "mapa.h"
 #include "init.h"
 #include "vida.h"
@@ -61,7 +63,7 @@ int menu(){
    cpct_clearScreen(0);
 
    memptr = cpct_getScreenPtr(VMEM,10,10);
-   cpct_drawStringM0("Lounge Gladiator",memptr,1,0);
+   cpct_drawSprite(portada1,memptr,60,60);
 
    //Opciones
    memptr = cpct_getScreenPtr(VMEM,20,90);
@@ -85,12 +87,12 @@ int menu(){
       cpct_scanKeyboard();
       if(cpct_isKeyPressed(Key_CursorDown) && cont > 150){
         cpct_drawSolidBox(memptr, 0, 2, 8);
-        pushed ++;
+        if(pushed<3) pushed ++;
         cont =0;
       }
       if(cpct_isKeyPressed(Key_CursorUp) && cont > 150){
         cpct_drawSolidBox(memptr, 0, 2, 8);
-        pushed --;
+        if(pushed>0) pushed --;
         cont = 0;
       }
 
@@ -101,8 +103,8 @@ int menu(){
         case 3: init = 150;break;
       }
       memptr = cpct_getScreenPtr(VMEM,15,init);
-      cpct_drawSolidBox(memptr, 3, 2, 8);
-      if(cpct_isKeyPressed(Key_Enter)){
+      cpct_drawSprite(marcador,memptr, 2, 8);
+      if(cpct_isKeyPressed(Key_Space)){
         switch (pushed){
         case 0: return 1;break;
         case 1: return 2;break;
@@ -223,17 +225,32 @@ void game(){
 
 /* CREDITOS */
 void credits(){
-  u8* memptr;
+u8* memptr;
   cpct_clearScreen(0);
-  memptr = cpct_getScreenPtr(VMEM,10,10);
-  cpct_drawStringM0("Lounge Gladiator",memptr,1,0);
+
+  memptr = cpct_getScreenPtr(VMEM, 18, 30); 
+  cpct_drawStringM0("Grupo Pyxis", memptr, 1, 0); 
+
+  memptr = cpct_getScreenPtr(VMEM, 23, 60); 
+  cpct_drawStringM0("Miembros:", memptr, 1, 0); 
+  
+  memptr = cpct_getScreenPtr(VMEM, 10, 80); 
+  cpct_drawStringM0("Alberto Martinez", memptr,2, 0); 
+  memptr = cpct_getScreenPtr(VMEM, 27, 95); 
+  cpct_drawStringM0("Martinez", memptr,2, 0); 
+  
+  memptr = cpct_getScreenPtr(VMEM, 13, 115); 
+  cpct_drawStringM0("Josep Domenech", memptr,2, 0);
+  memptr = cpct_getScreenPtr(VMEM, 27, 125); 
+  cpct_drawStringM0("Mingot", memptr, 2, 0);  
+
+  memptr = cpct_getScreenPtr(VMEM, 12, 175); 
+  cpct_drawStringM0("Pulsa una esc", memptr, 1, 0); 
+
+
 
   while (1){
-
-      cpct_scanKeyboard_f();
-      cpct_drawStringM0("Josep Domenech Mingot",memptr,1,0);
-      cpct_drawStringM0("Alberto Martinez Martinez",memptr,1,0);
-
+    cpct_scanKeyboard_f();
      if(cpct_isKeyPressed(Key_Esc)) {
 
         return;
@@ -248,13 +265,24 @@ void credits(){
 void controles(){
   u8* memptr;
   cpct_clearScreen(0);
-  memptr = cpct_getScreenPtr(VMEM,10,10);
-  cpct_drawStringM0("Controles",memptr,1,0);
 
-  while (1){
+  memptr = cpct_getScreenPtr(VMEM, 23, 60); 
+  cpct_drawStringM0("Controles:", memptr, 1, 0); 
+  
+  memptr = cpct_getScreenPtr(VMEM, 11, 80); 
+  cpct_drawStringM0("Movimiento: ", memptr, 2, 0); 
+  memptr = cpct_getScreenPtr(VMEM, 27, 95); 
+  cpct_drawStringM0("Flechas", memptr, 2, 0); 
+  
+  memptr = cpct_getScreenPtr(VMEM, 13, 115); 
+  cpct_drawStringM0("Esc: Menu", memptr, 2, 0); 
 
-      
-     if(cpct_isAnyKeyPressed()) {
+  memptr = cpct_getScreenPtr(VMEM, 12, 175); 
+  cpct_drawStringM0("Pulsa una esc", memptr, 1, 0); 
+
+   while (1){
+    cpct_scanKeyboard_f();
+     if(cpct_isKeyPressed(Key_Esc)) {
 
         return;
       }
