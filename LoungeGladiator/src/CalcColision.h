@@ -105,13 +105,13 @@ void checkBoundsCollisions(u8 *corazon,u8 *flecha){
           initEnemies(map);
 
           cpct_clearScreen(0);
-          
+
           drawMap(map);
         }else {
           player.x=player.lx;
           player.y=player.ly;
         }
-        
+
   }
 }
 
