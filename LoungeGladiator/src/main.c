@@ -27,66 +27,14 @@
 #include "chacho-quieto.h"
 #include "flecha.h"
 #include "mapa.h"
+#include "init.h"
 #include "vida.h"
 #include "draws.h"
 #include "ia.h"
 #include "CalcColision.h"
 #include "keyboard.h"
 
-/*INICIALIZACION*/
-void init(){
-   cpct_disableFirmware();
-   cpct_setVideoMode(0);
-   cpct_fw2hw(g_palette,4);
-   cpct_setPalette(g_palette,4);
-}
 
-void initPlayer(u8 p){
-  u8 *sprite = gladis_quieto_dcha;
-  player.x = origins[p-1][0];
-  player.y = origins[p-1][1];
-  player.lx = origins[p-1][0];
-  player.ly = origins[p-1][1];
-  player.sprite = sprite;
-  player.life = 3;
-  player.dir = 6;
-  player.atk = 20;
-  player.latk = 20;
-  player.bullets = 3;
-}
-
-void initEnemies(u8 p){
-  u8 *sprite = chacho_dcha;
-    enemy.x = origins[p-1][2];
-    enemy.y = origins[p-1][3];
-    enemy.lx = origins[p-1][2];
-    enemy.ly = origins[p-1][3];
-    enemy.ox = origins[p-1][2];
-    enemy.oy = origins[p-1][3];
-    enemy.sprite = sprite;
-    enemy.life = 3;
-    enemy.dir = 6;
-    enemy.bullets = 3;
-    enemy.room = 3;
-
-}
-
-void initNivel(){
-  n.num=0;
-  n.corazon=0;
-  n.bullet=0;
-}
-
-void initVariables(){
-   bound =0;
-  temp = 0;
-  map = 1;
-  arrow =0;
-  finish =0;
-  following =0;
-  archer = 0;
-  dead =0;
-}
 
 /*GAME OVER*/
 void gameOver(){
@@ -164,15 +112,12 @@ int menu(){
    }
 }
 
-
-
-
 /*JUEGO*/
 
 void game(){
   u8 atkObj = 0;
 
-  initVariables();
+  initVariables(1);
   initPlayer(map);
   initNivel();
   initEnemies(map);
@@ -219,20 +164,26 @@ void game(){
         move();
 
         switch(checkCollisions(player.x, player.y, enemy.x, enemy.y, player.atk)){
-        case 1:
-            enemy.x = enemy.ox;
-            enemy.y = enemy.oy;
-            enemy.life -= 1;
-            player.atk = 20;
-            break;
-        case 2:
-            player.x = 0;
-            player.y = 80;
-            player.life -= 1;
-            player.atk = 20;
-            enemy.pursue = 0;
-            break;
-        }
+         case 1:
+         erase(enemy.lx,enemy.ly,0);
+         enemy.x = enemy.ox;
+         enemy.y = enemy.oy;
+         enemy.lx = enemy.x;
+         enemy.ly = enemy.y;
+         enemy.life -= 1;
+         player.atk = 20;
+         break;
+         case 2:
+         erase(player.lx,player.ly,0);
+         player.x = 0;
+         player.y = 80;
+         player.lx = 0;
+         player.ly = 80;
+         player.life -= 1;
+         player.atk = 20;
+         enemy.pursue = 0;
+         break;
+         }
     }
     if(temp > 10)
         temp = 0;

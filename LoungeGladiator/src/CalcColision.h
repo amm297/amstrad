@@ -91,9 +91,17 @@ void checkBoundsCollisions(u8 *corazon,u8 *flecha){
       || scene[(player.y+tileheight-2)/tileheight][(player.x+tilewidth-1)/tilewidth] == 9
 
     ){
-        cpct_clearScreen(0);
         map+=1;
+
+        initVariables(map);
+        initPlayer(map);
+        initNivel();
+        initEnemies(map);
+
+        cpct_clearScreen(0);
+        
         drawMap(map);
+        
   }
 }
 
