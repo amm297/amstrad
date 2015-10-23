@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
-; Version 3.5.0 #9253 (Sep 26 2015) (CYGWIN)
-; This file was generated Fri Oct 23 13:16:12 2015
+; Version 3.5.0 #9253 (Sep 22 2015) (CYGWIN)
+; This file was generated Fri Oct 23 15:17:18 2015
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mz80
@@ -3555,12 +3555,12 @@ _move::
 	sub	a, 0 (iy)
 	jr	NC,00117$
 ;src/ia.h:111: following = detectPlayerRoom(player.x,player.y);
-	ld	a, (#_player + 1)
-	ld	hl, #_player + 0
+	ld	hl, #_player + 1
 	ld	d,(hl)
-	push	af
-	inc	sp
+	ld	a, (#_player + 0)
 	push	de
+	inc	sp
+	push	af
 	inc	sp
 	call	_detectPlayerRoom
 	pop	af
@@ -3568,34 +3568,34 @@ _move::
 	ld	0 (iy),l
 ;src/ia.h:112: if(following == enemy.room || enemy.pursue != 0){
 	ld	hl, #_enemy + 10
-	ld	d,(hl)
-	ld	bc,#_enemy + 13
-	ld	a,(bc)
-	ld	e,a
+	ld	c,(hl)
+	ld	de,#_enemy + 13
+	ld	a,(de)
+	ld	b,a
 	ld	a,(#_following + 0)
-	sub	a, d
+	sub	a, c
 	jr	Z,00106$
-	ld	a,e
+	ld	a,b
 	or	a, a
 	jr	Z,00107$
 00106$:
 ;src/ia.h:113: if(enemy.pursue == 0)
-	ld	a,e
+	ld	a,b
 	or	a, a
 	jr	NZ,00104$
 ;src/ia.h:114: enemy.pursue = 4;
 	ld	a,#0x04
-	ld	(bc),a
+	ld	(de),a
 	jr	00118$
 00104$:
 ;src/ia.h:115: else if(enemy.pursue > 1)
 	ld	a,#0x01
-	sub	a, e
+	sub	a, b
 	jr	NC,00118$
 ;src/ia.h:116: enemy.pursue -=1;
-	dec	e
-	ld	a,e
-	ld	(bc),a
+	dec	b
+	ld	a,b
+	ld	(de),a
 	jr	00118$
 00107$:
 ;src/ia.h:118: enemy.dir = chooseDirection();
@@ -3605,29 +3605,32 @@ _move::
 	jr	00118$
 00117$:
 ;src/ia.h:121: if(enemy.pursue >= 1){
-	ld	a,(#(_enemy + 0x000d) + 0)
+	ld	de,#_enemy + 13
+	ld	a,(de)
 	sub	a, #0x01
 	jr	C,00114$
 ;src/ia.h:122: followPlayer();
+	push	de
 	call	_followPlayer
+	pop	de
 ;src/ia.h:123: if(enemy.seenX == enemy.x && enemy.seenY == enemy.y)
 	ld	hl, #_enemy + 11
-	ld	d,(hl)
+	ld	b,(hl)
 	ld	hl, #_enemy + 0
-	ld	e,(hl)
-	ld	a,d
-	sub	a, e
+	ld	c,(hl)
+	ld	a,b
+	sub	a, c
 	jr	NZ,00118$
 	ld	hl, #_enemy + 12
-	ld	d,(hl)
+	ld	b,(hl)
 	ld	hl, #_enemy + 1
-	ld	e,(hl)
-	ld	a,d
-	sub	a, e
+	ld	c,(hl)
+	ld	a,b
+	sub	a, c
 	jr	NZ,00118$
 ;src/ia.h:124: enemy.pursue = 0;
-	ld	hl,#(_enemy + 0x000d)
-	ld	(hl),#0x00
+	xor	a, a
+	ld	(de),a
 	jr	00118$
 00114$:
 ;src/ia.h:126: patrol();
@@ -3644,13 +3647,13 @@ _move::
 	call	_detectPlayerRoom
 	pop	af
 	ld	d,l
-	ld	a, (#(_player + 0x0001) + 0)
-	ld	hl, #_player + 0
+	ld	hl, #(_player + 0x0001) + 0
 	ld	b,(hl)
+	ld	a, (#_player + 0)
 	push	de
-	push	af
-	inc	sp
 	push	bc
+	inc	sp
+	push	af
 	inc	sp
 	call	_detectPlayerRoom
 	pop	af
@@ -3663,29 +3666,15 @@ _move::
 	ld	h,(hl)
 	ld	a,#0x01
 	sub	a, h
-	jr	NC,00120$
+	ret	NC
 00119$:
 ;src/ia.h:130: enemy.seenX = player.x;
-	ld	de,#_enemy + 11
 	ld	a, (#_player + 0)
-	ld	(de),a
+	ld	hl,#(_enemy + 0x000b)
+	ld	(hl),a
 ;src/ia.h:131: enemy.seenY = player.y;
-	ld	de,#_enemy + 12
 	ld	a, (#(_player + 0x0001) + 0)
-	ld	(de),a
-00120$:
-;src/ia.h:133: enemy.room = detectPlayerRoom(enemy.x,enemy.y);
-	ld	a, (#_enemy + 1)
-	ld	hl, #_enemy + 0
-	ld	d,(hl)
-	push	af
-	inc	sp
-	push	de
-	inc	sp
-	call	_detectPlayerRoom
-	pop	af
-	ld	a,l
-	ld	(#(_enemy + 0x000a)),a
+	ld	(#(_enemy + 0x000c)),a
 	ret
 ;src/CalcColision.h:7: u8 checkCollisions(u8 pX, u8 pY, u8 eX, u8 eY, u8 atk){
 ;	---------------------------------

@@ -9,28 +9,28 @@ Symbol Table
     .__.H$L.                                                    =  0000 L
   0 ___str_0                                                       03B8 R
   0 ___str_1                                                       03C8 R
-  0 ___str_10                                                      28E0 R
-  0 ___str_11                                                      28F6 R
-  0 ___str_12                                                      2942 R
-  0 ___str_2                                                       236B R
-  0 ___str_3                                                       237C R
-  0 ___str_4                                                       25A8 R
-  0 ___str_5                                                       25B9 R
-  0 ___str_6                                                       25C7 R
-  0 ___str_7                                                       25D0 R
-  0 ___str_8                                                       25DB R
-  0 ___str_9                                                       28CF R
+  0 ___str_10                                                      28CB R
+  0 ___str_11                                                      28E1 R
+  0 ___str_12                                                      292D R
+  0 ___str_2                                                       2356 R
+  0 ___str_3                                                       2367 R
+  0 ___str_4                                                       2593 R
+  0 ___str_5                                                       25A4 R
+  0 ___str_6                                                       25B2 R
+  0 ___str_7                                                       25BB R
+  0 ___str_8                                                       25C6 R
+  0 ___str_9                                                       28BA R
     __modsint                                                      **** GX
   1 _archer                                                        00F7 GR
   1 _arrow                                                         00F4 GR
   1 _bound                                                         00F6 GR
     _chacho_dcha                                                   **** GX
-  0 _checkArrowCollisions                                          1E10 GR
-  0 _checkBoundsCollisions                                         1708 GR
-  0 _checkCollisions                                               15E7 GR
-  0 _checkKeyboard                                                 2059 GR
+  0 _checkArrowCollisions                                          1DFB GR
+  0 _checkBoundsCollisions                                         16F3 GR
+  0 _checkCollisions                                               15D2 GR
+  0 _checkKeyboard                                                 2044 GR
   0 _chooseDirection                                               0C8C GR
-  0 _controles                                                     2910 GR
+  0 _controles                                                     28FB GR
     _corazon_lleno                                                 **** GX
     _corazon_roto                                                  **** GX
     _cpct_disableFirmware                                          **** GX
@@ -48,7 +48,7 @@ Symbol Table
     _cpct_setPalette                                               **** GX
     _cpct_setVideoMode                                             **** GX
     _cpct_waitVSYNC                                                **** GX
-  0 _credits                                                       286D GR
+  0 _credits                                                       2858 GR
   1 _dead                                                          00F8 GR
   0 _detectPlayerRoom                                              0C5F GR
   0 _draw                                                          086C GR
@@ -80,8 +80,8 @@ Symbol Table
   0 _g_palette                                                     0025 GR
     _g_tile_puerta_0                                               **** GX
     _g_tile_puerta_1                                               **** GX
-  0 _game                                                          25E1 GR
-  0 _gameOver                                                      2319 GR
+  0 _game                                                          25CC GR
+  0 _gameOver                                                      2304 GR
     _gladis_abajo                                                  **** GX
     _gladis_arriba                                                 **** GX
     _gladis_atk_abajo                                              **** GX
@@ -95,14 +95,14 @@ Symbol Table
   0 _initNivel                                                     0327 GR
   0 _initPlayer                                                    0239 GR
   0 _initVariables                                                 0337 GR
-  0 _main                                                          294C GR
+  0 _main                                                          2937 GR
   1 _map                                                           00F1 GR
   0 _mapSelector                                                   040D GR
   0 _mapa1                                                         0059 GR
   0 _mapa2                                                         0149 GR
-  0 _menu                                                          2392 GR
+  0 _menu                                                          237D GR
   0 _move                                                          151A GR
-  0 _moveObject                                                    22E4 GR
+  0 _moveObject                                                    22CF GR
   0 _movement                                                      0CCA GR
     _muro                                                          **** GX
   1 _n                                                             00F9 GR
@@ -130,7 +130,7 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size 2988   flags    0
+   0 _CODE                                      size 2973   flags    0
    1 _DATA                                      size  120   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8
